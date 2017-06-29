@@ -30,18 +30,18 @@
 				   <td><a href="#">删除</a></td>
                 </tr>
                 <tr>
-                    <td>张三</td>
-                  <td>2016-12-4</td>
-				  <td>￥20000</td>
-				  <td>完结</td>
+                    <td>刘娜</td>
+                  <td>2016-12-6</td>
+				  <td>￥2000000</td>
+				  <td>待付款</td>
 				   <td><a href="#">详情</a></td>
 				   <td><a href="#">删除</a></td>
                 </tr>
                 <tr>
-                     <td>张三</td>
-                  <td>2016-12-4</td>
-				  <td>￥20000</td>
-				  <td>完结</td>
+                     <td>李四</td>
+                  <td>2016-11-0</td>
+				  <td>￥543000</td>
+				  <td>预付</td>
 				   <td><a href="#">详情</a></td>
 				   <td><a href="#">删除</a></td>
                 </tr>

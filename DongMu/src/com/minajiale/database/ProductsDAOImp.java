@@ -1,5 +1,6 @@
 package com.minajiale.database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import object.Product;

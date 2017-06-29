@@ -4,6 +4,21 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+.classify{
+	display:block;
+	float:right;
+	margin-top:-50px;
+}
+.venus-menu li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    float: left;
+    line-height: 20px;
+    position: relative;
+}
+
+
 body {
   padding-top: 50px;
 }

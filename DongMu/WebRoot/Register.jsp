@@ -3,7 +3,9 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@page import="com.minajiale.database.*" %>
+<%@page import="java.sql.*" %>
+  <%@  page import = "javax.swing.JOptionPane" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html lang="en">
@@ -42,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="./Register.jsp" method="post">
         <h2 class="form-signin-heading">请注册</h2>
         <label for="name" class="sr-only" >请输入您真实姓名</label>
         <input type="name" id="inputEmail" class="form-control" placeholder="请输入您真实姓名" name="name" required autofocus><br>
@@ -59,6 +61,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<br><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
       </form>
+      
+      <%
+      	request.setCharacterEncoding("utf-8");
+		String username = request.getParameter("name");
+		String pwd = request.getParameter("passwd");
+		String phone = request.getParameter("phone");
+		String power = request.getParameter("power");
+		
+        if((username!=null)&&(username!="")&&(pwd!=null)&&(pwd!="")&&(phone!=null)&&(phone!="")&&(power!=null)&&(power!="")){
+       
+			Connection conn = DBConnection.getConnection();
+		   PreparedStatement pstmt = null;
+			String SQLString="insert into people(name,power,password,phone) values(?,?,?,?)";//查询该用户是否曾经登陆过
+		   try{
+		      pstmt = conn.prepareStatement(SQLString);
+		   	  pstmt.setString(1,username);
+		   	  pstmt.setString(2,power);
+		   	  pstmt.setString(3,pwd);
+		   	  pstmt.setString(4,phone);
+		   	  pstmt.executeUpdate();
+		   	  //JOptionPane.showMessageDialog(null, "注册成功，请登录", "恭喜您", JOptionPane.ERROR_MESSAGE);
+		   	  response.sendRedirect("login.jsp");
+		   }catch(SQLException e){
+		   		e.printStackTrace();
+		   }finally{
+		    DBConnection.close(conn);
+			DBConnection.close(pstmt);
+		   }
+		   
+		}
+       %>
+      
 
     </div> <!-- /container -->
 

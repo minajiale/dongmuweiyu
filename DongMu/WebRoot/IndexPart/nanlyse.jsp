@@ -14,7 +14,7 @@
 			<div id="maintest4" style="width: 600px;height:400px;"></div>
 			<div id="maintest5" style="width: 600px;height:400px;"></div>
 		</div>
-      <script src="./js/echarts.js"></script> <!--echart图表-->
-       <script src="./js/dashboard.js" charset="gbk" ></script> <!--echart图表-->
+      <script src="./js/echarts.common.min.js"></script> <!--echart图表-->
+       <script src="./js/analyse.js" charset="gbk" ></script> <!--echart图表-->
 </body>
 </html>

@@ -44,12 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" method="post" action="./login.jsp">
         <h2 class="form-signin-heading">请登录</h2>
         <label for="name" class="sr-only">请输入您的名字</label>
-        <input type="name" id="inputEmail" class="form-control" name="workerName" placeholder="请输入您的名字" required autofocus>
+        <input type="name" id="inputEmail" class="form-control" name="workerName" placeholder="请输入您的名字" method="post" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="密码" required>
+        <input type="password" id="inputPassword" class="form-control" method="post"  name="password" placeholder="密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住密码
@@ -64,25 +64,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
  	<%
-		request.setCharacterEncoding("gb2312");
+		request.setCharacterEncoding("utf-8");
 		String username = request.getParameter("workerName");
 		String pwd = request.getParameter("password");
-		out.print(username);
-		
 		
 		 if((username!=null)&&(username!=""))
 		{
-			//session.setAttribute("username",username);
+			
+		
 			Connection conn = DBConnection.getConnection();
+				
 		   PreparedStatement pstmt = null;
 			String SQLString="SELECT * FROM people where name='"+username+"' ";//查询该用户是否曾经登陆过
 		    pstmt = conn.prepareStatement(SQLString);
 			ResultSet rs1 = pstmt.executeQuery();
+			//String test = session.getAttribute("username").toString();
+
 			if(rs1.next()){
-				if(pwd.equals(rs1.getString(4)))
+				if(pwd.equals(rs1.getString(4))){
+				    session.setAttribute("username",username);
+   				    session.setAttribute("power",rs1.getString(3));
 					response.sendRedirect("index.jsp");
+				}
+
 				else
-					 JOptionPane.showMessageDialog(null, "您不是卖家身份", "出错啦", JOptionPane.ERROR_MESSAGE);
+					 JOptionPane.showMessageDialog(null, "密码错误", "出错啦", JOptionPane.ERROR_MESSAGE);
 			}
 
 			DBConnection.close(conn);

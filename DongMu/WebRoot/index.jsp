@@ -65,26 +65,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li ><a href="#">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#">提醒服务</a></li>
-            <li><a href="#">统计</a></li>
+            <li class="active" id="analyse" onclick='analyse(this)'><a href="#">统计</a></li>
             <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">财务管理</a></li>
-            <li><a href="">产品管理</a></li>
-            <li><a href="">订单管理</a></li>
+            <li id="finance" onclick='fiannce(this)'><a href="">财务管理</a></li>
+            <li id="products" onclick='products(this)'><a href="">产品管理</a></li>
+            <li id="order" onclick='order(this)'><a href="">订单管理</a></li>
+            <li id="people" onclick='people(this)'><a href="">店员管理</a></li>
           </ul>
         </div>
         
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main alarm">
-       
-          <%@include file="./IndexPart/order.jsp" %>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main alarm" id="containmaid">
+       <%@include file="./IndexPart/products.jsp" %>
+          
       </div>
     </div>
          <script src="./js/echarts.js"></script> <!--echart图表-->
-
-
+	     <script src="./js/index.js"></script> <!--idnexjs文件-->
+         <script src="./js/jquery-3.2.1.min.js"></script> <!--idnexjs文件-->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
