@@ -23,29 +23,38 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-
+                  <td>刘娜</td>
+                  <td>1317798633</td>
+                  <td>￥675432</td>
+				   <td><a href="#">删除</a></td>
                 </tr>
                 <%
           		Connection conn = DBConnection.getConnection();
-				String updateSQL = "select * from productsorder";
+				String updateSQL = "select * from productsorder where progress = 3";
 				PreparedStatement pstmt = null;
 				try{
 					pstmt = conn.prepareStatement(updateSQL);
 					ResultSet rs = pstmt.executeQuery();
 					while(rs.next()){
+						int costomerid = rs.getInt(3);
+						Double debt = rs.getDouble(6);
+						String Customer=null;
+						String phone = null;
+						
+						//根据顾客ID查找顾客姓名
+						String customerSQL = "select * from customer where id= "+costomerid+"";
+					    PreparedStatement pstmtC = null;
+					    pstmtC = conn.prepareStatement(customerSQL);
+					    ResultSet rsC = pstmtC.executeQuery();
+					    while(rsC.next()){
+					    	Customer= rsC.getString(2);
+					    	phone = rsC.getString(3);
+					    }
+					    
+					    
 					    int id= rs.getInt(1);
-						out.println("<tr><td>"+rs.getString(2)+"</td><td>￥"+rs.getString(4)+"</td><td>"+ rs.getString(8)+ "</td><td>"+rs.getString(9)+
-						"<td><a href='./Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
-						"<td><a href='./Resolve/ProductsReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
+						out.println("<tr><td>"+Customer+"</td><td>"+phone+"</td><td>￥"+debt+
+						"<td><a href='./Resolve/financeResolve.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
 					}
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -54,6 +63,7 @@
 					DBConnection.close(conn);
 				}
            %> 
+
               </tbody>
             </table>
 		</div>  
