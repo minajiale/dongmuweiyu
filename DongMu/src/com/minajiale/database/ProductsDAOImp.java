@@ -33,13 +33,25 @@ public class ProductsDAOImp implements ProductsDAO {
 
 	public void deleteProducts(int commodityId) {
 		// TODO Auto-generated method stub
-
+		
+		Connection conn = DBConnection.getConnection();
+		String deleteSQL="delete from products where id=?";
+		PreparedStatement pstmt = null;
+		try{
+			pstmt=conn.prepareStatement(deleteSQL);
+			pstmt.setInt(1,commodityId);
+			pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			DBConnection.close(pstmt);
+			DBConnection.close(conn);
+		}
 	}
-
 	public List<Product> findAllCommodity() {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnection.getConnection();
-		String updateSQL = "select * from products ";
+		String updateSQL = "select * from products";
 		PreparedStatement pstmt = null;
 		List<Product> commosityList = new ArrayList<Product>();
 		try{
@@ -47,7 +59,9 @@ public class ProductsDAOImp implements ProductsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Product commodity = new Product();
-				commodity.setBuyprice(rs.getString(1));
+				commodity.setBuyprice(rs.getString(4));
+				commodity.setCalss(rs.getString(3));
+				commodity.setName(rs.getString(2));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

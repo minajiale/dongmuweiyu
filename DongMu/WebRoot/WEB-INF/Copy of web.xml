@@ -2,19 +2,37 @@
 <web-app version="2.5" 
 	xmlns="http://java.sun.com/xml/ns/javaee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
   <display-name></display-name>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
+  	[html] view plain copy
 
+
+<jsp-config>  
+ <jsp-property-group>  
+    <description>html encoding</description>  
+      <display-name>JSPConfiguration</display-name>  
+       <url-pattern>*.html</url-pattern>  
+        <el-ignored>true</el-ignored>  
+       <page-encoding>UTF-8</page-encoding>  
+       <scripting-invalid>false</scripting-invalid>  
+       <include-prelude></include-prelude>  
+       <include-coda></include-coda>  
+    </jsp-property-group>  
+</jsp-config> 
   
   	<jsp-config>
 	<taglib>
 	<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
 	<taglib-location>/WEB-INF/fmt.tld</taglib-location>
+	</taglib>
+	<taglib>
+	<taglib-uri>http://java.sun.com/jstl/fmt-rt</taglib-uri>
+	<taglib-location>/WEB-INF/fmt-rt.tld</taglib-location>
 	</taglib>
 	<taglib>
 	<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
@@ -29,6 +47,10 @@
 	<taglib-location>/WEB-INF/sql.tld</taglib-location>
 	</taglib>
 	<taglib>
+	<taglib-uri>http://java.sun.com/jstl/sql-rt</taglib-uri>
+	<taglib-location>/WEB-INF/sql-rt.tld</taglib-location>
+	</taglib>
+	<taglib>
 	<taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
 	<taglib-location>/WEB-INF/x.tld</taglib-location>
 	</taglib>
@@ -39,5 +61,4 @@
 	</jsp-config>
 
 	
-  
 </web-app>

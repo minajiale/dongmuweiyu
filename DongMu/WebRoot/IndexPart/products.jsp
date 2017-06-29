@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@page import="com.minajiale.database.*" %>
+<%@page import="java.sql.*" %>
+  <%@  page import = "javax.swing.JOptionPane" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -127,18 +130,31 @@
 				   <td><a href="#">详情</a></td>
 				   <td><a href="#">删除</a></td>
                 </tr>
+               <%
+          		Connection conn = DBConnection.getConnection();
+		String updateSQL = "select * from products";
+		PreparedStatement pstmt = null;
+		try{
+			pstmt = conn.prepareStatement(updateSQL);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()){
+			    int id= rs.getInt(1);
+				out.println("<tr><td>"+rs.getString(2)+"</td><td>￥"+rs.getString(4)+"</td><td>"+ rs.getString(8)+ "</td><td>"+rs.getString(9)+
+				"<td><a href='./Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
+				"<td><a href='./Resolve/ProductsReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			DBConnection.close(pstmt);
+			DBConnection.close(conn);
+		}
+           %> 
               </tbody>
             </table>
-          </div>  
+          </div> 
+
 		</div>
-		
-		request.setCharacterEncoding("utf-8");
-		Connection conn = DBConnection.getConnection();
-		
-		   PreparedStatement pstmt = null;
-			String SQLString="SELECT * FROM people where name='"+username+"' ";//查询该用户是否曾经登陆过
-		    pstmt = conn.prepareStatement(SQLString);
-			ResultSet rs1 = pstmt.executeQuery();
 			   
 </body>
 <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
