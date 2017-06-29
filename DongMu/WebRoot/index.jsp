@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main alarm" id="containmaid">
-       <%@include file="./IndexPart/order.jsp" %>
+       <%@include file="./IndexPart/finance.jsp" %>
           
       </div>
     </div>

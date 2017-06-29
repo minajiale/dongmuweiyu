@@ -51,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
        if(name.equals("delete")){
             out.println(name);
-		   // ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
-		    //commodityDAO.deleteProducts(id);
-		    //response.sendRedirect("../index.jsp");
+		   ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
+		    commodityDAO.deleteProducts(id);
+		    response.sendRedirect("../index.jsp");
       }
       
       
@@ -132,6 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <input type="file" id="inputfile">
 		    <p class="help-block">请上传该产品图片</p>
 	    </div>
+	    	<button type="submit" class="btn btn-default form">提交</button>
 	  </form>
  </div>
 <script src="./js/jquery-3.2.1.min.js"></script>
