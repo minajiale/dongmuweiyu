@@ -97,5 +97,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	%>
   </body>
+ <script src="./js/bootstrap.min.js"></script><!--boostrap 标准库-->
 </html>
 
