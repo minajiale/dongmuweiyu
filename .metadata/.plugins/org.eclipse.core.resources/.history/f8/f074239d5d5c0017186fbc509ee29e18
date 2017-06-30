@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+  <title></title>
+  <style type="text/css">
+    .top-nav
+    {
+      font-size: 12px;
+      font-weight: bold;
+      list-style: none;
+    }
+    .top-nav li
+    {
+      float: left;
+      list-style: none;
+      margin-right: 1px;
+    }
+    .top-nav li a
+    {
+      line-height: 20px;
+      text-decoration: none;
+      background: #DDDDDD;
+      color: #666666;
+      display: block;
+      width: 80px;
+      text-align: center;
+    }
+    .top-nav li a:hover
+    {
+      background: #900;
+      color: #FFF;
+    }
+    .top-nav ul
+    {
+      list-style: none;
+      display: none;
+      width: 80px;
+      padding: 0;
+      position: relative;
+    }
+    .top-nav li ul li ul
+    {
+      position: absolute;
+      top: 0;
+      left: 80px;
+    }
+  </style>
+</head>
+<body>
+  <ul class="top-nav">
+    <li><a href="#">首页内容</a>
+      <ul>
+        <li><a href="#">前端课程 +</a>
+          <ul>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">css</a></li>
+            <li><a href="#">jquery</a></li>
+          </ul>
+        </li>
+        <li><a href="#">手机开发</a>
+          <ul>
+            <li><a href="#">ios开发</a></li>
+            <li><a href="#">android开发</a></li>
+            <li><a href="#">WP开发</a></li>
+          </ul>
+        </li>
+        <li><a href="#">后台编程</a></li>
+      </ul>
+    </li>
+    <li><a href="#">课程大厅</a> </li>
+    <li><a href="#">学习中心 +</a>
+      <ul>
+        <li><a href="#">前端课程 +</a>
+          <ul>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">css</a></li>
+            <li><a href="#">jquery</a></li>
+          </ul>
+        </li>
+        <li><a href="#">手机开发</a>
+          <ul>
+            <li><a href="#">ios开发</a></li>
+            <li><a href="#">android开发</a></li>
+            <li><a href="#">WP开发</a></li>
+          </ul>
+        </li>
+        <li><a href="#">后台编程</a></li>
+      </ul>
+    </li>
+    <li><a href="#">关于我们</a></li>
+  </ul>
+    </script>
+<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+   $(function(){
+    $(".top-nav li").hover(function(){
+      $(this).has("ul").children("ul").fadeIn();
+    },function(){
+      $(this).has("ul").children("ul").hide();
+    });
+   }) 
+</script>
+</body>
+</html>

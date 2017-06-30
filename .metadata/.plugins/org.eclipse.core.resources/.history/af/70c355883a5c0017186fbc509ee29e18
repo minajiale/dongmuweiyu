@@ -1,0 +1,15 @@
+function analyse(obj){
+	alert("this.id");
+}
+function fiannce(this){
+	
+}
+function products(this){
+	
+}
+function order(this){
+	alert("this.id");
+}
+function people(this){
+	
+}

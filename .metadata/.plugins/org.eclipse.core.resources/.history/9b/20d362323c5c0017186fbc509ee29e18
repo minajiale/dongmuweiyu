@@ -1,0 +1,15 @@
+function analyse(obj){
+	obj.class="active";
+}
+function fiannce(obj){
+	
+}
+function products(obj){
+	
+}
+function order(obj){
+	alert(obj.id);
+}
+function people(obj){
+	
+}

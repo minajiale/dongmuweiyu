@@ -1,0 +1,5 @@
+package com.minajiale.database;
+import com.minajiale.database.*;
+public class ProductsDAOFactory {
+
+}

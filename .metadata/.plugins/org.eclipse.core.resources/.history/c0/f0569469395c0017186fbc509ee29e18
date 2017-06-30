@@ -1,0 +1,15 @@
+analyse(this){
+	alert(this.id);
+}
+fiannce(this){
+	
+}
+products(this){
+	
+}
+order(this){
+	
+}
+people(this){
+	
+}

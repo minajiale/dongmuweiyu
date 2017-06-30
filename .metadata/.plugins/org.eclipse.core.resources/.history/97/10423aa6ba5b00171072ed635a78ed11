@@ -1,0 +1,8 @@
+package object;
+
+//店里工作人员对象
+
+public class people {
+	private String name;
+	
+}

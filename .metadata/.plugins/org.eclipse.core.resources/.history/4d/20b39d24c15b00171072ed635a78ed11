@@ -1,0 +1,6 @@
+package com.minajiale.database;
+import java.util.List;
+
+public interface ProductsDAO {
+
+}

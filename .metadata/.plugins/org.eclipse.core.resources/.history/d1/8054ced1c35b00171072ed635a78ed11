@@ -1,0 +1,4 @@
+package com.minajiale.database;
+public class ProductsDAOFactory {
+
+}

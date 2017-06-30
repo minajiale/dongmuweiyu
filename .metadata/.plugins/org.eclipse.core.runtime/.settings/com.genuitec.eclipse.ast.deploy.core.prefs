@@ -1,0 +1,14 @@
+#Thu Jun 29 10:14:47 CST 2017
+tomcat7Server.DongMu.shouldBackup=false
+tomcat7Server.DongMu.type=WebDeployment
+tomcat7Server.DongMu.altContextRoot=
+tomcat7Server.DongMu.shouldOverwrite=false
+tomcat7Server.DongMu.contextRoot=/DongMu
+tomcat7Server.DongMu.deploymentPath=E\:\\tomcat\\apache-tomcat-7.0.78-windows-x64\\apache-tomcat-7.0.78\\webapps\\DongMu
+tomcat7Server.DongMu.isUptoDate=true
+tomcat7Server.DongMu.IEARProjectName=
+tomcat7Server.DongMu.deployIsOverProject=false
+tomcat7Server.DongMu.isExploded=true
+eclipse.preferences.version=1
+tomcat7Server.DongMu.isDeployed=true
+tomcat7Server.DongMu.noFileCopy=false

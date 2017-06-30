@@ -1,0 +1,17 @@
+function analyse(obj){
+	obj.class="active";
+}
+function fiannce(obj){
+	obj.addClass('active'); 
+}
+function products(obj){
+	
+}
+function order(obj){
+	var contain = getElementById("containmaid");
+	alert(obj.id);
+	contain.innerHTML='<%@include file="./IndexPart/alarm.jsp" %>';
+}
+function people(obj){
+	
+}

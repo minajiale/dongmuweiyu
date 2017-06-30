@@ -1,0 +1,12 @@
+package object;
+
+public class Product {
+	private String name;//商品名称
+	private String calss;//商品分类  0为门，1为浴室用品
+	private String buyprice;//进价
+	private String sellprice;//卖价
+	private String location;//放置地点.打算为一张带标记的图片
+	private String picture;//产品图片
+	private String number;//库存
+	
+}

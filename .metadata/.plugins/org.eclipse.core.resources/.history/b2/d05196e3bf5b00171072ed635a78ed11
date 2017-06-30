@@ -1,0 +1,9 @@
+package com.minajiale.database;
+import java.sql.*;
+
+public class DBConnection {
+	private static final String DBDRIVER = "com.mysql.jdbc.Driver";
+	private static final String DBURL ="jdbc:mysql://localhost:3306/dongmu";
+	private static final String DBUSER="root";
+	private static final String DBPASSWORD="123456";
+}

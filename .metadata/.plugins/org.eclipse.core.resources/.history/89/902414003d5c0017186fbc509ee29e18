@@ -1,0 +1,16 @@
+function analyse(obj){
+	obj.class="active";
+}
+function fiannce(obj){
+	obj.addClass('active'); 
+}
+function products(obj){
+	
+}
+function order(obj){
+	alert(obj.id);
+	obj.innerHTML=
+}
+function people(obj){
+	
+}
