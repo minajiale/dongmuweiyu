@@ -174,8 +174,8 @@
 			    
 			    
 				out.println("<tr><td>"+Customer+"</td><td>"+rs.getString(2)+"</td><td>￥"+ rs.getString(4)+ "</td><td>"+progress+
-				"<td><a href='./Resolve/OrderReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
-				"<td><a href='./Resolve/OrderReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
+				"<td><a href='../Resolve/OrderReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
+				"<td><a href='../Resolve/OrderReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

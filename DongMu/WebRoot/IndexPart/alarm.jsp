@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+        <%@page import="com.minajiale.database.*" %>
+<%@page import="java.sql.*" %>
+  <%@  page import = "javax.swing.JOptionPane" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -40,20 +43,32 @@
                 </tr>
               </thead>
               <tbody>
+              <!-- 
                 <tr>
-                  <td>东沐花洒库存不足，只剩下3个。</td>
-                  <td><a href="#">完成</a></td>
+                  <td><span>花洒</span>库存不足，只剩下<span>3</span>个。</td>
+                  <td><a href="#">详情</a></td>
 
                 </tr>
-                <tr>
-                  <td>铁门库存不足，只剩下0个。</td>
-                  <td><a href="#">完成</a></td>
-
-                </tr>
-                <tr>
-                  <td>东牧地漏库存不足，只剩下1个。</td>
-                  <td><a href="#">完成</a></td>
-                </tr>
+                 -->
+                <%
+        Connection connProducts = DBConnection.getConnection();
+		String updateProductsSQL = "select * from products where number < minnumber";
+		PreparedStatement pstmtproducts = null;
+		try{
+			pstmtproducts = connProducts.prepareStatement(updateProductsSQL);
+			ResultSet rsproducts = pstmtproducts.executeQuery();
+			while(rsproducts.next()){
+			    int id= rsproducts.getInt(1);
+				out.println("<tr><td><span>"+ rsproducts.getString(2)+"</span>库存不足，只剩下<span>"+rsproducts.getDouble(8)+"</span>个。</td>"+
+				"<td><a href='../Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			DBConnection.close(pstmtproducts);
+			DBConnection.close(connProducts);
+		}
+           %> 
               </tbody>
             </table>
           </div>  

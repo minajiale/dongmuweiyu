@@ -33,10 +33,10 @@
        
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li ><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+           <!--   <li ><a href="#">Overview <span class="sr-only">(current)</span></a></li>-->
             <li onclick="setTab(1,6)" id="1" ><a href="alarm.jsp" target="content">提醒服务</a></li>
             <li class="active" id="2" onclick="setTab(2,6)"><a href="nanlyse.jsp" target="content">统计</a></li>
-            <li><a href="#">Export</a></li>
+        
           </ul>
           <ul class="nav nav-sidebar">
             <li id="3" onclick="setTab(3,6)" ><a href="finance.jsp" target="content">财务管理</a></li>

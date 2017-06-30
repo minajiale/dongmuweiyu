@@ -165,8 +165,8 @@
 			while(rsproducts.next()){
 			    int id= rsproducts.getInt(1);
 				out.println("<tr><td>"+rsproducts.getString(2)+"</td><td>￥"+rsproducts.getString(4)+"</td><td>"+ rsproducts.getString(8)+ "</td><td>"+rsproducts.getString(9)+
-				"<td><a href='./Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
-				"<td><a href='./Resolve/ProductsReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
+				"<td><a href='../Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
+				"<td><a href='../Resolve/ProductsReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

@@ -73,8 +73,8 @@
 			    
 			    
 				out.println("<tr><td>"+assistantName+"</td><td>￥"+allmount+
-				"<td><a href='./Resolve/peopleResolve.jsp?assistant="+ assistantName+"&name=details&id=" + id + "'>详情</a></td>"+
-				"<td><a href='./Resolve/peopleResolve.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
+				"<td><a href='../Resolve/peopleResolve.jsp?assistant="+ assistantName+"&name=details&id=" + id + "'>详情</a></td>"+
+				"<td><a href='../Resolve/peopleResolve.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
