@@ -4,10 +4,33 @@
 <%@page import="java.sql.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
+  <head>
+  	 <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+
+	<title>东牧卫浴管理系统</title>
+	
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="./assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+       <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+    
+	    <link rel="icon" href="./favicon.ico">
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/dashborad.css" rel="stylesheet">
+  </head>
 <body>
 		<h1 class="page-header">店员管理</h1>
          <div class="table-responsive">
@@ -27,22 +50,22 @@
 				   <td><a href="#">删除</a></td>
                 </tr>
                <%
-          		Connection conn = DBConnection.getConnection();
-		String updateSQL = "select * from people where power =2";
-		PreparedStatement pstmt = null;
+          		Connection connPeople = DBConnection.getConnection();
+		String updatePeopleSQL = "select * from people where power =2";
+		PreparedStatement pstmtPeople = null;
 		try{
-			pstmt = conn.prepareStatement(updateSQL);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()){
-			    int id= rs.getInt(1);
-			    String assistantName = rs.getString(2);
+			pstmtPeople = connPeople.prepareStatement(updatePeopleSQL);
+			ResultSet rsPeople = pstmtPeople.executeQuery();
+			while(rsPeople.next()){
+			    int id= rsPeople.getInt(1);
+			    String assistantName = rsPeople.getString(2);
 			    Double allmount =0.0;
 			     
 			     
 			    //根据店员ID查询订单表，计算该店员的总的销售额
 				String processSQL = "select * from productsorder where owner= "+id+"";
 			    PreparedStatement pstmtP = null;
-			    pstmtP = conn.prepareStatement(processSQL);
+			    pstmtP = connPeople.prepareStatement(processSQL);
 			    ResultSet rsP = pstmtP.executeQuery();
 			    while(rsP.next()){
 			    	allmount+= rsP.getDouble(4);
@@ -56,12 +79,26 @@
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
-			DBConnection.close(pstmt);
-			DBConnection.close(conn);
+			DBConnection.close(pstmtPeople);
+			DBConnection.close(connPeople);
 		}
            %> 
               </tbody>
             </table>
           </div> 
 </body>
+
+        <script src="./js/echarts.js"></script> <!--echart图表-->
+	     <script src="./js/index.js"></script> <!--idnexjs文件-->
+         <script src="./js/jquery-3.2.1.min.js"></script> <!--idnexjs文件-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../js/bootstrap.min.js"></script><!--boostrap 标准库-->
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </html>

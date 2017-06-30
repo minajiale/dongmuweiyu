@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+  <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,35 +30,34 @@
 	<link href="../css/dashborad.css" rel="stylesheet">
   </head>
 <body>
-<h1 class="page-header">待办事项</h1>
-                    <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>事项</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>东沐花洒库存不足，只剩下3个。</td>
-                  <td><a href="#">完成</a></td>
-
-                </tr>
-                <tr>
-                  <td>铁门库存不足，只剩下0个。</td>
-                  <td><a href="#">完成</a></td>
-
-                </tr>
-                <tr>
-                  <td>东牧地漏库存不足，只剩下1个。</td>
-                  <td><a href="#">完成</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>  
+  
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Project name</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">东牧卫浴管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">个人信息</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+    
 </body>
-        <script src="./js/echarts.js"></script> <!--echart图表-->
+         <script src="./js/echarts.js"></script> <!--echart图表-->
 	     <script src="./js/index.js"></script> <!--idnexjs文件-->
          <script src="./js/jquery-3.2.1.min.js"></script> <!--idnexjs文件-->
     <!-- Bootstrap core JavaScript

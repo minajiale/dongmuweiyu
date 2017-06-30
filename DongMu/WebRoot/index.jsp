@@ -34,55 +34,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/dashborad.css" rel="stylesheet">
   </head>
+  
+	 <frameset rows="80,*" cols="*" frameborder="No" border="0"  
+        framespacing="1">  
+        <frame  
+            src="./IndexPart/top.jsp"  
+            name="topFrame" scrolling="No" noresize="noresize" id="topFrame"  
+            title="topFrame" />  
+          
+        <frameset cols="270,*" frameborder="No" border="0" framespacing="1">  
+            <frame  
+                src="./IndexPart/menu.jsp"  
+                name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame"  
+                title="leftFrame" />  
+            <frame  
+                src="./IndexPart/nanlyse.jsp"  
+                name="content" noresize="noresize" id="content" title="content" /> 
+        </frameset>  
+    </frameset> 
    <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Project name</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">东牧卫浴管理系统</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">个人信息</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li ><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">提醒服务</a></li>
-            <li class="active" id="analyse" onclick='analyse(this)'><a href="#">统计</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li id="finance" onclick='fiannce(this)'><a href="">财务管理</a></li>
-            <li id="products" onclick='products(this)'><a href="">产品管理</a></li>
-            <li id="order" onclick='order(this)'><a href="">订单管理</a></li>
-            <li id="people" onclick='people(this)'><a href="">店员管理</a></li>
-          </ul>
-        </div>
-        
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main alarm" id="containmaid">
-       <%@include file="./IndexPart/peoplemanage.jsp" %>
-          
-      </div>
-    </div>
+    
          <script src="./js/echarts.js"></script> <!--echart图表-->
 	     <script src="./js/index.js"></script> <!--idnexjs文件-->
          <script src="./js/jquery-3.2.1.min.js"></script> <!--idnexjs文件-->
