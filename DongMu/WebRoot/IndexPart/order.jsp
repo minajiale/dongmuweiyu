@@ -131,6 +131,7 @@
                 </tr>
               </thead>
               <tbody>
+              <!-- 
                 <tr>
                   <td>张三</td>
                   <td>2016-12-4</td>
@@ -138,7 +139,7 @@
 				  <td>完结</td>
 				   <td><a href="#">详情</a></td>
 				   <td><a href="#">删除</a></td>
-                </tr>
+                </tr> -->
          <%
          Connection connOrder = DBConnection.getConnection();
 		String updateOrderSQL = "select * from productsorder";

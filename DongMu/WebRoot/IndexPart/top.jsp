@@ -44,8 +44,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="login.jsp" target="_top">登陆</a></li>
+            <li><a href="Register.jsp" target="_top">注册</a></li>
             <li><a href="#">个人信息</a></li>
             <li><a href="#">Help</a></li>
           </ul>

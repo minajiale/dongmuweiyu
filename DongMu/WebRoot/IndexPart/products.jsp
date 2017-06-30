@@ -131,14 +131,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>东牧单孔水龙头</td>
-                  <td>￥230</td>
-				  <td>340</td>
-				  <td>90</td>
-				   <td><a href="#">详情</a></td>
-				   <td><a href="#">删除</a></td>
-                </tr>
+<!-- 
                 <tr>
                   <td>好太太油烟机</td>
                   <td>￥400</td>
@@ -147,14 +140,7 @@
 				   <td><a href="#">详情</a></td>
 				   <td><a href="#">删除</a></td>
                 </tr>
-                <tr>
-                  <td>红铜大门</td>
-                  <td>￥4900</td>
-				  <td>10</td>
-				  <td>5</td>
-				   <td><a href="#">详情</a></td>
-				   <td><a href="#">删除</a></td>
-                </tr>
+ -->
                <%
         Connection connProducts = DBConnection.getConnection();
 		String updateProductsSQL = "select * from products";
