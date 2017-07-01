@@ -1,0 +1,38 @@
+ <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@page import="com.minajiale.database.*" %>
+<%@page import="java.sql.*" %>
+  <%@  page import = "javax.swing.JOptionPane" %>
+
+
+
+      <%
+    int classification=0;
+     Double buyprice=0.0;
+     Double sellprice=0.0;
+     int number=0 ;
+    int minnumber=0;
+    String productsName=null;
+    int id =0;
+     String  name =null;
+    
+    String  idString = request.getParameter("id");
+      name = (String)request.getParameter("name");
+      if(idString != null && idString != "" ){
+         id = Integer.parseInt(idString);
+      }
+
+	
+
+	 	String prductsname = (String)request.getParameter("produtsName");
+	 	out.println(prductsname);
+	 			    JOptionPane.showMessageDialog(null, "添加成功", "恭喜您", JOptionPane.ERROR_MESSAGE);
+	 	
+	
+	
+     %>
+  
+  

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="78" version="2.0">
+<workbench progressCount="77" version="2.0">
 <workbenchAdvisor/>
 <window height="728" maximized="true" width="1024" x="52" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -8,7 +8,7 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="278" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="266" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="com.genuitec.eclipse.j2eedt.core.ejb" itemType="typeToolBarContribution" x="55" y="22"/>
 <coolItem id="com.genuitec.eclipse.uml.actions" itemType="typeToolBarContribution" x="61" y="22"/>
@@ -29,7 +29,7 @@
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.jboss.tools.common.model.ui.editor.EditorPartWrapper" itemType="typePlaceholder" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.css.core.csssource.source" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="com.genuitec.eclipse.webdesigner3.editors.jsp" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -43,27 +43,18 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
-<part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="order.jsp" partName="order.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/order.jsp" title="order.jsp" tooltip="DongMu/WebRoot/IndexPart/order.jsp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/order.jsp"/>
-</editor>
 <editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="alarm.jsp" partName="alarm.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/alarm.jsp" title="alarm.jsp" tooltip="DongMu/WebRoot/IndexPart/alarm.jsp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
 </editor>
-<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="nanlyse.jsp" partName="nanlyse.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/nanlyse.jsp" title="nanlyse.jsp" tooltip="DongMu/WebRoot/IndexPart/nanlyse.jsp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/nanlyse.jsp"/>
+<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" partName="products.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/products.jsp" title="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
 </editor>
-<editor activePart="true" focus="true" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="index.jsp" partName="index.jsp" path="F:/dongmu/DongMu/WebRoot/index.jsp" title="index.jsp" tooltip="DongMu/WebRoot/index.jsp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/index.jsp"/>
-</editor>
-<editor id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="dashboard.js" partName="dashboard.js" path="F:/dongmu/DongMu/WebRoot/js/dashboard.js" title="dashboard.js" tooltip="DongMu/WebRoot/js/dashboard.js" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/js/dashboard.js"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="400" selectionTopPixel="0"/>
+<editor activePart="true" focus="true" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="order.jsp" partName="order.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/order.jsp" title="order.jsp" tooltip="DongMu/WebRoot/IndexPart/order.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/order.jsp"/>
 </editor>
 </editors>
 <views>
@@ -125,7 +116,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="com.genuitec.eclipse.webdesigner3.editors.jsp" activePerspective="com.genuitec.myeclipse.perspective.myeclipseperspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="com.genuitec.myeclipse.perspective.myeclipseperspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="com.genuitec.myeclipse.perspective.MyEclipsePerspectiveFactory" id="com.genuitec.myeclipse.perspective.myeclipseperspective" label="MyEclipse Java Enterprise"/>
 <alwaysOnActionSet id="com.genuitec.myeclipse.actions.deploytools"/>
@@ -221,15 +212,23 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.jdt.ui.TypeHierarchy"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.ui.views.PropertySheet"/>
 <fastViewBars>
+<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@113f25e3" orientation="512" selectedTabId="org.eclipse.ui.views.PropertySheet" style="0">
+<fastViews>
+<view id="org.eclipse.ui.views.PropertySheet" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@4cc4dfc5" orientation="512" selectedTabId="org.eclipse.ui.views.ContentOutline" style="0">
+<fastViews>
+<view id="org.eclipse.ui.views.ContentOutline" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
 <fastViewBar fastViewLocation="1024" id="bottom" orientation="256" selectedTabId="org.eclipse.ui.console.ConsoleView" style="0">
 <fastViews>
 <view id="org.eclipse.ui.views.ProblemView" ratio="0.3"/>
 <view id="org.eclipse.ui.views.TaskList" ratio="0.3"/>
 <view id="com.genuitec.eclipse.ui.HTMLView" ratio="0.85"/>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.28333333"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.915"/>
 <view id="com.genuitec.eclipse.ast.deploy.core.serverview" ratio="0.3"/>
 </fastViews>
 </fastViewBar>
@@ -254,21 +253,17 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.2" ratioLeft="200" ratioRight="800" relationship="2" relative="cvslocation"/>
+<info part="org.eclipse.ui.editorss" ratio="0.15060242" ratioLeft="200" ratioRight="1128" relationship="2" relative="cvslocation"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@4cc4dfc5" ratio="0.75" ratioLeft="600" ratioRight="200" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@113f25e3" ratio="0.54950494" ratioLeft="333" ratioRight="273" relationship="4" relative="org.eclipse.ui.internal.ViewStack@4cc4dfc5">
-<folder activePageID="org.eclipse.ui.views.PropertySheet" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="bottom" ratio="0.7491749" ratioLeft="454" ratioRight="152" relationship="4" relative="org.eclipse.ui.editorss">
@@ -309,93 +304,72 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/index.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/DongMu/WebRoot/js/dashboard.js"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/finance.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/test.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/menu.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/order.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/nanlyse.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
-<editor factoryID="org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory" id="org.jboss.tools.common.model.ui.editor.EditorPartWrapper" path="/DongMu/WebRoot/WEB-INF/web.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/peoplemanage.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" path="/DongMu/WebRoot/index.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.jboss.tools.common.model.ui.editor.EditorPartWrapper" path="/DongMu/WebRoot/WEB-INF/web.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/order.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/index.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/DongMu/WebRoot/css/dashborad.css"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/finance.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/alarmReslove.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/top.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/login.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/Register.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/DongMu/WebRoot/css/signin.css"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/nanlyse.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/DongMu/WebRoot/css/dashborad.css"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/DongMu/WebRoot/js/dashboard.js"/>
 </editors>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="dashboard.js" index="1">
-<position info="not_deleted" x="4902" y="0"/>
-</item>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="index.jsp" index="0"/>
-<item historyLabel="nanlyse.jsp" index="4"/>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="nanlyse.jsp" index="4"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="finance.jsp" index="2"/>
-<item historyLabel="index.jsp" index="0"/>
-<item historyLabel="web.xml" index="6">
-<position info="not_deleted" x="40" y="236"/>
-</item>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="nanlyse.jsp" index="4"/>
-<item historyLabel="alarm.jsp" index="5">
-<position info="not_deleted" x="734" y="14"/>
-</item>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="finance.jsp" index="2"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="products.jsp" index="7"/>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="products.jsp" index="7"/>
 <item historyLabel="order.jsp" index="3"/>
 <item historyLabel="index.jsp" index="0"/>
+<item historyLabel="test.jsp" index="1"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="peoplemanage.jsp" index="4"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="peoplemanage.jsp" index="4"/>
 <item historyLabel="order.jsp" index="3"/>
-<item historyLabel="products.jsp" index="7"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="products.jsp" index="7"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="index.jsp" index="0">
-<position info="not_deleted" x="3256" y="0"/>
-</item>
-<item historyLabel="index.jsp" index="8">
-<position info="not_deleted" x="3172" y="0"/>
-</item>
-<item historyLabel="alarm.jsp" index="5"/>
-<item historyLabel="products.jsp" index="7"/>
-<item historyLabel="order.jsp" index="3"/>
+<item historyLabel="peoplemanage.jsp" index="4"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="alarmReslove.jsp" index="7"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="alarmReslove.jsp" index="7"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="products.jsp" index="5"/>
+<item historyLabel="alarmReslove.jsp" index="7"/>
+<item historyLabel="alarm.jsp" index="6"/>
+<item historyLabel="alarmReslove.jsp" index="7"/>
+<item historyLabel="alarm.jsp" index="6"/>
 <item historyLabel="index.jsp" index="0"/>
-<item historyLabel="web.xml" index="9"/>
-<item historyLabel="order.jsp" index="10"/>
-<item historyLabel="alarm.jsp" index="11"/>
-<item historyLabel="index.jsp" index="12"/>
-<item historyLabel="dashborad.css" index="13">
+<item historyLabel="menu.jsp" index="2"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="top.jsp" index="8"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="signin.css" index="11">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="index.jsp" index="12"/>
-<item historyLabel="finance.jsp" index="14"/>
-<item historyLabel="index.jsp" index="12"/>
-<item historyLabel="products.jsp" index="15"/>
-<item historyLabel="index.jsp" index="12"/>
-<item historyLabel="dashborad.css" index="13">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="nanlyse.jsp" index="16"/>
-<item historyLabel="index.jsp" index="12"/>
-<item historyLabel="dashborad.css" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="dashboard.js" index="18">
-<position info="not_deleted" x="400" y="0"/>
-</item>
-<item active="true" historyLabel="index.jsp" index="12"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="login.jsp" index="9"/>
+<item historyLabel="Register.jsp" index="10"/>
+<item historyLabel="alarm.jsp" index="12"/>
+<item historyLabel="products.jsp" index="13"/>
+<item active="true" historyLabel="order.jsp" index="3"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -404,6 +378,10 @@
 <trimLayout>
 <trimArea IMemento.internal.id="16384">
 <trimItem IMemento.internal.id="bottomleft"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@4cc4dfc5"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@113f25e3"/>
 </trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -417,14 +395,38 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="dashboard.js" tooltip="DongMu/WebRoot/js/dashboard.js">
-<persistable path="/DongMu/WebRoot/js/dashboard.js"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="order.jsp" tooltip="DongMu/WebRoot/IndexPart/order.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/order.jsp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" name="dashborad.css" tooltip="DongMu/WebRoot/css/dashborad.css">
-<persistable path="/DongMu/WebRoot/css/dashborad.css"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/products.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="alarm.jsp" tooltip="DongMu/WebRoot/IndexPart/alarm.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" name="signin.css" tooltip="DongMu/WebRoot/css/signin.css">
+<persistable path="/DongMu/WebRoot/css/signin.css"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Register.jsp" tooltip="DongMu/WebRoot/IndexPart/Register.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/Register.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="login.jsp" tooltip="DongMu/WebRoot/IndexPart/login.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/login.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="top.jsp" tooltip="DongMu/WebRoot/IndexPart/top.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/top.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="menu.jsp" tooltip="DongMu/WebRoot/IndexPart/menu.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/menu.jsp"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="index.jsp" tooltip="DongMu/WebRoot/index.jsp">
 <persistable path="/DongMu/WebRoot/index.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="alarmReslove.jsp" tooltip="DongMu/WebRoot/Resolve/alarmReslove.jsp">
+<persistable path="/DongMu/WebRoot/Resolve/alarmReslove.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="peoplemanage.jsp" tooltip="DongMu/WebRoot/IndexPart/peoplemanage.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/peoplemanage.jsp"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="nanlyse.jsp" tooltip="DongMu/WebRoot/IndexPart/nanlyse.jsp">
 <persistable path="/DongMu/WebRoot/IndexPart/nanlyse.jsp"/>
@@ -432,26 +434,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="finance.jsp" tooltip="DongMu/WebRoot/IndexPart/finance.jsp">
 <persistable path="/DongMu/WebRoot/IndexPart/finance.jsp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.jboss.tools.common.model.ui.editor.EditorPartWrapper" name="web.xml" tooltip="DongMu/WebRoot/WEB-INF/web.xml">
-<persistable path="/DongMu/WebRoot/WEB-INF/web.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="copyindex.jsp" tooltip="DongMu/WebRoot/copyindex.jsp">
+<persistable path="/DongMu/WebRoot/copyindex.jsp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="alarm.jsp" tooltip="DongMu/WebRoot/IndexPart/alarm.jsp">
-<persistable path="/DongMu/WebRoot/IndexPart/alarm.jsp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp">
-<persistable path="/DongMu/WebRoot/IndexPart/products.jsp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="order.jsp" tooltip="DongMu/WebRoot/IndexPart/order.jsp">
-<persistable path="/DongMu/WebRoot/IndexPart/order.jsp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="echarts.js" tooltip="DongMu/WebRoot/js/echarts.js">
-<persistable path="/DongMu/WebRoot/js/echarts.js"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="test.jsp" tooltip="DongMu/WebRoot/test.jsp">
-<persistable path="/DongMu/WebRoot/test.jsp"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" name="bootstrap.min.css" tooltip="DongMu/WebRoot/css/bootstrap.min.css">
-<persistable path="/DongMu/WebRoot/css/bootstrap.min.css"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Copy of index.jsp" tooltip="DongMu/WebRoot/Copy of index.jsp">
+<persistable path="/DongMu/WebRoot/Copy of index.jsp"/>
 </file>
 </mruList>
 </workbench>

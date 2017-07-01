@@ -5,7 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@page import="com.minajiale.database.*" %>
 <%@page import="java.sql.*" %>
-
+  <%@  page import = "javax.swing.JOptionPane" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -44,12 +44,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      int number=0 ;
     int minnumber=0;
     String productsName=null;
-    
+    int id =0;
     String  idString = request.getParameter("id");
       String  name = (String)request.getParameter("name");
-       int id = Integer.parseInt(idString);
-       
-       if(name.equals("delete")){
+      if(idString != null && idString != "" ){
+         id = Integer.parseInt(idString);
+      }
+       if(name != null  && name.equals("delete")){
             out.println(name);
 		   ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
 		    commodityDAO.deleteProducts(id);
@@ -57,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
       
       
-      if(name.equals("details")){
+      if(name != null  && name.equals("details")){
       if(idString != null){
          Connection conn = DBConnection.getConnection();
 		String updateSQL = "select * from products where id="+id+"";
@@ -82,44 +83,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			DBConnection.close(conn);
 		}
       }}
-
+	
+	 if(name != null  &&  name.equals("add")){
+	 		String prductsname = (String)request.getParameter("produtsName");
+	 	out.println(prductsname);
+	 			    JOptionPane.showMessageDialog(null, "添加成功", "恭喜您", JOptionPane.ERROR_MESSAGE);
+	 	
+	 }
+	
      %>
   </body>
   <div class="form">
-	  <form action="" role="form"  class="form-horizontal">
+	  <form action="Resolve/ProductsReslove.jsp?name=add" role="form"  class="form-horizontal">
 	  <div class="form-group">
 	  	<label  for="firstname" class="col-sm-2 control-label">产品名称</label>
 	  	 <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="firstname"value="<%= productsName %>"></input>
+	    	<input type="text" class="form-control" id="firstname" name="produtsName" value="<%= productsName %>"></input>
 	    </div>
 	   </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label"> 进价</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" value="<%= buyprice %>"></input>
+		    	<input type="text" class="form-control" id="name" name="buyprice" value="<%= buyprice %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">卖价</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" value="<%= sellprice %>"></input>
+		    	<input type="text" class="form-control" id="name" name="sellprice"value="<%= sellprice %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">剩余库存</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" value="<%= number %>"></input>
+		    	<input type="text" class="form-control" id="name" name="number" value="<%= number %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">最小库存</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" value="<%= minnumber %>"></input>
+		    	<input type="text" class="form-control" id="name" name="minnumber" value="<%= minnumber %>"></input>
 		    </div>
 	    </div>
 	     <div class="form-group">
    			 <label for="name" class="col-sm-2 control-label">分类</label>
-    		<select class="form-control" id="name" class="col-sm-10"> 
+    		<select class="form-control" id="name" class="col-sm-10" name="clascification"> 
       			<option>厨房用品</option>
       			<option>卫生间用品</option>
      			 <option>门</option>

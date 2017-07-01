@@ -80,7 +80,7 @@
 <body>
 		<div class="finance">
 			
-		<h1 class="page-header">产品管理</h1>
+		<h1 class="page-header">产品管理 &nbsp<a href="../Resolve/ProductsReslove.jsp">+</a></h1>
 		
 		<!-- 分类菜单 -->
 		<div class="classify">

@@ -9,4 +9,8 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
+	<section name="NewJspCreationWizardPage">
+		<item value="Default JSP template" key="templatezh_CN"/>
+		<item value="/DongMu/WebRoot/IndexPart" key="filePath"/>
+	</section>
 </section>
