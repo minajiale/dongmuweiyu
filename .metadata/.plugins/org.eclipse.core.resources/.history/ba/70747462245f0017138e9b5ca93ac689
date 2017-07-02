@@ -80,7 +80,7 @@
 <body>
 		<div class="finance">
 			
-		<h1 class="page-header">订单管理 &nbsp<a href="../Resolve/OrderReslove.jsp?name=add">+</a></h1>
+		<h1 class="page-header">订单管理</h1>
 		
 		<!-- 分类菜单 -->
 		<div class="classify">
