@@ -1,0 +1,10 @@
+package object;
+
+public class order {
+ 
+	private String time;
+	private String customer;
+	
+	
+	
+}

@@ -1,0 +1,12 @@
+package object;
+
+public class order {
+ 
+	private String time;
+	private String customer;
+	private Double totalamount;
+	private String payway;
+	private Double debt;
+	private int[] products;
+	private String owner;	
+}
