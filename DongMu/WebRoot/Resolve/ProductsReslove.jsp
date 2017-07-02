@@ -1,11 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@page import="com.minajiale.database.*" %>
 <%@page import="java.sql.*" %>
-  <%@  page import = "javax.swing.JOptionPane" %>
+<%@page import="object.*" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -38,13 +38,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <%
-    int classification=0;
+    request.setCharacterEncoding("UTF-8");//传值编码
+    
+    String classification=null;
      Double buyprice=0.0;
      Double sellprice=0.0;
-     int number=0 ;
-    int minnumber=0;
+     Double number=0.0 ;
+    Double minnumber=0.0;
     String productsName=null;
     int id =0;
+    String label = "nolabel";
+    
     String  idString = request.getParameter("id");
       String  name = (String)request.getParameter("name");
       if(idString != null && idString != "" ){
@@ -54,11 +58,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             out.println(name);
 		   ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
 		    commodityDAO.deleteProducts(id);
-		    response.sendRedirect("../index.jsp");
+		  response.sendRedirect("../IndexPart/products.jsp");
       }
       
       
       if(name != null  && name.equals("details")){
+      session.setAttribute("label", "change");
+      
       if(idString != null){
          Connection conn = DBConnection.getConnection();
 		String updateSQL = "select * from products where id="+id+"";
@@ -70,11 +76,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 			  productsName=rs.getString(2);
-			   classification = rs.getInt(3);
+			   classification = rs.getString(3);
 			  buyprice = rs.getDouble(4);
 			  sellprice = rs.getDouble(5);
-			   number = rs.getInt(8);
-			  minnumber = rs.getInt(9);
+			   number = rs.getDouble(8);
+			  minnumber = rs.getDouble(9);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -85,44 +91,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }}
 	
 	 if(name != null  &&  name.equals("add")){
-	 		String prductsname = (String)request.getParameter("produtsName");
-	 	out.println(prductsname);
-	 			    JOptionPane.showMessageDialog(null, "添加成功", "恭喜您", JOptionPane.ERROR_MESSAGE);
-	 	
-	 }
+	 session.setAttribute("label", "add");
+	 } 
 	
      %>
   </body>
   <div class="form">
-	  <form action="Resolve/ProductsReslove.jsp?name=add" role="form"  class="form-horizontal">
+	  <form action="Resolve/productsAddChange.jsp?id=<%= id %>" role="form"  class="form-horizontal">
 	  <div class="form-group">
 	  	<label  for="firstname" class="col-sm-2 control-label">产品名称</label>
 	  	 <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="firstname" name="produtsName" value="<%= productsName %>"></input>
+	    	<input type="text" class="form-control" id="firstname" name="produtsName" placeholder="<%= productsName %>"></input>
 	    </div>
 	   </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label"> 进价</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" name="buyprice" value="<%= buyprice %>"></input>
+		    	<input type="text" class="form-control" id="name" name="buyprice" placeholder="<%= buyprice %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">卖价</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" name="sellprice"value="<%= sellprice %>"></input>
+		    	<input type="text" class="form-control" id="name" name="sellprice"placeholder="<%= sellprice %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">剩余库存</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" name="number" value="<%= number %>"></input>
+		    	<input type="text" class="form-control" id="name" name="number" placeholder="<%= number %>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">最小库存</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" name="minnumber" value="<%= minnumber %>"></input>
+		    	<input type="text" class="form-control" id="name" name="minnumber" placeholder="<%= minnumber %>"></input>
 		    </div>
 	    </div>
 	     <div class="form-group">
@@ -137,10 +140,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>
 	     <div class="form-group" >
 	     	<label class="sr-only" for="inputfile">文件输入</label>
-		    <input type="file" id="inputfile">
+		    <input type="file" id="inputfile" name="ProductsPicture">
 		    <p class="help-block">请上传该产品图片</p>
 	    </div>
-	    	<button type="submit" class="btn btn-default form">提交</button>
+	    <button type="submit" class="btn btn-default form" name="addSignal" value="add">提交</button>
 	  </form>
  </div>
 <script src="./js/jquery-3.2.1.min.js"></script>

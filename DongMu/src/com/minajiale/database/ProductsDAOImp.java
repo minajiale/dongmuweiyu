@@ -11,11 +11,18 @@ public class ProductsDAOImp implements ProductsDAO {
 	public void addProducts(Product commodity) {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnection.getConnection();
-		String addSQL ="insert into ";
+		String addSQL ="insert into products(name,class,buyprice,sellprice,picture,number,minnumber) values(?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try{
+			
 			pstmt = conn.prepareStatement(addSQL);
 			pstmt.setString(1,commodity.getName());
+			pstmt.setString(2,commodity.getCalss());
+			pstmt.setDouble(3, commodity.getBuyprice());
+			pstmt.setDouble(4, commodity.getSellprice());
+			pstmt.setString(5, commodity.getPicture());
+			pstmt.setDouble(6,commodity.getNumber());
+			pstmt.setDouble(7,commodity.getMinnumber());
 			pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -59,7 +66,7 @@ public class ProductsDAOImp implements ProductsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Product commodity = new Product();
-				commodity.setBuyprice(rs.getString(4));
+				commodity.setBuyprice(rs.getDouble(4));
 				commodity.setCalss(rs.getString(3));
 				commodity.setName(rs.getString(2));
 			}

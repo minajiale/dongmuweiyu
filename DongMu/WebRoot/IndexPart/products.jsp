@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
     <%@page import="com.minajiale.database.*" %>
 <%@page import="java.sql.*" %>
@@ -80,7 +80,7 @@
 <body>
 		<div class="finance">
 			
-		<h1 class="page-header">产品管理 &nbsp<a href="../Resolve/ProductsReslove.jsp">+</a></h1>
+		<h1 class="page-header">产品管理 &nbsp<a href="../Resolve/ProductsReslove.jsp?name=add">+</a></h1>
 		
 		<!-- 分类菜单 -->
 		<div class="classify">
@@ -142,6 +142,8 @@
                 </tr>
  -->
                <%
+               request.setCharacterEncoding("UTF-8");//传值编码
+               
         Connection connProducts = DBConnection.getConnection();
 		String updateProductsSQL = "select * from products";
 		PreparedStatement pstmtproducts = null;
