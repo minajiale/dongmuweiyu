@@ -1,7 +1,0 @@
-<%@page language="java" import="java.util.*" pageEncoding="gb2312" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl.core"%>
-<html>
-<head>
-<tittle>test</tittle>
-</head>
-</html>

@@ -38,11 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       if(idString != null && idString != "" ){
          id = Integer.parseInt(idString);
       }
-   	
-   	 if(label != null && label.equals("add")){
-   	    out.println("add");
-   
-   	    Product commodity = new Product();
+      Product commodity = new Product();
 	    Double buypriceD = 0.0;
 	    Double sellpriceD = 0.0;
 	    Double NumberD = 0.0;
@@ -93,6 +89,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	
 	    ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
 	 	commodityDAO.addProducts(commodity);
+   	
+   	 if(label != null && label.equals("add")){
+   	    out.println("add");
+   
+   	    
 	 	
 	    response.sendRedirect("../IndexPart/products.jsp");
 	 	

@@ -145,22 +145,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	<input type="text" class="form-control" id="name" name="minnumber" placeholder="<%= minnumber %>"></input>
 		    </div>
 	    </div>
+	    <% if(name != null  && name.equals("details")){ %>
+	    <div class="form-group">
+   			 <label for="name" class="col-sm-2 control-label">分类</label>
+      			<input type="text" class="form-control" id="name" name="clascification" placeholder="<%=classification %>" class="col-sm-10"></input> 
+  		</div>
+  		<%} else { %>
 	     <div class="form-group">
    			 <label for="name" class="col-sm-2 control-label">分类</label>
     		<select class="form-control" id="name" class="col-sm-10" name="clascification"> 
-      			<option>厨房用品</option>
-      			<option>卫生间用品</option>
-     			 <option>门</option>
+      			<option>龙头系列</option>
+      			<option>花洒系列</option>
+     			 <option>座便器系列</option>
       			<option>配件</option>
      			 <option>瓷砖</option>
+     			 <option>地漏系列</option>
+     			 <option>挂件系列</option>
+     			  <option>淋浴阀系列</option>
+     			  <option>单水系列</option>
+     			   <option>净水器系列</option>
    			 </select>
   		</div>
+  		<%} %>
 	     <div class="form-group" >
 	     	<label class="sr-only" for="inputfile">文件输入</label>
 		    <input type="file" id="inputfile" name="ProductsPicture">
 		    <p class="help-block">请上传该产品图片</p>
 	    </div>
+	     <% if(name != null  && name.equals("details")){ %>
+	     <button type="submit" class="btn btn-default form" name="addSignal" value="add">修改</button>
+	     <%} else { %>
 	    <button type="submit" class="btn btn-default form" name="addSignal" value="add">提交</button>
+	    <%} %>
 	  </form>
  </div>
 <script src="./js/jquery-3.2.1.min.js"></script>

@@ -124,6 +124,7 @@
               <thead>
                 <tr>
                   <th>产品名称</th>
+                  <th>型号</th>
                   <th>销售单价（元）</th>
                   <th>剩余库存</th>
                   <th>成交数量</th>
@@ -145,14 +146,14 @@
                request.setCharacterEncoding("UTF-8");//传值编码
                
         Connection connProducts = DBConnection.getConnection();
-		String updateProductsSQL = "select * from products";
+		String updateProductsSQL = "select * from products order by id desc";
 		PreparedStatement pstmtproducts = null;
 		try{
 			pstmtproducts = connProducts.prepareStatement(updateProductsSQL);
 			ResultSet rsproducts = pstmtproducts.executeQuery();
 			while(rsproducts.next()){
 			    int id= rsproducts.getInt(1);
-				out.println("<tr><td>"+rsproducts.getString(2)+"</td><td>￥"+rsproducts.getString(4)+"</td><td>"+ rsproducts.getString(8)+ "</td><td>"+rsproducts.getString(9)+
+				out.println("<tr><td>"+rsproducts.getString(2)+"</td><td>"+rsproducts.getString(10)+"</td></td><td>￥"+rsproducts.getString(4)+"</td><td>"+ rsproducts.getString(8)+ "</td><td>"+rsproducts.getString(9)+
 				"<td><a href='../Resolve/ProductsReslove.jsp?name=details&id=" + id + "'>详情</a></td>"+
 				"<td><a href='../Resolve/ProductsReslove.jsp?name=delete&id=" + id + "'>删除</a></td></tr>");
 			}
