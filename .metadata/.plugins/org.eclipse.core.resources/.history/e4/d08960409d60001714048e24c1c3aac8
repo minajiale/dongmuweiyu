@@ -166,10 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      			   <option>净水器系列</option>
      			   <option>浴柜系列</option>
      			    <option>瓷砖系列</option>
-     			   <option>门系列</option>
-     			     <option>其他</option>
-     			   
-     			    
    			 </select>
   		</div>
   		<%} %>
