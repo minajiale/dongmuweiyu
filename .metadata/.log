@@ -1325,3 +1325,36 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.m2e.logback.appender 4 0 2017-07-02 18:20:45.342
 !MESSAGE Unable to update index for central|http://repo1.maven.org/maven2
+!SESSION 2017-07-03 05:58:59.927 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-07-03 06:00:16.646
+!MESSAGE Unable to update index for central|http://repo1.maven.org/maven2
+!SESSION 2017-07-03 07:45:10.688 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-07-03 07:45:42.115
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-07-03 07:46:57.182
+!MESSAGE Unable to update index for central|http://repo1.maven.org/maven2
+!SESSION 2017-07-04 08:20:57.393 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-07-04 08:21:53.500
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2017-07-04 08:23:44.149
+!MESSAGE Unable to update index for central|http://repo1.maven.org/maven2

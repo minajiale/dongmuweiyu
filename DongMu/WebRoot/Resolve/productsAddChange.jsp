@@ -71,6 +71,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
 	 	String clascificationT = request.getParameter("clascification"); 
 	    String clascification = new String(clascificationT.getBytes("ISO-8859-1"),"utf-8");
+	    
+	    String codeT = request.getParameter("produtsCode"); 
+	    String produtsCode = new String(codeT.getBytes("ISO-8859-1"),"utf-8");
+	    
+	     String specificationsT = request.getParameter("specifications"); 
+	    String specifications = new String(specificationsT.getBytes("ISO-8859-1"),"utf-8");
 	 		
 	 	String ProductsPicture = request.getParameter("ProductsPicture");
 	 	commodity.setName(prductsname);
@@ -80,6 +86,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	commodity.setPicture(ProductsPicture);
 	 	commodity.setSellprice(sellpriceD);
 	 	commodity.setNumber(NumberD);
+	 	commodity.setCode(produtsCode);
+	 	commodity.setSpecificationsT(specifications);
 	 	
 	 	out.println(prductsname);
 	 	

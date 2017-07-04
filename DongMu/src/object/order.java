@@ -6,8 +6,9 @@ public class order {
 	private String customer;
 	private Double totalamount;
 	private String payway;
+	private String progress;
 	private Double debt;
-	private int[] products;
+	private String products;
 	private String owner;
 	public String getTime() {
 		return time;
@@ -39,16 +40,23 @@ public class order {
 	public void setDebt(Double debt) {
 		this.debt = debt;
 	}
-	public int[] getProducts() {
-		return products;
-	}
-	public void setProducts(int[] products) {
-		this.products = products;
-	}
+
 	public String getOwner() {
 		return owner;
 	}
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	public String getProgress() {
+		return progress;
+	}
+	public void setProgress(String progress) {
+		this.progress = progress;
+	}
+	public String getProducts() {
+		return products;
+	}
+	public void setProducts(String products) {
+		this.products = products;
 	}	
 }

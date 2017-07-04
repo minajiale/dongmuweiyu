@@ -11,7 +11,7 @@ public class ProductsDAOImp implements ProductsDAO {
 	public void addProducts(Product commodity) {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnection.getConnection();
-		String addSQL ="insert into products(name,class,buyprice,sellprice,picture,number,minnumber) values(?,?,?,?,?,?,?)";
+		String addSQL ="insert into products(name,class,buyprice,sellprice,picture,number,minnumber,code,specifications) values(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try{
 			
@@ -23,6 +23,9 @@ public class ProductsDAOImp implements ProductsDAO {
 			pstmt.setString(5, commodity.getPicture());
 			pstmt.setDouble(6,commodity.getNumber());
 			pstmt.setDouble(7,commodity.getMinnumber());
+			pstmt.setString(8,commodity.getCode());
+			pstmt.setString(9,commodity.getSpecificationsT());
+
 			pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();

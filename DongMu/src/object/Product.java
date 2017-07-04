@@ -9,6 +9,8 @@ public class Product {
 	private String picture;//产品图片
 	private Double number;//库存
 	private Double minnumber;
+	private String code;//货号
+	private String specificationsT;//规格
 	public String getName() {
 		return name;
 	}
@@ -56,6 +58,18 @@ public class Product {
 	}
 	public void setMinnumber(Double minnumber) {
 		this.minnumber = minnumber;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getSpecificationsT() {
+		return specificationsT;
+	}
+	public void setSpecificationsT(String specificationsT) {
+		this.specificationsT = specificationsT;
 	}
 
 

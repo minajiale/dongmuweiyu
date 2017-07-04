@@ -46,7 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      Double number=0.0 ;
     Double minnumber=0.0;
     String productsName=null;
-    int id =0;
+    String specifications=null;
+    String productsCode = null;
+    int id =0; 
     String label = "nolabel";
     
     String  idString = request.getParameter("id");
@@ -81,6 +83,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  sellprice = rs.getDouble(5);
 			   number = rs.getDouble(8);
 			  minnumber = rs.getDouble(9);
+			  productsCode = rs.getString(10);
+			  specifications = rs.getString(11);
+			  
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -93,7 +98,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 if(name != null  &&  name.equals("add")){
 	 session.setAttribute("label", "add");
 	 } 
-	
      %>
   </body>
   <div class="form">
@@ -104,6 +108,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	<input type="text" class="form-control" id="firstname" name="produtsName" placeholder="<%= productsName %>"></input>
 	    </div>
 	   </div>
+	   	<div class="form-group">
+	  	<label  for="firstname" class="col-sm-2 control-label">货号</label>
+	  	 <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="firstname" name="produtsCode" placeholder="<%= productsCode %>"></input>
+	    </div>
+	   </div>
+	   <div class="form-group">
+	  	<label  for="firstname" class="col-sm-2 control-label">规格</label>
+	  	 <div class="col-sm-10">
+	    	<input type="text" class="form-control" id="firstname" name="specifications" placeholder="<%= specifications %>"></input>
+	    </div>
+	   </div>
+	   
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label"> 进价</label>
 		     <div class="col-sm-10">

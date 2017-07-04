@@ -26,6 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	
 	<style type="text/css">
 	.formmid{
 	display:block;
@@ -40,13 +42,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%
  
 		String time = null;
-		int customerint = 0;
+		String customerString = null;
 		Double totalmount = 0.0;
-		int paywayint = 0;
+		String paywayint = null;
 		Double debt =0.0;
-		int progressint =0;
+		String progressint =null;
 		String products =null;
-		  int id =0;
+		int id =0;
+		String owner=null;
     
     String  idString = request.getParameter("id");
       String  name = (String)request.getParameter("name");
@@ -88,12 +91,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 			  time=rs.getString(2);
-			   customerint = rs.getInt(3);
+			  customerString = rs.getString(3);
 			  totalmount = rs.getDouble(4);
-			  paywayint = rs.getInt(5);
-			   debt = rs.getDouble(8);
-			  progressint = rs.getInt(9);
-			  products = rs.getString(10);
+			  paywayint = rs.getString(5);
+			   debt = rs.getDouble(6);
+			  progressint = rs.getString(7);
+			  products = rs.getString(8);
+			  owner = rs.getString(9);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -109,14 +113,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
      %>
-     <%
+     <%--
      //根据订单表中的 顾客姓名ID，付款方式ID，订单状态ID查询相应的表，得出人性化数字
      				 //根据顾客ID查找顾客姓名
      				 
      				 String Customer=null;
      				 String progress = null;
      				 String payway = null;
-     				 
+     			//根据顾客ID查找顾客姓名 
      		    Connection conn = DBConnection.getConnection();
 				String customerSQL = "select * from customer where id= "+customerint+"";
 			    PreparedStatement pstmtC = null;
@@ -135,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	progress= rsP.getString(3);
 			    }
 			    
-			    //根据订单状态ID查找订单状态
+			    //根据付款方式ID查找付款方式
 				String paywaySQL = "select * from payway where id= "+paywayint+"";
 			    PreparedStatement pstmtPa = null;
 			    pstmtPa = conn.prepareStatement(paywaySQL);
@@ -149,26 +153,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		DBConnection.close(pstmtPa);
 			DBConnection.close(conn);
      
-      %>
+      --%>
   </body>
   <div class="formmid">
 	  <form action="Resolve/OrderAddChange.jsp?id=<%= id %>" role="form"  class="form-horizontal">
 	  <div class="form-group">
 	  	<label  for="firstname" class="col-sm-2 control-label">订单号</label>
 	  	 <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="firstname" name="id"placeholder="<%= id %>"></input><span>该ID自动生成无须改动</span>
+	    	<input type="text" class="form-control" id="firstname" name="orderId"placeholder="<%= id %>"></input><span>该ID自动生成无须改动</span>
 	    </div>
 	   </div>
+	   
+	   
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">订单时间</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" name="time" placeholder="<%= time %>"></input>
-		    </div>
+			<div class="control-group">
+                <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input size="16" type="text" value="" readonly name="orderTime">
+                    <span class="add-on"><i class="icon-remove"></i></span>
+					<span class="add-on"><i class="icon-th"></i></span>
+                </div>
+				<input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>		    </div>
 	    </div>
+	    
+	    
+	    
 	   <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">顾客姓名</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" time="customer" placeholder="<%= Customer%>"></input>
+		    	<input type="text" class="form-control" id="name" time="customer" name="customerName"placeholder="<%= customerString%>"></input>
+		    </div>
+	    </div>
+	    <div class="form-group" >
+		    <label for="name"  class="col-sm-2 control-label">卖家姓名</label>
+		     <div class="col-sm-10">
+		    	<input type="text" class="form-control" id="name" time="dealer" name="dealer"placeholder="<%= owner%>"></input>
 		    </div>
 	    </div>
 	   <div class="form-group" >
@@ -177,10 +198,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	<input type="text" class="form-control" id="name" name="totalamount" placeholder="<%= totalmount %>"></input>
 		    </div>
 	    </div>
+	    <div class="form-group" >
+		    <label for="name"  class="col-sm-2 control-label">欠款金额</label>
+		     <div class="col-sm-10">
+		    	<input type="text" class="form-control" id="name" name="debt" placeholder="<%= debt %>"></input>
+		    </div>
+	    </div>
 	    <div class="form-group">
    			 <label for="name" class="col-sm-2 control-label">付款方式</label>
     		<select class="form-control" id="name" class="col-sm-10" name="payway"> 
-      			<option><%= payway %></option>
+      			<option><%= paywayint %></option>
       			<option>现金</option>
      			 <option>微信</option>
       			<option>支付宝</option>
@@ -190,7 +217,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="form-group">
    			 <label for="name" class="col-sm-2 control-label">订单状态</label>
     		<select class="form-control" id="name" class="col-sm-10" name="progress"> 
-      			<option><%= progress %></option>
+      			<option><%= progressint %></option>
       			<option>预付定金</option>
      			 <option>欠款未完成</option>
       			<option>完结</option>
@@ -200,12 +227,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="form-group" >
 		    <label for="name"  class="col-sm-2 control-label">购买产品列表</label>
 		     <div class="col-sm-10">
-		    	<input type="text" class="form-control" id="name" value="<%= products %>"></input>
+		    	<input type="text" class="form-control" id="name" name="productsList" placeholder="<%= products %>"></input>
 		    </div>
 	    </div>
 	    	<button type="submit " class="btn btn-default formmid" >提交</button>
 	  </form>
  </div>
-<script src="./js/jquery-3.2.1.min.js"></script>
+ <script type="text/javascript" src="./js/jquery-3.2.1.min.js" charset="UTF-8"></script>
 <script src="./js/bootstrap.min.js"></script><!--boostrap 标准库-->
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+ <script type="text/javascript">
+
+	$('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+
+</script>
+
+
 </html>

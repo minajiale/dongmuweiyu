@@ -42,51 +42,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	    out.println("add");
    
    	    order oneOrder = new order();
+   	    Double totalamountD= 0.0;
+   	    Double debt=0.0;
    	    
-	    Double buypriceD = 0.0;
-	    Double sellpriceD = 0.0;
-	    Double NumberD = 0.0;
-	    Double MinNumberD = 0.0;
 	    
-	    String prductsnameT = (String)request.getParameter("produtsName");
-	    
+	    String prductsnameT = (String)request.getParameter("orderTime");
 	    String prductsname = new String(prductsnameT.getBytes("ISO-8859-1"),"utf-8");
 	    
-	    String buypriceString = request.getParameter("buyprice");
-	    if(buypriceString != null){
-	       buypriceD =  Double.parseDouble(buypriceString);
+	    String customerNameString = request.getParameter("customerName");
+	    String customerName = new String(customerNameString.getBytes("ISO-8859-1"),"utf-8");
+		
+
+	    String debtString = request.getParameter("debt");
+	    if(debtString != null){
+	    	debt =  Double.parseDouble(debtString);
 	    }
-	    String sellpriceString = request.getParameter("sellprice");
-	    if(sellpriceString != null){
-	    	sellpriceD =  Double.parseDouble(sellpriceString);
-	    }
-	    String numberString = request.getParameter("number");
-	    if(numberString != null){
-	    	NumberD =  Double.parseDouble(numberString);
-	    }
-	    String minnumberString = request.getParameter("minnumber");
-	    if(minnumberString != null){
-	       MinNumberD =  Double.parseDouble(minnumberString);
+	    	    
+	    String totalamountString = request.getParameter("totalamount");
+	    if(totalamountString != null){
+	    	totalamountD =  Double.parseDouble(totalamountString);
 	    }
 	    
-	 	String clascificationT = request.getParameter("clascification"); 
-	    String clascification = new String(clascificationT.getBytes("ISO-8859-1"),"utf-8");
+	    String paywayString = request.getParameter("payway");
+	    String payway = new String(paywayString.getBytes("ISO-8859-1"),"utf-8");
+
+		
+	    String progressString = request.getParameter("progress");
+	    String progress = new String(progressString.getBytes("ISO-8859-1"),"utf-8");
+		
+	    
+	 	String productsListT = request.getParameter("productsList"); 
+	    String productsList = new String(productsListT.getBytes("ISO-8859-1"),"utf-8");
+	    	    
+	 	String dealerT = request.getParameter("dealer"); 
+	    String dealer = new String(dealerT.getBytes("ISO-8859-1"),"utf-8");
+	    
+	 	String timeT = request.getParameter("orderTime"); 
+	    String orderTime = new String(timeT.getBytes("ISO-8859-1"),"utf-8");
 	 		
-	 	String ProductsPicture = request.getParameter("ProductsPicture");
-	 	commodity.setName(prductsname);
-	 	commodity.setBuyprice(buypriceD);
-	 	commodity.setCalss(clascification);
-	 	commodity.setMinnumber(MinNumberD);
-	 	commodity.setPicture(ProductsPicture);
-	 	commodity.setSellprice(sellpriceD);
-	 	commodity.setNumber(NumberD);
+	 	oneOrder.setCustomer(customerName);
+		oneOrder.setOwner(dealer);
+		oneOrder.setPayway(payway);
+		oneOrder.setDebt(debt);
+		oneOrder.setProducts(productsList);
+		oneOrder.setTime(orderTime);
+		oneOrder.setProgress(progress);
+		oneOrder.setTotalamount(totalamountD);
+		
 	 	
-	 	out.println(prductsname);
 	 	
-	    ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
-	 	commodityDAO.addProducts(commodity);
+	    OrderDAO orderDAO = OrderDAOFactory.getOrderDAOInstance();
+	 	orderDAO.addOrder(oneOrder);
 	 	
-	    response.sendRedirect("../IndexPart/products.jsp");
+	   response.sendRedirect("../IndexPart/order.jsp");
 	 	
 	 }
 	 
