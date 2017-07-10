@@ -1,7 +1,0 @@
-package object;
-
-public class Product {
-	private String name;//商品名称
-	private String calss;//商品分类  0为门，1为浴室用品 
-	
-}

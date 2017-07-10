@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="70" version="2.0">
+<workbench progressCount="71" version="2.0">
 <workbenchAdvisor/>
 <window height="728" maximized="true" width="1036" x="-155" y="344">
 <fastViewData fastViewLocation="1024"/>
@@ -27,7 +27,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="198" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.jboss.tools.common.model.ui.editor.EditorPartWrapper" itemType="typePlaceholder" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.css.core.csssource.source" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -43,14 +43,28 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="ProductsReslove.jsp" partName="ProductsReslove.jsp" path="F:/dongmu/DongMu/WebRoot/Resolve/ProductsReslove.jsp" title="ProductsReslove.jsp" tooltip="DongMu/WebRoot/Resolve/ProductsReslove.jsp" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/Resolve/ProductsReslove.jsp"/>
+<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Test.jsp" partName="Test.jsp" path="F:/dongmu/DongMu/WebRoot/Resolve/Test.jsp" title="Test.jsp" tooltip="DongMu/WebRoot/Resolve/Test.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/Resolve/Test.jsp"/>
 </editor>
-<editor activePart="true" focus="true" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" partName="products.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/products.jsp" title="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GoddessAction.java" partName="GoddessAction.java" path="C:/Users/minajiale/Desktop/jdbc_imooc/src/com/imooc/action/GoddessAction.java" title="GoddessAction.java" tooltip="jdbc_imooc/src/com/imooc/action/GoddessAction.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/jdbc_imooc/src/com/imooc/action/GoddessAction.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="414" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Ordertemplate.jsp" partName="Ordertemplate.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/Ordertemplate.jsp" title="Ordertemplate.jsp" tooltip="DongMu/WebRoot/IndexPart/Ordertemplate.jsp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/Ordertemplate.jsp"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OrderDAOImpl.java" partName="OrderDAOImpl.java" path="F:/dongmu/DongMu/src/com/minajiale/database/OrderDAOImpl.java" title="OrderDAOImpl.java" tooltip="DongMu/src/com/minajiale/database/OrderDAOImpl.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/src/com/minajiale/database/OrderDAOImpl.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="271" selectionTopPixel="0"/>
+</editor>
+<editor id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" partName="products.jsp" path="F:/dongmu/DongMu/WebRoot/IndexPart/products.jsp" title="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
 </editor>
 </editors>
@@ -225,7 +239,7 @@
 <view id="org.eclipse.ui.views.ProblemView" ratio="0.3"/>
 <view id="org.eclipse.ui.views.TaskList" ratio="0.3"/>
 <view id="com.genuitec.eclipse.ui.HTMLView" ratio="0.85"/>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.84"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.17666666"/>
 <view id="com.genuitec.eclipse.ast.deploy.core.serverview" ratio="0.3"/>
 </fastViews>
 </fastViewBar>
@@ -250,7 +264,7 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.21445042" ratioLeft="279" ratioRight="1022" relationship="2" relative="cvslocation"/>
+<info part="org.eclipse.ui.editorss" ratio="0.2159877" ratioLeft="281" ratioRight="1020" relationship="2" relative="cvslocation"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@4cc4dfc5" ratio="0.75" ratioLeft="600" ratioRight="200" relationship="2" relative="org.eclipse.ui.editorss">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
@@ -300,89 +314,96 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/OrderReslove.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/ProductsReslove.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/order.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/OrderAddChange.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/ProductsReslove.jsp"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/productsAddChange.jsp"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DongMu/src/object/Product.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/productsAddChange.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/ProductsReslove.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/Resolve/Test.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/jdbc_imooc/src/com/imooc/action/GoddessAction.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/jdbc_imooc/src/com/imooc/dao/GoddessDao.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/Ordertemplate.jsp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DongMu/src/com/minajiale/database/OrderDAOImpl.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DongMu/src/com/minajiale/database/ProductsDAO.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/DongMu/src/com/minajiale/database/ProductsDAOImp.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" path="/DongMu/WebRoot/IndexPart/products.jsp"/>
 </editors>
-<item historyLabel="products.jsp" index="2"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
-<item historyLabel="OrderAddChange.jsp" index="4"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
+<item historyLabel="products.jsp" index="0"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
-<item historyLabel="OrderAddChange.jsp" index="4"/>
+<item historyLabel="products.jsp" index="0"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
-<item historyLabel="order.jsp" index="3"/>
-<item historyLabel="products.jsp" index="2"/>
-<item historyLabel="order.jsp" index="3"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
+<item historyLabel="products.jsp" index="0"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
+<item historyLabel="products.jsp" index="0"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
-<item historyLabel="OrderAddChange.jsp" index="4"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
+<item historyLabel="productsAddChange.jsp" index="2"/>
 <item historyLabel="ProductsReslove.jsp" index="1"/>
-<item historyLabel="OrderReslove.jsp" index="0"/>
-<item historyLabel="OrderAddChange.jsp" index="4"/>
+<item historyLabel="products.jsp" index="3"/>
+<item historyLabel="productsAddChange.jsp" index="4"/>
+<item historyLabel="ProductsReslove.jsp" index="1"/>
+<item historyLabel="products.jsp" index="3"/>
+<item historyLabel="productsAddChange.jsp" index="4"/>
 <item historyLabel="ProductsReslove.jsp" index="5"/>
-<item historyLabel="OrderAddChange.jsp" index="4"/>
+<item historyLabel="Test.jsp" index="6"/>
+<item historyLabel="products.jsp" index="7"/>
 <item historyLabel="ProductsReslove.jsp" index="5"/>
-<item historyLabel="productsAddChange.jsp" index="6"/>
+<item historyLabel="Test.jsp" index="6"/>
 <item historyLabel="ProductsReslove.jsp" index="5"/>
-<item historyLabel="productsAddChange.jsp" index="6"/>
-<item historyLabel="Product.java" index="7">
-<position/>
-</item>
-<item historyLabel="Product.java" index="7">
-<position/>
-</item>
-<item historyLabel="Product.java" index="7">
-<position/>
-</item>
-<item historyLabel="ProductsDAOImp.java" index="8">
-<position/>
-</item>
-<item historyLabel="Product.java" index="7">
-<position/>
-</item>
-<item historyLabel="productsAddChange.jsp" index="6"/>
+<item historyLabel="Test.jsp" index="6"/>
 <item historyLabel="ProductsReslove.jsp" index="5"/>
-<item historyLabel="productsAddChange.jsp" index="6"/>
-<item historyLabel="ProductsDAOImp.java" index="8">
-<position info="not_deleted" x="938" y="55"/>
+<item historyLabel="Test.jsp" index="6"/>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="productsAddChange.jsp" index="6"/>
-<item historyLabel="ProductsDAOImp.java" index="8">
-<position info="not_deleted" x="938" y="55"/>
+<item historyLabel="Test.jsp" index="6"/>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Product.java" index="7">
-<position/>
+<item historyLabel="productsAddChange.jsp" index="4"/>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="ProductsDAOImp.java" index="8">
-<position info="not_deleted" x="1047" y="0"/>
-</item>
-<item historyLabel="Product.java" index="7">
-<position/>
-</item>
-<item historyLabel="productsAddChange.jsp" index="6"/>
-<item historyLabel="ProductsReslove.jsp" index="5"/>
-<item historyLabel="Product.java" index="7">
-<position info="not_deleted" x="1426" y="0"/>
+<item historyLabel="products.jsp" index="7"/>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="ProductsReslove.jsp" index="5"/>
-<item active="true" historyLabel="products.jsp" index="9"/>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="448" y="0"/>
+</item>
+<item historyLabel="GoddessDao.java" index="9">
+<position info="not_deleted" x="655" y="0"/>
+</item>
+<item historyLabel="GoddessAction.java" index="8">
+<position info="not_deleted" x="414" y="0"/>
+</item>
+<item historyLabel="Ordertemplate.jsp" index="10"/>
+<item historyLabel="OrderDAOImpl.java" index="11">
+<position info="not_deleted" x="271" y="0"/>
+</item>
+<item historyLabel="ProductsDAO.java" index="12">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="OrderDAOImpl.java" index="11">
+<position info="not_deleted" x="271" y="0"/>
+</item>
+<item historyLabel="ProductsDAOImp.java" index="13">
+<position info="not_deleted" x="2043" y="0"/>
+</item>
+<item historyLabel="OrderDAOImpl.java" index="11">
+<position info="not_deleted" x="271" y="0"/>
+</item>
+<item historyLabel="products.jsp" index="14"/>
+<item active="true" historyLabel="Ordertemplate.jsp" index="10"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -411,14 +432,32 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="products.jsp" tooltip="DongMu/WebRoot/IndexPart/products.jsp">
 <persistable path="/DongMu/WebRoot/IndexPart/products.jsp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Product.java" tooltip="DongMu/src/object/Product.java">
-<persistable path="/DongMu/src/object/Product.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProductsDAOImp.java" tooltip="DongMu/src/com/minajiale/database/ProductsDAOImp.java">
 <persistable path="/DongMu/src/com/minajiale/database/ProductsDAOImp.java"/>
 </file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProductsDAO.java" tooltip="DongMu/src/com/minajiale/database/ProductsDAO.java">
+<persistable path="/DongMu/src/com/minajiale/database/ProductsDAO.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OrderDAOImpl.java" tooltip="DongMu/src/com/minajiale/database/OrderDAOImpl.java">
+<persistable path="/DongMu/src/com/minajiale/database/OrderDAOImpl.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Ordertemplate.jsp" tooltip="DongMu/WebRoot/IndexPart/Ordertemplate.jsp">
+<persistable path="/DongMu/WebRoot/IndexPart/Ordertemplate.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GoddessDao.java" tooltip="jdbc_imooc/src/com/imooc/dao/GoddessDao.java">
+<persistable path="/jdbc_imooc/src/com/imooc/dao/GoddessDao.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GoddessAction.java" tooltip="jdbc_imooc/src/com/imooc/action/GoddessAction.java">
+<persistable path="/jdbc_imooc/src/com/imooc/action/GoddessAction.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="Test.jsp" tooltip="DongMu/WebRoot/Resolve/Test.jsp">
+<persistable path="/DongMu/WebRoot/Resolve/Test.jsp"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="productsAddChange.jsp" tooltip="DongMu/WebRoot/Resolve/productsAddChange.jsp">
 <persistable path="/DongMu/WebRoot/Resolve/productsAddChange.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Product.java" tooltip="DongMu/src/object/Product.java">
+<persistable path="/DongMu/src/object/Product.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="OrderAddChange.jsp" tooltip="DongMu/WebRoot/Resolve/OrderAddChange.jsp">
 <persistable path="/DongMu/WebRoot/Resolve/OrderAddChange.jsp"/>
@@ -432,26 +471,8 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.genuitec.eclipse.webdesigner3.editors.jsp" name="OrderReslove.jsp" tooltip="DongMu/WebRoot/Resolve/OrderReslove.jsp">
 <persistable path="/DongMu/WebRoot/Resolve/OrderReslove.jsp"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OrderDAOImpl.java" tooltip="DongMu/src/com/minajiale/database/OrderDAOImpl.java">
-<persistable path="/DongMu/src/com/minajiale/database/OrderDAOImpl.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProductsDAOFactory.java" tooltip="DongMu/src/com/minajiale/database/ProductsDAOFactory.java">
 <persistable path="/DongMu/src/com/minajiale/database/ProductsDAOFactory.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OrderDAOFactory.java" tooltip="DongMu/src/com/minajiale/database/OrderDAOFactory.java">
-<persistable path="/DongMu/src/com/minajiale/database/OrderDAOFactory.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProductsDAO.java" tooltip="DongMu/src/com/minajiale/database/ProductsDAO.java">
-<persistable path="/DongMu/src/com/minajiale/database/ProductsDAO.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OrderDAO.java" tooltip="DongMu/src/com/minajiale/database/OrderDAO.java">
-<persistable path="/DongMu/src/com/minajiale/database/OrderDAO.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="order.java" tooltip="DongMu/src/object/order.java">
-<persistable path="/DongMu/src/object/order.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="View.java" tooltip="jdbc_imooc/src/com/imooc/model/view/View.java">
-<persistable path="/jdbc_imooc/src/com/imooc/model/view/View.java"/>
 </file>
 </mruList>
 </workbench>

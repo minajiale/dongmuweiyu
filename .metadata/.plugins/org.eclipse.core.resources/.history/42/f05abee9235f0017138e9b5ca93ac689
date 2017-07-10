@@ -1,8 +1,0 @@
-package com.minajiale.database;
-
-public class OrderDAOFactory {
-	public static OrderDAO getcommodityDAOInstance(){
-		return new ProductsDAOImp();
-	}
-
-}

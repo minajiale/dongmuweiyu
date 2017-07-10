@@ -32,11 +32,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h1>wode jsp yemian </h1>
    <%
    response.setContentType("text/html;charset=UTF-8");//设置传输编码
-     int id=0;
+   response.setCharacterEncoding("utf-8");
+     int id1=0;
       String label = session.getAttribute("label").toString();
-   	 String  idString = request.getParameter("id");
+      if(session.getAttribute("id")!=null && session.getAttribute("id")!=""){
+   	 	String idString = session.getAttribute("id").toString();
+   	 System.out.println(idString);
+   	 
       if(idString != null && idString != "" ){
-         id = Integer.parseInt(idString);
+         id1 = Integer.parseInt(idString);
+      }
       }
       Product commodity = new Product();
 	    Double buypriceD = 0.0;
@@ -75,6 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    String specifications = new String(specificationsT.getBytes("ISO-8859-1"),"utf-8");
 	 		
 	 	String ProductsPicture = request.getParameter("ProductsPicture");
+	 	
+   	 if(label != null && label.equals("add")){
+   	    out.println("add");
 	 	commodity.setName(prductsname);
 	 	commodity.setBuyprice(buypriceD);
 	 	commodity.setCalss(clascification);
@@ -90,25 +98,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    ProductsDAO commodityDAO = ProductsDAOFactory.getcommodityDAOInstance();
 	 	commodityDAO.addProducts(commodity);
    	
-   	 if(label != null && label.equals("add")){
-   	    out.println("add");
-   
-   	    
-	 	
 	    response.sendRedirect("../IndexPart/products.jsp");
 	 	
 	 }
 	 
 	 	 if(label != null && label.equals("change")){
-	 	 out.println("change");
+	 	 System.out.println("change");
 	             Connection conn = DBConnection.getConnection();
-		String updateSQL = "update products set name=?, class=?, buyprice=?, sellprice=?, picture=?,number=?,minnumber=? where id="+id+"";
+		String updateSQL = "update products set name=?,code=?, specifications=?,  buyprice=?, sellprice=?,number=?,minnumber=? ,class=?where id="+id1+"";
 		PreparedStatement pstmt = null;
 		try{
-		    //pstmt.setInt(1, id);
-		    //pstmt.setString(1,idString);
-			pstmt = conn.prepareStatement(updateSQL);
-			//pstmt.executeUpdate();
+		pstmt = conn.prepareStatement(updateSQL);
+			//System.out.println(idString);
+			System.out.println(prductsname);
+		    pstmt.setString(1, prductsname);
+		    pstmt.setString(2,produtsCode);
+		    pstmt.setString(3,specifications);
+		    pstmt.setDouble(4,buypriceD);
+		    pstmt.setDouble(5,sellpriceD);
+		    pstmt.setDouble(6,NumberD);
+		    pstmt.setDouble(7,MinNumberD);
+		    pstmt.setString(8,clascification);
+			
+		    pstmt.executeUpdate();
 
 		}catch(SQLException e){
 			e.printStackTrace();

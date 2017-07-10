@@ -1,9 +1,0 @@
-package object;
-
-public class order {
- 
-	private String time;
-	
-	
-	
-}

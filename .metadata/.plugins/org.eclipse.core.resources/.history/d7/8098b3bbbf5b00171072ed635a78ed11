@@ -1,7 +1,0 @@
-package com.minajiale.database;
-import java.sql.*;
-
-public class DBConnection {
-	private static final String DBDRIVER = "com.mysql.jdbc.Driver";
-	
-}
