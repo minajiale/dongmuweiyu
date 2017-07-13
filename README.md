@@ -1,3 +1,3 @@
 # dongmuweiyu
 # 架构：　
-vue+bootstrap+jsp+mysql
+vue+Element UI +jsp+mysql
