@@ -24,10 +24,6 @@ export default {
     topMenu
   }
 }
-
-
-
-
 </script>
 
 <style scoped>
@@ -35,6 +31,6 @@ export default {
   float: left;
   position:relative;
   top: px;
-  margin-left: 210px;
+  margin-left: 198px;
 }
 </style>
