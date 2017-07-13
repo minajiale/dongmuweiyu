@@ -22,21 +22,7 @@ export default {
   components:{
     rightMenu,
     topMenu
-  },
-
-  methods:{
-       fetchData(){
-            console.log('路由发送变化doing...');
-      }
-   },
-   created() {
-         var self = this;
-         self.fetchData();
-   },
-   watch:{
-       '$route':'fetchData'
-   },
-
+  }
 }
 
 
