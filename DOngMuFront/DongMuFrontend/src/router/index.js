@@ -55,6 +55,13 @@ export default new Router({
                       rightContent: resolve => require(['../components/view/content/Products.vue'], resolve)
                     },
                 },
+                {
+                    path: '/classification',
+                    components: {
+                      default: resolve => require(['../components/Index.vue'], resolve),
+                      rightContent: resolve => require(['../components/view/content/classification.vue'], resolve)
+                    },
+                },
             ]
         },
         {

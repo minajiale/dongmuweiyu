@@ -3,6 +3,7 @@
     :data="tableData5"
     style="width: 100%">
     <el-table-column type="expand">
+      <template scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
           <el-form-item label="商品名称">
             <span>{{ props.row.name }}</span>
@@ -25,9 +26,8 @@
           <el-form-item label="商品描述">
             <span>{{ props.row.desc }}</span>
           </el-form-item>
-          <el-form-item label="操作">
-          </el-form-item>
         </el-form>
+      </template>
     </el-table-column>
     <el-table-column
       label="商品 ID"

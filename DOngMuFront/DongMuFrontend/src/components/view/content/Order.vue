@@ -1,8 +1,9 @@
 <template>
   <el-table
     :data="tableData5"
-    style="width: 100%">
+    style="width: 1000px">
     <el-table-column type="expand">
+      <template scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
           <el-form-item label="商品名称">
             <span>{{ props.row.name }}</span>
@@ -25,9 +26,8 @@
           <el-form-item label="商品描述">
             <span>{{ props.row.desc }}</span>
           </el-form-item>
-          <el-form-item label="操作">
-          </el-form-item>
         </el-form>
+      </template>
     </el-table-column>
     <el-table-column
       label="商品 ID"
@@ -40,6 +40,14 @@
     <el-table-column
       label="描述"
       prop="desc">
+    </el-table-column>
+    <el-table-column
+      label="操作"
+      width="100">
+      <template scope="scope">
+        <el-button @click="handleClick" type="text" size="small">查看</el-button>
+        <el-button @click="handleClick" type="text" size="small">编辑</el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -55,7 +63,7 @@
   .demo-table-expand .el-form-item {
     margin-right: 0;
     margin-bottom: 0;
-    width: 50%;
+    width: 90%;
   }
 </style>
 

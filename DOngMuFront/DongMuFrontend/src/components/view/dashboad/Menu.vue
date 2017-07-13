@@ -8,11 +8,11 @@
           <el-submenu index="productions">
             <template slot="title"><i class="el-icon-menu"></i>产品管理</template>
             <el-menu-item-group>
-              <el-menu-item index="productions">产品管理</el-menu-item>
+              <el-menu-item index="products">产品管理</el-menu-item>
               <el-menu-item index="classification">产品分类管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="orders"><i class="el-icon-setting"></i>订单管理</el-menu-item>
+          <el-menu-item index="order"><i class="el-icon-setting"></i>订单管理</el-menu-item>
           <el-menu-item index="peoplemanage"><i class="el-icon-picture"></i>人员管理</el-menu-item>
         </el-menu>
       </el-col>
