@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view name="main"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,5 +16,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin-top: -8px;
+  margin-left: -8px;
 }
 </style>

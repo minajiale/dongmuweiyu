@@ -3,7 +3,6 @@
     <topMenu></topMenu>
     <rightMenu></rightMenu>
     <router-view name="rightContent"></router-view>
-
   </div>
 </template>
 
