@@ -1,5 +1,5 @@
 <template>
-  <div id="rightMenu">
+  <div id="rightMenu" class="rightMenu">
     <el-row class="tac">
       <el-col :span="4">
         <el-menu default-active="analyse" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" router>
@@ -30,3 +30,13 @@ export default{
   }
 }
 </script>
+<style>
+.rightMenu{
+  display: block;
+  position: absolute;
+  width: 880px;
+  top: 60px;
+  left: 0;
+  bottom:0;
+}
+</style>

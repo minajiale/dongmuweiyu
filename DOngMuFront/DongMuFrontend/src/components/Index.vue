@@ -2,7 +2,9 @@
   <div class="Index">
     <topMenu></topMenu>
     <rightMenu></rightMenu>
-    <router-view name="rightContent"></router-view>
+    <div class="content">
+    <transition name="move" mode="out-in"><router-view name="rightContent"></router-view></transition>
+</div>
   </div>
 </template>
 
@@ -24,7 +26,11 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.content{
+  float: left;
+  position:relative;
+  top: px;
+  margin-left: 210px;
+}
 </style>
