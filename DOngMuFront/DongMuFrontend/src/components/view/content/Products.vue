@@ -60,6 +60,10 @@
               size="small"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              <el-button
+              size="small"
+              type="primary"
+              @click="handleAdd(scope.$index, scope.row)">加入订单</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -131,6 +135,9 @@
         console.log(index, row);
       },
       handleDelete(index, row) {
+        console.log(index, row);
+      },
+      handleAdd(index,row){
         console.log(index, row);
       }
   }
