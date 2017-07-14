@@ -15,12 +15,6 @@
     <el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>
-    <el-form-item label="订单状态" :label-width="formLabelWidth">
-      <el-select v-model="form.region" placeholder="预付定金">
-        <el-option label="欠款" value="shanghai"></el-option>
-        <el-option label="完结" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
     <el-form-item>
   <el-button type="primary" @click="onSubmit">提交</el-button>
   <el-button>取消</el-button>

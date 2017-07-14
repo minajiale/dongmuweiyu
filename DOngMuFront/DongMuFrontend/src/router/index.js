@@ -14,6 +14,13 @@ export default new Router({
             },
             children:[
               {
+                path: '/product/addProduct',
+                components: {
+                  default: resolve => require(['../components/Index.vue'], resolve),
+                  rightContent: resolve => require(['../components/view/content/detailes/AddProduct.vue'], resolve)
+                },
+              },
+              {
                 path: '/order/addOrder/verify',
                 components: {
                   default: resolve => require(['../components/Index.vue'], resolve),

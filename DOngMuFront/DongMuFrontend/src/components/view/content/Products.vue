@@ -1,6 +1,6 @@
 <template>
   <div class=""   style="width: 1100px">
-    <h1>产品管理 &nbsp<a href="#">+</a> </h1>
+    <h1>产品管理 &nbsp<router-link to="/product/addProduct">+</router-link> </h1>
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item title="一致性 Consistency" name="1">
         <el-tabs v-model="activeName2" @tab-click="handleClick">
