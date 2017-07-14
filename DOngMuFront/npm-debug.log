@@ -1,26 +1,20 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs',
-1 verbose cli   '/usr/local/lib/node_modules/cnpm/node_modules/.bin/npm',
-1 verbose cli   '--userconfig=/home/nana/.cnpmrc',
-1 verbose cli   '--disturl=https://npm.taobao.org/mirrors/node',
-1 verbose cli   '--registry=https://registry.npm.taobao.org',
-1 verbose cli   'run',
-1 verbose cli   'dev' ]
-2 info using npm@3.10.8
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'run', 'dev' ]
+2 info using npm@3.5.2
 3 info using node@v4.2.6
-4 verbose stack Error: ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DOngMuFront/package.json'
+4 verbose stack Error: ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DongMu/dongmuweiyu/DOngMuFront/package.json'
 4 verbose stack     at Error (native)
-5 verbose cwd /home/nana/practice/JavaScript/DOngMuFront
+5 verbose cwd /home/nana/practice/JavaScript/DongMu/dongmuweiyu/DOngMuFront
 6 error Linux 4.4.0-21-generic
-7 error argv "/usr/bin/nodejs" "/usr/local/lib/node_modules/cnpm/node_modules/.bin/npm" "--userconfig=/home/nana/.cnpmrc" "--disturl=https://npm.taobao.org/mirrors/node" "--registry=https://registry.npm.taobao.org" "run" "dev"
+7 error argv "/usr/bin/nodejs" "/usr/bin/npm" "run" "dev"
 8 error node v4.2.6
-9 error npm  v3.10.8
-10 error path /home/nana/practice/JavaScript/DOngMuFront/package.json
+9 error npm  v3.5.2
+10 error path /home/nana/practice/JavaScript/DongMu/dongmuweiyu/DOngMuFront/package.json
 11 error code ENOENT
 12 error errno -2
 13 error syscall open
-14 error enoent ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DOngMuFront/package.json'
-15 error enoent ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DOngMuFront/package.json'
+14 error enoent ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DongMu/dongmuweiyu/DOngMuFront/package.json'
+15 error enoent ENOENT: no such file or directory, open '/home/nana/practice/JavaScript/DongMu/dongmuweiyu/DOngMuFront/package.json'
 15 error enoent This is most likely not a problem with npm itself
 15 error enoent and is related to npm not being able to find a file.
 16 verbose exit [ -2, true ]
