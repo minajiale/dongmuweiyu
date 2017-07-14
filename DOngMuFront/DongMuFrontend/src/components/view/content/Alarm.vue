@@ -1,59 +1,55 @@
 <template>
-  <div class="">
+  <div class="alarm">
     <h1>提醒服务</h1>
-      <div class="check-box-group" >
-      <div class="check-box-group-one">
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <div style="margin: 15px 0;"></div>
-        <el-checkbox-group    v-model="checkedCities" @change="handleCheckedCitiesChange">
-            <el-checkbox class="check-box" v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-        </el-checkbox-group>
-      </div>
-
-      <div class="check-box-group-two">
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <div style="margin: 15px 0;"></div>
-        <el-checkbox-group    v-model="checkedCities" @change="handleCheckedCitiesChange">
-            <el-checkbox class="check-box" v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-        </el-checkbox-group>
-      </div>
+    <div class="table">
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="事件"
+            width="660">
+          </el-table-column>
+        </el-table>
     </div>
   </div>
 </template>
 <style>
-  .check-box{
-    display: block;
+  .alarm{
+    margin-left: 20px;
+    width: 1200px;
   }
-  .check-box-group{
-    display: flex;
-    top: 1000px;
+  .table{
+    /*margin-left: 300px*/
   }
 </style>
 <script>
-  const cityOptions = [
-    '上海nhbgvfcdxsjyhtgrfdeskjuhygtfcrdxszjuhygtfrds',
-    '北京jhgfcdsjhgfcdxsjhgfds',
-    '广州',
-     '深圳'];
   export default {
     data() {
       return {
-        checkAll: true,
-        checkedCities: [],
-        cities: cityOptions,
-        isIndeterminate: true
+        tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }],
       };
     },
-    methods: {
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    }
   };
 </script>

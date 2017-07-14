@@ -74,7 +74,7 @@
           <el-button
           size="small"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          @click="handleDelete(scope.$index, scope.row)">失效订单</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -157,6 +157,21 @@
       },
       handleDelete(index, row) {
         console.log(index, row);
+        this.$confirm('该订单已被废弃, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       }
     }
   }
