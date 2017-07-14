@@ -63,30 +63,18 @@
             </template>
           </el-table-column>
         </el-table>
-        <product-details v-bind:dialogFormVisible="false" ></product-details>
       </el-collapse-item>
     </el-collapse>
-    <product-details v-bind:dialogFormVisible="false" ></product-details>
+
+    <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
+      <product-details></product-details>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
-
-<style>
-  h1{
-    margin-left: 40px;
-  }
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 90%;
-  }
-</style>
 
 <script>
   import productDetails from './detailes/ProductsDetails.vue'
@@ -148,8 +136,24 @@
   }
 }
 </script>
+
 <style>
   .el-tabs__content{
     display: none;
+  }
+  h1{
+    margin-left: 40px;
+  }
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 90%;
   }
 </style>

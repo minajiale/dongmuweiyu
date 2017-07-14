@@ -78,37 +78,34 @@
         </template>
       </el-table-column>
     </el-table>
-    <order-details v-bind:dialogFormVisible="false" ></order-details>
-  </div>
-</template>
 
-<style>
-  .search{
-    width: 150px;
-  }
-  .additional-crew{
-    float: right;
-    margin-top: -50px;
-  }
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 90%;
-  }
-</style>
+    <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
+      <order-details></order-details>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+    </div>
+</template>
 
 <script>
   import orderDetails from './detailes/OrderDatils.vue'
   export default {
     data() {
       return {
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px',
+
         dialogFormVisible: false,
         tableData5: [{
           date: '2016-05-02',
@@ -153,7 +150,36 @@
       orderDetails
     },
     methods:{
-      handleClick(){}
+      handleClick(){},
+      handleEdit(index, row) {
+        this.dialogFormVisible=true;
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
     }
   }
 </script>
+
+<style>
+  .search{
+    width: 150px;
+  }
+  .additional-crew{
+    float: right;
+    margin-top: -50px;
+  }
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 90%;
+  }
+</style>
