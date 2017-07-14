@@ -15,6 +15,11 @@
     <el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>
+    <el-collapse v-model="activeName" accordion>
+      <el-collapse-item title="定门单" name="1">
+        <order-door></order-door>
+      </el-collapse-item>
+    </el-collapse>
     <el-form-item>
   <el-button type="primary" @click="onSubmit">提交</el-button>
   <el-button>取消</el-button>
@@ -24,7 +29,11 @@
 </template>
 
 <script>
+import orderDoor from './OderDoor.vue'
 export default {
+  components:{
+    orderDoor
+  },
   data() {
     return {
       pickerOptions0: {

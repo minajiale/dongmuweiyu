@@ -25,11 +25,18 @@
         label="金额(元)">
       </el-table-column>
     </el-table>
+    <el-collapse-item title="定门单" name="1">
+      <order-door></order-door>
+    </el-collapse-item>
   </div>
 </template>
 
 <script>
+import orderDoor from './OderDoor.vue'
   export default {
+    components:{
+      orderDetails
+    },
     data() {
       return {
         tableData: [{
