@@ -15,6 +15,12 @@
     <el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>
+    <el-form-item label="顾客电话" :label-width="formLabelWidth">
+      <el-input v-model="form.name" auto-complete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="顾客住址" :label-width="formLabelWidth">
+      <el-input v-model="form.name" auto-complete="off"></el-input>
+    </el-form-item>
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item title="定门单" name="1">
         <order-door></order-door>
