@@ -66,6 +66,7 @@
         <product-details v-bind:dialogFormVisible="false" ></product-details>
       </el-collapse-item>
     </el-collapse>
+    <product-details v-bind:dialogFormVisible="false" ></product-details>
   </div>
 </template>
 
@@ -136,7 +137,14 @@
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
-  },
+      },
+      handleEdit(index, row) {
+        this.dialogFormVisible=true;
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
   }
 }
 </script>
