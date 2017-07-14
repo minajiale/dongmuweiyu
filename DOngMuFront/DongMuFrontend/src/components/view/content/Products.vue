@@ -1,5 +1,6 @@
 <template>
-  <div class=""   style="width: 1000px">
+  <div class=""   style="width: 1100px">
+    <h1>产品管理 &nbsp<a href="#">+</a> </h1>
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item title="一致性 Consistency" name="1">
         <el-tabs v-model="activeName2" @tab-click="handleClick">
@@ -50,12 +51,15 @@
             label="描述"
             prop="desc">
           </el-table-column>
-          <el-table-column
-            label="操作"
-            width="100">
+          <el-table-column label="操作">
             <template scope="scope">
-              <el-button  @click="dialogFormVisible = true" type="text" size="small">查看</el-button>
-              <el-button @click="dialogFormVisible = true" type="text" size="small">编辑</el-button>
+              <el-button
+              size="small"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button
+              size="small"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -66,6 +70,9 @@
 </template>
 
 <style>
+  h1{
+    margin-left: 40px;
+  }
   .demo-table-expand {
     font-size: 0;
   }
@@ -133,3 +140,8 @@
   }
 }
 </script>
+<style>
+  .el-tabs__content{
+    display: none;
+  }
+</style>
