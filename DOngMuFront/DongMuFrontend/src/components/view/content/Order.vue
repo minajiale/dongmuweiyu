@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1>订单管理 &nbsp<a href="#">+</a> </h1>
+    <h1>订单管理 &nbsp<router-link to="/order/addOrder">+</router-link></h1>
     <div class="additional-crew">
       <el-input
         class="search"
@@ -90,7 +90,7 @@
 </template>
 
 <script>
-  import orderDetails from './detailes/OrderDatils.vue'
+  import orderDetails from './detailes/ChangeOrder.vue'
   export default {
     data() {
       return {

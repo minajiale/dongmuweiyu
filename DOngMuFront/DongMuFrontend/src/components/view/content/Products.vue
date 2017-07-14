@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import productDetails from './detailes/ProductsDetails.vue'
+  import productDetails from './detailes/ChangeProducts.vue'
   export default {
     data() {
       return {

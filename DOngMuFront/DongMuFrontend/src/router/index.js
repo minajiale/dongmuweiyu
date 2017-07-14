@@ -13,6 +13,20 @@ export default new Router({
               rightContent: resolve => require(['../components/view/content/Analyse.vue'], resolve)
             },
             children:[
+              {
+                path: '/order/addOrder/verify',
+                components: {
+                  default: resolve => require(['../components/Index.vue'], resolve),
+                  rightContent: resolve => require(['../components/view/content/detailes/VerifyOrder.vue'], resolve)
+                },
+              },
+                {
+                  path: '/order/addOrder',
+                  components: {
+                    default: resolve => require(['../components/Index.vue'], resolve),
+                    rightContent: resolve => require(['../components/view/content/detailes/AddOrder.vue'], resolve)
+                  },
+                },
                 {
                     path: '/analyse',
                     components: {
