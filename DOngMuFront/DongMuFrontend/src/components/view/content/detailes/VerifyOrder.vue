@@ -35,7 +35,7 @@
 import orderDoor from './OderDoor.vue'
   export default {
     components:{
-      orderDetails
+      orderDoor
     },
     data() {
       return {

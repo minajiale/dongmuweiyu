@@ -10,7 +10,13 @@
           <el-menu-item index="/products"><i class="el-icon-menu"></i>产品管理</el-menu-item>
           <el-menu-item index="/order"><i class="el-icon-setting"></i>订单管理</el-menu-item>
           <el-menu-item index="/classification"><i class="el-icon-minus"></i>产品分类管理</el-menu-item>
-          <el-menu-item index="/peoplemanage"><i class="el-icon-picture"></i>人员管理</el-menu-item>
+          <el-submenu index="1">
+            <template slot="title"><i class="el-icon-picture"></i>人员管理</template>
+            <el-menu-item index="/login">登录</el-menu-item>
+            <el-menu-item index="/register">注册</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="/test"><i class="el-icon-picture"></i>测试
+          </el-menu-item>
         </el-menu>
       </el-col>
       </el-col>
