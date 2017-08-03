@@ -52,21 +52,7 @@
     data() {
       return {
         filterText: '',
-        data2: [{
-          id: 1,
-          label: '一级 1',
-          children: [{
-            id: 4,
-            label: '二级 1-1',
-            children: [{
-              id: 9,
-              label: '三级 1-1-1'
-            }, {
-              id: 10,
-              label: '三级 1-1-2'
-            }]
-          }]
-        }, {
+        data2: [ {
           id: 2,
           label: '一级 2',
           children: [{
