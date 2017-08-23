@@ -1,26 +1,33 @@
 <template>
   <div class="">
+    <br>
+    <br>
   <el-form :model="form">
-    <el-form-item label="订单号" :label-width="formLabelWidth">
-      <el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
-    </el-form-item>
-    <el-form-item label="订单日期" :label-width="formLabelWidth">
-    <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="选择日期"
-      :picker-options="pickerOptions0">
-    </el-date-picker>
-  </el-form-item>
-    <el-form-item label="顾客姓名" :label-width="formLabelWidth">
+    <el-row :gutter="15">
+       <el-col :span="16"><el-form-item label="订单号码" :label-width="formLabelWidth">
+        <el-col :span="8"><el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input></el-col>
+      </el-form-item></el-col>
+      <el-col :span="8"><el-form-item label="订单日期" :label-width="formLabelWidth" >
+      <el-date-picker
+        v-model="value1"
+        type="date"
+        placeholder="选择日期"
+        :picker-options="pickerOptions0">
+      </el-date-picker>
+      </el-form-item></el-col>
+  </el-row>
+  <el-row :gutter="15">
+     <el-col :span="4"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="顾客电话" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="顾客住址" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item>
+    </el-form-item></el-col>
+    <el-col :span="8"> <el-form-item label="顾客电话" :label-width="formLabelWidth">
+   <el-input v-model="form.name" auto-complete="off"></el-input>
+    </el-form-item></el-col>
+      <el-col :span="12"><el-form-item label="顾客住址" :label-width="formLabelWidth">
+        <el-input v-model="form.name" auto-complete="off"></el-input>
+    </el-form-item></el-col>
+  </el-row>
+<br>
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item title="定门单" name="1">
         <order-door></order-door>
@@ -32,11 +39,11 @@
       </el-collapse-item>
     </el-collapse>
     <el-form-item>
-  <el-button type="primary" @click="onSubmit">预览</el-button>
-  <el-button>取消</el-button>
-</el-form-item>
-  </el-form>
-    </div>
+      <el-button type="primary" @click="onSubmit">预览</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+</el-form>
+  </div>
 </template>
 
 <script>
