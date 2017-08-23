@@ -2,12 +2,12 @@
   <div class=""   style="width: 1100px">
     <h1>产品管理 &nbsp<router-link to="/product/addProduct">+</router-link> </h1>
     <el-collapse v-model="activeName" accordion>
-      <el-collapse-item title="一致性 Consistency" name="1">
+      <el-collapse-item title="产品一级菜单" name="1">
         <el-tabs v-model="activeName2" @tab-click="handleClick">
-          <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-          <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-          <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-          <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+          <el-tab-pane label="产品二级菜单" name="first">产品二级菜单</el-tab-pane>
+          <el-tab-pane label="产品二级菜单" name="second">产品二级菜单</el-tab-pane>
+          <el-tab-pane label="产品二级菜单" name="third">产品二级菜单</el-tab-pane>
+          <el-tab-pane label="产品二级菜单" name="fourth">产品二级菜单</el-tab-pane>
         </el-tabs>
         <el-table
           :data="tableData5"

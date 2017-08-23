@@ -30,11 +30,9 @@
         <order-door></order-door>
       </el-collapse-item>
     </el-collapse>
-    <el-collapse v-model="activeName" accordion>
-      <el-collapse-item title="普通销货清单" name="1">
-        <order-genenal></order-genenal>
-      </el-collapse-item>
-    </el-collapse>
+    <p>
+      <router-link to="/products"><i class="el-icon-arrow-right "></i>普通销售清单</router-link>
+    </p>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">预览</el-button>
       <el-button>取消</el-button>
@@ -45,14 +43,12 @@
 
 <script>
 import orderDoor from './OderDoor.vue'
-import orderGenenal from './OrderGenenal.vue'
 
 
 export default {
   components:{
-    orderDoor,
-    orderGenenal
-  },
+    orderDoor
+    },
   data() {
     return {
       pickerOptions0: {
