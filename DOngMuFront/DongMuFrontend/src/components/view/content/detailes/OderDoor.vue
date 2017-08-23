@@ -1,6 +1,7 @@
 <template>
-  <div class="">
-    <el-form ref="form" :model="form" label-width="200px">
+  <div class="" id="oderDoor">
+    <div class="" id="oderDoorTemplate">
+    <el-form ref="form" :model="form" label-width="200px" id="oderDoorForm">
       <el-form-item label="型号">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
@@ -35,11 +36,12 @@
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="warning">增加</el-button>
+        <el-button type="warning" @click="oderAdd" class="addOrderTempalte">增加</el-button>
         <el-button type="primary" @click="onSubmit">立即创建</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
+    </div>
 </div>
 </template>
 <script>
@@ -61,6 +63,16 @@
     methods: {
       onSubmit() {
         console.log('submit!');
+      },
+      oderAdd(){
+        // var oderDoor = document.getElementById("oderDoor");
+        // var oderDoorTemplate= document.getElementById("oderDoorTemplate");
+        // var oderDoorForm = document.getElementById("oderDoorForm");
+         alert("gvfcdxsz");
+         var sss = $("#oderDoor");
+        var oDiv = document.createElement('script');
+        oDiv.html(oderDoorTemplate);
+        $("#oderDoor").appendChild(oDiv);
       }
     }
   }
