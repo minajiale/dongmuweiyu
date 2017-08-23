@@ -4,9 +4,6 @@
     <br>
   <el-form :model="form">
     <el-row :gutter="15">
-       <el-col :span="16"><el-form-item label="订单号码" :label-width="formLabelWidth">
-        <el-col :span="8"><el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input></el-col>
-      </el-form-item></el-col>
       <el-col :span="8"><el-form-item label="订单日期" :label-width="formLabelWidth" >
       <el-date-picker
         v-model="value1"
@@ -48,7 +45,7 @@
 
 <script>
 import orderDoor from './OderDoor.vue'
-import orderGenenal from './orderGenenal.vue'
+import orderGenenal from './OrderGenenal.vue'
 
 
 export default {
