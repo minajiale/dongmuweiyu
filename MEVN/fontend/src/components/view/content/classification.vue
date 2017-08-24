@@ -35,6 +35,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
   export default {
     watch: {
       filterText(val) {
@@ -46,6 +47,22 @@
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
+      },
+      getClass(){
+        axios({
+          url:'/api/class',
+          params:{
+            userId:"12"
+          },
+          headers:{
+            token:"gtfrdes"
+          }
+        }).then(res=>{
+          var result = res.data;
+          this.data2=result.result.lsit;
+        },error=>{
+          consolr.log("error");
+        })
       }
     },
 
@@ -53,27 +70,7 @@
       return {
         msg:"",
         filterText: '',
-        data2: [ {
-          id: 2,
-          label: '一级 2',
-          children: [{
-            id: 5,
-            label: '二级 2-1'
-          }, {
-            id: 6,
-            label: '二级 2-2'
-          }]
-        }, {
-          id: 3,
-          label: '一级 3',
-          children: [{
-            id: 7,
-            label: '二级 3-1'
-          }, {
-            id: 8,
-            label: '二级 3-2'
-          }]
-        }],
+        data2: [],
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -93,18 +90,7 @@
       };
     },
     mounted: function(){
-        Vue.http.get("app.js",{
-          params:{
-            userId:"12"
-          },
-          headers:{
-            token:"gtfrdes"
-          }
-        }).then(res=>{
-          this.msg=res.data;
-        },error=>{
-          consolr.log("error");
-        })
+      this.getClass();
     }
   };
 </script>

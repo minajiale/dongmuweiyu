@@ -1,0 +1,47 @@
+{
+	"status": "0",
+	"msg": "",
+	"result": {
+		"count": 2,
+		"lsit": [
+			{
+				"_id": "599ed4678dfe497594f875ff",
+				"label": "一级 teo2",
+				"children": [
+					{
+						"label": "二级 2-1"
+					},
+					{
+						"label": "二级 2-2"
+					}
+				],
+				"producList": []
+			},
+			{
+				"_id": "599ed4678dfe497594f875ff",
+				"label": "一级 2",
+				"children": [
+					{
+						"goodsList": [
+							1,
+							2,
+							3,
+							45
+						],
+						"label": "二级 2-1"
+					},
+					{
+						"goodsList": [
+							6,
+							87,
+							9,
+							10
+						],
+						"label": "二级 2-2"
+					}
+				],
+				"producList": []
+			}
+		]
+	}
+}

@@ -14,7 +14,11 @@
           style="width: 1000px">
           <el-table-column type="expand">
             <template scope="props">
-              <el-form label-position="left" inline class="demo-table-expand">
+              <el-row >
+               <el-col :span="12"><div class="">
+                <img v-bind:src="props.row.imgSrc" class="image">
+              </div></el-col>
+               <el-col :span="12"><el-form label-position="left" inline class="demo-table-expand">
                 <el-form-item label="商品名称">
                   <span>{{ props.row.name }}</span>
                 </el-form-item>
@@ -36,7 +40,8 @@
                 <el-form-item label="商品描述">
                   <span>{{ props.row.desc }}</span>
                 </el-form-item>
-              </el-form>
+              </el-form></el-col>
+            </el-row>
             </template>
           </el-table-column>
           <el-table-column
@@ -95,7 +100,8 @@
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
-          shopId: '10333'
+          shopId: '10333',
+          imgSrc:'static/logo.png'
         }, {
           id: '12987123',
           name: '好滋好味鸡蛋仔',
