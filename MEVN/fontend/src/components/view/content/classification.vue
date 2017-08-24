@@ -51,6 +51,7 @@
 
     data() {
       return {
+        msg:"",
         filterText: '',
         data2: [ {
           id: 2,
@@ -90,6 +91,20 @@
         },
         formLabelWidth: '120px'
       };
+    },
+    mounted: function(){
+        Vue.http.get("app.js",{
+          params:{
+            userId:"12"
+          },
+          headers:{
+            token:"gtfrdes"
+          }
+        }).then(res=>{
+          this.msg=res.data;
+        },error=>{
+          consolr.log("error");
+        })
     }
   };
 </script>

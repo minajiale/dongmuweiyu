@@ -1,6 +1,6 @@
-# dongmu
+# fontend
 
-> DongMu's frontEnd
+> 东牧卫浴进销存管理系统的前端部分
 
 ## Build Setup
 
