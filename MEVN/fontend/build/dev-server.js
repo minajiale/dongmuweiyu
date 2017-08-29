@@ -22,12 +22,13 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var router = express.Router();
+/*
 var classificationData = require("./../mock/classification.json");
 router.get("/api/class",function(req,res,next){
   res.json(classificationData);
 });
 app.use(router);
-
+*/
 
 
 var compiler = webpack(webpackConfig)

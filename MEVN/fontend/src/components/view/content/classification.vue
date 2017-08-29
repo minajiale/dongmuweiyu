@@ -10,10 +10,12 @@
     </el-input>
 
     <el-tree
-      class="filter-tree"
       :data="data2"
       :props="defaultProps"
-      default-expand-all
+      show-checkbox
+      node-key="id"
+      :expand-on-click-node="false"
+      :render-content="renderContent"
       :filter-node-method="filterNode"
       ref="tree2">
     </el-tree>
@@ -21,9 +23,6 @@
     <el-dialog title="新增分类" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="一级分类" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="二级分类" :label-width="formLabelWidth">
           <el-input v-model="form.name" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -50,7 +49,7 @@ import axios from 'axios'
       },
       getClass(){
         axios({
-          url:'/api/class',
+          url:'/class',
           params:{
             userId:"12"
           },
@@ -70,7 +69,33 @@ import axios from 'axios'
       return {
         msg:"",
         filterText: '',
-        data2: [],
+        data2: [
+          {
+            "_id": "599ed4678dfe497594f875ff",
+            "label": "一级 2",
+            "children": [
+              {
+                "goodsList": [
+                  1,
+                  2,
+                  3,
+                  45
+                ],
+                "label": "二级 2-1"
+              },
+              {
+                "goodsList": [
+                  6,
+                  87,
+                  9,
+                  10
+                ],
+                "label": "二级 2-2"
+              }
+            ],
+            "producList": []
+          }
+        ],
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -95,10 +120,13 @@ import axios from 'axios'
   };
 </script>
 <style>
-  .classificationIn{
+  /*.classificationIn{
     float: right;
     width: 300px;
-  }
+    position: relative;
+    margin-top: -40px;
+    right: -100px;
+  }*/
   .filter-tree {
     margin-left: 100px;
     width: 900px;

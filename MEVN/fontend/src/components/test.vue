@@ -6,15 +6,14 @@
             <input type="text" v-model="username" v-on:change="userNameChange" class="form-control" :placeholder="username">
         </div>
 
-        <button @click=post>test----</button>
-        <p>{{msg}}</p>
-    </div>
+
   </div>
+</div>
 
 </template>
 
 <script>
-    export default{
+        export default{
         props:["placeholder"],
         data:function () {
             return {
@@ -41,17 +40,6 @@
                 consolr.log("error");
               })
             },
-            post(){
-              this.$http.post('app.vue',{
-                userId:'102'
-              },{
-                headers:{
-                  access_token:"asvdsv"
-                }
-              }).then(function(res){
-                this.msg=res.data;
-              })
-            }
         }
     }
 </script>

@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var classificationSchema = new Schema({
   "name":String,
   "parent":String,
-  "child":String,
-  "producList":Array
+  "children":String,
 });
 module.exports = mongoose.model("classification",classificationSchema)

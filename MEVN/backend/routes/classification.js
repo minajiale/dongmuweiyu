@@ -14,7 +14,15 @@ mongoose.connection.on("disconnected",function(){
   console.log("mongoose connect disconnected!!!");
 })
 //取得某一一级分类下的二级分类
-router.get("/senconfClass",function(req,res,next){
+router.get("/",function(req,res,next){
+  var data=[{
+          id: 0,
+          label: '一级 1',
+          children: [{
+            id: 0,
+            label: '二级 1-1',
+          }]
+        }];
   classification.find({},function(err,doc){
     if(err){
       res.json({
@@ -22,12 +30,20 @@ router.get("/senconfClass",function(req,res,next){
         msg:err.message
       });
     }else{
+      // 进行数据格式化
+
+      for(i in doc){
+        if(doc.father == "null"){
+          console.log("sucess!");
+          data.label=doc.label;
+        }
+      }
       res.json({
         status:'0',
-        msg:'',
+        msg:'get all classification suecess!',
         result:{
           count:doc.length,
-          lsit:doc
+          allClass:doc
         }
       })
     }
@@ -35,7 +51,7 @@ router.get("/senconfClass",function(req,res,next){
 })
 
 //取得某一一级分类
-router.get("/firstClass",function(req,res,next){
+router.get("/insert",function(req,res,next){
   classification.find({},function(err,doc){
     if(err){
       res.json({

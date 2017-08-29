@@ -24,26 +24,11 @@
       <el-table-column type="expand">
         <template scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="商品名称">
+            <el-form-item label="订单总金额">
               <span>{{ props.row.name }}</span>
             </el-form-item>
-            <el-form-item label="所属店铺">
+            <el-form-item label="欠款金额">
               <span>{{ props.row.shop }}</span>
-            </el-form-item>
-            <el-form-item label="商品 ID">
-              <span>{{ props.row.id }}</span>
-            </el-form-item>
-            <el-form-item label="店铺 ID">
-              <span>{{ props.row.shopId }}</span>
-            </el-form-item>
-            <el-form-item label="商品分类">
-              <span>{{ props.row.category }}</span>
-            </el-form-item>
-            <el-form-item label="店铺地址">
-              <span>{{ props.row.address }}</span>
-            </el-form-item>
-            <el-form-item label="商品描述">
-              <span>{{ props.row.desc }}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -55,15 +40,15 @@
       width="180">
       </el-table-column>
       <el-table-column
-        label="商品 ID"
-        prop="id">
-      </el-table-column>
-      <el-table-column
-        label="商品名称"
+        label="顾客姓名"
         prop="name">
       </el-table-column>
       <el-table-column
-        label="描述"
+        label="顾客联系方式"
+        prop="name">
+      </el-table-column>
+      <el-table-column
+        label="订单状态"
         prop="desc">
       </el-table-column>
       <el-table-column label="操作">
@@ -73,8 +58,8 @@
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button
           size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">失效订单</el-button>
+          type="primary"
+          @click="handledatail(scope.$index, scope.row)">查看详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -155,23 +140,9 @@
         this.dialogFormVisible=true;
         console.log(index, row);
       },
-      handleDelete(index, row) {
-        console.log(index, row);
-        this.$confirm('该订单已被废弃, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
-        });
+      handledatail(index, row) {
+        console.log("hgtfrdeshygtfrdeswa")
+        this.$router.push("/order/addOrder/verify")
       }
     }
   }
