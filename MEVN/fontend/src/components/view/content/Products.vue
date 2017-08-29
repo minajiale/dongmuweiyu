@@ -150,7 +150,22 @@
         });
       },
       handleAdd(index,row){
-        console.log(index, row);
+        this.$prompt('请商品单价', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputPattern: /^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/,
+          inputErrorMessage: '单价格式不正确'
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '加入购物车成功，商品单价是' + value+"元"
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        });
       }
   }
 }
