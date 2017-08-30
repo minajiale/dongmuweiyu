@@ -64,7 +64,14 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
+    <div class="block">
+      <el-pagination
+      layout="prev, pager, next"
+      :total="1000">
+      </el-pagination>
+    </div>
+
+    <el-dialog title="修改订单" :visible.sync="dialogFormVisible">
       <order-details></order-details>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -149,6 +156,11 @@
 </script>
 
 <style>
+  .block{
+    margin: 0,auto;
+    text-align: center;
+    padding-top: 20px;
+  }
   .search{
     width: 150px;
   }
