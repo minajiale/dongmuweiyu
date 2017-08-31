@@ -125,7 +125,8 @@ import axios from 'axios'
           desc: ''
         },
         formLabelWidth: '120px',
-        temp:null
+        temp:null,
+        position:0,
       };
     },
 
@@ -141,16 +142,22 @@ import axios from 'axios'
         var that=this;
         that.temp()();
         this.addSecondVisible=false;
+        that.temp=null;
       },
       editClassSucess(){
-        this.editClassVisible=false;
+        var that=this;
+        console.log(that.position);
+        that.editClassVisible=false;
       },
       remove(store, data) {
         store.remove(data);
       },
-      edit(store,data){
-        this.editClassVisible=true;
-        console.log("edit");
+      edit(data){
+        var that=this;
+        that.editClassVisible=true;
+        // 为什么此时的data2为undefined
+        // var position = that.data2.indexOf(data);
+        that.position=data.id;
       },
       renderContent(h, { node, data, store }) {
         var that=this;
@@ -161,7 +168,7 @@ import axios from 'axios'
                 <span>{node.label}</span>
               </span>
               <span style="float: right; margin-right: 20px;margin-top:-40px;">
-              <el-button size="mini" on-click={ () => this.edit(store, data) }>编辑</el-button>
+              <el-button size="mini" on-click={  that.editTemp=()=>this.edit(data) }>编辑</el-button>
                 <el-button size="mini" on-click={ this.temp=() => this.append(store, data)}>增加</el-button>
                 <el-button size="mini" on-click="this.remove(store, data)">删除</el-button>
               </span>
