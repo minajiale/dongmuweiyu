@@ -20,7 +20,7 @@
       ref="tree2">
     </el-tree>
 
-    <el-dialog title="新增分类" :visible.sync="dialogFormVisible">
+    <el-dialog title="新增一级分类" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="一级分类" :label-width="formLabelWidth">
           <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -31,10 +31,36 @@
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+
+
+  <el-dialog title="编辑分类" :visible.sync="editClassVisible">
+    <el-form :model="form">
+      <el-form-item label="分类名字" :label-width="formLabelWidth">
+        <el-input v-model="form.editClass" auto-complete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="editClassVisible = false">取 消</el-button>
+      <el-button type="primary" @click="editClassSucess">确 定</el-button>
+    </div>
+  </el-dialog>
+
+  <el-dialog title="增加二级分类" :visible.sync="addSecondVisible">
+    <el-form :model="form">
+      <el-form-item label="二级分类" :label-width="formLabelWidth">
+        <el-input v-model="form.addSecond" auto-complete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="addSecondVisible = false">取 消</el-button>
+      <el-button type="primary" @click="addSecondSucess">确 定</el-button>
+    </div>
+  </el-dialog>
   </div>
 </template>
 <script>
 import axios from 'axios'
+  let id = 1000;
   export default {
     watch: {
       filterText(val) {
@@ -42,7 +68,118 @@ import axios from 'axios'
       }
     },
 
+    data() {
+      return {
+        editClassVisible:false,
+        addSecondVisible:false,
+        dialogFormVisible: false,
+        msg:"",
+        filterText: '',
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: []
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1',
+            children: []
+          }, {
+            id: 6,
+            label: '二级 2-2',
+            children: []
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1',
+            children: []
+          }, {
+            id: 8,
+            label: '二级 3-2',
+            children: []
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        },
+      form: {
+          name: '',
+          addSecond:'',
+          editClass:'',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px',
+        temp:null
+      };
+    },
+
     methods: {
+      append(store, data) {
+        this.addSecondVisible=true;
+        var that=this;
+        return function(){
+          store.append({ id: id++, label: that.form.addSecond, children: [] }, data);
+        }
+      },
+      addSecondSucess(){
+        var that=this;
+        that.temp()();
+        this.addSecondVisible=false;
+      },
+      editClassSucess(){
+        this.editClassVisible=false;
+      },
+      remove(store, data) {
+        store.remove(data);
+      },
+      edit(store,data){
+        this.editClassVisible=true;
+        console.log("edit");
+      },
+      renderContent(h, { node, data, store }) {
+        var that=this;
+        if(data.children.length != 0){
+          return (
+            <span>
+              <span>
+                <span>{node.label}</span>
+              </span>
+              <span style="float: right; margin-right: 20px;margin-top:-40px;">
+              <el-button size="mini" on-click={ () => this.edit(store, data) }>编辑</el-button>
+                <el-button size="mini" on-click={ this.temp=() => this.append(store, data)}>增加</el-button>
+                <el-button size="mini" on-click="this.remove(store, data)">删除</el-button>
+              </span>
+            </span>);
+        }else{
+          return(
+            <span>
+              <span>
+                <span>{node.label}</span>
+              </span>
+              <span style="float: right; margin-right: 20px;margin-top:-40px;">
+                <el-button size="mini" on-click={ () => this.edit(store, data) }>编辑</el-button>
+                <el-button size="mini" on-click={ () => this.remove(store, data) }>删除</el-button>
+              </span>
+            </span>
+          )
+        }
+      },
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
@@ -64,69 +201,15 @@ import axios from 'axios'
         })
       }
     },
-
-    data() {
-      return {
-        msg:"",
-        filterText: '',
-        data2: [
-          {
-            "_id": "599ed4678dfe497594f875ff",
-            "label": "一级 2",
-            "children": [
-              {
-                "goodsList": [
-                  1,
-                  2,
-                  3,
-                  45
-                ],
-                "label": "二级 2-1"
-              },
-              {
-                "goodsList": [
-                  6,
-                  87,
-                  9,
-                  10
-                ],
-                "label": "二级 2-2"
-              }
-            ],
-            "producList": []
-          }
-        ],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        },
-      dialogFormVisible: false,
-      form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
-      };
-    },
     mounted: function(){
       this.getClass();
     }
   };
 </script>
 <style>
-  /*.classificationIn{
-    float: right;
-    width: 300px;
-    position: relative;
-    margin-top: -40px;
-    right: -100px;
-  }*/
+  .el-tree{
+    width: 600px;
+  }
   .filter-tree {
     margin-left: 100px;
     width: 900px;
