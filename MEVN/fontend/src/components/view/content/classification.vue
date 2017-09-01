@@ -142,7 +142,7 @@ import axios from 'axios'
         var that=this;
         that.temp()();
         this.addSecondVisible=false;
-        that.temp=null;
+        // that.temp=null;
       },
       editClassSucess(){
         var that=this;

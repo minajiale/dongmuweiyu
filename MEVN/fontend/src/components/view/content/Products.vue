@@ -73,6 +73,21 @@
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="修改产品" :visible.sync="addCartVisible">
+      <el-form :model="form">
+        <el-form-item label="请输入商品单价" :label-width="formLabelWidth">
+          <el-input v-model="product.price" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="请输入商品数量，不输入为1" :label-width="formLabelWidth">
+          <el-input v-model="product.number" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addCartVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addCartVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -81,7 +96,12 @@
   export default {
     data() {
       return {
+        product:{
+          price:1,
+          number:1,
+        },
         dialogFormVisible: false,//控制详情弹出框
+        addCartVisible:false,
         activeName: '1',　//控制折叠框
         activeName2: 'second',//控制标签页，选择卡项
         tableData5: [{
@@ -150,22 +170,7 @@
         });
       },
       handleAdd(index,row){
-        this.$prompt('请商品单价', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern: /^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/,
-          inputErrorMessage: '单价格式不正确'
-        }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '加入购物车成功，商品单价是' + value+"元"
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });
-        });
+        this.addCartVisible=true;
       }
   }
 }
