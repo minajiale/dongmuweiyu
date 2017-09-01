@@ -37,8 +37,8 @@ var customserSchema = new mongoose.Schema({
               "width":String,
             },
             "doorLine":String,
-            "number":int,
-            "price":double,
+            "number":String,
+            "price":String,
             "remark":String,
             "number":String
           }

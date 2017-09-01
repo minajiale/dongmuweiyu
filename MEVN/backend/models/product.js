@@ -4,10 +4,10 @@ var productSchema = new mongoose.Schema({
   "id":String,
   "name":String,
   "spec":String,
-  "price":double,
-  "minNUm":int,
-  "num":int,
-  "buyPrice":double,
+  "price":String,
+  "minNUm":String,
+  "num":String,
+  "buyPrice":String,
   "classification":String,
   "img":String
 })

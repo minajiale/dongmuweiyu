@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <slot></slot>
+    <slot name="header"></slot>
     <el-form :model="form" class="ChangeProducts">
         <el-form-item label="产品名称" :label-width="formLabelWidth">
           <el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
@@ -34,10 +34,11 @@
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
-        <el-form-item>
+        <slot name="footer"></slot>
+        <!-- <el-form-item>
           <el-button type="primary" @click="onSubmit">提交</el-button>
           <el-button　 @click="onSuspend">取消</el-button>
-        </el-form-item>
+        </el-form-item> -->
     </el-form>
   </div>
 </template>
