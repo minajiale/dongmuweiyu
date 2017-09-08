@@ -4,7 +4,7 @@ var productSchema = new mongoose.Schema({
   "id":String,
   "name":String,
   "spec":String,
-  "price":String,
+  "sellPrice":String,
   "minNUm":String,
   "num":String,
   "buyPrice":String,

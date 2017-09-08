@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <add-product>
+    <add-product :isChange="false">
       <h2 slot="header">新增商品</h2>
       <div slot="footer">
         <el-form-item>
@@ -16,7 +16,19 @@
 import addProduct from './ChangeProducts.vue'
 export default {
   data () {
-    return {}
+    return {
+      product: {
+        "id":"",
+        "name":"",
+        "spec":"",
+        "sellPrice":"",
+        "minNUm":"",
+        "num":"",
+        "buyPrice":"",
+        "classification":"",
+        "img":""
+      },
+    }
   },
   computed: {},
   ready () {},

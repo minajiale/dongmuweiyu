@@ -67,7 +67,7 @@
     </el-collapse>
 
     <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
-      <product-details></product-details>
+      <product-details :isChange="true"></product-details>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>

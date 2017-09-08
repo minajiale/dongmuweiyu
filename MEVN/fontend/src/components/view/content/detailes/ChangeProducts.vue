@@ -6,22 +6,22 @@
           <el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
         </el-form-item>
         <el-form-item label="货号" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.code" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="规格" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.spec" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="进价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.buyPrice" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="卖价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.sellPrice" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="剩余库存" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.num" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="最小库存" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off"></el-input>
+          <el-input v-model="form.minNUm" auto-complete="off"></el-input>
         </el-form-item>
       </el-form-item>
       <el-upload
@@ -35,10 +35,6 @@
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
         <slot name="footer"></slot>
-        <!-- <el-form-item>
-          <el-button type="primary" @click="onSubmit">提交</el-button>
-          <el-button　 @click="onSuspend">取消</el-button>
-        </el-form-item> -->
     </el-form>
   </div>
 </template>
@@ -49,37 +45,31 @@ export default {
       value1: '',
       value2: '',
       form: {
-        id:'',
-        time:'',
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        "id":"",
+        "name":"",
+        "spec":"",
+        "sellPrice":"",
+        "minNUm":"",
+        "num":"",
+        "buyPrice":"",
+        "classification":"",
+        "img":""
       },
       formLabelWidth: '120px',
       fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
     };
   },
-  methods: {
-    onSubmit(){
-      this.$notify({
-         title: '成功',
-         message: '新增产品成功',
-         type: 'success'
-       });
-    },
-    onSuspend(){
-      this.$notify({
-        title: '警告',
-        message: '取消添加商品',
-        type: 'warning'
-    });
-    this.$router.push('/order');
+  props:{
+    isChange:Boolean,
   },
+  methods: {
+    transferProducts(){
+      if(this.isChange == true){
+        console.log("修改产品")
+      }else{
+        console.log("增加产品")
+      }
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
