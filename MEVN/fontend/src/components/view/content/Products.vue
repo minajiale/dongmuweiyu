@@ -4,7 +4,7 @@
     <el-collapse v-model="activeName" accordion>
       <el-collapse-item title="产品一级菜单" name="1">
         <el-tabs v-model="activeName2" @tab-click="handleClick">
-          <el-tab-pane label="产品二级菜单" name="first">产品二级菜单</el-tab-pane>
+          <el-tab-pane label="全部" name="first">产品二级菜单</el-tab-pane>
           <el-tab-pane label="产品二级菜单" name="second">产品二级菜单</el-tab-pane>
           <el-tab-pane label="产品二级菜单" name="third">产品二级菜单</el-tab-pane>
           <el-tab-pane label="产品二级菜单" name="fourth">产品二级菜单</el-tab-pane>

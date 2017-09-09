@@ -28,7 +28,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addFirst">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -125,24 +125,25 @@ import axios from 'axios'
           desc: ''
         },
         formLabelWidth: '120px',
-        temp:null,
+        eddTemp:0,
         position:0,
       };
     },
 
     methods: {
+      addFirst(){
+        this.dialogFormVisible = false;
+        this.insertClass();
+      },
       append(store, data) {
         this.addSecondVisible=true;
         var that=this;
-        return function(){
-          store.append({ id: id++, label: that.form.addSecond, children: [] }, data);
-        }
+        this.addTemp=data.id;
       },
       addSecondSucess(){
         var that=this;
-        that.temp()();
         this.addSecondVisible=false;
-        // that.temp=null;
+        // this.insertClass();
       },
       editClassSucess(){
         var that=this;
@@ -203,6 +204,24 @@ import axios from 'axios'
         }).then(res=>{
           var result = res.data;
           this.data2=result.result.lsit;
+        },error=>{
+          consolr.log("error");
+        })
+      },
+      insertClass(){
+        axios({
+          method: 'post',
+          url:"/class/insert",
+          params:{
+            father:"花洒系列",
+            name:"东沐花洒"
+          }
+        }).then(res=>{
+          if(res ==0){
+            alert("插入成功")
+          }else{
+            alert(res.message)
+          }
         },error=>{
           consolr.log("error");
         })
