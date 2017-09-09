@@ -133,7 +133,7 @@ import axios from 'axios'
     methods: {
       addFirst(){
         this.dialogFormVisible = false;
-        this.insertClass();
+        this.insertFirstClass();
       },
       append(store, data) {
         this.addSecondVisible=true;
@@ -208,23 +208,42 @@ import axios from 'axios'
           consolr.log("error");
         })
       },
-      insertClass(){
+      insertFirstClass(){
         axios({
           method: 'post',
-          url:"/class/insert",
-          params:{
-            father:"花洒系列",
-            name:"东沐花洒"
+          url:"/class/insertFirst",
+          data:{
+            name:this.form.name,
           }
         }).then(res=>{
           if(res ==0){
-            alert("插入成功")
+            alert("res.message")
           }else{
-            alert(res.message)
+            alert("插入成功")
           }
         },error=>{
           consolr.log("error");
         })
+        this.form.name="";
+      },
+      insertSecondClass(){
+        axios({
+          method: 'post',
+          url:"/class/insertSecond",
+          data:{
+            name:this.form.addSecond,
+            father:""
+          }
+        }).then(res=>{
+          if(res ==0){
+            alert("res.message")
+          }else{
+            alert("插入成功")
+          }
+        },error=>{
+          consolr.log("error");
+        })
+        this.form.name="";
       }
     },
     mounted: function(){

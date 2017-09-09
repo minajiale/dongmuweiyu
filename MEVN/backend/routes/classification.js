@@ -61,20 +61,14 @@ router.get("/",function(req,res,next){
   })
 })
 
-//插入新的分类
-router.post("/insert",function(req,res,next){
-  // let father = req.body.params.father || '',
-  //     name = req.body.params.name || '';
-      let father="",
-          name="花洒系列";
-  // let ObjectId= mongoose.Types.ObjectId();
 
-  //插入某个二级分类
-  if(father){
+//插入某个二级分类
+router.post("/insertSecond",function(req,res,next){
+  let father = req.body.father || '',
+      name = req.body.name || '';
+
     console.log("插入某个二级分类")
-
     let  sencondClass={
-      "key":3,
       "label":name
     }
     classification.findOne({label:father},function(err,doc){
@@ -84,7 +78,6 @@ router.post("/insert",function(req,res,next){
           message:err.message
         });
       }else{
-        console.log("classification:"+doc);
         if(doc){
           doc.children.push(sencondClass);
           doc.save(function(err2,doc2){
@@ -104,9 +97,13 @@ router.post("/insert",function(req,res,next){
         }
       }
     })
-  }else{
+})
+//插入某个一级分类
+router.post("/insertFirst",function(req,res,next){
+  let father = req.body.father || '',
+      name = req.body.name || '';
+
     if(father=='' && name){
-      //插入某个一级分类
       console.log("插入某个一级分类")
 
       let classificationOne=
@@ -143,7 +140,8 @@ router.post("/insert",function(req,res,next){
             })
           }
       })
+    }else{
+      console.log("params err!");
     }
-}
 })
 module.exports = router;
