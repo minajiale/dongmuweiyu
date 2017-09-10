@@ -107,7 +107,8 @@ import axios from 'axios'
         },
         formLabelWidth: '120px',
         eddTemp:0,
-        position:0,
+        addTemp:0,
+        deleteTemp:0
       };
     },
 
@@ -128,18 +129,20 @@ import axios from 'axios'
       },
       editClassSucess(){
         var that=this;
-        console.log(that.position);
         that.editClassVisible=false;
+        this.editClass();
       },
-      remove(store, data) {
-        store.remove(data);
+      remove(node,data,store) {
+        console.log(node);
+
+        // store.remove(data);
+
+        // this.deleteClass(data._id)
       },
       edit(data){
         var that=this;
         that.editClassVisible=true;
-        // 为什么此时的data2为undefined
-        // var position = that.data2.indexOf(data);
-        that.position=data.id;
+        that.eddTemp=data._id
       },
       renderContent(h, { node, data, store }) {
         var that=this;
@@ -150,9 +153,9 @@ import axios from 'axios'
                 <span>{node.label}</span>
               </span>
               <span style="float: right; margin-right: 20px;margin-top:-40px;">
-              <el-button size="mini" on-click={  that.editTemp=()=>this.edit(data) }>编辑</el-button>
+                <el-button size="mini" on-click={  that.editTemp=()=>this.edit(data) }>编辑</el-button>
                 <el-button size="mini" on-click={ this.temp=() => this.append(store, data)}>增加</el-button>
-                <el-button size="mini" on-click="this.remove(store, data)">删除</el-button>
+                <el-button size="mini" on-click={  ()=>this.remove(node,data,store) }>删除</el-button>
               </span>
             </span>);
         }else{
@@ -185,7 +188,7 @@ import axios from 'axios'
         }).then(res=>{
           this.data2 = res.data.result.allClass;
         },error=>{
-          consolr.log("error");
+          console.log("error");
         })
       },
       insertFirstClass(){
@@ -202,7 +205,7 @@ import axios from 'axios'
             alert("插入成功")
           }
         },error=>{
-          consolr.log("error");
+          console.log("error");
         })
         this.form.name="";
       },
@@ -221,9 +224,44 @@ import axios from 'axios'
             alert("插入成功")
           }
         },error=>{
-          consolr.log("error");
+          console.log("error");
         })
         this.form.name="";
+      },
+      editClass(){
+        axios({
+          method: 'post',
+          url:"/class/edit",
+          data:{
+            id:this.eddTemp,
+            label:this.form.editClass
+          }
+        }).then(res=>{
+          if(res ==0){
+            alert("res.message")
+          }else{
+            console.log(res)
+          }
+        },err=>{
+          console.log("error");
+        })
+      },
+      deleteClass(key){
+        axios({
+          method: 'post',
+          url:"/class/delete",
+          data:{
+            id:key,
+          }
+        }).then(res=>{
+          if(res ==0){
+            alert("res.message")
+          }else{
+            console.log(res)
+          }
+        },err=>{
+          console.log("error");
+        })
       }
     },
     mounted: function(){

@@ -116,5 +116,68 @@ router.post("/insertFirst",function(req,res,next){
     }else{
       console.log("params err!");
     }
-})
+}),
+//编辑某个分类
+router.post("/edit",function(req,res,next){
+  let editId = req.body.id || '',
+      name=req.body.label;
+  let query = { _id: editId };
+
+  classification.update(query,{label:name},function(err,raw){
+    if(err){
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      res.json({
+        status:"0",
+        msg:name,
+        result:"edit secess"
+      })
+    }
+    console.log('The raw response from Mongo was ', raw);
+  })
+}),
+//删除某个分类
+router.post("/delete",function(req,res,next){
+  consloe.log("editId");
+
+  let editId = req.body.id || '';
+  let query = { _id: editId };
+
+  classification.update({_id:fatherId},{
+    $pull:{
+      'children':{"_id:childrenId"}
+    }
+  },function(err,doc){
+    if(err){
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      res.json({
+        status:"0",
+        msg:name,
+        result:"edit secess"
+      })
+    }
+  })
+  // classification.findByIdAndRemove(query,function(err,raw){
+  //   if(err){
+  //     res.json({
+  //       status:"1",
+  //       message:err.message
+  //     });
+  //   }else{
+  //     res.json({
+  //       status:"0",
+  //       result:"delete secess"
+  //     })
+  //   }
+  //   console.log('The raw response from Mongo was ', raw);
+  // })
+}),
+
 module.exports = router;

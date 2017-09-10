@@ -23,7 +23,15 @@
         <el-form-item label="最小库存" :label-width="formLabelWidth">
           <el-input v-model="form.minNUm" auto-complete="off"></el-input>
         </el-form-item>
-      </el-form-item>
+        <el-form-item label="分类" :label-width="formLabelWidth">
+          <el-cascader
+            placeholder="试试搜索：指南"
+            :options="options"
+            expand-trigger="hover"
+            filterable
+          ></el-cascader>
+          <!-- <el-input v-model="form.minNUm" auto-complete="off"></el-input> -->
+        </el-form-item>
       <el-upload
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
@@ -33,7 +41,7 @@
         list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
+     </el-upload>
         <slot name="footer"></slot>
     </el-form>
   </div>
@@ -42,6 +50,17 @@
 export default {
   data() {
     return {
+      options: [{
+          value: 'zhinan',
+          label: '指南',
+          children: [{
+            value: 'shejiyuanze',
+            label: '设计原则',
+          }, {
+            value: 'daohang',
+            label: '导航',
+          }]
+        }],
       value1: '',
       value2: '',
       form: {
