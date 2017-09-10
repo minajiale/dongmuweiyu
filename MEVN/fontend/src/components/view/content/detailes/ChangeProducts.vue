@@ -47,6 +47,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -94,7 +96,31 @@ export default {
     },
     handlePreview(file) {
       console.log(file);
-    }
+    },
+    getClass(){
+      axios({
+        url:'/class',
+        params:{
+          userId:"12"
+        },
+        headers:{
+          token:"gtfrdes"
+        }
+      }).then(res=>{
+        let results = res.data.result.allClass;
+        results.forEach(function(item,index,array){
+          item.value=item._id;
+          item.children.value=item.children._id
+        })
+
+       this.options=results
+      },error=>{
+        console.log("error");
+      })
+    },
+  },
+  mounted: function(){
+    this.getClass();
   }
 }
 </script>
