@@ -14,47 +14,21 @@ mongoose.connection.on("disconnected",function(){
   console.log("mongoose connect disconnected!!!");
 })
 
-//取得所有的分类并进行格式化
+//取得所有的分类
 router.get("/",function(req,res,next){
-  var data=[];
   classification.find({},function(err,doc){
     if(err){
       res.json({
-        status:'1',
+        status:'0',
         msg:err.message
       });
     }else{
-      // 进行数据格式化
-      var a=0;
-      for(let i in doc){
-        if(doc[i].father == null){
-          data[a] = {};
-          data[a].label=doc[i].name;
-          data[a].id=doc[i].id;
-          var b=0;
-          for(let j in doc[i].children){
-            let targrt = doc[i].children[j];
-            console.log(targrt);
-            //二分法查找
-
-            for(let k in doc){
-              if(doc[k]._id == doc[i].children[j]){
-                data[a].children[b].label = doc[k].name;
-                data[a].children[b].id = doc[k]._id;
-                b++;
-              }
-            }
-          }
-          a++
-        }
-      }
-
       res.json({
-        status:'0',
+        status:'1',
         msg:'get all classification suecess!',
         result:{
           count:doc.length,
-          allClass:data
+          allClass:doc
         }
       })
     }
@@ -66,12 +40,11 @@ router.get("/",function(req,res,next){
 router.post("/insertSecond",function(req,res,next){
   let father = req.body.father || '',
       name = req.body.name || '';
-
     console.log("插入某个二级分类")
     let  sencondClass={
       "label":name
     }
-    classification.findOne({label:father},function(err,doc){
+    classification.findOne({_id:father},function(err,doc){
       if(err){
         res.json({
           status:"1",

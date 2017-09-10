@@ -13,7 +13,7 @@
       :data="data2"
       :props="defaultProps"
       show-checkbox
-      node-key="id"
+      node-key="key"
       :expand-on-click-node="false"
       :render-content="renderContent"
       :filter-node-method="filterNode"
@@ -76,38 +76,19 @@ import axios from 'axios'
         msg:"",
         filterText: '',
         data2: [{
-          id: 1,
-          label: '一级 1',
-          children: [{
-            id: 4,
-            label: '二级 1-1',
-            children: []
-          }]
-        }, {
-          id: 2,
-          label: '一级 2',
-          children: [{
-            id: 5,
-            label: '二级 2-1',
-            children: []
-          }, {
-            id: 6,
-            label: '二级 2-2',
-            children: []
-          }]
-        }, {
-          id: 3,
-          label: '一级 3',
-          children: [{
-            id: 7,
-            label: '二级 3-1',
-            children: []
-          }, {
-            id: 8,
-            label: '二级 3-2',
-            children: []
-          }]
-        }],
+				_id: "59b360f81315703dcde928e7",
+				key: 2,
+				label: "花洒系列",
+				__v: 0,
+				children: []
+			},
+			{
+				_id: "59b361291315703dcde928e8",
+				key: 2,
+				label: "拉拉",
+				__v: 0,
+				children: []
+			}],
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -138,12 +119,12 @@ import axios from 'axios'
       append(store, data) {
         this.addSecondVisible=true;
         var that=this;
-        this.addTemp=data.id;
+        this.addTemp=data._id;
       },
       addSecondSucess(){
         var that=this;
         this.addSecondVisible=false;
-        // this.insertClass();
+        this.insertSecondClass();
       },
       editClassSucess(){
         var that=this;
@@ -162,7 +143,7 @@ import axios from 'axios'
       },
       renderContent(h, { node, data, store }) {
         var that=this;
-        if(data.children.length != 0){
+        if(data.children != null){
           return (
             <span>
               <span>
@@ -202,8 +183,7 @@ import axios from 'axios'
             token:"gtfrdes"
           }
         }).then(res=>{
-          var result = res.data;
-          this.data2=result.result.lsit;
+          this.data2 = res.data.result.allClass;
         },error=>{
           consolr.log("error");
         })
@@ -232,7 +212,7 @@ import axios from 'axios'
           url:"/class/insertSecond",
           data:{
             name:this.form.addSecond,
-            father:""
+            father:this.addTemp
           }
         }).then(res=>{
           if(res ==0){
