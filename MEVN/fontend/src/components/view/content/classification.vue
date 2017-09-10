@@ -106,9 +106,10 @@ import axios from 'axios'
           desc: ''
         },
         formLabelWidth: '120px',
-        eddTemp:0,
-        addTemp:0,
-        deleteTemp:0
+        eddTemp:undefined,
+        addTemp:undefined,
+        deleteTemp:undefined,
+        fatherKey:''
       };
     },
 
@@ -132,12 +133,17 @@ import axios from 'axios'
         that.editClassVisible=false;
         this.editClass();
       },
+      findFatherByChild(data,childId){
+        let father = data.map(function(item,index){
+          if(item.children._id == childId){
+            return item._id
+          }
+        })
+        return father[0]
+      },
       remove(node,data,store) {
-        console.log(node);
-
-        // store.remove(data);
-
-        // this.deleteClass(data._id)
+        this.deleteClass(data._id);
+        this.fatherKey = this.findFatherByChild(node.root.data);
       },
       edit(data){
         var that=this;
@@ -252,12 +258,13 @@ import axios from 'axios'
           url:"/class/delete",
           data:{
             id:key,
+            fatherId:this.fatherKey
           }
         }).then(res=>{
           if(res ==0){
             alert("res.message")
           }else{
-            console.log(res)
+            console.log(res.data)
           }
         },err=>{
           console.log("error");

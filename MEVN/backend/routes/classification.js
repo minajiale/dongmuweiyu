@@ -141,14 +141,17 @@ router.post("/edit",function(req,res,next){
 }),
 //删除某个分类
 router.post("/delete",function(req,res,next){
-  consloe.log("editId");
+  let editId = req.body.id || '',
+      fatherId = req.body.fatherId || '';
 
-  let editId = req.body.id || '';
   let query = { _id: editId };
-
+  console.log(fatherId);
+//删除某个二级分类
+if(fatherId != '' && editId != ''){
+  console.log("删除某个二级分类");
   classification.update({_id:fatherId},{
     $pull:{
-      'children':{"_id:childrenId"}
+      'children':{"_id":editId}
     }
   },function(err,doc){
     if(err){
@@ -159,25 +162,38 @@ router.post("/delete",function(req,res,next){
     }else{
       res.json({
         status:"0",
-        msg:name,
-        result:"edit secess"
+        msg:"",
+        result:"delete secess"
       })
     }
   })
-  // classification.findByIdAndRemove(query,function(err,raw){
-  //   if(err){
-  //     res.json({
-  //       status:"1",
-  //       message:err.message
-  //     });
-  //   }else{
-  //     res.json({
-  //       status:"0",
-  //       result:"delete secess"
-  //     })
-  //   }
-  //   console.log('The raw response from Mongo was ', raw);
-  // })
+}
+if(fatherId == '' && editId != ''){
+  //删除一级分类和其自分类
+  console.log("删除一级分类和其子分类")
+  classification.findByIdAndRemove(query,function(err,raw){
+    if(err){
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      if(raw==null){
+        res.json({
+          status:"1",
+          result:"没找到该条document"
+        })
+      }else{
+        res.json({
+          status:"0",
+          result:"delete sucess"
+        })
+      }
+
+    }
+    console.log('The raw response from Mongo was ', raw);
+  })
+}
 }),
 
 module.exports = router;
