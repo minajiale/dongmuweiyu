@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <add-product :isChange="false">
+    <add-product :isChange="false" v-on:ChangeProduct="getComponentData">
       <h2 slot="header">新增商品</h2>
       <div slot="footer">
         <el-form-item>
@@ -34,7 +34,11 @@ export default {
   ready () {},
   attached () {},
   methods: {
+    getComponentData(data){
+      this.product=data
+    },
     onSubmit(){
+      console.log(this.product);
       this.$notify({
          title: '成功',
          message: '新增产品成功',

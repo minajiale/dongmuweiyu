@@ -8,7 +8,23 @@ router.get('/', function(req, res, next) {
 });
 //添加商品
 router.post("/insert",function(req,res,next){
-  res.send('insert');
+  let oneProduct = req.body.oneProduct || '';
+  if(oneProduct != ''){
+    product.create(oneProduct,function(err3,doc){
+      if(err3){
+        res.json({
+          status:"1",
+          message:err3.message
+        });
+      }else{
+        res.json({
+          status:"0",
+          msg:"",
+          result:"sucess"
+        })
+      }
+    })
+  }
 })
 // 加入购物车
 router.post("/addcart",function(req,res,next){

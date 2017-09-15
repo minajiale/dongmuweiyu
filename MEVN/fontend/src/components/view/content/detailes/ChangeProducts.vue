@@ -3,7 +3,7 @@
     <slot name="header"></slot>
     <el-form :model="form" class="ChangeProducts">
         <el-form-item label="产品名称" :label-width="formLabelWidth">
-          <el-input v-model="form.id" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
+          <el-input v-model="form.id" v-on:change="formChange" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
         </el-form-item>
         <el-form-item label="货号" :label-width="formLabelWidth">
           <el-input v-model="form.code" auto-complete="off"></el-input>
@@ -28,6 +28,7 @@
             placeholder="试试搜索：指南"
             :options="options"
             expand-trigger="hover"
+            v-model="form.classification"
             filterable
           ></el-cascader>
           <!-- <el-input v-model="form.minNUm" auto-complete="off"></el-input> -->
@@ -87,6 +88,7 @@ export default {
     transferProducts(){
       if(this.isChange == true){
         console.log("修改产品")
+        this.$emit('ChangeProduct',this.form)
       }else{
         console.log("增加产品")
       }
@@ -118,9 +120,14 @@ export default {
         console.log("error");
       })
     },
+    formChange(){
+      alert("change!");
+    },
   },
   mounted: function(){
     this.getClass();
+  },
+  watch: {
   }
 }
 </script>

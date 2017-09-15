@@ -44,6 +44,13 @@ var customserSchema = new mongoose.Schema({
           }
         ]
       }
+    ],
+    //每次修改订单的记录
+    "modifyRecord":[
+      {
+        "time":String,
+        "record":String
+      }
     ]
   }
 });
