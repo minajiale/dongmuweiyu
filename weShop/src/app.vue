@@ -8,6 +8,10 @@
 </template>
 
 <script>
+import sidebar from "./homepage/sidebar"
+import commodieslist from "./commodieslist/sidebar"
+import header from "./common/header"
+import tabbar from "./common/tabbar"
 export default {
   data () {
     return {}
@@ -16,7 +20,12 @@ export default {
   ready () {},
   attached () {},
   methods: {},
-  components: {}
+  components: {
+    sidebar,
+    commodieslist,
+    header,
+    tabbar
+  }
 }
 </script>
 
