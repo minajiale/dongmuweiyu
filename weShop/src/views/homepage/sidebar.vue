@@ -1,7 +1,10 @@
 <template lang="html">
-  <div class="weui-cell weui-cell_access" v-for="item in classifications">
-    {{item}}
+  <div class="">
+    <div class="weui-cell weui-cell_access" v-for="item in classifications">
+      {{item}}
+    </div>
   </div>
+
 </template>
 
 <script>
