@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import sidebar from "./homepage/sidebar"
-import commodieslist from "./commodieslist/sidebar"
-import header from "./common/header"
-import tabbar from "./common/tabbar"
+import sidebar from "./views/homepage/sidebar.vue"
+import commodieslist from "./views/homepage/commodieslist.vue"
+import header from "./views/common/header.vue"
+import tabbar from "./views/common/tabbar.vue"
 export default {
   data () {
     return {}
