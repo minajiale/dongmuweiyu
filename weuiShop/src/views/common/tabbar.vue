@@ -7,16 +7,11 @@
         </span>
         <p class="weui-tabbar__label">东牧首页</p>
     </a>
+    <slot></slot>
+
     <a href="javascript:;" class="weui-tabbar__item">
         <img src="/static/cart.jpeg" alt="" class="weui-tabbar__icon">
         <p class="weui-tabbar__label">购物车</p>
-    </a>
-    <a href="javascript:;" class="weui-tabbar__item">
-        <span style="display: inline-block;position: relative;">
-            <img src="/static/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
-        </span>
-        <p class="weui-tabbar__label">个人中心</p>
     </a>
     <!-- <a href="javascript:;" class="weui-tabbar__item">
         <img src="/static/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">

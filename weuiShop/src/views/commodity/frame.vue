@@ -1,23 +1,28 @@
 <template lang="html">
   <div class="">
-    <div class="weui-gallery">
-      <span class="weui-gallery__img" style="background-image: url(./images/pic_article.png);"></span>
+    <div class="" style="">
+      <img src="/static/images/timg.jpeg" alt="" />
+    </div>
+    <abstract></abstract>
+     <div class="weui-flex">
+       <div class="weui-flex__item"><div class="placeholder on">产品详情</div></div>
+       <div class="weui-flex__item"><div class="placeholder">用户评论</div></div>
      </div>
-     <div class="detail-and-comment">
-       <div class="weui-navbar">
-          <div class="weui-navbar__item">
-              产品详情
-          </div>
-          <div class="weui-navbar__item weui-bar__item_on">
-              用户评论
-          </div>
-        </div>
-     </div>
+     <tabbar>
+       <a href="javascript:;" class="weui-tabbar__item">
+         <a href="javascript:;" class="weui-btn weui-btn_primary">页面主操作 Normal</a>
+       </a>
+       <a href="javascript:;" class="weui-tabbar__item">
+         <a href="javascript:;" class="weui-btn weui-btn_primary">页面主操作 Normal</a>
+       </a>
+     </tabbar>
   </div>
- </div>
 </template>
 
 <script>
+import abstract from "./abstract.vue"
+import tabbar from "@/views/common/tabbar.vue"
+
 export default {
   data () {
     return {}
@@ -26,9 +31,16 @@ export default {
   ready () {},
   attached () {},
   methods: {},
-  components: {}
+  components: {
+    abstract,
+    tabbar
+  }
 }
 </script>
 
 <style lang="css">
+.on{
+  background-color: #EFEFF4;
+  padding: 12px;
+}
 </style>

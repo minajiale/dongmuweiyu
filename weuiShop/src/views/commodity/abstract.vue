@@ -37,4 +37,8 @@ export default {
 </script>
 
 <style lang="css">
+.explanation{
+  padding: 0 100px;
+  text-align: left;
+}
 </style>

@@ -5,7 +5,15 @@
     <div class=""> <sidebar></sidebar> </div>
     <div class="weui-flex__item"><commodieslist></commodieslist></div>
   </div>
-  <tabbar></tabbar>
+  <tabbar>
+    <a href="javascript:;" class="weui-tabbar__item">
+        <span style="display: inline-block;position: relative;">
+            <img src="/static/images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+            <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
+        </span>
+        <p class="weui-tabbar__label">个人中心</p>
+    </a>
+  </tabbar>
   </div>
 </template>
 
