@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="weui-navbar">
-    <div class="weui-navbar__item weui-bar__item_on">
+    <div class="weui-bar__item_on weui-left ">
         <a href="#"><</a>
     </div>
-    <div class="weui-navbar__item">
+    <div class="weui-flex__item">
       <div class="weui-search-bar" id="searchBar">
           <form class="weui-search-bar__form">
               <div class="weui-search-bar__box">
@@ -19,7 +19,7 @@
           <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
       </div>
     </div>
-    <div class="weui-navbar__item">
+    <div class="">
         选项三
     </div>
 </div>
@@ -39,4 +39,8 @@ export default {
 </script>
 
 <style lang="css">
+.weui-left{
+  width: 30px;
+  margin-top: 5px;
+}
 </style>
