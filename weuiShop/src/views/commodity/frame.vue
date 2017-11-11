@@ -43,4 +43,7 @@ export default {
   background-color: #EFEFF4;
   padding: 12px;
 }
+.weui-btn{
+  margin: 0 10px;
+}
 </style>
