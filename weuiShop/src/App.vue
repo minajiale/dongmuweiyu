@@ -1,44 +1,22 @@
-<template lang="html">
-  <div class="">
-    <heabarbar class="heabarbar"></heabarbar>
-  <div class="weui-flex">
-    <div class=""> <sidebar></sidebar> </div>
-    <div class="weui-flex__item"><commodieslist></commodieslist></div>
-  </div>
-  <tabbar></tabbar>
+<template>
+  <div id="app">
+    <router-view/>
   </div>
 </template>
 
 <script>
-import sidebar from "./views/homepage/sidebar.vue"
-import commodieslist from "./views/homepage/commodieslist.vue"
-import heabarbar from "./views/common/header.vue"
-import tabbar from "./views/common/tabbar.vue"
 export default {
-  data () {
-    return {}
-  },
-  computed: {},
-  ready () {},
-  attached () {},
-  methods: {},
-  components: {
-    sidebar,
-    commodieslist,
-    heabarbar,
-    tabbar
-  }
+  name: 'app'
 }
 </script>
 
-<style lang="css">
-.weui-flex__item{
-
-}
-.weui-flex{
-  margin-top: 100px;
-}
-.heabarbar{
-
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
