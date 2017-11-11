@@ -19,7 +19,7 @@
           <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
       </div>
     </div>
-    <div class="">
+    <div class="three">
         选项三
     </div>
 </div>
@@ -42,5 +42,9 @@ export default {
 .weui-left{
   width: 30px;
   margin-top: 5px;
+}
+.three{
+  margin-top: 10px;
+
 }
 </style>

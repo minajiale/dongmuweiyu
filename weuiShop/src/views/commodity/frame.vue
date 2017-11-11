@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div class="frame">
     <div class="" style="">
       <img src="/static/images/timg.jpeg" alt="" />
     </div>
@@ -45,5 +45,8 @@ export default {
 }
 .weui-btn{
   margin: 0 10px;
+}
+.frame .weui-flex{
+  margin-top: 0px;
 }
 </style>
