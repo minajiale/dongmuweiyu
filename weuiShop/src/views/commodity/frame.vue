@@ -10,10 +10,10 @@
      </div>
      <tabbar>
        <a href="javascript:;" class="weui-tabbar__item">
-         <a href="javascript:;" class="weui-btn weui-btn_primary">页面主操作 Normal</a>
+         <a href="javascript:;" class="weui-btn weui-btn_primary">立即购买</a>
        </a>
        <a href="javascript:;" class="weui-tabbar__item">
-         <a href="javascript:;" class="weui-btn weui-btn_primary">页面主操作 Normal</a>
+         <a href="javascript:;" class="weui-btn weui-btn_primary">加入购物车</a>
        </a>
      </tabbar>
   </div>

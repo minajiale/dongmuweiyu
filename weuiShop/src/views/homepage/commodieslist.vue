@@ -11,8 +11,8 @@
             <p>马克菠萝马桶</p>
             <p style="font-size: 13px;color: #888888;">￥30</p>
             <div class="operation">
-              <a href="javascript:;" class="weui-btn buy">加入购物车</a>
-              <a href="javascript:;" class="weui-btn  buy">立即购买</a>
+              <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">加入购物车</a>
+              <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">立即购买</a>
             </div>
         </div>
         </div>
