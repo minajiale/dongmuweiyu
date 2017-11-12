@@ -41,11 +41,11 @@
           </el-table-column>
           <el-table-column
             label="商品货号"
-            prop="name">
+            prop="code">
           </el-table-column>
           <el-table-column
             label="规格"
-            prop="desc">
+            prop="spec">
           </el-table-column>
           <el-table-column label="操作">
             <template scope="scope">
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import productDetails from './detailes/ChangeProducts.vue'
   export default {
     data() {
@@ -104,9 +105,12 @@
         addCartVisible:false,
         activeName: '1',　//控制折叠框
         activeName2: 'second',//控制标签页，选择卡项
+        tempdata1:[], // 处理商品的中间变量
         tableData5: [{
           id: '12987122',
-          name: '好滋好味鸡蛋仔',
+          name: '二麻子',
+          code:"Mi-2",
+          spec:"50*50",
           category: '江浙小吃、小吃零食',
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
@@ -115,7 +119,9 @@
           imgSrc:'static/logo.png'
         }, {
           id: '12987123',
-          name: '好滋好味鸡蛋仔',
+          name: '东牧花洒',
+          code:"Mi-2",
+          spec:"50*50",
           category: '江浙小吃、小吃零食',
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
@@ -123,7 +129,9 @@
           shopId: '10333'
         }, {
           id: '12987125',
-          name: '好滋好味鸡蛋仔',
+          name: '东牧菜盆水龙头',
+          code:"Mi-2",
+          spec:"50*50",
           category: '江浙小吃、小吃零食',
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
@@ -131,8 +139,9 @@
           shopId: '10333'
         }, {
           id: '12987126',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
+          name: 'PVC板子',
+          code:"Mi-2",
+          spec:"50*50",
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
@@ -171,8 +180,22 @@
       },
       handleAdd(index,row){
         this.addCartVisible=true;
+      },
+      getAllProducts(){
+        axios({
+          url:'/products',
+        }).then(res=>{
+          console.log("哈哈哈哈seccess");
+
+          this.tempdata1 = res.data.result.allProducts;
+        },error=>{
+          console.log("哈哈哈哈error");
+        })
       }
-  }
+    },
+  mounted: function(){
+    this.getAllProducts();
+  },
 }
 </script>
 

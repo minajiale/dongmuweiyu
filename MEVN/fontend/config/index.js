@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     //dai li cha jian ,dang fang wen hou tai duan kou jiu bu yong kua yu
     proxyTable: {
-      '/class':{
+      '/':{
         target:'http://localhost:3000'
       }
     },

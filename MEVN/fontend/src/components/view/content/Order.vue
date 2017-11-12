@@ -45,11 +45,11 @@
       </el-table-column>
       <el-table-column
         label="顾客联系方式"
-        prop="name">
+        prop="phone">
       </el-table-column>
       <el-table-column
         label="订单状态"
-        prop="desc">
+        prop="state">
       </el-table-column>
       <el-table-column label="操作">
         <template scope="scope">
@@ -102,36 +102,36 @@
         tableData5: [{
           date: '2016-05-02',
           id: '12987122',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
+          name: '尤玉溪',
+          phone: '13177918633',
+          state: '进行中',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
           shopId: '10333'
         }, {
           date: '2016-05-02',
           id: '12987123',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
+          name: '将大大',
+          phone: '15929159416',
+          state: '完成',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
           shopId: '10333'
         }, {
           date: '2016-05-02',
           id: '12987125',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
+          name: '隔壁家的',
+          phone: '13607030062',
+          state: '欠款',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
           shopId: '10333'
         }, {
           date: '2016-05-02',
           id: '12987126',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
+          name: '尤玉溪',
+          phone: '13177918633',
+          state: '进行中',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
           shopId: '10333'

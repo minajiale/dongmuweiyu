@@ -3,9 +3,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var product = require('../models/product.js');
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 //添加商品
 router.post("/insert",function(req,res,next){
   let oneProduct = req.body.oneProduct || '';
@@ -26,6 +23,29 @@ router.post("/insert",function(req,res,next){
     })
   }
 })
+
+
+//取得所有的产品
+router.get("/",function(req,res,next){
+  product.find({},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      res.json({
+        status:'1',
+        msg:'get all classification suecess!',
+        result:{
+          count:doc.length,
+          allProducts:doc
+        }
+      })
+    }
+  })
+})
+
 // 加入购物车
 router.post("/addcart",function(req,res,next){
   var customerId="";

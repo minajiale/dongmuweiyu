@@ -31,7 +31,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/class', classification);
 app.use('/customer',customer);
-app.use('/product',product);
+app.use('/products',product);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
