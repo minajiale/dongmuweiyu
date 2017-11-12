@@ -185,11 +185,9 @@
         axios({
           url:'/products',
         }).then(res=>{
-          console.log("哈哈哈哈seccess");
-
-          this.tempdata1 = res.data.result.allProducts;
+          this.data2 = res.data.result.allClass;
         },error=>{
-          console.log("哈哈哈哈error");
+          console.log("error");
         })
       }
     },
