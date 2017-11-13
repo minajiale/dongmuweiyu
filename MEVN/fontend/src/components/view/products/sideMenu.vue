@@ -35,7 +35,8 @@ export default {
       classifacation:[]
     }
   },
-  computed: {},
+  computed:{
+  },
   ready () {
   },
   attached () {
@@ -59,6 +60,9 @@ export default {
         }
       }).then(res=>{
         this.classifacation = res.data.result.allClass;
+        this.classifacation.unshift(
+          {"_id": "09b525ef5096a428fa0e3699",
+           "label": "全部",})
       },error=>{
         console.log("error");
       })

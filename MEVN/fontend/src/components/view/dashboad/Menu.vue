@@ -44,11 +44,6 @@ export default{
       console.log(key, keyPath);
     }
   }
-  // computed:{
-  //     onRoutes(){
-  //         return this.$route.path.replace('/','');
-  //     }
-  // }
 }
 </script>
 <style>
