@@ -11,17 +11,23 @@
             <template scope="props">
               <el-row >
                <el-col :span="12"><div class="">
-                <img v-bind:src="props.row.imgSrc" class="image">
+                <img v-bind:src="props.row.img[1]" class="image">
               </div></el-col>
                <el-col :span="12"><el-form label-position="left" inline class="demo-table-expand">
                 <el-form-item label="商品ID">
-                  <span>{{ props.row.id }}</span>
+                  <span>{{ props.row._id }}</span>
                 </el-form-item>
                 <el-form-item label="剩余库存">
-                  <span>{{ props.row.shop }}</span>
+                  <span>{{ props.row.num }}</span>
+                </el-form-item>
+                <el-form-item label="最小库存">
+                  <span>{{ props.row.minNUm }}</span>
                 </el-form-item>
                 <el-form-item label="卖价">
-                  <span>{{ props.row.id }}</span>
+                  <span>{{ props.row.sellPrice }}</span>
+                </el-form-item>
+                <el-form-item label="分类">
+                  <span>{{ props.row.firstClass }}/{{props.row.secondClass}}</span>
                 </el-form-item>
                 <el-form-item label="商品描述">
                   <span>{{ props.row.desc }}</span>
@@ -104,18 +110,7 @@
         activeName2: 'second',//控制标签页，选择卡项
         tempdata1:[], // 处理商品的中间变量,查询商品的collection
         classifacation:[],//，查询分类的collection
-        tableData5: [{
-          id: '12987123',
-          name: '东牧花洒',
-          code:"Mi-2",
-          spec:"50*50",
-          imgSrc:'static/logo.png',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }],
+        tableData5: [], //商品信息
         param:{
           secondClass:'',
           firstClass:""
@@ -159,7 +154,7 @@
         axios({
           url:'/products',
         }).then(res=>{
-          this.data2 = res.data.result.allClass;
+          this.tableData5 = res.data.result.allProducts;
         },error=>{
           console.log("error");
         })
@@ -173,8 +168,9 @@
           params:this.param,
         }).then(res=>{
           if( res.data.result){
-            this.tempdata1 = res.data.result.allProducts;
+            this.tableData5 = res.data.result.allProducts;
           }else{
+            this.tableData5=[];
             console.log("您查询的商品不存在")
           }
         },error=>{
@@ -183,6 +179,9 @@
       },
       getProductsByFirClass(key){
         console.log(key);
+        if(key==1){
+          this.getAllProducts();
+        }else{
         axios({
           url:'/products/FClass',
           params:{
@@ -190,13 +189,15 @@
           },
         }).then(res=>{
           if( res.data.result){
-            this.tempdata1 = res.data.result.allProducts;
+            this.tableData5 = res.data.result.allProducts;
           }else{
+            this.tableData5=[];
             console.log("您查询的商品不存在")
           }
         },error=>{
           console.log("error");
         })
+      }
       },
     },
   mounted: function(){
