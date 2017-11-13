@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
     <el-menu
-      default-active="2"
+      default-active="1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
@@ -9,15 +9,15 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       v-for="classi in classifacation"
-      :key="_id"
+      :key="classi._id"
       >
-      <el-submenu index="1">
+      <el-submenu index=classi._id>
         <template slot="title">
           <span>{{classi.label}}</span>
         </template>
-        <el-menu-item-group      v-for="subclassi in classi.children":key="_id" >
+        <el-menu-item-group     v-for="subclassi in classi.children":key="subclassi._id" >
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item index="1-1">{{subclassi.label}}</el-menu-item>
+          <el-menu-item  index="subclassi._id">{{subclassi.label}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -27,38 +27,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
-      classifacation:[{
-        "_id": "59b525ef5096a428fa0e3699",
-        "label": "全部",
-      },{
-				"_id": "59b525ef5096a428fa0e3699",
-				"label": "花洒系列",
-				"children": [
-					{
-						"label": "东沐花洒",
-						"_id": "59b525fd5096a428fa0e369a"
-					},
-					{
-						"label": "dsd",
-						"_id": "5a07a27e4fdf871e0e192c46"
-					}
-				]
-			},
-      {
-        "_id": "59b525ef5096a428fa0e3699",
-        "label": "花洒系列",
-        "children": []
-      }
-    ]
+      classifacation:[]
     }
   },
   computed: {},
-  ready () {},
+  ready () {
+  },
   attached () {
-    this.getClass();
+
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -82,6 +63,9 @@ export default {
         console.log("error");
       })
     },
+  },
+  mounted: function(){
+    this.getClass();
   },
   components: {}
 }

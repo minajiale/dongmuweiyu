@@ -209,7 +209,6 @@
     },
   mounted: function(){
     this.getAllProducts();
-    this.getClass();
     this.getProductsBySClass();
   },
 }
