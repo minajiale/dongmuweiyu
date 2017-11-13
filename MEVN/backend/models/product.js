@@ -9,7 +9,8 @@ var productSchema = new mongoose.Schema({
   "minNUm":String,
   "num":String,
   "buyPrice":String,
-  "classification":String,
+  "firstClass":String,
+  "secondClass":String,
   "img":String
 })
 

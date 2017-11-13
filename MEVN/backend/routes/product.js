@@ -49,6 +49,36 @@ router.get("/",function(req,res,next){
 // 加入购物车
 router.post("/addcart",function(req,res,next){
   var customerId="";
+})
+
+//根据分类查询产品。
+router.get("/SClass",function(req,res,next){
+  var secondClassId=req.param("secondClass");
+  var firstClassId=req.param("firstClass");
+  product.findOne({secondClass:secondClassId,firstClass:firstClassId},function(err1,productsByclass){
+    if(err1){
+      res.json({
+        status:"1",
+        message:err1.message
+      });
+    }else{
+      if(productsByclass){
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:productsByclass.length,
+            allProducts:productsByclass
+          }
+        })
+      }else{
+        res.json({
+          status:'0',
+          msg:'查询结果为null',
+        })
+      }
+    }
+  })
 
 })
 

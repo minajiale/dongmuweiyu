@@ -1,14 +1,9 @@
 <template>
-  <div class=""   style="width: 1100px">
+  <div class="products"   style="width: 1100px">
     <h1>产品管理 &nbsp<router-link to="/product/addProduct">+</router-link> </h1>
-    <el-collapse v-model="activeName" accordion>
-      <el-collapse-item title="产品一级菜单" name="1">
-        <el-tabs v-model="activeName2" @tab-click="handleClick">
-          <el-tab-pane label="全部" name="first">产品二级菜单</el-tab-pane>
-          <el-tab-pane label="产品二级菜单" name="second">产品二级菜单</el-tab-pane>
-          <el-tab-pane label="产品二级菜单" name="third">产品二级菜单</el-tab-pane>
-          <el-tab-pane label="产品二级菜单" name="fourth">产品二级菜单</el-tab-pane>
-        </el-tabs>
+    <el-row>
+    <el-col :span="2"><sideMenu></sideMenu></el-col>
+      <el-col :span="22">
         <el-table
           :data="tableData5"
           style="width: 1000px">
@@ -63,8 +58,7 @@
             </template>
           </el-table-column>
         </el-table>
-      </el-collapse-item>
-    </el-collapse>
+    </el-col>
 
     <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
       <product-details :isChange="true"></product-details>
@@ -88,12 +82,15 @@
         <el-button type="primary" @click="addCartVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+    </el-row>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   import productDetails from './detailes/ChangeProducts.vue'
+  import sideMenu from '../products/sideMenu.vue'
+
   export default {
     data() {
       return {
@@ -105,7 +102,8 @@
         addCartVisible:false,
         activeName: '1',　//控制折叠框
         activeName2: 'second',//控制标签页，选择卡项
-        tempdata1:[], // 处理商品的中间变量
+        tempdata1:[], // 处理商品的中间变量,查询商品的collection
+        classifacation:[],//，查询分类的collection
         tableData5: [{
           id: '12987122',
           name: '二麻子',
@@ -150,7 +148,8 @@
       }
     },
     components:{
-      productDetails
+      productDetails,
+      sideMenu
     },
     methods: {
       handleClick(tab, event) {
@@ -189,15 +188,37 @@
         },error=>{
           console.log("error");
         })
+      },
+      getProductsBySClass(){
+        axios({
+          url:'/products/SClass',
+          params:{
+            secondClass:"321",
+            firstClass:"54321"
+          },
+        }).then(res=>{
+          this.tempdata1 = res.data.result.allProducts;
+        },error=>{
+          console.log("error");
+        })
+      },
+      mergeTempt1a2(){
+        console("fcdx");
+
       }
     },
   mounted: function(){
     this.getAllProducts();
+    this.getClass();
+    this.getProductsBySClass();
   },
 }
 </script>
 
 <style>
+  .products el-table{
+    margin-right: -300px;
+  }
   .el-tabs__content{
     display: none;
   }
