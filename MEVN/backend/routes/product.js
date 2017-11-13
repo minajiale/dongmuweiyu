@@ -51,7 +51,7 @@ router.post("/addcart",function(req,res,next){
   var customerId="";
 })
 
-//根据分类查询产品。
+//根据二级分类查询产品。
 router.get("/SClass",function(req,res,next){
   var secondClassId=req.param("secondClass");
   var firstClassId=req.param("firstClass");
@@ -59,7 +59,8 @@ router.get("/SClass",function(req,res,next){
     if(err1){
       res.json({
         status:"1",
-        message:err1.message
+        message:err1.message,
+        result:null
       });
     }else{
       if(productsByclass){
@@ -79,7 +80,35 @@ router.get("/SClass",function(req,res,next){
       }
     }
   })
-
+})
+//取得某个一级分类下的所有产品
+router.get("/FClass",function(req,res,next){
+  var firstClassId=req.param("firstClass");
+  product.findOne({firstClass:firstClassId},function(err1,productsByclass){
+    if(err1){
+      res.json({
+        status:"1",
+        message:err1.message,
+        result:null
+      });
+    }else{
+      if(productsByclass){
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:productsByclass.length,
+            allProducts:productsByclass
+          }
+        })
+      }else{
+        res.json({
+          status:'0',
+          msg:'查询结果为null',
+        })
+      }
+    }
+  })
 })
 
 module.exports=router;

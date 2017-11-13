@@ -11,13 +11,13 @@
       v-for="classi in classifacation"
       :key="classi._id"
       >
-      <el-submenu index=classi._id>
+      <el-submenu  v-bind:index=classi._id>
         <template slot="title">
           <span>{{classi.label}}</span>
         </template>
-        <el-menu-item-group     v-for="subclassi in classi.children":key="subclassi._id" >
+        <el-menu-item-group   v-for="subclassi in classi.children":key="subclassi._id" >
           <!-- <template slot="title">分组一</template> -->
-          <el-menu-item  index="subclassi._id">{{subclassi.label}}</el-menu-item>
+          <el-menu-item  v-on:click="handleClick(subclassi._id,classi._id)"  v-bind:index="subclassi._id">{{subclassi.label}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -43,8 +43,13 @@ export default {
 
   },
   methods: {
+    //点击一级菜单
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      this.$emit('muenuClick',key)
+    },
+    // 点击二级菜单
+    handleClick(key,fatherKey){
+      this.$emit('itemClick',key,fatherKey)
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);

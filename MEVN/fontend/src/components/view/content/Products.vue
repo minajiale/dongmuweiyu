@@ -2,7 +2,7 @@
   <div class="products"   style="width: 1100px">
     <h1>产品管理 &nbsp<router-link to="/product/addProduct">+</router-link> </h1>
     <el-row>
-    <el-col :span="2"><sideMenu></sideMenu></el-col>
+    <el-col :span="2"><sideMenu v-on:itemClick ="getProductsBySecClass" v-on:muenuClick='getProductsByFirClass'></sideMenu></el-col>
       <el-col :span="22">
         <el-table
           :data="tableData5"
@@ -105,46 +105,21 @@
         tempdata1:[], // 处理商品的中间变量,查询商品的collection
         classifacation:[],//，查询分类的collection
         tableData5: [{
-          id: '12987122',
-          name: '二麻子',
-          code:"Mi-2",
-          spec:"50*50",
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333',
-          imgSrc:'static/logo.png'
-        }, {
           id: '12987123',
           name: '东牧花洒',
           code:"Mi-2",
           spec:"50*50",
+          imgSrc:'static/logo.png',
           category: '江浙小吃、小吃零食',
           desc: '荷兰优质淡奶，奶香浓而不腻',
           address: '上海市普陀区真北路',
           shop: '王小虎夫妻店',
           shopId: '10333'
-        }, {
-          id: '12987125',
-          name: '东牧菜盆水龙头',
-          code:"Mi-2",
-          spec:"50*50",
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987126',
-          name: 'PVC板子',
-          code:"Mi-2",
-          spec:"50*50",
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }]
+        }],
+        param:{
+          secondClass:'',
+          firstClass:""
+        }
       }
     },
     components:{
@@ -189,27 +164,43 @@
           console.log("error");
         })
       },
-      getProductsBySClass(){
+      getProductsBySecClass(key,fatherKey){
+        console.log(key);
+        this.param.firstClass=fatherKey;
+        this.param.secondClass=key;
         axios({
           url:'/products/SClass',
-          params:{
-            secondClass:"321",
-            firstClass:"54321"
-          },
+          params:this.param,
         }).then(res=>{
-          this.tempdata1 = res.data.result.allProducts;
+          if( res.data.result){
+            this.tempdata1 = res.data.result.allProducts;
+          }else{
+            console.log("您查询的商品不存在")
+          }
         },error=>{
           console.log("error");
         })
       },
-      mergeTempt1a2(){
-        console("fcdx");
-
-      }
+      getProductsByFirClass(key){
+        console.log(key);
+        axios({
+          url:'/products/FClass',
+          params:{
+            firstClass:key
+          },
+        }).then(res=>{
+          if( res.data.result){
+            this.tempdata1 = res.data.result.allProducts;
+          }else{
+            console.log("您查询的商品不存在")
+          }
+        },error=>{
+          console.log("error");
+        })
+      },
     },
   mounted: function(){
     this.getAllProducts();
-    this.getProductsBySClass();
   },
 }
 </script>
