@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class="ChangeProducts">
     <slot name="header"></slot>
-    <el-form :model="form" class="ChangeProducts">
+    <el-form :model="form" class="">
         <el-form-item label="产品名称" :label-width="formLabelWidth">
           <el-input v-model="form.id" v-on:change="formChange" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
         </el-form-item>
@@ -28,7 +28,7 @@
             placeholder="试试搜索：指南"
             :options="options"
             expand-trigger="hover"
-            v-model="form.classification"
+            v-model="form.firstClass"
             filterable
           ></el-cascader>
           <!-- <el-input v-model="form.minNUm" auto-complete="off"></el-input> -->
@@ -67,15 +67,18 @@ export default {
       value1: '',
       value2: '',
       form: {
-        "id":"",
-        "name":"",
-        "spec":"",
-        "sellPrice":"",
-        "minNUm":"",
-        "num":"",
-        "buyPrice":"",
-        "classification":"",
-        "img":""
+        id:"",
+        name:"",
+        code:"", //商品货号
+        spec:"", //规格
+        sellPrice:"",//规定卖价
+        buyPrice:"", //成交价格
+        minNUm:"", //最小库存
+        num:"", //剩余数量
+        firstClass:"", //第一级别分类
+        secondClass:"", //第二季别分类
+        img:[], //图片
+        desc:"",//商品简单描述
       },
       formLabelWidth: '120px',
       fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
@@ -83,12 +86,13 @@ export default {
   },
   props:{
     isChange:Boolean,
+    theProduct:Object
   },
   methods: {
     transferProducts(){
       if(this.isChange == true){
-        console.log("修改产品")
-        this.$emit('ChangeProduct',this.form)
+        this.form = this.theProduct;
+        console.log(this.theProduct);
       }else{
         console.log("增加产品")
       }
@@ -99,41 +103,17 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    getClass(){
-      axios({
-        url:'/class',
-        params:{
-          userId:"12"
-        },
-        headers:{
-          token:"gtfrdes"
-        }
-      }).then(res=>{
-        let results = res.data.result.allClass;
-        results.forEach(function(item,index,array){
-          item.value=item._id;
-          item.children.value=item.children._id
-        })
-
-       this.options=results
-      },error=>{
-        console.log("error");
-      })
-    },
     formChange(){
       alert("change!");
     },
   },
   mounted: function(){
-    this.getClass();
   },
-  watch: {
-  }
 }
 </script>
 <style>
   .ChangeProducts .el-form-item{
-    width: 700px;
+    width: 600px;
   }
   .el-form-item{
     margin-bottom: 2px;

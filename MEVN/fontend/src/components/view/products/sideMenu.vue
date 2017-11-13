@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="">
+  <div class="sideMenu">
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      background-color="#545c64"
+      background-color="red"
       text-color="#fff"
       active-text-color="#ffd04b"
       v-for="classi in classifacation"
@@ -45,14 +45,16 @@ export default {
   methods: {
     //点击一级菜单
     handleOpen(key, keyPath) {
-      this.$emit('muenuClick',key)
+      if(key==1){
+        this.$emit('muenuClick',key)
+      }
     },
     // 点击二级菜单
     handleClick(key,fatherKey){
       this.$emit('itemClick',key,fatherKey)
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      this.$emit('muenuClick',key)
     },
     getClass(){
       axios({

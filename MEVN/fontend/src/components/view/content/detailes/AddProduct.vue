@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div class="addProduct">
     <add-product :isChange="false" v-on:ChangeProduct="getComponentData">
       <h2 slot="header">新增商品</h2>
       <div slot="footer">
