@@ -18,15 +18,15 @@ export default {
   data () {
     return {
       product: {
-        "id":"",
-        "name":"",
-        "spec":"",
-        "sellPrice":"",
-        "minNUm":"",
-        "num":"",
-        "buyPrice":"",
-        "classification":"",
-        "img":""
+        id:"",
+        name:"",
+        spec:"",
+        sellPrice:"",
+        minNUm:"",
+        num:"",
+        buyPrice:"",
+        classification:"",
+        img:""
       },
     }
   },

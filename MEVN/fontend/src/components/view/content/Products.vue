@@ -67,7 +67,7 @@
     </el-col>
 
     <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
-      <keep-alive ><product-details :isChange="true" theProduct=this.editTemp ></product-details></keep-alive>
+      <product-details :isChange="true"></product-details>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitEit">确 定</el-button>
@@ -111,7 +111,6 @@
         tempdata1:[], // 处理商品的中间变量,查询商品的collection
         classifacation:[],//，查询分类的collection
         tableData5: [], //商品信息
-        editTemp: [], //需要修改的商品的信息
         param:{
           secondClass:'',
           firstClass:""
@@ -128,6 +127,8 @@
       },
       handleEdit(index, row) {
         this.dialogFormVisible=true;
+        this.$store.commit("updateTempProduct",row);
+        console.log("prodycts:",row._id)
       },
       submitEit(){
         this.dialogFormVisible = false;
@@ -152,7 +153,6 @@
       },
       handleAdd(index,row){
         this.addCartVisible=true;
-        this.editTemp=row;
       },
       getAllProducts(){
         axios({

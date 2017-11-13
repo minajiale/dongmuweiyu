@@ -66,33 +66,22 @@ export default {
         }],
       value1: '',
       value2: '',
-      form: {
-        id:"",
-        name:"",
-        code:"", //商品货号
-        spec:"", //规格
-        sellPrice:"",//规定卖价
-        buyPrice:"", //成交价格
-        minNUm:"", //最小库存
-        num:"", //剩余数量
-        firstClass:"", //第一级别分类
-        secondClass:"", //第二季别分类
-        img:[], //图片
-        desc:"",//商品简单描述
-      },
       formLabelWidth: '120px',
       fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
     };
   },
   props:{
     isChange:Boolean,
-    theProduct:Object
+  },
+  computed:{
+    form(){
+      return this.$store.state.TempProduct;
+    }
   },
   methods: {
     transferProducts(){
       if(this.isChange == true){
-        this.form = this.theProduct;
-        console.log(this.theProduct);
+        console.log("ChangeProducts"+this.theProduct._id);
       }else{
         console.log("增加产品")
       }
@@ -108,6 +97,7 @@ export default {
     },
   },
   mounted: function(){
+    this.transferProducts()
   },
 }
 </script>
