@@ -51,7 +51,9 @@
         label="订单状态"
         prop="state">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column
+      label="操作"
+      width="300px">
         <template scope="scope">
           <el-button
           size="small"
@@ -60,6 +62,10 @@
           size="small"
           type="primary"
           @click="handledatail(scope.$index, scope.row)">查看详情</el-button>
+          <el-button
+          size="small"
+          type="danger"
+          @click="handleAdd(scope.$index, scope.row)">+</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -147,8 +153,11 @@
         this.dialogFormVisible=true;
         console.log(index, row);
       },
+      handleAdd(index,row){
+        this.$router.push("/order/addOrder");
+
+      },
       handledatail(index, row) {
-        console.log("hgtfrdeshygtfrdeswa")
         this.$router.push("/order/addOrder/verify")
       }
     }
