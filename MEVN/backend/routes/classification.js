@@ -103,28 +103,36 @@ router.post("/insertFirst",function(req,res,next){
 }),
 //编辑某个分类
 router.post("/edit",function(req,res,next){
-  let editId = req.body.id,
+  var editId = req.body.id,
       name   =req.body.label,
       index   =req.body.index,
       father=req.body.father;
+    var query={};
+    var updateContaint={};
   if(editId && father && index){
-    let query = { _id: father._id, "children.index._id": "editId"};
+     query = { "_id": "father._id", "children._id": "editId"};
+     updateContaint={$set:{"children.label":"name"}};
   }else{
-    let query = { _id: editId };
+     query = { _id: editId };
+     updateContaint={label:name};
   }
-
-  classification.update(query,{label:name},function(err,raw){
+  classification.update(query,updateContaint,function(err,raw){
     if(err){
       res.json({
         status:"1",
         message:err.message
       });
-    }else{
+    }else if(raw.nModified !=0 ){
       res.json({
         status:"0",
         msg:name,
         result:"edit secess"
       })
+    }else{
+      res.json({
+        status:"1",
+        message:null
+      });
     }
     console.log('The raw response from Mongo was ', raw);
   })

@@ -261,17 +261,18 @@ import axios from 'axios'
           }
 
         }).then(res=>{
-          if(res ==0){
-            this.$notify.error({
-              title: '错误',
-              message: '编辑分类失败失败'
-            });
-          }else{
+          console.log(res);
+          if(res.status == 200 && res.data.status == 0){
             this.$notify({
                title: '成功',
                message: '编辑分类成功',
                type: 'success'
-             });
+             })
+          }else{
+            this.$notify.error({
+              title: '错误',
+              message: '编辑分类失败失败'
+            });
           }
         },err=>{
           this.$notify.error({
