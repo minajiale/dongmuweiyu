@@ -131,7 +131,7 @@ import axios from 'axios'
       },
       edit(node,data,store){
         this.eddTemp.lable=data.label;
-        this.eddTemp.id   =data._id;
+        this.eddTemp.id =data;
         this.eddTemp.father = node.parent.data._id;
         var index = -1
         var sibling=node.parent.childNodes;

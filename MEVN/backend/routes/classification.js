@@ -110,7 +110,7 @@ router.post("/edit",function(req,res,next){
     var query={};
     var updateContaint={};
   if(editId && father && index){
-     query = { "_id": "father._id", "children._id": "editId"};
+     query = { "_id": "father._id", "children": "editId"};
      updateContaint={$set:{"children.label":"name"}};
   }else{
      query = { _id: editId };
