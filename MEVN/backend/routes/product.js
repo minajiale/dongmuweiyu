@@ -52,7 +52,7 @@ router.post("/addcart",function(req,res,next){
 })
 //编辑某条商品
 router.post("/edit",function(req,res,next){
-  var key=req.param(id);
+  var key=req.body.id;
   var oldValue  = {_id:id};
   var newData = {$set:{name:"内容",age:2}};
   product.update(oldValue,newData,function(err,result){
@@ -61,7 +61,7 @@ router.post("/edit",function(req,res,next){
     }else{
       console.log("update");
     }
-  }
+  })
 })
 
 //根据二级分类查询产品。

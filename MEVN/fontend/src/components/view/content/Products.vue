@@ -67,19 +67,28 @@
     </el-col>
 
     <el-dialog title="修改产品" :visible.sync="dialogFormVisible">
-      <product-details :isChange="true"></product-details>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitEit">确 定</el-button>
-      </div>
+      <keep-alive exclude="productDetails">
+        <component
+        v-bind:is="currentView"
+        :isChange="true"
+        v-on:changeDialogFormVisible="watchDialogFormVisible"
+        :prodictInit="prodictTemp">
+        </component>
+      </keep-alive>
+      <!-- <product-details
+        :isChange="true"
+        v-on:changeDialogFormVisible="watchDialogFormVisible"
+        :form="prodictTemp"
+        >
+      </product-details> -->
     </el-dialog>
 
     <el-dialog title="加入购物车" :visible.sync="addCartVisible">
-      <el-form :model="form">
-        <el-form-item label="请输入商品单价" :label-width="formLabelWidth">
+      <el-form :model="product">
+        <el-form-item label="请输入商品单价">
           <el-input v-model="product.price" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="请输入商品数量，不输入为1" :label-width="formLabelWidth">
+        <el-form-item label="请输入商品数量，不输入为1">
           <el-input v-model="product.number" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -100,6 +109,7 @@
   export default {
     data() {
       return {
+        currentView:'',//keep-alive参数
         product:{
           price:1,
           number:1,
@@ -111,15 +121,17 @@
         tempdata1:[], // 处理商品的中间变量,查询商品的collection
         classifacation:[],//，查询分类的collection
         tableData5: [], //商品信息
+        prodictTemp:[],//row
         param:{
           secondClass:'',
           firstClass:""
-        }
+        },
       }
     },
     components:{
       productDetails,
-      sideMenu
+      sideMenu,
+
     },
     methods: {
       handleClick(tab, event) {
@@ -127,11 +139,12 @@
       },
       handleEdit(index, row) {
         this.dialogFormVisible=true;
-        this.$store.commit("updateTempProduct",row);
-        console.log("prodycts:",row._id)
+        this.prodictTemp=row;
+        this.currentView=productDetails;
       },
-      submitEit(){
-        this.dialogFormVisible = false;
+      watchDialogFormVisible(value){
+        this.dialogFormVisible=false;
+        this.currentView=sideMenu;
       },
       handleDelete(index, row) {
         console.log(index, row);
@@ -203,6 +216,25 @@
         })
       }
       },
+      editProduct(item){
+        axios({
+          url:'/products/edit',
+          params:item,
+        }).then(res=>{
+          console.log(修改成功);
+          this.$notify({
+            title: '成功',
+            message: '这是一条成功的提示消息',
+            type: 'success'
+          });
+        },error=>{
+          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '这是一条错误的提示消息'
+          });
+        })
+      }
     },
   mounted: function(){
     this.getAllProducts();

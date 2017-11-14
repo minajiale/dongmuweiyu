@@ -3,7 +3,7 @@
     <slot name="header"></slot>
     <el-form :model="form" class="">
         <el-form-item label="产品名称" :label-width="formLabelWidth">
-          <el-input v-model="form.id" v-on:change="formChange" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
+          <el-input v-model="form.name" v-on:change="formChange()" auto-complete="off"　placeholder="该ＩＤ自动生成"　></el-input>
         </el-form-item>
         <el-form-item label="货号" :label-width="formLabelWidth">
           <el-input v-model="form.code" auto-complete="off"></el-input>
@@ -43,7 +43,10 @@
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
      </el-upload>
-        <slot name="footer"></slot>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">提交</el-button>
+          <el-button　 @click="onSuspend">取消</el-button>
+        </el-form-item>
     </el-form>
   </div>
 </template>
@@ -53,6 +56,16 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      form:{
+        name:"",
+        spec:"",
+        sellPrice:"",
+        minNUm:"",
+        num:"",
+        buyPrice:"",
+        classification:"",
+        img:""
+      },
       options: [{
           value: 'zhinan',
           label: '指南',
@@ -72,18 +85,25 @@ export default {
   },
   props:{
     isChange:Boolean,
+    prodictInit:Object,
   },
   computed:{
-    form(){
-      return this.$store.state.TempProduct;
-    }
   },
   methods: {
+    onSubmit(){
+      this.$emit('changeDialogFormVisible');
+    },
+    onSuspend(){
+      this.$emit('changeDialogFormVisible');
+      this.$destroy();
+    },
     transferProducts(){
       if(this.isChange == true){
-        console.log("ChangeProducts"+this.theProduct._id);
+        console.log("编辑产品");
+        // console.log("ChangeProducts"+this.theProduct._id);
       }else{
-        console.log("增加产品")
+        console.log("增加产品");
+        this.$store.commit("updateTempProduct",[]);
       }
     },
     handleRemove(file, fileList) {
@@ -92,12 +112,14 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    formChange(){
-      alert("change!");
+    formChange(values){
     },
   },
   mounted: function(){
-    this.transferProducts()
+    // this.transferProducts();
+  },
+  activated:function(){
+    this.form = this.prodictInit;
   },
 }
 </script>
