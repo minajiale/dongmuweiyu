@@ -11,6 +11,7 @@
 
     <el-tree
       :data="data2"
+      :default-expand-all=true
       :props="defaultProps"
       show-checkbox
       node-key="key"
@@ -75,20 +76,7 @@ import axios from 'axios'
         dialogFormVisible: false,
         msg:"",
         filterText: '',
-        data2: [{
-				_id: "59b360f81315703dcde928e7",
-				key: 2,
-				label: "花洒系列",
-				__v: 0,
-				children: []
-			},
-			{
-				_id: "59b361291315703dcde928e8",
-				key: 2,
-				label: "拉拉",
-				__v: 0,
-				children: []
-			}],
+        data2: [],
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -206,12 +194,23 @@ import axios from 'axios'
           }
         }).then(res=>{
           if(res ==0){
-            alert("res.message")
+            this.$notify.error({
+              title: '错误',
+              message: '新增一级分类失败失败'
+            });
           }else{
-            alert("插入成功")
+            this.$notify({
+               title: '成功',
+               message: '新增一级分类成功',
+               type: 'success'
+             });
           }
+          this.data2
         },error=>{
-          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '新增一级分类失败失败'
+          });
         })
         this.form.name="";
       },
@@ -225,14 +224,25 @@ import axios from 'axios'
           }
         }).then(res=>{
           if(res ==0){
-            alert("res.message")
+            this.$notify.error({
+              title: '错误',
+              message: '新增二级分类失败失败'
+            });
           }else{
-            alert("插入成功")
+            this.$notify({
+               title: '成功',
+               message: '新增一级分类成功',
+               type: 'success'
+             });
           }
         },error=>{
-          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '新增二级分类失败失败'
+          });
         })
         this.form.name="";
+
       },
       editClass(){
         axios({

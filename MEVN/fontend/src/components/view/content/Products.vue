@@ -180,7 +180,6 @@
           var index = this.tableData5.indexOf(row);
            this.tableData5.splice(index,1);
         },error=>{
-          console.log("error");
           this.$notify.error({
             title: '错误',
             message: '删除产品失败'
