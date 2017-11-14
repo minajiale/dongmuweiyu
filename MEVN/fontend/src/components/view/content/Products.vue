@@ -163,15 +163,6 @@
       handleAdd(index,row){
         this.addCartVisible=true;
       },
-      findFromArray(array,key){
-        for(var i=0;i<array.length;i++){
-          if(array[i]._id == key){
-            return i;
-          }else{
-            return -1;
-          }
-        }
-      },
       deleteProduct(row,item){
         //item为id
         axios({
