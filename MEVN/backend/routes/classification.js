@@ -75,30 +75,14 @@ router.post("/insertSecond",function(req,res,next){
 router.post("/insertFirst",function(req,res,next){
   let father = req.body.father || '',
       name = req.body.name || '';
-
     if(father=='' && name){
       console.log("插入某个一级分类")
-
       let classificationOne=
         {
           "key":2,
           "label":name,
           "children":[]
         };
-      // classificationOne.save(function(err3,classification){
-      //   if(err3){
-      //     res.json({
-      //       status:"1",
-      //       message:err3.message
-      //     });
-      //   }else{
-      //     res.json({
-      //       status:"0",
-      //       msg:"",
-      //       result:"sucess"
-      //     })
-      //   }
-      // });
       classification.create(classificationOne,function(err3,classification){
           if(err3){
             res.json({
@@ -119,9 +103,15 @@ router.post("/insertFirst",function(req,res,next){
 }),
 //编辑某个分类
 router.post("/edit",function(req,res,next){
-  let editId = req.body.id || '',
-      name=req.body.label;
-  let query = { _id: editId };
+  let editId = req.body.id,
+      name   =req.body.label,
+      index   =req.body.index,
+      father=req.body.father;
+  if(editId && father && index){
+    let query = { _id: father._id, "children.index._id": "editId"};
+  }else{
+    let query = { _id: editId };
+  }
 
   classification.update(query,{label:name},function(err,raw){
     if(err){
@@ -141,14 +131,14 @@ router.post("/edit",function(req,res,next){
 }),
 //删除某个分类
 router.post("/delete",function(req,res,next){
-  let editId = req.body.id || '',
-      fatherId = req.body.fatherId || '';
+  let editId = req.body.id,
+      fatherId = req.body.fatherId;
 
   let query = { _id: editId };
   console.log(fatherId);
 //删除某个二级分类
-if(fatherId != '' && editId != ''){
-  console.log("删除某个二级分类");
+if(fatherId && editId){
+  console.log("删除某个二级分类fatherId:"+fatherId);
   classification.update({_id:fatherId},{
     $pull:{
       'children':{"_id":editId}

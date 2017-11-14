@@ -37,7 +37,7 @@
   <el-dialog title="编辑分类" :visible.sync="editClassVisible">
     <el-form :model="form">
       <el-form-item label="分类名字" :label-width="formLabelWidth">
-        <el-input v-model="form.editClass" auto-complete="off">{{eddTemp}}</el-input>
+        <el-input v-model="form.editClass" auto-complete="off" :placeholder="eddTemp.lable">{{eddTemp}}</el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -94,9 +94,13 @@ import axios from 'axios'
           desc: ''
         },
         formLabelWidth: '120px',
-        eddTemp:undefined,
+        eddTemp:{ //要进行编辑的那个分类的信息
+          lable:"",
+          id:"",
+          father:"",
+          index:""
+        },
         addTemp:undefined,
-        deleteTemp:undefined,
       };
     },
 
@@ -118,25 +122,26 @@ import axios from 'axios'
       editClassSucess(){
         var that=this;
         that.editClassVisible=false;
-        this.editClass();
-      },
-      findFatherByChild(data,childId){
-        let father = data.map(function(item,index){
-          if(item.children._id == childId){
-            return item._id
-          }
-        })
-        return father[0]
+        this.editClass(this.eddTemp);
       },
       remove(node,data,store) {
         var key =data._id;
-        var fatherKey= this.findFatherByChild(node.root.data);
+        var fatherKey= node.parent.data._id;
+        this.deleteClass(key,fatherKey);
       },
       edit(node,data,store){
-        console.log(node);
-        // var fatherKey= this.findFatherByChild(node.root.data);
-        var that=this;
-        that.editClassVisible=true;
+        this.eddTemp.lable=data.label;
+        this.eddTemp.id   =data._id;
+        this.eddTemp.father = node.parent.data._id;
+        var index = -1
+        var sibling=node.parent.childNodes;
+        for(var i = 0;i<sibling.length;i++){
+          if(sibling[i].data._id==  this.eddTemp.id){
+            index=i;
+          }
+        }
+        this.eddTemp.index=index;
+        this.editClassVisible=true;
       },
       renderContent(h, { node, data, store }) {
         var that=this;
@@ -160,7 +165,7 @@ import axios from 'axios'
               </span>
               <span style="float: right; margin-right: 20px;margin-top:-40px;">
                 <el-button size="mini" on-click={ () => this.edit(node,data,store) }>编辑</el-button>
-                <el-button size="mini" on-click={ () => this.remove(node,store, data) }>删除</el-button>
+                <el-button size="mini" on-click={ () => this.remove(node,data, store) }>删除</el-button>
               </span>
             </span>
           )
@@ -244,13 +249,14 @@ import axios from 'axios'
         this.form.name="";
 
       },
-      editClass(key,fatherKey){
+      editClass(param){
         axios({
           method: 'post',
           url:"/class/edit",
           data:{
-            id:key,
-            fatherId:fatherKey,
+            id:param.id,
+            father:param.father,
+            index:param.index,
             label:this.form.editClass
           }
 
