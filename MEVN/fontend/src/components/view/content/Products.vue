@@ -152,10 +152,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          this.deleteProduct(row,row._id);
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -165,6 +162,40 @@
       },
       handleAdd(index,row){
         this.addCartVisible=true;
+      },
+      findFromArray(array,key){
+        for(var i=0;i<array.length;i++){
+          if(array[i]._id == key){
+            return i;
+          }else{
+            return -1;
+          }
+        }
+      },
+      deleteProduct(row,item){
+        //item为id
+        axios({
+          method: 'delete',
+          url:'/products/delete',
+          data:{
+            id:item,
+          }
+        }).then(res=>{
+          this.$notify({
+             title: '成功',
+             message: '删除产品成功',
+             type: 'success'
+           });
+           var index = this.findFromArray(this.tableData5,item);
+          var index = this.tableData5.indexOf(row);
+           this.tableData5.splice(index,1);
+        },error=>{
+          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '删除产品失败'
+          });
+        })
       },
       getAllProducts(){
         axios({

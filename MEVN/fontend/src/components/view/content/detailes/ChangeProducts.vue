@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       form:{
-        _id:'',
+        id:'',
         name:"",
         spec:"",
         sellPrice:"",

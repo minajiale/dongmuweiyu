@@ -132,7 +132,21 @@ router.get("/FClass",function(req,res,next){
   })
 })
 //删除某和产品
-router.delete("/delete",function(req,res,next){
 
+router.delete("/delete",function(req,res,next){
+  var id =req.body.id;
+  product.remove({ _id: id }, function (err) {
+    if(err){
+      res.json({
+        status:'1',
+        msg:'删除产品失败',
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'删除产品成功',
+      })
+    }
+  });
 })
 module.exports=router;
