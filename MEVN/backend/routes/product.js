@@ -6,6 +6,7 @@ var product = require('../models/product.js');
 //添加商品
 router.post("/insert",function(req,res,next){
   let oneProduct = req.body.oneProduct || '';
+  console.log(oneProduct);
   if(oneProduct != ''){
     product.create(oneProduct,function(err3,doc){
       if(err3){
@@ -23,8 +24,6 @@ router.post("/insert",function(req,res,next){
     })
   }
 })
-
-
 //取得所有的产品
 router.get("/",function(req,res,next){
   product.find({},function(err,doc){
@@ -45,25 +44,34 @@ router.get("/",function(req,res,next){
     }
   })
 })
-
 // 加入购物车
 router.post("/addcart",function(req,res,next){
   var customerId="";
 })
 //编辑某条商品
 router.post("/edit",function(req,res,next){
-  var key=req.body.id;
-  var oldValue  = {_id:id};
-  var newData = {$set:{name:"内容",age:2}};
-  product.update(oldValue,newData,function(err,result){
-    if(err){
-      console.log(err);
+  var getNew= req.body.oneProduct;
+  var key=getNew._id;
+  console.log("id:"+key);
+  var oldValue  = {_id:key};
+  var newData = {$set:getNew};
+  product.update(oldValue,newData,function(err5,result){
+    if(err5){
+      console.log(err5);
+      res.json({
+        status:"1",
+        message:err.message
+      });
     }else{
       console.log("update");
+      res.json({
+        status:"0",
+        msg:"",
+        result:"sucess"
+      })
     }
   })
 })
-
 //根据二级分类查询产品。
 router.get("/SClass",function(req,res,next){
   var secondClassId=req.param("secondClass");
@@ -123,5 +131,8 @@ router.get("/FClass",function(req,res,next){
     }
   })
 })
+//删除某和产品
+router.delete("/delete",function(req,res,next){
 
+})
 module.exports=router;

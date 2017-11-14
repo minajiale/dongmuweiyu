@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       form:{
+        _id:'',
         name:"",
         spec:"",
         sellPrice:"",
@@ -91,20 +92,73 @@ export default {
   },
   methods: {
     onSubmit(){
+      this.transferProducts();
       this.$emit('changeDialogFormVisible');
     },
     onSuspend(){
       this.$emit('changeDialogFormVisible');
-      this.$destroy();
+      this.$alert('取消插入商品', '请确认操作', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$message({
+            type: 'info',
+            message: `action: ${ action }`
+          });
+        }
+      });
     },
     transferProducts(){
       if(this.isChange == true){
-        console.log("编辑产品");
+        console.log("修改产品");
+        this.editProduct();
         // console.log("ChangeProducts"+this.theProduct._id);
       }else{
         console.log("增加产品");
-        this.$store.commit("updateTempProduct",[]);
+        this.insertProduct();
       }
+    },
+    editProduct(){
+      axios({
+        method: 'post',
+        url:'/products/edit',
+        data:{
+         oneProduct:this.form,
+        }
+      }).then(res=>{
+        if(res.data.status ==0){
+          this.$message.error('修改商品失败');
+        }else{
+          this.$notify({
+            title: '成功',
+            message: '修改商品信息成功',
+            type: 'success'
+          });
+        }
+      },error=>{
+        console.log("error");
+        this.$message.error('修改商品失败');
+      })
+    },
+    insertProduct(){
+      axios({
+        method: 'post',
+        url:'/products/insert',
+        data:{
+          oneProduct:this.form,
+        }
+      }).then(res=>{
+        this.$notify({
+           title: '成功',
+           message: '新增产品成功',
+           type: 'success'
+         });
+      },error=>{
+        console.log("error");
+        this.$notify.error({
+          title: '错误',
+          message: '这是一条错误的提示消息'
+        });
+      })
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);

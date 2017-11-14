@@ -131,7 +131,6 @@
     components:{
       productDetails,
       sideMenu,
-
     },
     methods: {
       handleClick(tab, event) {
@@ -216,25 +215,6 @@
         })
       }
       },
-      editProduct(item){
-        axios({
-          url:'/products/edit',
-          params:item,
-        }).then(res=>{
-          console.log(修改成功);
-          this.$notify({
-            title: '成功',
-            message: '这是一条成功的提示消息',
-            type: 'success'
-          });
-        },error=>{
-          console.log("error");
-          this.$notify.error({
-            title: '错误',
-            message: '这是一条错误的提示消息'
-          });
-        })
-      }
     },
   mounted: function(){
     this.getAllProducts();
