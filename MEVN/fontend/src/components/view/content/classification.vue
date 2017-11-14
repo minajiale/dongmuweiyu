@@ -37,7 +37,7 @@
   <el-dialog title="编辑分类" :visible.sync="editClassVisible">
     <el-form :model="form">
       <el-form-item label="分类名字" :label-width="formLabelWidth">
-        <el-input v-model="form.editClass" auto-complete="off"></el-input>
+        <el-input v-model="form.editClass" auto-complete="off">{{eddTemp}}</el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -97,7 +97,6 @@ import axios from 'axios'
         eddTemp:undefined,
         addTemp:undefined,
         deleteTemp:undefined,
-        fatherKey:''
       };
     },
 
@@ -130,13 +129,14 @@ import axios from 'axios'
         return father[0]
       },
       remove(node,data,store) {
-        this.deleteClass(data._id);
-        this.fatherKey = this.findFatherByChild(node.root.data);
+        var key =data._id;
+        var fatherKey= this.findFatherByChild(node.root.data);
       },
-      edit(data){
+      edit(node,data,store){
+        console.log(node);
+        // var fatherKey= this.findFatherByChild(node.root.data);
         var that=this;
         that.editClassVisible=true;
-        that.eddTemp=data._id
       },
       renderContent(h, { node, data, store }) {
         var that=this;
@@ -147,8 +147,8 @@ import axios from 'axios'
                 <span>{node.label}</span>
               </span>
               <span style="float: right; margin-right: 20px;margin-top:-40px;">
-                <el-button size="mini" on-click={  that.editTemp=()=>this.edit(data) }>编辑</el-button>
-                <el-button size="mini" on-click={ this.temp=() => this.append(store, data)}>增加</el-button>
+                <el-button size="mini" on-click={  ()=>this.edit(node,data,store) }>编辑</el-button>
+                <el-button size="mini" on-click={  () => this.append(store, data)}>增加</el-button>
                 <el-button size="mini" on-click={  ()=>this.remove(node,data,store) }>删除</el-button>
               </span>
             </span>);
@@ -159,8 +159,8 @@ import axios from 'axios'
                 <span>{node.label}</span>
               </span>
               <span style="float: right; margin-right: 20px;margin-top:-40px;">
-                <el-button size="mini" on-click={ () => this.edit(store, data) }>编辑</el-button>
-                <el-button size="mini" on-click={ () => this.remove(store, data) }>删除</el-button>
+                <el-button size="mini" on-click={ () => this.edit(node,data,store) }>编辑</el-button>
+                <el-button size="mini" on-click={ () => this.remove(node,store, data) }>删除</el-button>
               </span>
             </span>
           )
@@ -231,7 +231,7 @@ import axios from 'axios'
           }else{
             this.$notify({
                title: '成功',
-               message: '新增一级分类成功',
+               message: '新增二级分类成功',
                type: 'success'
              });
           }
@@ -244,40 +244,62 @@ import axios from 'axios'
         this.form.name="";
 
       },
-      editClass(){
+      editClass(key,fatherKey){
         axios({
           method: 'post',
           url:"/class/edit",
           data:{
-            id:this.eddTemp,
+            id:key,
+            fatherId:fatherKey,
             label:this.form.editClass
           }
+
         }).then(res=>{
           if(res ==0){
-            alert("res.message")
+            this.$notify.error({
+              title: '错误',
+              message: '编辑分类失败失败'
+            });
           }else{
-            console.log(res)
+            this.$notify({
+               title: '成功',
+               message: '编辑分类成功',
+               type: 'success'
+             });
           }
         },err=>{
-          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '编辑分类失败失败'
+          });
         })
       },
-      deleteClass(key){
+      deleteClass(key,fatherKey){
         axios({
           method: 'post',
           url:"/class/delete",
           data:{
             id:key,
-            fatherId:this.fatherKey
+            fatherId:fatherKey
           }
         }).then(res=>{
           if(res ==0){
-            alert("res.message")
+            this.$notify.error({
+              title: '错误',
+              message: '删除分类失败失败'
+            });
           }else{
-            console.log(res.data)
+            this.$notify({
+               title: '成功',
+               message: '删除分类成功',
+               type: 'success'
+             });
           }
         },err=>{
-          console.log("error");
+          this.$notify.error({
+            title: '错误',
+            message: '删除分类失败失败'
+          });
         })
       }
     },
