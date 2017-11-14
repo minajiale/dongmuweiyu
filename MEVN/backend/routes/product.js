@@ -52,7 +52,6 @@ router.post("/addcart",function(req,res,next){
 router.post("/edit",function(req,res,next){
   var getNew= req.body.oneProduct;
   var key=getNew._id;
-  console.log("id:"+key);
   var oldValue  = {_id:key};
   var newData = {$set:getNew};
   product.update(oldValue,newData,function(err5,result){
@@ -63,7 +62,6 @@ router.post("/edit",function(req,res,next){
         message:err.message
       });
     }else{
-      console.log("update");
       res.json({
         status:"0",
         msg:"",

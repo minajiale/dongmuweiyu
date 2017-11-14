@@ -177,7 +177,6 @@
              message: '删除产品成功',
              type: 'success'
            });
-           var index = this.findFromArray(this.tableData5,item);
           var index = this.tableData5.indexOf(row);
            this.tableData5.splice(index,1);
         },error=>{

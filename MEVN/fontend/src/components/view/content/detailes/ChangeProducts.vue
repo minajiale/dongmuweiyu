@@ -126,13 +126,13 @@ export default {
         }
       }).then(res=>{
         if(res.data.status ==0){
-          this.$message.error('修改商品失败');
-        }else{
           this.$notify({
             title: '成功',
             message: '修改商品信息成功',
             type: 'success'
           });
+        }else{
+          this.$message.error('修改商品失败');
         }
       },error=>{
         console.log("error");
