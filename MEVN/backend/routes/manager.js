@@ -1,13 +1,43 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+var manager = require('../models/manager.js')
+
+/* GET manaders listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('manaders');
 });
 //登录
-router.get('/login', function(req, res, next) {
-  res.send('respond with a resource');
+router.post('/login', function(req, res, next) {
+  var param = req.body.manager;
+  manager.findOne(param,function(err,managerDoc){
+    if(err){
+      res.json({
+        status:"1",
+        msg:err.message
+      })
+    }else{
+      if(managerDoc){
+        res.cookie("userId",managerDoc._id,{
+          path:'/',
+          MaxAge:1000*60*60//一个小时
+        });
+        req.session.user=managerDoc;
+        res.json({
+          status:"0",
+          msg:'登录成功',
+          result:{
+            manager:managerDoc._id
+          }
+        })
+      }else{
+        res.json({
+          status:"1",
+          msg:"帐号密码错误"
+        })
+      }
+    }
+  })
 });
 
 module.exports = router;

@@ -39,7 +39,16 @@ import axios from 'axios'
         methods: {
             submitForm(formName) {
                 const self = this;
-                axios.post("/manager/login")
+                axios.post("/manager/login",{
+                  manager:this.ruleForm,
+                  methods:'post'
+                }).then((res)=>{
+                  if(res.data.status == '0'){
+                    //成功 TO-DO
+                  }else{
+                    //失败 TO-DO
+                  }
+                })
                 self.$router.push('/');
                 localStorage.token = self.ruleForm;
                 self.$store.state.token = self.ruleForm;

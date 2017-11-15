@@ -35,9 +35,12 @@ module.exports = {
       '/class':{
         target:'http://localhost:3000'
       },
-      // '/products/SClass':{
-      //   target:'http://localhost:3000'
-      // },
+      '/manager':{
+        target:'http://localhost:3000'
+      },
+      '/customer':{
+        target:'http://localhost:3000'
+      },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

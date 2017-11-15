@@ -54,4 +54,4 @@ var customserSchema = new mongoose.Schema({
   }
 });
 
-module.exports=mogoose.model("customer",customserSchema)
+module.exports=mongoose.model("customer",customserSchema)
