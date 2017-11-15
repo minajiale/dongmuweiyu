@@ -57,8 +57,8 @@
 </script>
 <style>
 .login-wrap{
-  width: 300px;
-  margin: 0,auto !important;
+  padding: 0 35%;
+  margin: 0,auto;
   text-align: center;
 }
 
