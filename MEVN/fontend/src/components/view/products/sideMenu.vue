@@ -68,7 +68,7 @@ export default {
       }).then(res=>{
         this.classifacation = res.data.result.allClass;
         this.classifacation.unshift(
-          {"_id": "1",
+          {"_id": 1,
            "label": "全部",})
       },error=>{
         console.log("error");

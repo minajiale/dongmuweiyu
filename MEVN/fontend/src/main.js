@@ -23,5 +23,5 @@ new Vue({
   template: '<App/>',
   components: { App },
   store,      // 子组件通过this.$store来store
-  //axios, 将axios挂载到prototype上，在组件中可以直接使用this.axios访问
+  axios, //将axios挂载到prototype上，在组件中可以直接使用this.$axios访问axios
 })

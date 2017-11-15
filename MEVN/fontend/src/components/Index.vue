@@ -22,7 +22,13 @@ export default {
   components:{
     rightMenu,
     topMenu
-  }
+  },
+  // computed :{
+  //   manager (){
+  //     return this.$store.state.manager
+  //   }
+  // },
+
 }
 </script>
 

@@ -43,6 +43,7 @@
   }
 </style>
 <script>
+import axios from "axios"
     export default {
         data() {
             return {
@@ -54,13 +55,38 @@
             }
         },
         methods:{
+          checkout(){
+            if(this.manager){
+            }else{
+              this.$alert('您尚未登录，所有功能不可用', '登录', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  this.$message({
+                    type: 'info',
+                    message: `action: ${ action }`
+                  });
+                }
+              });
+              this.$router.push('/login');
+            }
+          },
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
-                    this.$router.push('/login');
                     //TO-DO 清除cookie
+                    axios.post("/manager/loginOut").then((response)=>{
+                      let res=response.data;
+                      if(res.status == 0){
+                        this.$router.push('/login');
+                        this.$store.commit("updateManager","");
+                      }else{
+                        this.$message.error('退出登录失败');
+                      }
+                    })
                 }
             }
         },
+    mounted (){
+      this.checkout();
+    },
     }
 </script>

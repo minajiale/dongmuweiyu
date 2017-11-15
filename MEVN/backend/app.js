@@ -26,22 +26,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// //登录拦截
-// app.use(function(req,res,next){
-//   if(req.cookies.userId){
-//     next();
-//   }else{
-//     if(res.originalUrl == "/login"){
-//       next()
-//     }else{
-//       res.json({
-//         status:'10001',
-//         msg:"当前未登录",
-//         result:''
-//       })
-//     }
-//   }
-// });
+
 //https://www.npmjs.com/package/cookie-parser
 //https://segmentfault.com/a/1190000004139342?_ea=504710
 app.use(cookieParser());
@@ -55,6 +40,27 @@ app.use(session({
   cookie: { secure: true }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//登录拦截
+app.use(function(req,res,next){
+  console.log("nianglie");
+  if(req.cookies.userId){
+    console.log("yi");
+    next();
+  }else{
+    if(req.originalUrl == "/manager/login"){
+      console.log("2");
+      next()
+    }else{
+      console.log(3);
+      res.json({
+        status:'10001',
+        msg:"当前未登录",
+        result:''
+      })
+    }
+  }
+});
 
 app.use('/', index);
 app.use('/users', users);
