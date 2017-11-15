@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         data: function(){
             return {
@@ -38,6 +39,7 @@
         methods: {
             submitForm(formName) {
                 const self = this;
+                axios.post("/manager/login")
                 self.$router.push('/');
                 localStorage.token = self.ruleForm;
                 self.$store.state.token = self.ruleForm;
