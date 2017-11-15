@@ -48,11 +48,11 @@ import axios from 'axios'
                   methods:'post'
                 }).then((res)=>{
                   if(res.data.status == '0'){
-                    //成功 TO-DO
-                    self.$router.push('/');
+                    //成功
                     this.$store.commit("updateManager",res.data.result.managerName);
+                    self.$router.push('/');
                   }else{
-                    //失败 TO-DO
+                    //失败
                      this.$message.error('请输入正确的用户名和密码');
                   }
                 })

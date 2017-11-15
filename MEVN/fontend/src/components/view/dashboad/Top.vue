@@ -55,21 +55,6 @@ import axios from "axios"
             }
         },
         methods:{
-          checkout(){
-            if(this.manager){
-            }else{
-              this.$alert('您尚未登录，所有功能不可用', '登录', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  this.$message({
-                    type: 'info',
-                    message: `action: ${ action }`
-                  });
-                }
-              });
-              this.$router.push('/login');
-            }
-          },
             handleCommand(command) {
                 if(command == 'loginout'){
                     //TO-DO 清除cookie
@@ -85,8 +70,5 @@ import axios from "axios"
                 }
             }
         },
-    mounted (){
-      this.checkout();
-    },
     }
 </script>

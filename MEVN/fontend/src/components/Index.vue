@@ -23,12 +23,32 @@ export default {
     rightMenu,
     topMenu
   },
-  // computed :{
-  //   manager (){
-  //     return this.$store.state.manager
-  //   }
-  // },
-
+  computed:{
+      username(){
+            return this.$store.state.manager
+      }
+  },
+  methods:{
+    checkout(){
+      if(this.username){
+      }else{
+        console.log(this.manager);
+        this.$alert('您尚未登录，所有功能不可用', '登录', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+        this.$router.push('/login');
+      }
+    },
+  },
+  mounted (){
+    this.checkout();
+  },
 }
 </script>
 
