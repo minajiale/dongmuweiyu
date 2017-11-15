@@ -30,7 +30,8 @@ export default {
   },
   methods:{
     checkout(){
-      if(this.username){
+      var manager=getCookie('userId');
+      if(manager){
       }else{
         console.log(this.manager);
         this.$alert('您尚未登录，所有功能不可用', '登录', {
