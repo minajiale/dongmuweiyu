@@ -40,5 +40,18 @@ router.post('/login', function(req, res, next) {
     }
   })
 });
+//登出
+router.post('/loginOut', function(req, res, next) {
+  // res.clearCookie(userId);
+  res.cookie("userId",'',{
+    path:'/',
+    MaxAge:-1//一个小时
+  });
+  res.json({
+    status:0,
+    msg:"退出登录成功",
+    result:''
+  })
+});
 
 module.exports = router;
