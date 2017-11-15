@@ -13,7 +13,6 @@ mongoose.connection.on("error",function(){
 mongoose.connection.on("disconnected",function(){
   console.log("mongoose connect disconnected!!!");
 })
-
 //取得所有的分类
 router.get("/",function(req,res,next){
   classification.find({},function(err,doc){
@@ -34,8 +33,6 @@ router.get("/",function(req,res,next){
     }
   })
 })
-
-
 //插入某个二级分类
 router.post("/insertSecond",function(req,res,next){
   let father = req.body.father || '',
