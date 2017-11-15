@@ -47,12 +47,13 @@ import axios from "axios"
     export default {
         data() {
             return {
+              username:''
             }
         },
         computed:{
-            username(){
-                  return this.$store.state.manager
-            }
+            // manager(){
+            //       return this.$store.state.manager
+            // }
         },
         methods:{
             handleCommand(command) {
@@ -68,7 +69,23 @@ import axios from "axios"
                       }
                     })
                 }
+            },
+            getMessageFromCookie(){
+              var that =this;
+              var cookirarray = document.cookie.split(";");
+              for(var i=0;i<cookirarray.length;i++){
+                var arr=cookirarray[i].split("=");
+                //找到名称为userId的cookie，并返回它的值
+                console.log(arr[0]);
+                if(" userName" == arr[0]){
+                that.username=arr[1];
+                break;
+                }
+              };
             }
         },
+    mounted (){
+      this.getMessageFromCookie();
+    },
     }
 </script>

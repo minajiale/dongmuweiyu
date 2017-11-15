@@ -29,8 +29,19 @@ export default {
       }
   },
   methods:{
+    getCookie(name){
+      var cookirarray = document.cookie.split(";");
+      for(var i=0;i<cookirarray.length;i++){
+        var arr=cookirarray[i].split("=");
+        //找到名称为userId的cookie，并返回它的值
+        if(name==arr[0]){
+         return arr[1];
+        break;
+        }
+      }
+    },
     checkout(){
-      var manager=getCookie('userId');
+      var manager=this.getCookie('userId');
       if(manager){
       }else{
         console.log(this.manager);

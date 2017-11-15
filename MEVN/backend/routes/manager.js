@@ -22,6 +22,10 @@ router.post('/login', function(req, res, next) {
           path:'/',
           MaxAge:1000*60*60//一个小时
         });
+        res.cookie("userName",managerDoc.username,{
+          path:'/',
+          MaxAge:1000*60*60//一个小时
+        });
         req.session.user=managerDoc;
         res.json({
           status:"0",
