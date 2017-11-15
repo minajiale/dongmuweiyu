@@ -10,7 +10,7 @@
                     <el-input type="password" placeholder="请填写您的密码" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>
                 </el-form-item>
                 <div class="login-btn">
-                    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                    <el-button type="primary" @click="submitForm()">登录</el-button>
                 </div>
             </el-form>
         </div>
@@ -37,19 +37,27 @@ import axios from 'axios'
             }
         },
         methods: {
-            submitForm(formName) {
-                const self = this;
+            submitForm() {
+              const self = this;
+                if(!this.ruleForm.password || !this.ruleForm.username){
+                   this.$message.error('用户名和密码不能为空');
+                  return
+                }else{
                 axios.post("/manager/login",{
                   manager:this.ruleForm,
                   methods:'post'
                 }).then((res)=>{
                   if(res.data.status == '0'){
                     //成功 TO-DO
+                    self.$router.push('/');
+                    this.$store.commit("updateManager",res.data.result.managerName);
                   }else{
                     //失败 TO-DO
+                     this.$message.error('请输入正确的用户名和密码');
                   }
                 })
-                self.$router.push('/');
+              }
+
                 localStorage.token = self.ruleForm;
                 self.$store.state.token = self.ruleForm;
                 // self.$refs[formName].validate((valid) => {

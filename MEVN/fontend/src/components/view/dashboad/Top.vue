@@ -11,9 +11,6 @@
           </span>
       </el-dropdown>
 </el-menu>
-
-
-
   </div>
 </template>
 <style>
@@ -36,13 +33,12 @@
     export default {
         data() {
             return {
-                username: '刘联友'
+                name: 'wuwuwu'
             }
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
+                  return this.$store.state.manager
             }
         },
         methods:{
@@ -52,6 +48,9 @@
                     this.$router.push('/login');
                 }
             }
+        },
+        mounted:function(){
+          console.log(this.$store.state.manager);
         }
     }
 </script>

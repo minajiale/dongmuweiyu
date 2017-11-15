@@ -27,7 +27,8 @@ router.post('/login', function(req, res, next) {
           status:"0",
           msg:'登录成功',
           result:{
-            manager:managerDoc._id
+            managerID:managerDoc._id,
+            managerName:managerDoc.username
           }
         })
       }else{

@@ -26,7 +26,13 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//https://www.npmjs.com/package/cookie-parser
+//https://segmentfault.com/a/1190000004139342?_ea=504710
 app.use(cookieParser());
+
+//TO-DO session配置还没有懂，只是照抄npm中
+//https://www.npmjs.com/package/express-session
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
