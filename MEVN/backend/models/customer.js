@@ -6,11 +6,11 @@ var customserSchema = new mongoose.Schema({
   "name":String,
   "phone":String,
   "address":Array,
-  "cartList":{
+  "cartList":[{
+    "time":String,  //生成该张订单事件
     "generalGoods":[ //普通销售清单
       {
         "GoodsListId":String, //普通销售清单ID
-        "time":String,  //生成该张订单事件
         "lists":[
           {
               "id":String,
@@ -23,7 +23,6 @@ var customserSchema = new mongoose.Schema({
     "DoorGoods":[ //定们单
       {
         "GoodsListId":String,
-        "time":String,
         "lists":[
           {
             "spec":String,
@@ -51,7 +50,7 @@ var customserSchema = new mongoose.Schema({
         "record":String
       }
     ]
-  }
+  }]
 });
 
 module.exports=mongoose.model("customer",customserSchema)

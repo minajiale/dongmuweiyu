@@ -162,6 +162,11 @@
       },
       handleAdd(index,row){
         this.addCartVisible=true;
+        console.log(row._id);
+        this.insertgeneralGoods(row._id)
+      },
+      insertgeneralGoods(){
+
       },
       deleteProduct(row,item){
         //item为id

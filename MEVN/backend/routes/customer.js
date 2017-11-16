@@ -33,35 +33,20 @@ router.get("/",function(req,res,next){
     }
   })
 })
-//根据顾客ID和表单 创建定们单
-router.post("/insert",function(req,res,next){
-  let father = req.body.father || '',
-      name = req.body.name || '';
-    if(father=='' && name){
-      console.log("插入某个一级分类")
-      let classificationOne=
-        {
-          "key":2,
-          "label":name,
-          "children":[]
-        };
-      customer.create(classificationOne,function(err3,classification){
-          if(err3){
-            res.json({
-              status:"1",
-              message:err3.message
-            });
-          }else{
-            res.json({
-              status:"0",
-              msg:"",
-              result:"sucess"
-            })
-          }
-      })
-    }else{
-      console.log("params err!");
-    }
+//根据顾客ID和表单 插入普通订单
+router.post("/insertGeneralGoods",function(req,res,next){
+  console.log(req);
+  var param=req.body;
+  let oneNomalProduct={};
+  // 把GoodsListId和time放在session里面，设置时间为绝对时间，当天晚上12点过期
+  //判断session，如果时间有效，则加入到已有的generalGoods
+  //否则新建generalGoods
+  if(req.session.generalGoodsId){
+    //插入generalGoods.lists数组中
+  }else{
+    //新建generalGoods
+
+  }
 }),
 //顾客注册
 router.post('/register', function(req, res, next) {
@@ -121,7 +106,7 @@ router.get('/searchCostomer',function(req,res,next){
 //顾客登录 这里可以使用get么？
 router.post('/login', function(req, res, next) {
   var param = req.body.customer;
-  console.log(param);
+  var time = req.body.time;
   customer.findOne({'_id':param},function(err,managerDoc){
     if(err){
       res.json({
@@ -130,6 +115,23 @@ router.post('/login', function(req, res, next) {
       })
     }else{
       if(managerDoc){
+        //向generalGoods数组中插入一个时间
+        // product.update(oldValue,newData,function(err5,result){
+        //   if(err5){
+        //     console.log(err5);
+        //     res.json({
+        //       status:"1",
+        //       message:err.message
+        //     });
+        //   }else{
+        //     res.json({
+        //       status:"0",
+        //       msg:"",
+        //       result:"sucess"
+        //     })
+        //   }
+        // });
+
         res.cookie("costomerId",managerDoc._id,{
           path:'/',
           MaxAge:1000*60*60//一个小时

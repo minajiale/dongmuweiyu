@@ -3,7 +3,7 @@
     <br>
     <br>
   <el-form :model="form">
-    <!-- <el-row :gutter="15">
+    <el-row :gutter="15">
       <el-col :span="8"><el-form-item label="订单日期" :label-width="formLabelWidth" >
       <el-date-picker
         v-model="form.time"
@@ -12,7 +12,7 @@
         :picker-options="pickerOptions0">
       </el-date-picker>
       </el-form-item></el-col>
-  </el-row> -->
+  </el-row>
   <el-row :gutter="3">
      <el-col :span="8"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -125,7 +125,8 @@ export default {
         method:'post',
         url:'/customer/login',
         data:{
-          customer:customerId
+          customer:customerId,
+          time:this.form.time
         }
       }).then((res)=>{
         //并且改变store中的customerName的值
@@ -147,7 +148,7 @@ export default {
         data:{
           name:this.form.name,
           phone:this.form.phone,
-          address:this.form.address
+          address:this.form.address,
         }
       }).then((res)=>{
         if(res ==0){
