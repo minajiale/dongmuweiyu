@@ -1,20 +1,28 @@
 <template>
-  <div id="top-menu">
+  <div id="top-menu" class="top">
     <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="index" class="tittle">东牧卫浴后台管理系统</el-menu-item>
   <el-menu-item index="" ><a href="https://d.weidian.com/loginNew/#/login/loginMain">微店</a> </el-menu-item>
+  <el-dropdown @command="customerCommand" class="customer">
+    <span class="el-dropdown-link">
+      当前操作顾客：{{customerName}}
+    </span>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
+      <el-dropdown-item command="me">顾客中心</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 
-      <el-dropdown @command="handleCommand" class="personality">
-        <span class="el-dropdown-link">
-          <img class="user-logo" width="23px" height="23px" src="../../../assets/logo.png">
-          {{username}}
-        </span>
-
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
-          <el-dropdown-item command="me">个人中心</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+  <el-dropdown @command="handleCommand" class="personality">
+    <span class="el-dropdown-link">
+      <img class="user-logo" width="23px" height="23px" src="../../../assets/logo.png">
+      {{username}}
+    </span>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
+      <el-dropdown-item command="me">个人中心</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 </el-menu>
 
   </div>
@@ -31,7 +39,7 @@
     font-size: 20px;
     padding-left: 100px;
   }
-  .personality{
+  .top .personality{
     display: block;
     position: relative;
     top: 10px;
@@ -41,19 +49,29 @@
     margin: 0,auto;
     color: white;
   }
+  .top .personality span{
+    color: white
+  }
+  .top .customer{
+    width: 200px;
+  }
+  .top .customer span{
+    color: #bfcbd9;
+  }
 </style>
 <script>
 import axios from "axios"
     export default {
         data() {
             return {
-              username:''
+              username:'',
+              // customerName:''
             }
         },
         computed:{
-            // manager(){
-            //       return this.$store.state.manager
-            // }
+            customerName(){
+                  return this.$store.state.customerName
+            }
         },
         methods:{
             handleCommand(command) {

@@ -106,10 +106,11 @@ router.get('/searchUser',function(req,res,next){
     }
   })
 })
-//顾客登录
+//顾客登录 这里可以使用get么？
 router.post('/login', function(req, res, next) {
-  var param = req.body.manager;
-  manager.findOne(param,function(err,managerDoc){
+  var param = req.body.customer;
+  console.log(param);
+  customer.findOne({'_id':param},function(err,managerDoc){
     if(err){
       res.json({
         status:"1",
@@ -121,7 +122,7 @@ router.post('/login', function(req, res, next) {
           path:'/',
           MaxAge:1000*60*60//一个小时
         });
-        res.cookie("userName",managerDoc.username,{
+        res.cookie("customerName",managerDoc.name,{
           path:'/',
           MaxAge:1000*60*60//一个小时
         });
@@ -131,7 +132,7 @@ router.post('/login', function(req, res, next) {
           msg:'登录成功',
           result:{
             managerID:managerDoc._id,
-            managerName:managerDoc.username
+            managerName:managerDoc.name
           }
         })
       }else{
@@ -147,6 +148,10 @@ router.post('/login', function(req, res, next) {
 //登出
 router.post('/loginOut', function(req, res, next) {
   // res.clearCookie(costomerId);
+  res.cookie("customerName",'',{
+    path:'/',
+    MaxAge:-1//一个小时
+  });
   res.cookie("costomerId",'',{
     path:'/',
     MaxAge:-1//一个小时

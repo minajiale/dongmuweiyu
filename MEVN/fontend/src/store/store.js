@@ -5,15 +5,15 @@ Vue.use(Vuex) //创建Store实例
 const store = new Vuex.Store({
   // 存储状态值
   state: {
-    manager:"",
+    customerName:"",
     token:null,
     // TempProduct:{}
    },
    // 状态值的改变方法,操作状态值
    // 提交mutations是更改Vuex状态的唯一方法
   mutations: {
-    updateManager(state,name){
-      state.manager=name;
+    updatecustomerName(state,name){
+      state.customerName=name;
     }
    },
     // 在store中定义getters（可以认为是store的计算属性）。Getters接收state作为其第一个函数

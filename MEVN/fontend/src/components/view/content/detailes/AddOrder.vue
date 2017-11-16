@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    login(phoneNumber){
+    searchUser(phoneNumber){
       this.$http({
         url:'/customer/searchUser',
         params:{
@@ -98,10 +98,8 @@ export default {
             type: 'warning'
           }).then(() => {
             var customerId=data.customerId;
-            var customerName=data.customerId;
-            //存在cookie中便于操作TO-DO
-            document.cookie="customerId="+customerId+";customerName="+customerName;
-            this.insert(customerId);
+            //登录
+            this.login(customerId);
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -120,10 +118,28 @@ export default {
         });
       })
     },
-    insert(id){
-      console.log(id);
-      console.log(document.cookie);
+    //登录
+    login(customerId){
+      console.log(customerId);
+      this.$http({
+        method:'post',
+        url:'/customer/login',
+        data:{
+          customer:customerId
+        }
+      }).then((res)=>{
+        //并且改变store中的customerName的值
+        var customername = res.data.result.managerName;
+        this.$store.commit('updatecustomerName',customername);
+        this.insert(customerId);
+      },(error)=>{
+        this.$notify.error({
+          title: '错误',
+          message: '顾客登录失败'
+        });
+      })
     },
+    //注册新的顾客
     register(){
       this.$http({
         method:"post",
@@ -153,9 +169,14 @@ export default {
         });
       })
     },
+    //插入记录到_id为id的记录中
+    insert(id){
+      console.log(id);
+    },
+    //点击注册按钮
     onLogin(){
       if(this.form.name !='' || this.form.phone !=''){
-      this.login(this.form.phone);
+      this.searchUser(this.form.phone);
       }else{
         this.$notify.error({
           title: '错误',
