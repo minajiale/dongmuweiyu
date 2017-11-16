@@ -99,7 +99,8 @@ router.get('/searchUser',function(req,res,next){
         msg:'找到该用户',
         result:{
           count:doc.length,
-          customer:doc
+          customerId:doc[0]._id,
+          customerName:doc[0].name,
         }
       })
     }
