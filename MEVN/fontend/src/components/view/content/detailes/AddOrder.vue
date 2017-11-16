@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    searchCostomer(phoneNumber){
+    costomerSearch(phoneNumber){
       this.$http({
         url:'/customer/searchCostomer',
         params:{
@@ -99,7 +99,7 @@ export default {
           }).then(() => {
             var customerId=data.customerId;
             //登录
-            this.login(customerId);
+            this.customerLogin(customerId);
           }).catch(() => {
             this.$message({
               type: 'info',
@@ -109,7 +109,7 @@ export default {
           this.tableData5 = res.data.result.allProducts;
         }else{
           //没找到该顾客
-          this.register()
+          this.customerRegister()
         }
       },error=>{
         this.$notify.error({
@@ -119,7 +119,7 @@ export default {
       })
     },
     //顾客登录
-    login(customerId){
+    customerLogin(customerId){
       console.log(customerId);
       this.$http({
         method:'post',
@@ -140,7 +140,7 @@ export default {
       })
     },
     //注册新的顾客
-    register(){
+    customerRegister(){
       this.$http({
         method:"post",
         url:"/customer/register",
@@ -156,6 +156,8 @@ export default {
             message: '新增订单失败失败'
           });
         }else{
+          console.log(res.data.result.customerId);
+          this.customerLogin(res.data.result.customerId);
           this.$notify({
              title: '成功',
              message: '新增订单成功',
@@ -176,7 +178,7 @@ export default {
     //点击注册按钮
     onLogin(){
       if(this.form.name !='' || this.form.phone !=''){
-      this.searchCostomer(this.form.phone);
+      this.costomerSearch(this.form.phone);
       }else{
         this.$notify.error({
           title: '错误',

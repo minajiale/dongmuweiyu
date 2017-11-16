@@ -33,7 +33,7 @@ router.get("/",function(req,res,next){
     }
   })
 })
-//根据customerId 插入数据到customer表中
+//根据顾客ID和表单 创建定们单
 router.post("/insert",function(req,res,next){
   let father = req.body.father || '',
       name = req.body.name || '';
@@ -77,8 +77,10 @@ router.post('/register', function(req, res, next) {
         }else{
           res.json({
             status:"0",
-            msg:"",
-            result:"sucess"
+            msg:"sucess",
+            result:{
+              customerId:customer._id
+            }
           })
         }
     })
@@ -154,7 +156,6 @@ router.post('/login', function(req, res, next) {
     }
   })
 });
-
 //登出
 router.post('/loginOut', function(req, res, next) {
   // res.clearCookie(costomerId);
