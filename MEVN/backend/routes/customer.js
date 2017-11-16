@@ -33,7 +33,7 @@ router.get("/",function(req,res,next){
     }
   })
 })
-//插入数据到customer表中
+//根据customerId 插入数据到customer表中
 router.post("/insert",function(req,res,next){
   let father = req.body.father || '',
       name = req.body.name || '';
@@ -63,5 +63,98 @@ router.post("/insert",function(req,res,next){
       console.log("params err!");
     }
 }),
+//顾客注册
+router.post('/register', function(req, res, next) {
+  var param = req.body;
+  console.log(param);
+  if(param.name!='' && param.phone !== ''){
+    customer.create(param,function(err3,customer){
+        if(err3){
+          res.json({
+            status:"1",
+            message:err3.message
+          });
+        }else{
+          res.json({
+            status:"0",
+            msg:"",
+            result:"sucess"
+          })
+        }
+    })
+  }
+});
+//根据电话查找某个用户
+router.get('/searchUser',function(req,res,next){
+  var phone = req.param('phone');
+  customer.find({'phone':phone},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      res.json({
+        status:'1',
+        msg:'找到该用户',
+        result:{
+          count:doc.length,
+          customer:doc
+        }
+      })
+    }
+  })
+})
+//顾客登录
+router.post('/login', function(req, res, next) {
+  var param = req.body.manager;
+  manager.findOne(param,function(err,managerDoc){
+    if(err){
+      res.json({
+        status:"1",
+        msg:err.message
+      })
+    }else{
+      if(managerDoc){
+        res.cookie("userId",managerDoc._id,{
+          path:'/',
+          MaxAge:1000*60*60//一个小时
+        });
+        res.cookie("userName",managerDoc.username,{
+          path:'/',
+          MaxAge:1000*60*60//一个小时
+        });
+        req.session.user=managerDoc;
+        res.json({
+          status:"0",
+          msg:'登录成功',
+          result:{
+            managerID:managerDoc._id,
+            managerName:managerDoc.username
+          }
+        })
+      }else{
+        res.json({
+          status:"1",
+          msg:"帐号密码错误"
+        })
+      }
+    }
+  })
+});
+
+//登出
+router.post('/loginOut', function(req, res, next) {
+  // res.clearCookie(userId);
+  res.cookie("userId",'',{
+    path:'/',
+    MaxAge:-1//一个小时
+  });
+  res.json({
+    status:0,
+    msg:"退出登录成功",
+    result:''
+  })
+});
 
 module.exports = router;

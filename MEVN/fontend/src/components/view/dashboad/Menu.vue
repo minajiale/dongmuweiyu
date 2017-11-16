@@ -7,7 +7,7 @@
 
     <el-row class="tac" >
       <el-col :span="4">
-        <el-menu default-active="/alarm" class="el-menu-vertical-demo" unique-opened @open="handleOpen" @close="handleClose" router>
+        <el-menu default-active="/order" class="el-menu-vertical-demo" unique-opened @open="handleOpen" @close="handleClose" router>
           <el-menu-item index="/analyse"><i class="el-icon-star-on "></i>统计</el-menu-item>
           <el-badge :value="12" class="item">
             <el-menu-item index="/alarm"><i class="el-icon-message"></i>提醒服务</el-menu-item>
@@ -37,7 +37,7 @@ export default{
     }
   },
   mounted:function(){
-    this.$router.push('/alarm');
+    this.$router.push('/order');
   },
   methods:{
     handleOpen(key, keyPath) {

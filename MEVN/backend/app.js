@@ -43,9 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //登录拦截
 app.use(function(req,res,next){
-  console.log("nianglie");
   if(req.cookies.userId){
-    console.log("yi");
     next();
   }else{
     if(req.originalUrl == "/manager/login"){

@@ -3,7 +3,7 @@
     <br>
     <br>
   <el-form :model="form">
-    <el-row :gutter="15">
+    <!-- <el-row :gutter="15">
       <el-col :span="8"><el-form-item label="订单日期" :label-width="formLabelWidth" >
       <el-date-picker
         v-model="form.time"
@@ -12,7 +12,7 @@
         :picker-options="pickerOptions0">
       </el-date-picker>
       </el-form-item></el-col>
-  </el-row>
+  </el-row> -->
   <el-row :gutter="15">
      <el-col :span="4"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -83,8 +83,86 @@ export default {
     };
   },
   methods: {
+    search(phoneNumber){
+      this.$http({
+        url:'/customer/searchUser',
+        params:{
+          phone:phoneNumber
+        },
+      }).then(res=>{
+        if( res.data.result){
+          this.$confirm('该用户已经存在, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            //找到该用户
+            return true;
+          }).catch(() => {
+            return false;
+            this.$message({
+              type: 'info',
+              message: '已取消添加'
+            });
+          });
+          this.tableData5 = res.data.result.allProducts;
+        }else{
+          //没找到该顾客
+          return false;
+        }
+      },error=>{
+        return fasle;
+        this.$notify.error({
+          title: '错误',
+          message: '服务器出错请联系管理员：13177918633'
+        });
+      })
+    },
     onLogin(){
-      console.log(this.form.time);
+      if(this.form.name !='' || this.form.phone !=''){
+        var result = this.search(this.form.phone);
+            alert(result)
+      if(result){
+        //用户已经存在，并且确认添加到已有的记录中
+        alert("insit")
+      }else{
+        //用户不存在
+          this.$http({
+            method:"post",
+            url:"/customer/register",
+            data:{
+              name:this.form.name,
+              phone:this.form.phone,
+              address:this.form.address
+            }
+          }).then((res)=>{
+            if(res ==0){
+              this.$notify.error({
+                title: '错误',
+                message: '新增订单失败失败'
+              });
+            }else{
+              this.$notify({
+                 title: '成功',
+                 message: '新增订单成功',
+                 type: 'success'
+               });
+            }
+          },(error)=>{
+            this.$notify.error({
+              title: '错误',
+              message: '新增订单失败'
+            });
+          })
+        }
+      }else{
+        this.$notify.error({
+          title: '错误',
+          message: '新增订单失败,姓名和电话号码不能为空'
+        });
+      }
+
+
     //点击注册时候首先根据电话查找是不是已经存在，如果已经存在
     //提示“该号码已经注册，可能以前买过”
     },
