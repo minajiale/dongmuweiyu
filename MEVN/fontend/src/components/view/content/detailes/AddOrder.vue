@@ -13,8 +13,8 @@
       </el-date-picker>
       </el-form-item></el-col>
   </el-row> -->
-  <el-row :gutter="15">
-     <el-col :span="4"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
+  <el-row :gutter="3">
+     <el-col :span="8"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item></el-col>
     <el-col :span="8"> <el-form-item label="顾客电话" :label-width="formLabelWidth">
@@ -83,15 +83,15 @@ export default {
     };
   },
   methods: {
-    searchUser(phoneNumber){
+    searchCostomer(phoneNumber){
       this.$http({
-        url:'/customer/searchUser',
+        url:'/customer/searchCostomer',
         params:{
           phone:phoneNumber
         },
       }).then(res=>{
         var data=res.data.result;
-        if( data.count != 0){
+        if( res.data.status != 0){
           this.$confirm('该用户已经存在, 是否继续?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -118,7 +118,7 @@ export default {
         });
       })
     },
-    //登录
+    //顾客登录
     login(customerId){
       console.log(customerId);
       this.$http({
@@ -176,7 +176,7 @@ export default {
     //点击注册按钮
     onLogin(){
       if(this.form.name !='' || this.form.phone !=''){
-      this.searchUser(this.form.phone);
+      this.searchCostomer(this.form.phone);
       }else{
         this.$notify.error({
           title: '错误',

@@ -85,24 +85,34 @@ router.post('/register', function(req, res, next) {
   }
 });
 //根据电话查找某个用户
-router.get('/searchUser',function(req,res,next){
+router.get('/searchCostomer',function(req,res,next){
   var phone = req.param('phone');
   customer.find({'phone':phone},function(err,doc){
     if(err){
       res.json({
         status:'0',
-        msg:err.message
+        msg:err.message,
+        result:''
       });
     }else{
-      res.json({
-        status:'1',
-        msg:'找到该用户',
-        result:{
-          count:doc.length,
-          customerId:doc[0]._id,
-          customerName:doc[0].name,
-        }
-      })
+      console.log(doc.length);
+      if(doc.length != 0){
+        res.json({
+          status:'1',
+          msg:'找到该用户',
+          result:{
+            count:doc.length,
+            customerId:doc[0]._id,
+            customerName:doc[0].name,
+          }
+        })
+      }else{
+        res.json({
+          status:'0',
+          msg:"没有找到该用户",
+          result:''
+        });
+      }
     }
   })
 })

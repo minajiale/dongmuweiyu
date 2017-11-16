@@ -88,9 +88,13 @@ import axios from "axios"
                     })
                 }
             },
+          updateMessage(){
+            this.username=this.getCookie("managerName");
+            this.$store.commit('updatecustomerName',this.getCookie("customerName"))
+          },
         },
     mounted (){
-      this.username=this.getCookie("managerName");
+      this.updateMessage();
     },
     }
 </script>
