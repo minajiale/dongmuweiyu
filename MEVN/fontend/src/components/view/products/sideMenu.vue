@@ -59,12 +59,6 @@ export default {
     getClass(){
       axios({
         url:'/class',
-        params:{
-          userId:"12"
-        },
-        headers:{
-          token:"gtfrdes"
-        }
       }).then(res=>{
         this.classifacation = res.data.result.allClass;
         this.classifacation.unshift(

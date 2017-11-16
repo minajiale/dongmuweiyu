@@ -117,7 +117,7 @@ router.post('/login', function(req, res, next) {
       })
     }else{
       if(managerDoc){
-        res.cookie("userId",managerDoc._id,{
+        res.cookie("costomerId",managerDoc._id,{
           path:'/',
           MaxAge:1000*60*60//一个小时
         });
@@ -146,8 +146,8 @@ router.post('/login', function(req, res, next) {
 
 //登出
 router.post('/loginOut', function(req, res, next) {
-  // res.clearCookie(userId);
-  res.cookie("userId",'',{
+  // res.clearCookie(costomerId);
+  res.cookie("costomerId",'',{
     path:'/',
     MaxAge:-1//一个小时
   });

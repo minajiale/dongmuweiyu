@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    search(phoneNumber){
+    login(phoneNumber){
       this.$http({
         url:'/customer/searchUser',
         params:{
@@ -98,7 +98,9 @@ export default {
             type: 'warning'
           }).then(() => {
             var customerId=data.customerId;
+            var customerName=data.customerId;
             //存在cookie中便于操作TO-DO
+            document.cookie="customerId="+customerId+";customerName="+customerName;
             this.insert(customerId);
           }).catch(() => {
             this.$message({
@@ -120,6 +122,7 @@ export default {
     },
     insert(id){
       console.log(id);
+      console.log(document.cookie);
     },
     register(){
       this.$http({
@@ -152,7 +155,7 @@ export default {
     },
     onLogin(){
       if(this.form.name !='' || this.form.phone !=''){
-      this.search(this.form.phone);
+      this.login(this.form.phone);
       }else{
         this.$notify.error({
           title: '错误',

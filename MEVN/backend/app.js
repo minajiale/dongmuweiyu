@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //登录拦截
 app.use(function(req,res,next){
-  if(req.cookies.userId){
+  if(req.cookies.managerId){
     next();
   }else{
     if(req.originalUrl == "/manager/login"){

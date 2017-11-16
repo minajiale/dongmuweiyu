@@ -178,12 +178,6 @@ import axios from 'axios'
       getClass(){
         axios({
           url:'/class',
-          params:{
-            userId:"12"
-          },
-          headers:{
-            token:"gtfrdes"
-          }
         }).then(res=>{
           this.data2 = res.data.result.allClass;
         },error=>{

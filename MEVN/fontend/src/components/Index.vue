@@ -24,27 +24,12 @@ export default {
     topMenu
   },
   computed:{
-      username(){
-            return this.$store.state.manager
-      }
   },
   methods:{
-    getCookie(name){
-      var cookirarray = document.cookie.split(";");
-      for(var i=0;i<cookirarray.length;i++){
-        var arr=cookirarray[i].split("=");
-        //找到名称为userId的cookie，并返回它的值
-        if(name==arr[0]){
-         return arr[1];
-        break;
-        }
-      }
-    },
     checkout(){
-      var manager=this.getCookie('userId');
+      var manager=this.getCookie('managerId');
       if(manager){
       }else{
-        console.log(this.manager);
         this.$alert('您尚未登录，所有功能不可用', '登录', {
           confirmButtonText: '确定',
           callback: action => {
