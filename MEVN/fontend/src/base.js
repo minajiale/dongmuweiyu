@@ -12,12 +12,12 @@ export default{
         if(arritem.substr(0,1)==' '){
           arritem=arritem.substring(1,arritem.length)
         }
-        console.log(arritem);
         if(arritem==name){
          return arr[1];
         break;
         }
       }
+      return -1;
     }
   }
 }

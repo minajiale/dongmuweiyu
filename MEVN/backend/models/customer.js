@@ -1,16 +1,17 @@
 var mongoose = require("mongoose");
 
 var customserSchema = new mongoose.Schema({
+  "owner":String,//哪个店员下的单
   "customerId":String,
   "usePwd":String,
   "name":String,
   "phone":String,
   "address":Array,
   "cartList":[{
-    "time":String,  //生成该张订单事件
     "generalGoods":[ //普通销售清单
       {
         "GoodsListId":String, //普通销售清单ID
+        "time":String,  //生成该张订单事件
         "lists":[
           {
               "id":String,
@@ -23,6 +24,7 @@ var customserSchema = new mongoose.Schema({
     "DoorGoods":[ //定们单
       {
         "GoodsListId":String,
+        "time":String,  //生成该张订单事件
         "lists":[
           {
             "spec":String,

@@ -39,8 +39,9 @@
         <order-door></order-door>
       </el-collapse-item>
     </el-collapse>
-    <p>
-      <router-link to="/products"><i class="el-icon-arrow-right "></i>普通销售清单</router-link>
+    <p class="generalGoods" v-on:click="createGeneralOrder">
+      <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>普通销售清单
+      <!-- <router-link to="/products"><i class="el-icon-arrow-right "></i>普通销售清单</router-link> -->
     </p>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">预览</el-button>
@@ -83,6 +84,38 @@ export default {
     };
   },
   methods: {
+    createGeneralOrder(){
+      var customerid=this.getCookie("customerId");
+      if(customerid == -1){
+        this.$notify.error({
+          title: '错误',
+          message: 'denglu'
+        });
+      }else {
+        this.$http({
+          url:'/customer/createOrder',
+          data:{
+            customerId:customerid
+          },
+          method:"post"
+        }).then((res)=>{
+          var ress = res.data;
+          if(ress.status == 0){
+            // this.$router.push("/products");
+          }else{
+            this.$notify.error({
+              title: '错误',
+              message: 'buzao'
+            });
+          }
+        },(err)=>{
+          this.$notify.error({
+            title: '错误',
+            message: err
+          });
+        })
+      }
+    },
     costomerSearch(phoneNumber){
       this.$http({
         url:'/customer/searchCostomer',
@@ -202,5 +235,12 @@ export default {
 }
 .clear{
   clear: both;
+}
+.generalGoods{
+  border: 1px solid #dfe6ec;
+  line-height: 43px;
+  padding-left:15px;
+  font-size: 13px;
+  cursor: pointer;
 }
 </style>

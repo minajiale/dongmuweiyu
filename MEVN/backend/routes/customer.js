@@ -33,9 +33,40 @@ router.get("/",function(req,res,next){
     }
   })
 })
+//生成一张订单
+router.post("/createOrder",function(req,res,next){
+  var id=req.body.customerId;
+  console.log(id);
+  customer.update(
+    {"_id":ObjectId("5a0cff4d79191729e0060c94")},
+    {"cartList.generalGoods":{$push:{"time":new Date()}}},
+    // update:{$push:{cartList:{ $currentDate:{time:true}}}},
+    function(err,doc){
+    if(err){
+      res.json({
+        status:1,
+        msg:err.message,
+        result:''
+      })
+    }else{
+      if(doc.nModified != 0){
+        res.json({
+          status:0,
+          msg:"创建订单成功，请向该订单添加商品",
+          result:doc._id
+        })
+      }else{
+        res.json({
+          status:1,
+          msg:"err3.message",
+          result:''
+        })
+      }
+    }
+  })
+})
 //根据顾客ID和表单 插入普通订单
 router.post("/insertGeneralGoods",function(req,res,next){
-  console.log(req);
   var param=req.body;
   let oneNomalProduct={};
   // 把GoodsListId和time放在session里面，设置时间为绝对时间，当天晚上12点过期
@@ -115,29 +146,13 @@ router.post('/login', function(req, res, next) {
       })
     }else{
       if(managerDoc){
-        //向generalGoods数组中插入一个时间
-        // product.update(oldValue,newData,function(err5,result){
-        //   if(err5){
-        //     console.log(err5);
-        //     res.json({
-        //       status:"1",
-        //       message:err.message
-        //     });
-        //   }else{
-        //     res.json({
-        //       status:"0",
-        //       msg:"",
-        //       result:"sucess"
-        //     })
-        //   }
-        // });
-
-        res.cookie("costomerId",managerDoc._id,{
-          path:'/',
+        console.log(managerDoc._id);
+        res.cookie("customerId",managerDoc._id,{
+          path:'/customer',
           MaxAge:1000*60*60//一个小时
         });
         res.cookie("customerName",managerDoc.name,{
-          path:'/',
+          path:'/customer',
           MaxAge:1000*60*60//一个小时
         });
         req.session.user=managerDoc;
@@ -160,14 +175,14 @@ router.post('/login', function(req, res, next) {
 });
 //登出
 router.post('/loginOut', function(req, res, next) {
-  // res.clearCookie(costomerId);
+  // res.clearCookie(customerId);
   res.cookie("customerName",'',{
     path:'/',
-    MaxAge:-1//一个小时
+    MaxAge:-1
   });
-  res.cookie("costomerId",'',{
+  res.cookie("customerId",'',{
     path:'/',
-    MaxAge:-1//一个小时
+    MaxAge:-1
   });
   res.json({
     status:0,
