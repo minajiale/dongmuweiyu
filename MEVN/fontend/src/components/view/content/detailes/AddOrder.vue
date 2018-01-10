@@ -89,7 +89,7 @@ export default {
       if(customerid == -1){
         this.$notify.error({
           title: '错误',
-          message: 'denglu'
+          message: '请先登录'
         });
       }else {
         this.$http({
@@ -101,11 +101,11 @@ export default {
         }).then((res)=>{
           var ress = res.data;
           if(ress.status == 0){
-            // this.$router.push("/products");
+            this.$router.push("/products");
           }else{
             this.$notify.error({
               title: '错误',
-              message: 'buzao'
+              message: '没有添加成功'
             });
           }
         },(err)=>{

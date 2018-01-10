@@ -28,6 +28,9 @@
   </div>
 </template>
 <style>
+.customer{
+  margin: 20px 300px;
+}
 .el-dropdown-link {
   cursor: pointer;
   color: #409EFF;

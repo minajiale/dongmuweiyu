@@ -8,10 +8,10 @@ var customserSchema = new mongoose.Schema({
   "phone":String,
   "address":Array,
   "cartList":[{
+    "GoodsListId":String, //普通销售清单ID
+    "time":String,  //生成该张订单事件
     "generalGoods":[ //普通销售清单
       {
-        "GoodsListId":String, //普通销售清单ID
-        "time":String,  //生成该张订单事件
         "lists":[
           {
               "id":String,

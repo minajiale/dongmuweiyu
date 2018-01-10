@@ -38,8 +38,8 @@ router.post("/createOrder",function(req,res,next){
   var id=req.body.customerId;
   console.log(id);
   customer.update(
-    {"_id":ObjectId("5a0cff4d79191729e0060c94")},
-    {"cartList.generalGoods":{$push:{"time":new Date()}}},
+    {"_id":"5a55957128e0113f3b57d43f"},
+    {$push:{cartList:{"time":new Date()}}},
     // update:{$push:{cartList:{ $currentDate:{time:true}}}},
     function(err,doc){
     if(err){
@@ -113,7 +113,6 @@ router.get('/searchCostomer',function(req,res,next){
         result:''
       });
     }else{
-      console.log(doc.length);
       if(doc.length != 0){
         res.json({
           status:'1',
@@ -138,6 +137,7 @@ router.get('/searchCostomer',function(req,res,next){
 router.post('/login', function(req, res, next) {
   var param = req.body.customer;
   var time = req.body.time;
+  console.log("登录",param);
   customer.findOne({'_id':param},function(err,managerDoc){
     if(err){
       res.json({
@@ -148,11 +148,11 @@ router.post('/login', function(req, res, next) {
       if(managerDoc){
         console.log(managerDoc._id);
         res.cookie("customerId",managerDoc._id,{
-          path:'/customer',
+          path:'/',
           MaxAge:1000*60*60//一个小时
         });
         res.cookie("customerName",managerDoc.name,{
-          path:'/customer',
+          path:'/',
           MaxAge:1000*60*60//一个小时
         });
         req.session.user=managerDoc;
