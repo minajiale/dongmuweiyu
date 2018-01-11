@@ -82,6 +82,17 @@ import axios from "axios"
               if(command=="cart"){
                   this.$router.push('/order/addOrder/verify');
               }
+              if(command="logoinout"){
+                axios.post("/customer/loginOut").then((response)=>{
+                  let res=response.data;
+                  if(res.status == 0){
+                    this.$router.push('/order/addOrder');
+                    this.$store.commit("updatecustomerName","");
+                  }else{
+                    this.$message.error('退出登录失败');
+                  }
+                })
+              }
             },
             handleCommand(command) {
                 if(command == 'loginout'){

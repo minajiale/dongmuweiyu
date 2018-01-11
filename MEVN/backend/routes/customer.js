@@ -59,7 +59,7 @@ router.post("/insertCart",function(req,res,next){
             }
           }
           if(exit == true){
-            console.log(i);
+            console.log(generalId);
             console.log("exit");
             customer.update(
               {"_id":customerId,
@@ -68,7 +68,9 @@ router.post("/insertCart",function(req,res,next){
               {
                 $set: {
                   "generalGoodscart.$" : {
-                    "saleNumber":++data[i].saleNumber
+                    "saleNumber":parseInt(data[i].saleNumber)+parseInt(genetalNumb),
+                    "salePrice":genralPrice,
+                    "id":generalId
                   }
                 }
               },
