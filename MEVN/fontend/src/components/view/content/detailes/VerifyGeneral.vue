@@ -23,7 +23,7 @@
     <el-table-column
       prop="unit"
       label="单位"
-      width="150">
+      width="100">
     </el-table-column>
     <el-table-column
       prop="price"
@@ -33,7 +33,7 @@
     <el-table-column
       prop="num"
       label="数量"
-      width="150">
+      width="100">
     </el-table-column>
     <el-table-column
       sortable
@@ -44,12 +44,12 @@
     <el-table-column
       label="操作"
       width="120">
-      <template slot-scope="scope">移除
+      <template scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="editRow(scope.$index, tableData)"
           type="text"
           size="small">
-          移除
+          修改
         </el-button>
       </template>
     </el-table-column>
@@ -92,7 +92,24 @@ export default {
   computed: {},
   ready () {},
   attached () {},
-  methods: {},
+  mounted:function(){
+    this.queryCart();
+  },
+  methods: {
+    editRow(index,row){
+      console.log(index);
+      console.log(row);
+    },
+    queryCart(){
+      this.$http({
+        url:'/customer/cart',
+      }).then(res=>{
+          this.tableData = res.data.result.allClass;
+      },error=>{
+        console.log("查询不到数据");
+      })
+    }
+  },
   components: {}
 }
 </script>

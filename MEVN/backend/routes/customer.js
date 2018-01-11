@@ -67,6 +67,27 @@ router.post("/insertCart",function(req,res,next){
     }
   })
 });
+//根据顾客ID查询购物车中的东西
+router.get("/cart",function(req,res,next){
+  var customerId=req.cookies.customerId;
+  customer.find({"_id":customerId},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      res.json({
+        status:'1',
+        msg:'get all order suecess!',
+        result:{
+          count:doc.length,
+          allClass:doc[0].generalGoodscart
+        }
+      })
+    }
+  })
+})
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
     customerId=req.cookies.customerId;
