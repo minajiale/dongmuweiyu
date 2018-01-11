@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var customer = require('../models/customer');
+var product = require('../models/product');
 
 mongoose.connect('mongodb://127.0.0.1:27017/DONGMU');
 mongoose.connection.on("connected",function(){
@@ -38,34 +39,94 @@ router.post("/insertCart",function(req,res,next){
   var generalId=req.body.commodityId ||'',
       genetalNumb=req.body.number || '',
       genralPrice=req.body.salePrice ||'',
-      customerId=req.cookies.customerId;//从cookie中取
-  console.log(customerId);
-  customer.update(
-    {"_id":customerId},
-    {$push:{generalGoodscart:{"id":generalId,"salePrice":genralPrice,"saleNumber":genetalNumb}}},
-    function(err,doc){
-    if(err){
-      res.json({
-        status:1,
-        msg:err.message,
-        result:''
+      customerId=req.cookies.customerId,//从cookie中取
+      i=0,
+      exit=false;
+
+  customer.find({"_id":customerId},function(err,doc){
+        if(err){
+          res.json({
+            status:'0',
+            msg:err.message
+          });
+        }else{
+          var data =doc[0].generalGoodscart;
+          for(i=0;i<data.length;i++){
+            //如果该产品已经存在，加数量
+            if(generalId == data[i].id){
+              exit=true;
+              break
+            }
+          }
+          if(exit == true){
+            console.log(i);
+            console.log("exit");
+            customer.update(
+              {"_id":customerId,
+                "generalGoodscart._id":data[i]._id
+              },
+              {
+                $set: {
+                  "generalGoodscart.$" : {
+                    "saleNumber":++data[i].saleNumber
+                  }
+                }
+              },
+              function(errC,docC){
+              if(errC){
+                res.json({
+                  status:1,
+                  msg:errC.message,
+                  result:''
+                })
+              }else{
+                if(docC.nModified != 0){
+                  res.json({
+                    status:0,
+                    msg:"加入购物车成功",
+                    result:docC
+                  })
+                }else{
+                  res.json({
+                    status:1,
+                    msg:"err3.message",
+                    result:''
+                  })
+                }
+              }
+            })
+          }else{
+            console.log("no exit");
+            customer.update(
+              {"_id":customerId},
+              {$push:{generalGoodscart:{"id":generalId,"salePrice":genralPrice,"saleNumber":genetalNumb}}},
+              function(errCC,docCC){
+              if(errCC){
+                res.json({
+                  status:1,
+                  msg:errCC.message,
+                  result:''
+                })
+              }else{
+                if(docCC.nModified != 0){
+                  res.json({
+                    status:0,
+                    msg:"加入购物车成功",
+                    result:docCC
+                  })
+                }else{
+                  res.json({
+                    status:1,
+                    msg:"err3.message",
+                    result:''
+                  })
+                }
+              }
+            })
+          }
+        }
       })
-    }else{
-      if(doc.nModified != 0){
-        res.json({
-          status:0,
-          msg:"加入购物车成功",
-          result:doc
-        })
-      }else{
-        res.json({
-          status:1,
-          msg:"err3.message",
-          result:''
-        })
-      }
-    }
-  })
+
 });
 //根据顾客ID查询购物车中的东西
 router.get("/cart",function(req,res,next){
@@ -77,12 +138,28 @@ router.get("/cart",function(req,res,next){
         msg:err.message
       });
     }else{
+      var data =doc[0].generalGoodscart;
+      var cart=[]
+      for(var i=0;i<data.length;i++){
+        product.find({"_id":data[i].id},function(errP,docP){
+          if(errP){
+            res.json({
+              status:'0',
+              msg:errP.message
+            });
+          }else{
+            cart.push(docP)
+            console.log(docP);
+          }
+        })
+      }
       res.json({
         status:'1',
-        msg:'get all order suecess!',
+        msg:'get all classification suecess!',
         result:{
           count:doc.length,
-          allClass:doc[0].generalGoodscart
+          allProducts:cart,
+          allClass:data
         }
       })
     }
@@ -138,7 +215,6 @@ router.post("/insertGeneralGoods",function(req,res,next){
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;
-  console.log(param);
   if(param.name!='' && param.phone !== ''){
     customer.create(param,function(err3,customer){
         if(err3){
@@ -193,7 +269,6 @@ router.get('/searchCostomer',function(req,res,next){
 router.post('/login', function(req, res, next) {
   var param = req.body.customer;
   var time = req.body.time;
-  console.log("登录",param);
   customer.findOne({'_id':param},function(err,managerDoc){
     if(err){
       res.json({
@@ -202,7 +277,6 @@ router.post('/login', function(req, res, next) {
       })
     }else{
       if(managerDoc){
-        console.log(managerDoc._id);
         res.cookie("customerId",managerDoc._id,{
           path:'/',
           MaxAge:1000*60*60//一个小时
