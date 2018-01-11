@@ -141,8 +141,8 @@ router.get("/cart",function(req,res,next){
       });
     }else{
       var data =doc[0].generalGoodscart;
-      var cart=[]
       for(var i=0;i<data.length;i++){
+        console.log("weild"+i);
         product.find({"_id":data[i].id},function(errP,docP){
           if(errP){
             res.json({
@@ -150,8 +150,14 @@ router.get("/cart",function(req,res,next){
               msg:errP.message
             });
           }else{
-            cart.push(docP)
-            console.log(docP);
+            res.json({
+              status:'1',
+              msg:'get all classification suecess!',
+              result:{
+                count:doc.length,
+                products:data,
+              }
+            })
           }
         })
       }
@@ -160,8 +166,7 @@ router.get("/cart",function(req,res,next){
         msg:'get all classification suecess!',
         result:{
           count:doc.length,
-          allProducts:cart,
-          allClass:data
+          products:data,
         }
       })
     }
