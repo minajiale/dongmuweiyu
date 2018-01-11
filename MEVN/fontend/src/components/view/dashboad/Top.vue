@@ -10,7 +10,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
       <el-dropdown-item command="me">顾客中心</el-dropdown-item>
-      <el-dropdown-item command="me">购物车</el-dropdown-item>
+      <el-dropdown-item command="cart">购物车</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 
@@ -78,6 +78,11 @@ import axios from "axios"
             }
         },
         methods:{
+            customerCommand(command){
+              if(command=="cart"){
+                  this.$router.push('/order/addOrder/verify');
+              }
+            },
             handleCommand(command) {
                 if(command == 'loginout'){
                     //TO-DO 清除cookie
