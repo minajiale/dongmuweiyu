@@ -34,19 +34,15 @@ router.get("/",function(req,res,next){
   })
 })
 // 加入购物车
-
-
 router.post("/insertCart",function(req,res,next){
-  var generalId=req.body.commodityId,
-      genetalNumb=req.body.number,
-      genralPrice=req.body.salePrice,
-      customerId=req.body.cusId;//从cookie中取
-  console.log(genetalId);
-
-  
+  var generalId=req.body.commodityId ||'',
+      genetalNumb=req.body.number || '',
+      genralPrice=req.body.salePrice ||'',
+      customerId=req.cookies.customerId;//从cookie中取
+  console.log(customerId);
   customer.update(
-    {"_id":"5a55957128e0113f3b57d43f"},
-    {$push:{cartList:{$push:{generalGoods:{"id":generalId,salePrice:genralPrice,saleNumber:genetalNumb}}}}},
+    {"_id":customerId},
+    {$push:{generalGoodscart:{"id":generalId,"salePrice":genralPrice,"saleNumber":genetalNumb}}},
     function(err,doc){
     if(err){
       res.json({
@@ -73,9 +69,9 @@ router.post("/insertCart",function(req,res,next){
 });
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
-  var id=req.body.customerId;
-  customer.update(
-    {"_id":"5a55957128e0113f3b57d43f"},
+    customerId=req.cookies.customerId;
+    customer.update(
+    {"_id":customerId},
     {$push:{orderList:{"time":new Date()}}},
     // update:{$push:{cartList:{ $currentDate:{time:true}}}},
     function(err,doc){

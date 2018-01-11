@@ -94,7 +94,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addCartVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addCartVisible = false">确 定</el-button>
+        <el-button type="primary" @click="handleCart">确 定</el-button>
       </div>
     </el-dialog>
     </el-row>
@@ -111,6 +111,7 @@
       return {
         currentView:'',//keep-alive参数
         product:{
+          id:0,
           price:1,
           number:1,
         },
@@ -163,14 +164,18 @@
       handleAdd(index,row){
         this.addCartVisible=true;
         console.log(row._id);
-        this.insertgeneralGoods(row._id)
+        this.product.id=row._id;
       },
-      insertgeneralGoods(id){
+      handleCart(){
+         this.addCartVisible = false
+        this.insertgeneralGoods()
+      },
+      insertgeneralGoods(){
         this.$http({
-          method:'psot',
+          method:'post',
           url:'/customer/insertCart',
-          params:{
-            commodityId:id,
+          data:{
+            commodityId:this.product.id,
             salePrice:this.product.price,
             number:this.product.number
           },
