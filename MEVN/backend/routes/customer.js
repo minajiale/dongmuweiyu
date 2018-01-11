@@ -33,14 +33,20 @@ router.get("/",function(req,res,next){
     }
   })
 })
-//生成一张订单
-router.post("/createOrder",function(req,res,next){
-  var id=req.body.customerId;
-  console.log(id);
+// 加入购物车
+
+
+router.post("/insertCart",function(req,res,next){
+  var generalId=req.body.commodityId,
+      genetalNumb=req.body.number,
+      genralPrice=req.body.salePrice,
+      customerId=req.body.cusId;//从cookie中取
+  console.log(genetalId);
+
+  
   customer.update(
     {"_id":"5a55957128e0113f3b57d43f"},
-    {$push:{cartList:{"time":new Date()}}},
-    // update:{$push:{cartList:{ $currentDate:{time:true}}}},
+    {$push:{cartList:{$push:{generalGoods:{"id":generalId,salePrice:genralPrice,saleNumber:genetalNumb}}}}},
     function(err,doc){
     if(err){
       res.json({
@@ -52,8 +58,40 @@ router.post("/createOrder",function(req,res,next){
       if(doc.nModified != 0){
         res.json({
           status:0,
+          msg:"加入购物车成功",
+          result:doc
+        })
+      }else{
+        res.json({
+          status:1,
+          msg:"err3.message",
+          result:''
+        })
+      }
+    }
+  })
+});
+//生成一张订单
+router.post("/createOrder",function(req,res,next){
+  var id=req.body.customerId;
+  customer.update(
+    {"_id":"5a55957128e0113f3b57d43f"},
+    {$push:{orderList:{"time":new Date()}}},
+    // update:{$push:{cartList:{ $currentDate:{time:true}}}},
+    function(err,doc){
+    if(err){
+      res.json({
+        status:1,
+        msg:err.message,
+        result:'',
+      })
+    }else{
+      if(doc.nModified != 0){
+        //将订单的id存储在session中，方便后续的加入购物车
+        res.json({
+          status:0,
           msg:"创建订单成功，请向该订单添加商品",
-          result:doc._id
+          result:doc
         })
       }else{
         res.json({
@@ -72,13 +110,14 @@ router.post("/insertGeneralGoods",function(req,res,next){
   // 把GoodsListId和time放在session里面，设置时间为绝对时间，当天晚上12点过期
   //判断session，如果时间有效，则加入到已有的generalGoods
   //否则新建generalGoods
-  if(req.session.generalGoodsId){
+  req.session.cartId
+  if(req.session.cartId){
     //插入generalGoods.lists数组中
   }else{
     //新建generalGoods
 
   }
-}),
+})
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;
@@ -101,7 +140,7 @@ router.post('/register', function(req, res, next) {
         }
     })
   }
-});
+})
 //根据电话查找某个用户
 router.get('/searchCostomer',function(req,res,next){
   var phone = req.param('phone');

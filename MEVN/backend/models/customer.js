@@ -7,7 +7,34 @@ var customserSchema = new mongoose.Schema({
   "name":String,
   "phone":String,
   "address":Array,
-  "cartList":[{
+  "cartList":[
+    {
+      "generalGoods":[ //普通销售清单
+        {
+          "id":String,
+          "salePrice":String,// 实际上卖的金额
+          "saleNumber":String,//卖的数量
+        }
+      ],
+      "DoorGoods":[ //定们单
+        {
+          "spec":String,
+          "doorway":{
+            "height":String,
+            "width":String,
+          },
+          "wall":{
+            "height":String,
+            "width":String,
+          },
+          "doorLine":String,
+          "number":String,
+          "price":String,
+          "remark":String,
+          "number":String
+        }
+  ],
+  "orderList":[{
     "GoodsListId":String, //普通销售清单ID
     "time":String,  //生成该张订单事件
     "generalGoods":[ //普通销售清单

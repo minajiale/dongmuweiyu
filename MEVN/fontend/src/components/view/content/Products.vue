@@ -165,8 +165,27 @@
         console.log(row._id);
         this.insertgeneralGoods(row._id)
       },
-      insertgeneralGoods(){
-
+      insertgeneralGoods(id){
+        this.$http({
+          method:'psot',
+          url:'/customer/insertCart',
+          params:{
+            commodityId:id,
+            salePrice:this.product.price,
+            number:this.product.number
+          },
+        }).then(res=>{
+          this.$notify({
+             title: '成功',
+             message: '加入购物车成功',
+             type: 'success'
+           });
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '加入购物车失败'
+          });
+        })
       },
       deleteProduct(row,item){
         //item为id

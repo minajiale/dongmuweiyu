@@ -39,7 +39,7 @@
         <order-door></order-door>
       </el-collapse-item>
     </el-collapse>
-    <p class="generalGoods" v-on:click="createGeneralOrder">
+    <p class="generalGoods" v-on:click="createGeneralCart">
       <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>普通销售清单
       <!-- <router-link to="/products"><i class="el-icon-arrow-right "></i>普通销售清单</router-link> -->
     </p>
@@ -84,7 +84,7 @@ export default {
     };
   },
   methods: {
-    createGeneralOrder(){
+    createGeneralCart(){
       var customerid=this.getCookie("customerId");
       if(customerid == -1){
         this.$notify.error({
@@ -92,28 +92,7 @@ export default {
           message: '请先登录'
         });
       }else {
-        this.$http({
-          url:'/customer/createOrder',
-          data:{
-            customerId:customerid
-          },
-          method:"post"
-        }).then((res)=>{
-          var ress = res.data;
-          if(ress.status == 0){
-            this.$router.push("/products");
-          }else{
-            this.$notify.error({
-              title: '错误',
-              message: '没有添加成功'
-            });
-          }
-        },(err)=>{
-          this.$notify.error({
-            title: '错误',
-            message: err
-          });
-        })
+        this.$router.push('/products');
       }
     },
     costomerSearch(phoneNumber){
@@ -163,6 +142,7 @@ export default {
         }
       }).then((res)=>{
         //并且改变store中的customerName的值
+        this.$router.push("/products");
         var customername = res.data.result.managerName;
         this.$store.commit('updatecustomerName',customername);
         this.insert(customerId);

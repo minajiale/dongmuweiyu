@@ -10,6 +10,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
       <el-dropdown-item command="me">顾客中心</el-dropdown-item>
+      <el-dropdown-item command="me">购物车</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 
