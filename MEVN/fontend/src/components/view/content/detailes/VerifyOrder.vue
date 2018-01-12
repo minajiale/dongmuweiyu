@@ -22,10 +22,7 @@
  </el-form>
  <el-dialog title="创建订单" :visible.sync="createOrder">
    <el-form :model="orderStatus">
-     <el-form-item label="请输入商品单价">
-       <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
+     <el-form-item label="定金">
        <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
      </el-form-item>
    </el-form>
