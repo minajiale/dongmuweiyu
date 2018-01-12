@@ -34,7 +34,7 @@ router.get("/",function(req,res,next){
     }
   })
 })
-// 加入购物车
+// 普通商品加入购物车
 router.post("/insertCart",function(req,res,next){
   var generalId=req.body.commodityId ||'',
       genetalNumb=req.body.number || '',
@@ -42,7 +42,6 @@ router.post("/insertCart",function(req,res,next){
       customerId=req.cookies.customerId,//从cookie中取
       i=0,
       exit=false;
-
   customer.find({"_id":customerId},function(err,doc){
         if(err){
           res.json({
@@ -129,6 +128,37 @@ router.post("/insertCart",function(req,res,next){
         }
       })
 
+});
+//定门单加入购物车
+router.post("/insertCart",function(req,res,next){
+  var door=req.body ||'',
+      customerId=req.cookies.customerId;//从cookie中取
+  customer.update(
+    {"_id":customerId},
+    {$push:{DoorGoodscart:door}},
+    function(errCC,docCC){
+    if(errCC){
+      res.json({
+        status:1,
+        msg:errCC.message,
+        result:''
+      })
+    }else{
+      if(docCC.nModified != 0){
+        res.json({
+          status:0,
+          msg:"加入购物车成功",
+          result:docCC
+        })
+      }else{
+        res.json({
+          status:1,
+          msg:"err3.message",
+          result:''
+        })
+      }
+    }
+  })
 });
 //根据顾客ID查询购物车中的东西
 router.get("/cart",function(req,res,next){
