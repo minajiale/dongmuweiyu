@@ -161,8 +161,6 @@ router.get("/cart",function(req,res,next){
                     console.log(flag);
                     resolve();
                   }
-                  console.log("i"+i);
-                  console.log("flag"+flag);
                   cart.push(docP[0]);
                 }
               })
@@ -171,18 +169,15 @@ router.get("/cart",function(req,res,next){
         })
       }
       promise(cart,data).then(()=>{
-        console.log("真正的promise的后面--then");
-        console.log("cart:"+cart);
-        console.log("data:"+data);
-        // res.json({
-        //   status:'1',
-        //   msg:'get all classification suecess!',
-        //   result:{
-        //     count:doc.length,
-        //     products:data,
-        //     cartList:cart
-        //   }
-        // })
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:doc.length,
+            products:data,
+            cartList:cart
+          }
+        })
       },()=>{
         console.log("错？？");
       })

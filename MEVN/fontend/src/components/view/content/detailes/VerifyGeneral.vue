@@ -104,7 +104,24 @@ export default {
       this.$http({
         url:'/customer/cart',
       }).then(res=>{
-          this.tableData = res.data.result.allClass;
+        var data = res.data.result.products;
+        var cart = res.data.result.cartList;
+        var result=[];
+        for(var m =0;m<data.length;m++){
+          for(var n =0;n<cart.length;n++){
+            if(data[m].id == cart[n]._id){
+              result[m] = {};
+              result[m].proId=data[m].id;
+              result[m].price=data[m].salePrice;
+              result[m].num=data[m].saleNumber;
+              // result[m].unit=data[m].unit;
+              result[m].name=cart[n].name;
+              result[m].spec=cart[n].spec;
+              result[m].code=cart[n].code;
+            }
+          }
+        }
+        this.tableData=result
       },error=>{
         console.log("查询不到数据");
       })
