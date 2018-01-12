@@ -22,7 +22,7 @@
  </el-form>
  <el-dialog title="创建订单" :visible.sync="createOrder">
    <el-form :model="orderStatus">
-     <el-form-item label="定金">
+     <el-form-item label="定金（元）">
        <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
      </el-form-item>
    </el-form>
@@ -50,7 +50,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
     data() {
       return {
         orderStatus:{
-          status:"欠款"
+          status:1000
         },
         createOrder:false
       }

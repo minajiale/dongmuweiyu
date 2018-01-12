@@ -14,6 +14,8 @@ import Order from '@/components/view/content/Order.vue'
 import Peoplemanage from '@/components/view/content/Peoplemanage.vue'
 import Products from '@/components/view/content/Products.vue'
 import classification from '@/components/view/content/classification.vue'
+import customerCenter from '@/components/view/content/CustomerCenter.vue'
+import managerCenter from '@/components/view/content/ManagerCenter.vue'
 import Login from '@/components/view/dashboad/Login.vue'
 import Register from '@/components/view/dashboad/Register.vue'
 
@@ -37,6 +39,22 @@ const routes = [
               components: {
                 default: Index,
                 rightContent: Test
+              },
+            },
+            {
+              path: '/customerCenter',
+                requireAuth: true,
+              components: {
+                default: Index,
+                rightContent: customerCenter
+              },
+            },
+            {
+              path: '/managerCenter',
+                requireAuth: true,
+              components: {
+                default: Index,
+                rightContent: managerCenter
               },
             },
             {
