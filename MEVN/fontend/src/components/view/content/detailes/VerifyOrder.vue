@@ -34,6 +34,11 @@ import VerifyGeneral from './VerifyGeneral.vue'
     data() {
       return {
       }
+    },
+    methods: {
+      onSubmit(){
+
+      }
     }
   }
 </script>
