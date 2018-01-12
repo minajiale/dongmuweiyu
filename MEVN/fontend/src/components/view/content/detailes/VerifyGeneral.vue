@@ -70,22 +70,6 @@ export default {
                   num:1,
                   unit:"个"
                 },
-                {
-                  name:"东沐花洒",
-                  code:"DM-30", //商品货号
-                  spec:"80*80", //规格
-                  price:"1900",//规定卖价
-                  num:1,
-                  unit:"个"
-                },
-                {
-                  name:"东沐花洒",
-                  code:"DM-30", //商品货号
-                  spec:"80*80", //规格
-                  price:"1900",//规定卖价
-                  num:1,
-                  unit:"个"
-                },
             ]
     }
   },
