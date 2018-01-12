@@ -78,38 +78,59 @@
    </el-table-column>
  </el-table>
 
- <el-dialog title="加入购物车" :visible.sync="editDoor">
+ <el-dialog title="修改定门单" :visible.sync="editDoor">
    <el-form :model="product">
-     <el-form-item label="请输入商品单价">
-       <el-input v-model="product.price" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品单价">
-       <el-input v-model="product.price" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品单价">
-       <el-input v-model="product.price" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
-     <el-form-item label="请输入商品数量，不输入为1">
-       <el-input v-model="product.number" auto-complete="off"></el-input>
-     </el-form-item>
+     <el-row :gutter="20">
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+     </el-row>
+     <el-row :gutter="20">
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+     </el-row>
+     <el-row :gutter="20">
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+       <el-col :span="8">
+         <el-form-item label="请输入商品单价">
+           <el-input v-model="product.price" auto-complete="off"></el-input>
+         </el-form-item>
+       </el-col>
+     </el-row>
    </el-form>
    <div slot="footer" class="dialog-footer">
      <el-button @click="addCartVisible = false">取 消</el-button>
@@ -181,4 +202,30 @@ export default {
 </script>
 
 <style lang="css">
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
 </style>
