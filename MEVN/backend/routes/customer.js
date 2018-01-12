@@ -130,9 +130,10 @@ router.post("/insertCart",function(req,res,next){
 
 });
 //定门单加入购物车
-router.post("/insertCart",function(req,res,next){
+router.post("/insertDoorGoodscart",function(req,res,next){
   var door=req.body ||'',
       customerId=req.cookies.customerId;//从cookie中取
+      console.log(door);
   customer.update(
     {"_id":customerId},
     {$push:{DoorGoodscart:door}},

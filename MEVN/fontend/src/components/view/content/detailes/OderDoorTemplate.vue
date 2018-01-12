@@ -62,7 +62,7 @@ export default {
         spec:"型号",//型号
         color:"红色",//颜色
         doorwayHeight:"23",//门扇尺寸－高
-      doorwayWidth:"45",//门扇尺寸－宽
+        doorwayWidth:"45",//门扇尺寸－宽
         wallHeight: "4",//门洞尺寸－高
         wallWidth: "3",//门洞尺寸－宽
         wall:"1",     //门洞尺寸－墙厚
@@ -80,10 +80,10 @@ export default {
     onSubmit(){
       this.$http({
         method:"post",
-        url:"/customer/insertCart",
+        url:"/customer/insertDoorGoodscart",
         data:this.form
       }).then(res=>{
-        if(res.data.result.nModified != 1){
+        if(res.data.result.nModified == 1){
           this.$notify({
              title: '成功',
              message: '加入购物车成功',
