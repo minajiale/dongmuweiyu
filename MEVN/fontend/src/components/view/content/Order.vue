@@ -57,7 +57,7 @@
         <template scope="scope">
           <el-button
           size="small"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          @click="handleEdit(scope.$index, scope.row)">付款</el-button>
           <el-button
           size="small"
           type="primary"
@@ -76,12 +76,15 @@
       :total="1000">
       </el-pagination>
     </div>
-
-    <el-dialog title="修改订单" :visible.sync="dialogFormVisible">
-      <order-details></order-details>
+    <el-dialog title="付款" :visible.sync="dialogFormVisible">
+      <el-form :model="order">
+        <el-form-item label="请输入付款金额">
+          <el-input v-model="order.paied" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button @click="addCartVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleCart">确 定</el-button>
       </div>
     </el-dialog>
     </div>
@@ -92,6 +95,9 @@
   export default {
     data() {
       return {
+        order:{
+          paied:100
+        },
         form: {
           name: '',
           region: '',
@@ -158,7 +164,7 @@
 
       },
       handledatail(index, row) {
-        this.$router.push("/order/addOrder/verify")
+        this.$router.push("/customerCenter")
       }
     }
   }
