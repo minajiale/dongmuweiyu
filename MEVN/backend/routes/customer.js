@@ -161,7 +161,29 @@ router.post("/insertDoorGoodscart",function(req,res,next){
     }
   })
 });
-//根据顾客ID查询购物车中的东西
+//根据顾客ID查询购物车中的定门单
+router.get("/DoorGoodscart",function(req,res,next){
+  var customerId=req.cookies.customerId;
+  customer.find({"_id":customerId},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      var DoorGoods = doc[0].DoorGoodscart
+      console.log(DoorGoods);
+      res.json({
+        status:'1',
+        msg:'get all classification suecess!',
+        result:{
+          count:DoorGoods.length,
+          DoorGoods:DoorGoods,
+        }
+      })
+    }})
+});
+//根据顾客ID查询购物车中的普通货物
 router.get("/cart",function(req,res,next){
   var customerId=req.cookies.customerId;
   customer.find({"_id":customerId},function(err,doc){
@@ -173,7 +195,6 @@ router.get("/cart",function(req,res,next){
     }else{
       var data =doc[0].generalGoodscart;
       var cart=[];
-
       function promise (cart,data){
         return  new Promise((resolve,reject)=>{
           var flag=0;
@@ -215,7 +236,7 @@ router.get("/cart",function(req,res,next){
     }
   })
 })
-//生成一张订单
+//生成一张订单 暂时无用
 router.post("/createOrder",function(req,res,next){
     customerId=req.cookies.customerId;
     customer.update(
@@ -247,7 +268,7 @@ router.post("/createOrder",function(req,res,next){
     }
   })
 })
-//根据顾客ID和表单 插入普通订单
+//根据顾客ID和表单 插入普通订单 //暂时无用
 router.post("/insertGeneralGoods",function(req,res,next){
   var param=req.body;
   let oneNomalProduct={};
