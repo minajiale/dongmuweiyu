@@ -235,7 +235,7 @@ router.get("/cart",function(req,res,next){
     }
   })
 })
-//生成一张订单 暂时无用
+//生成一张订单
 router.post("/createOrder",function(req,res,next){
     customerId=req.cookies.customerId;
     customer.update(

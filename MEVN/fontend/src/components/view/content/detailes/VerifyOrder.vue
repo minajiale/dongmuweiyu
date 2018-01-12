@@ -37,7 +37,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     methods: {
       onSubmit(){
-
+        console.log("创建");
       }
     }
   }

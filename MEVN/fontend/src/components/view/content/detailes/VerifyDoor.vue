@@ -7,62 +7,74 @@
    <el-table-column
      prop="spec"
      label="型号"
-     width="150">
+     width="100">
    </el-table-column>
    <el-table-column
      prop="color"
      label="颜色"
-     width="150">
+     width="90">
    </el-table-column>
    <el-table-column label="门洞尺寸">
      <el-table-column
        prop="wallHeight"
        label="高"
-       width="120">
+       width="100">
      </el-table-column>
      <el-table-column
        prop="wallWidth"
        label="宽"
-       width="120">
+       width="100">
      </el-table-column>
      <el-table-column
        prop="wall"
        label="厚"
-       width="120">
+       width="100">
      </el-table-column>
    </el-table-column>
    <el-table-column label="门扇尺寸">
      <el-table-column
        prop="doorwayHeight"
        label="高"
-       width="120">
+       width="100">
      </el-table-column>
      <el-table-column
        prop="doorwayWidth"
        label="宽"
-       width="120">
+       width="100">
      </el-table-column>
    </el-table-column>
    <el-table-column
      prop="doorLine"
      label="门套线条类型"
-     width="150">
+     width="100">
    </el-table-column>
    <el-table-column
      prop="number"
      label="数量"
-     width="150">
+     width="80">
    </el-table-column>
    <el-table-column
      sortable
      prop="price"
      label="金额(元)"
-     width="120">
+     width="100">
    </el-table-column>
    <el-table-column
      prop="remark"
      label="备注"
      width="150">
+   </el-table-column>
+   <el-table-column
+     label="操作"
+     width="100">
+     <template scope="scope">
+       <el-button
+         @click.native.prevent="editRow(scope.$index, tableData)"
+         type="text"
+         size="small">
+         修改
+       </el-button>
+     </template>
    </el-table-column>
  </el-table>
 </div>
