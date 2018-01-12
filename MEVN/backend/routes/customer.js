@@ -141,33 +141,50 @@ router.get("/cart",function(req,res,next){
       });
     }else{
       var data =doc[0].generalGoodscart;
-      for(var i=0;i<data.length;i++){
-        console.log("weild"+i);
-        product.find({"_id":data[i].id},function(errP,docP){
-          if(errP){
-            res.json({
-              status:'0',
-              msg:errP.message
-            });
-          }else{
-            res.json({
-              status:'1',
-              msg:'get all classification suecess!',
-              result:{
-                count:doc.length,
-                products:data,
-              }
-            })
+      var cart=[];
+
+      function promise (cart,data){
+        return  new Promise((resolve,reject)=>{
+          var flag=0;
+          var length=data.length
+          for(var i=0;i<length;i++){
+            (function(i){
+              product.find({"_id":data[i].id},function(errP,docP){
+                if(errP){
+                  res.json({
+                    status:'0',
+                    msg:errP.message
+                  });
+                }else{
+                  flag++;
+                  if(flag==(length)){
+                    console.log(flag);
+                    resolve();
+                  }
+                  console.log("i"+i);
+                  console.log("flag"+flag);
+                  cart.push(docP[0]);
+                }
+              })
+            })(i)
           }
         })
       }
-      res.json({
-        status:'1',
-        msg:'get all classification suecess!',
-        result:{
-          count:doc.length,
-          products:data,
-        }
+      promise(cart,data).then(()=>{
+        console.log("真正的promise的后面--then");
+        console.log("cart:"+cart);
+        console.log("data:"+data);
+        // res.json({
+        //   status:'1',
+        //   msg:'get all classification suecess!',
+        //   result:{
+        //     count:doc.length,
+        //     products:data,
+        //     cartList:cart
+        //   }
+        // })
+      },()=>{
+        console.log("错？？");
       })
     }
   })
