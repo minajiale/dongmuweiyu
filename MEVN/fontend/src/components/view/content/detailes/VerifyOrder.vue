@@ -7,21 +7,40 @@
       <span>2017-08-23</span>
     </div>
     <Verify-general></Verify-general>
+    <div class="style">
+
+    </div>
     <Verify-door></Verify-door>
     <div class="">
       合计:
     </div>
-
-   <br>
    <el-form>
    <el-form-item>
      <el-button type="primary" @click="onSubmit">立即创建</el-button>
      <el-button>取消</el-button>
    </el-form-item>
  </el-form>
+ <el-dialog title="创建订单" :visible.sync="createOrder">
+   <el-form :model="orderStatus">
+     <el-form-item label="请输入商品单价">
+       <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
+     </el-form-item>
+   </el-form>
+   <div slot="footer" class="dialog-footer">
+     <el-button @click="addCartVisible = false">取 消</el-button>
+     <el-button type="primary" @click="handleCart">确 定</el-button>
+   </div>
+ </el-dialog>
   </div>
 </template>
-
+<style media="screen">
+  .style{
+    height: 30px;
+  }
+</style>
 <script>
 import VerifyDoor from './VerifyDoor.vue'
 import VerifyGeneral from './VerifyGeneral.vue'
@@ -33,11 +52,15 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     data() {
       return {
+        orderStatus:{
+          status:"欠款"
+        },
+        createOrder:false
       }
     },
     methods: {
       onSubmit(){
-        console.log("创建");
+        this.createOrder=true;
       }
     }
   }
