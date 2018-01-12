@@ -54,6 +54,21 @@
       </template>
     </el-table-column>
   </el-table>
+
+   <el-dialog title="加入购物车" :visible.sync="editGeneral">
+     <el-form :model="product">
+       <el-form-item label="请输入商品单价">
+         <el-input v-model="product.price" auto-complete="off"></el-input>
+       </el-form-item>
+       <el-form-item label="请输入商品数量，不输入为1">
+         <el-input v-model="product.number" auto-complete="off"></el-input>
+       </el-form-item>
+     </el-form>
+     <div slot="footer" class="dialog-footer">
+       <el-button @click="addCartVisible = false">取 消</el-button>
+       <el-button type="primary" @click="handleCart">确 定</el-button>
+     </div>
+   </el-dialog>
 </div>
 </template>
 
@@ -61,16 +76,26 @@
 export default {
   data () {
     return {
-              tableData: [
-                {
-                  name:"东沐花洒",
-                  code:"DM-30", //商品货号
-                  spec:"80*80", //规格
-                  price:"1900",//规定卖价
-                  num:1,
-                  unit:"个"
-                },
-            ]
+      editGeneral:false,
+      tableData: [
+        {
+          name:"东沐花洒",
+          code:"DM-30", //商品货号
+          spec:"80*80", //规格
+          price:"1900",//规定卖价
+          num:1,
+          unit:"个"
+        },
+    ],
+    product:
+      {
+        name:"东沐花洒",
+        code:"DM-30", //商品货号
+        spec:"80*80", //规格
+        price:"1900",//规定卖价
+        num:1,
+        unit:"个"
+      },
     }
   },
   computed: {},
@@ -81,6 +106,7 @@ export default {
   },
   methods: {
     editRow(index,row){
+      this.editGeneral=true;
       console.log(index);
       console.log(row);
     },

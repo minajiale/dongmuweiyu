@@ -77,6 +77,45 @@
      </template>
    </el-table-column>
  </el-table>
+
+ <el-dialog title="加入购物车" :visible.sync="editDoor">
+   <el-form :model="product">
+     <el-form-item label="请输入商品单价">
+       <el-input v-model="product.price" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品单价">
+       <el-input v-model="product.price" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品单价">
+       <el-input v-model="product.price" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+     <el-form-item label="请输入商品数量，不输入为1">
+       <el-input v-model="product.number" auto-complete="off"></el-input>
+     </el-form-item>
+   </el-form>
+   <div slot="footer" class="dialog-footer">
+     <el-button @click="addCartVisible = false">取 消</el-button>
+     <el-button type="primary" @click="handleCart">确 定</el-button>
+   </div>
+ </el-dialog>
 </div>
 </template>
 
@@ -84,6 +123,7 @@
 export default {
   data () {
     return {
+      editDoor:false,
       tableData3: [{
         spec:"型号",//型号
         color:"红色",//颜色
@@ -96,7 +136,20 @@ export default {
         number:"1",//数量
         price:"1983",//金额（元）
         remark:"lalalalala阿拉拉拉",//备注
-      }]
+      }],
+      product: {
+        spec:"型号",//型号
+        color:"红色",//颜色
+        doorwayHeight:"23",//门扇尺寸－高
+        doorwayWidth:"45",//门扇尺寸－宽
+        wallHeight: "4",//门洞尺寸－高
+        wallWidth: "3",//门洞尺寸－宽
+        wall:"1",     //门洞尺寸－墙厚
+        doorLine:"外白",//门套线类型
+        number:"1",//数量
+        price:"1983",//金额（元）
+        remark:"lalalalala阿拉拉拉",//备注
+      }
     }
   },
   computed: {},
@@ -106,6 +159,9 @@ export default {
     this.getDoorGoodscart();
   },
   methods: {
+    editRow(){
+      this.editDoor=true;
+    },
     getDoorGoodscart(){
       this.$http({
         method:"get",
