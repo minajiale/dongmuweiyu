@@ -156,6 +156,7 @@
 export default {
   data () {
     return {
+      all:0,
       editDoor:false,
       tableData3: [{
         spec:"型号",//型号
@@ -184,21 +185,32 @@ export default {
       }
     }
   },
-  computed: {
-    all:function(){
-      var amount=0;
-      this.tableData3.forEach(function(item,index,array){
-        amount= amount+ item.price*item.number
-      })
-      return amount
-    },
+  watch: {
+  // 如果 `tableData` 发生改变，这个函数就会运行
+    tableData3: function (newQuestion) {
+      this.getAllAmount()
+    }
   },
+  computed: {},
   ready () {},
   attached () {},
   mounted:function(){
     this.getDoorGoodscart();
   },
   methods: {
+    getAllAmount: _.debounce(
+      function(){
+        var amount=0;
+        this.tableData3.forEach(function(item,index,array){
+          amount= amount+ item.price*item.number
+        })
+        this.all=amount;
+        this.$emit("doorAomunt",amount);
+        return amount
+      },
+      // 这是我们为判定http请求完毕等待的毫秒数
+      100
+    ),
     editRow(){
       this.editDoor=true;
     },

@@ -237,7 +237,10 @@ router.get("/cart",function(req,res,next){
 })
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
-    customerId=req.cookies.customerId || '';
+    var customerId=req.cookies.customerId || '',
+        paied = req.body.paied,
+        allAmount=req.body.allAmount;
+
     customer.find({"_id":customerId},function(err,doc){
       if(err){
         res.json({
@@ -294,6 +297,10 @@ router.post("/insertGeneralGoods",function(req,res,next){
 
   }
 })
+//获得订单列表
+router.get("orders",function(req,res,next){
+
+});
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;

@@ -81,9 +81,11 @@
 </template>
 
 <script>
+import _ from 'lodash';
 export default {
   data () {
     return {
+      all:0,
       editGeneral:false,
       tableData: [
         {
@@ -102,21 +104,31 @@ export default {
       },
     }
   },
-  computed: {
-    all:function(){
-      var amount=0;
-      this.tableData.forEach(function(item,index,array){
-        amount= amount+ item.price*item.num
-      })
-      return amount
-    },
+  watch: {
+  // 如果 `tableData` 发生改变，这个函数就会运行
+    tableData: function (newQuestion) {
+      this.getAllAmount()
+    }
   },
+  computed: { },
   ready () {},
   attached () {},
   mounted:function(){
     this.queryCart();
   },
   methods: {
+    getAllAmount: _.debounce(
+      function(){
+        var amount=0;
+        this.tableData.forEach(function(item,index,array){
+          amount= amount+ item.price*item.num
+        })
+        this.$emit("generalAomunt",amount);
+        return amount
+      },
+      // 这是我们为判定http请求完毕等待的毫秒数
+      100
+    ),
     handleChange(value) {
       console.log(value);
     },

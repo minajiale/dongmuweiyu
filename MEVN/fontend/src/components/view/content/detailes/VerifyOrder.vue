@@ -6,13 +6,13 @@
     <div class="">
       <span>2017-08-23</span>
     </div>
-    <Verify-general></Verify-general>
+    <Verify-general @generalAomunt="getGeneralAomunt"></Verify-general>
     <div class="style">
 
     </div>
-    <Verify-door></Verify-door>
+    <Verify-door @doorAomunt="getDoorAmount"></Verify-door>
     <div class="">
-      合计:
+      合计:{{this.allAmount}}
     </div>
    <el-form>
    <el-form-item>
@@ -49,6 +49,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     data() {
       return {
+        allAmount:0,
         orderStatus:{
           status:1000
         },
@@ -56,6 +57,14 @@ import VerifyGeneral from './VerifyGeneral.vue'
       }
     },
     methods: {
+      getGeneralAomunt(generalAmount){
+        this.allAmount+=generalAmount
+        console.log("generalAmount"+generalAmount);
+      },
+      getDoorAmount(doorAmount){
+        this.allAmount+=doorAmount
+        console.log("doorAmount"+doorAmount);
+      },
       onSubmit(){
         this.createOrder=true;
       },
@@ -65,7 +74,8 @@ import VerifyGeneral from './VerifyGeneral.vue'
           method:"post",
           url:"/customer/createOrder",
           data:{
-            paied:this.orderStatus.status
+            paied:this.orderStatus.status,
+            allAmount:this.allAmount
           }
         }).then(res=>{
           this.$notify({
