@@ -318,7 +318,7 @@ router.post('/register', function(req, res, next) {
 })
 //根据电话查找某个用户
 router.get('/searchCostomer',function(req,res,next){
-  var phone = req.params('phone');
+  var phone = req.param('phone');
   customer.find({'phone':phone},function(err,doc){
     if(err){
       res.json({

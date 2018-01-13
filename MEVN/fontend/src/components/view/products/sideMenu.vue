@@ -16,7 +16,6 @@
           <span>{{classi.label}}</span>
         </template>
         <el-menu-item-group   v-for="subclassi in classi.children":key="subclassi._id" >
-          <!-- <template slot="title">分组一</template> -->
           <el-menu-item  v-on:click="handleClick(subclassi._id,classi._id)"  v-bind:index="subclassi._id">{{subclassi.label}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -45,6 +44,7 @@ export default {
   methods: {
     //点击一级菜单
     handleOpen(key, keyPath) {
+      alert(key)
       if(key==1){
         this.$emit('muenuClick',key)
       }

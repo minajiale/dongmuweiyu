@@ -75,14 +75,7 @@
         :prodictInit="prodictTemp">
         </component>
       </keep-alive>
-      <!-- <product-details
-        :isChange="true"
-        v-on:changeDialogFormVisible="watchDialogFormVisible"
-        :form="prodictTemp"
-        >
-      </product-details> -->
     </el-dialog>
-
     <el-dialog title="加入购物车" :visible.sync="addCartVisible">
       <el-form :model="product">
         <el-form-item label="请输入商品单价">
