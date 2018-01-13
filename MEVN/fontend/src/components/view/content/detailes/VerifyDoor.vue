@@ -147,7 +147,7 @@
    </div>
  </el-dialog>
  <div class="">
-   合计：{{this.all}}
+   合计(元)：{{this.all}}
  </div>
 </div>
 </template>
