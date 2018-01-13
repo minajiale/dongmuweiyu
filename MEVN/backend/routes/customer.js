@@ -247,7 +247,10 @@ router.post("/createOrder",function(req,res,next){
       }else{
         var DoorGoods = doc[0].DoorGoodscart;
         var generalGoodscart = doc[0].generalGoodscart;
+        console.log(DoorGoods);
+        console.log(generalGoodscart);
         var cart = DoorGoods.concat(generalGoodscart);
+        console.log(cart);
         customer.update(
         {"_id":customerId},
         {$push:{orderList:{"orderList":cart}}},

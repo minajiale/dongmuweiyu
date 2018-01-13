@@ -146,6 +146,9 @@
      <el-button type="primary" @click="handleCart">确 定</el-button>
    </div>
  </el-dialog>
+ <div class="">
+   合计：{{this.all}}
+ </div>
 </div>
 </template>
 
@@ -181,7 +184,15 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+    all:function(){
+      var amount=0;
+      this.tableData3.forEach(function(item,index,array){
+        amount= amount+ item.price*item.number
+      })
+      return amount
+    },
+  },
   ready () {},
   attached () {},
   mounted:function(){

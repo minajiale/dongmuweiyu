@@ -3,7 +3,6 @@
   <el-table
     :data="tableData"
     stripe
-    show-summary
     style="width: 100%">
     <el-table-column
       prop="name"
@@ -75,6 +74,9 @@
        <el-button type="primary" @click="handleCart">确 定</el-button>
      </div>
    </el-dialog>
+   <div class="">
+     合计(元)：{{this.all}}
+   </div>
 </div>
 </template>
 
@@ -100,7 +102,15 @@ export default {
       },
     }
   },
-  computed: {},
+  computed: {
+    all:function(){
+      var amount=0;
+      this.tableData.forEach(function(item,index,array){
+        amount= amount+ item.price*item.num
+      })
+      return amount
+    },
+  },
   ready () {},
   attached () {},
   mounted:function(){
