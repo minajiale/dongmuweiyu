@@ -66,13 +66,19 @@
    </el-table-column>
    <el-table-column
      label="操作"
-     width="100">
+     width="180">
      <template scope="scope">
        <el-button
          @click.native.prevent="editRow(scope.$index, tableData)"
          type="text"
          size="small">
          修改
+       </el-button>
+       <el-button
+         @click.native.prevent="deleteRow(scope.$index, tableData)"
+         type="text"
+         size="small">
+         删除
        </el-button>
      </template>
    </el-table-column>
@@ -82,55 +88,58 @@
    <el-form :model="product">
      <el-row :gutter="20">
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="颜色">
+           <el-input v-model="product.color" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门扇尺寸－高">
+           <el-input v-model="product.doorwayHeight" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门扇尺寸－宽">
+           <el-input v-model="product.doorwayWidth" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
      </el-row>
      <el-row :gutter="20">
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门洞尺寸－高">
+           <el-input v-model="product.wallHeight" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门洞尺寸－宽">
+           <el-input v-model="product.wallWidth" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门洞尺寸－墙厚">
+           <el-input v-model="product.wall" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
      </el-row>
      <el-row :gutter="20">
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="门套线类型">
+           <el-input v-model="product.doorLine" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
-           <el-input v-model="product.price" auto-complete="off"></el-input>
+         <el-form-item label="数量">
+           <el-input-number v-model="product.number" @change="handleChange" :min="0" ></el-input-number>
          </el-form-item>
        </el-col>
        <el-col :span="8">
-         <el-form-item label="请输入商品单价">
+         <el-form-item label="单价">
            <el-input v-model="product.price" auto-complete="off"></el-input>
          </el-form-item>
        </el-col>
      </el-row>
+     <el-form-item label="备注">
+       <el-input v-model="product.remark" auto-complete="off"></el-input>
+     </el-form-item>
    </el-form>
    <div slot="footer" class="dialog-footer">
      <el-button @click="addCartVisible = false">取 消</el-button>
@@ -159,7 +168,6 @@ export default {
         remark:"lalalalala阿拉拉拉",//备注
       }],
       product: {
-        spec:"型号",//型号
         color:"红色",//颜色
         doorwayHeight:"23",//门扇尺寸－高
         doorwayWidth:"45",//门扇尺寸－宽

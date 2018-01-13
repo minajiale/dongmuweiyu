@@ -51,46 +51,24 @@
           size="small">
           修改
         </el-button>
+        <el-button
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          type="text"
+          size="small">
+          删除
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
 
-   <el-dialog title="加入购物车" :visible.sync="editGeneral">
+   <el-dialog title="修改订单" :visible.sync="editGeneral">
      <el-form :model="product">
-       <el-row :gutter="20">
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-       </el-row>
-       <el-row :gutter="20">
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-         <el-col :span="8">
-           <el-form-item label="请输入商品单价">
-             <el-input v-model="product.price" auto-complete="off"></el-input>
-           </el-form-item>
-         </el-col>
-       </el-row>
+       <el-form-item label="请输入商品单价">
+         <el-input v-model="product.price" auto-complete="off"></el-input>
+       </el-form-item>
+       <el-form-item label="请输入商品数量">
+         <el-input-number v-model="product.num" @change="handleChange" :min="0" ></el-input-number>
+       </el-form-item>
      </el-form>
      <div slot="footer" class="dialog-footer">
        <el-button @click="addCartVisible = false">取 消</el-button>
@@ -117,12 +95,8 @@ export default {
     ],
     product:
       {
-        name:"东沐花洒",
-        code:"DM-30", //商品货号
-        spec:"80*80", //规格
         price:"1900",//规定卖价
         num:1,
-        unit:"个"
       },
     }
   },
@@ -133,6 +107,9 @@ export default {
     this.queryCart();
   },
   methods: {
+    handleChange(value) {
+      console.log(value);
+    },
     editRow(index,row){
       this.editGeneral=true;
       console.log(index);

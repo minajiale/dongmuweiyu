@@ -184,7 +184,7 @@ router.get("/DoorGoodscart",function(req,res,next){
 });
 //根据顾客ID查询购物车中的普通货物
 router.get("/cart",function(req,res,next){
-  var customerId=req.cookies.customerId;
+  var customerId=req.cookies.customerId || '';
   customer.find({"_id":customerId},function(err,doc){
     if(err){
       res.json({
@@ -237,35 +237,44 @@ router.get("/cart",function(req,res,next){
 })
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
-    customerId=req.cookies.customerId;
-    customer.update(
-    {"_id":customerId},
-    {$push:{orderList:{"time":new Date()}}},
-    // update:{$push:{cartList:{ $currentDate:{time:true}}}},
-    function(err,doc){
-    if(err){
-      res.json({
-        status:1,
-        msg:err.message,
-        result:'',
-      })
-    }else{
-      if(doc.nModified != 0){
-        //将订单的id存储在session中，方便后续的加入购物车
+    customerId=req.cookies.customerId || '';
+    customer.find({"_id":customerId},function(err,doc){
+      if(err){
         res.json({
-          status:0,
-          msg:"创建订单成功，请向该订单添加商品",
-          result:doc
-        })
+          status:'0',
+          msg:err.message
+        });
       }else{
-        res.json({
-          status:1,
-          msg:"err3.message",
-          result:''
-        })
-      }
-    }
-  })
+        var DoorGoods = doc[0].DoorGoodscart;
+        var generalGoodscart = doc[0].generalGoodscart;
+        var cart = DoorGoods.concat(generalGoodscart);
+        customer.update(
+        {"_id":customerId},
+        {$push:{orderList:{"orderList":cart}}},
+        function(err,doc){
+        if(err){
+          res.json({
+            status:1,
+            msg:err.message,
+            result:'',
+          })
+        }else{
+          if(doc.nModified != 0){
+            res.json({
+              status:0,
+              msg:"创建订单成功",
+              result:doc
+            })
+          }else{
+            res.json({
+              status:1,
+              msg:"err3.message",
+              result:''
+            })
+          }
+        }
+      })
+      }})
 })
 //根据顾客ID和表单 插入普通订单 //暂时无用
 router.post("/insertGeneralGoods",function(req,res,next){
@@ -306,7 +315,7 @@ router.post('/register', function(req, res, next) {
 })
 //根据电话查找某个用户
 router.get('/searchCostomer',function(req,res,next){
-  var phone = req.param('phone');
+  var phone = req.params('phone');
   customer.find({'phone':phone},function(err,doc){
     if(err){
       res.json({

@@ -32,14 +32,14 @@ var customserSchema = new mongoose.Schema({
       "remark":String,//备注
     }],
   "orderList":[{
-    "generalGoodscart":[ //普通销售清单
+    "generalGoodsOrder":[ //普通销售清单
       {
         "id":String,
         "salePrice":String,// 实际上卖的金额
         "saleNumber":String,//卖的数量
       }
     ],
-    "DoorGoodscart":[ //定们单
+      "DoorGoodsOrder":[ //定们单
         {
         "spec":String,//型号
         "color":String,//颜色

@@ -58,6 +58,27 @@ import VerifyGeneral from './VerifyGeneral.vue'
     methods: {
       onSubmit(){
         this.createOrder=true;
+      },
+      handleCart(){
+        this.createOrder=false
+        this.$http({
+          method:"post",
+          url:"/customer/createOrder",
+          data:{
+            paied:this.orderStatus.status
+          }
+        }).then(res=>{
+          this.$notify({
+             title: '成功',
+             message: '创建订单成功',
+             type: 'success'
+           });
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '加入购物车失败'
+          });
+        })
       }
     }
   }
