@@ -160,19 +160,6 @@ export default {
     return {
       all:0,
       editDoor:false,
-      tableData3: [{
-        spec:"型号",//型号
-        color:"红色",//颜色
-        doorwayHeight:"23",//门扇尺寸－高
-        doorwayWidth:"45",//门扇尺寸－宽
-        wallHeight: "4",//门洞尺寸－高
-        wallWidth: "3",//门洞尺寸－宽
-        wall:"1",     //门洞尺寸－墙厚
-        doorLine:"外白",//门套线类型
-        number:"1",//数量
-        price:"1983",//金额（元）
-        remark:"lalalalala阿拉拉拉",//备注
-      }],
       product: {
         color:"红色",//颜色
         doorwayHeight:"23",//门扇尺寸－高
@@ -197,7 +184,6 @@ export default {
   ready () {},
   attached () {},
   mounted:function(){
-    this.getDoorGoodscart();
   },
   methods: {
     getAllAmount: _.debounce(
@@ -216,21 +202,11 @@ export default {
     editRow(){
       this.editDoor=true;
     },
-    getDoorGoodscart(){
-      this.$http({
-        method:"get",
-        url:"/customer/DoorGoodscart"
-      }).then(res=>{
-        this.tableData3=res.data.result.DoorGoods
-      },error=>{
-        this.$notify.error({
-          title: '错误',
-          message: '货物定门单失败，请联系管理员'
-        });
-      })
-    }
   },
-  components: {}
+  components: {},
+  props: {
+    tableData3:Array
+  },
 }
 </script>
 

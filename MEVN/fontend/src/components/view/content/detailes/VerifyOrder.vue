@@ -6,11 +6,11 @@
     <div class="">
       <span>2017-08-23</span>
     </div>
-    <Verify-general @generalAomunt="getGeneralAomunt"></Verify-general>
+    <Verify-general @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"></Verify-general>
     <div class="style">
 
     </div>
-    <Verify-door @doorAomunt="getDoorAmount"></Verify-door>
+    <Verify-door @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3"></Verify-door>
     <div class="">
       合计:{{this.allAmount}}
     </div>
@@ -49,12 +49,30 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     data() {
       return {
+        tableData3: [{
+          spec:"型号",//型号
+          color:"红色",//颜色
+          doorwayHeight:"23",//门扇尺寸－高
+          doorwayWidth:"45",//门扇尺寸－宽
+          wallHeight: "4",//门洞尺寸－高
+          wallWidth: "3",//门洞尺寸－宽
+          wall:"1",     //门洞尺寸－墙厚
+          doorLine:"外白",//门套线类型
+          number:"1",//数量
+          price:"1983",//金额（元）
+          remark:"lalalalala阿拉拉拉",//备注
+        }],
+        tableData: [],//普通货物
         allAmount:0,
         orderStatus:{
           status:1000
         },
         createOrder:false
       }
+    },
+    mounted:function(){
+      this.getDoorGoodscart();
+      this.queryCart();
     },
     methods: {
       getGeneralAomunt(generalAmount){
@@ -67,6 +85,45 @@ import VerifyGeneral from './VerifyGeneral.vue'
       },
       onSubmit(){
         this.createOrder=true;
+      },
+      queryCart(){
+        this.$http({
+          url:'/customer/cart',
+        }).then(res=>{
+          var data = res.data.result.products;
+          var cart = res.data.result.cartList;
+          var result=[];
+          for(var m =0;m<data.length;m++){
+            for(var n =0;n<cart.length;n++){
+              if(data[m].id == cart[n]._id){
+                result[m] = {};
+                result[m].proId=data[m].id;
+                result[m].price=data[m].salePrice;
+                result[m].num=data[m].saleNumber;
+                // result[m].unit=data[m].unit;
+                result[m].name=cart[n].name;
+                result[m].spec=cart[n].spec;
+                result[m].code=cart[n].code;
+              }
+            }
+          }
+          this.tableData=result
+        },error=>{
+          console.log("查询不到数据");
+        })
+      },
+      getDoorGoodscart(){
+        this.$http({
+          method:"get",
+          url:"/customer/DoorGoodscart"
+        }).then(res=>{
+          this.tableData3=res.data.result.DoorGoods
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '货物定门单失败，请联系管理员'
+          });
+        })
       },
       handleCart(){
         this.createOrder=false

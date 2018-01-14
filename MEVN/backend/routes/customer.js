@@ -194,15 +194,26 @@ router.get("/DoorGoodscart",function(req,res,next){
         msg:err.message
       });
     }else{
-      var DoorGoods = doc[0].DoorGoodscart
-      res.json({
-        status:'1',
-        msg:'get all classification suecess!',
-        result:{
-          count:DoorGoods.length,
-          DoorGoods:DoorGoods,
-        }
-      })
+      var DoorGoods = doc[0].DoorGoodscart || ''
+      if(DoorGoods != "" && DoorGoods != undefined){
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:DoorGoods.length,
+            DoorGoods:DoorGoods,
+          }
+        })
+      }else{
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:DoorGoods.length,
+            DoorGoods:[],
+          }
+        })
+      }
     }})
 });
 //根据顾客ID查询购物车中的普通货物
@@ -216,9 +227,10 @@ router.get("/cart",function(req,res,next){
       });
     }else{
       var data =doc[0].generalGoodscart || '';
+      var cart=[];
+
       if(data != '' && data!= undefined){
         console.log("有数据");
-        var cart=[];
         function promise (cart,data){
           return  new Promise((resolve,reject)=>{
             var flag=0;
