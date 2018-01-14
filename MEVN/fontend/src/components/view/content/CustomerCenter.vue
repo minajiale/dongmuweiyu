@@ -1,10 +1,11 @@
 <template lang="html">
 <div class="">
-  顾客中心
+  <Verify-order></Verify-order>
 </div>
 </template>
 
 <script>
+import VerifyOrder from './detailes/VerifyOrder.vue'
 export default {
   data () {
     return {}
@@ -13,7 +14,9 @@ export default {
   ready () {},
   attached () {},
   methods: {},
-  components: {}
+  components: {
+    VerifyOrder
+  }
 }
 </script>
 

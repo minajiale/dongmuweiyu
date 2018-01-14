@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="personal-info">
-      <h2>   刘联友 </h2><span>赵湾镇 &nbsp &nbsp</span><span>15929159416</span>
+      <h2> 刘联友 </h2><span>赵湾镇 &nbsp &nbsp</span><span>15929159416</span>
     </div>
     <div class="">
       <span>2017-08-23</span>
