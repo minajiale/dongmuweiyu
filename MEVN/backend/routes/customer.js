@@ -435,9 +435,26 @@ router.post("/createOrder",function(req,res,next){
         }
       }})
 })
-//
-router.post("/insertGeneralGoods",function(req,res,next){
-
+//根据某个顾客ID查询所有的订单
+router.get("/findOrderByCusId",function(req,res,next){
+  var customerId=req.cookies.customerId || '';
+  customer.find({"_id":customerId},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      var Orders = doc[0].orderList
+      res.json({
+        status:'1',
+        msg:'get all classification suecess!',
+        result:{
+          count:Orders.length,
+          Orders:Orders,
+        }
+      })
+    }})
 })
 //获得订单列表
 router.get("orders",function(req,res,next){
