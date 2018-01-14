@@ -195,7 +195,6 @@ router.get("/DoorGoodscart",function(req,res,next){
       });
     }else{
       var DoorGoods = doc[0].DoorGoodscart
-      console.log("DoorGoods",DoorGoods);
       res.json({
         status:'1',
         msg:'get all classification suecess!',
