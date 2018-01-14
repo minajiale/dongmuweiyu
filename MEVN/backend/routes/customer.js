@@ -460,19 +460,22 @@ router.get("/findOrderByCusId",function(req,res,next){
       var Orders = doc[0].orderList
       var result=[];
       var orderLength = Orders.length;
+
       function promise(result,Orders,orderLength){
         var flag=0;
         return new Promise((resolve,reject)=>{
           Orders.forEach((item,index,array)=>{
             result[index]={};
             result[index].DoorGoodsOrder = item.DoorGoodsOrder;
-            result[index].generalGoodsOrder = item.generalGoodsOrder;
             result[index].id = item._id;
+            result[index].general=[];
+
+            // result[index].generalGoodsOrder = item.generalGoodsOrder;
             var data =item.generalGoodsOrder || '';
-            result[index].generalGoods = [];
+            // result[index].generalGoods = [];
             var temp=index;
-            var length=data.length;
             data.forEach(function(item,index,array){
+              var temp2 = index;
               product.find({"_id":item.id},function(errP,docP){
                 if(errP){
                   res.json({
@@ -480,10 +483,23 @@ router.get("/findOrderByCusId",function(req,res,next){
                     msg:errP.message
                   });
                 }else{
-                  result[temp].generalGoods.push(docP[0]);
+                  data.forEach((item,index,array)=>{
+                    if(item.id == docP[0]._id){
+                      var temp3 = result[temp].general[temp2] = {};
+                      temp3.proId=item.id;
+                      temp3.price=item.salePrice;
+                      temp3.num=item.saleNumber;
+                      // result[m].unit=data[m].unit;
+                      temp3.name=docP[0].name;
+                      temp3.spec=docP[0].spec;
+                      temp3.code=docP[0].code;
+                    }
+                  })
+                  // result[temp].generalGoods.push(docP[0]);
                   flag++;
                   console.log(flag);
-                  if(flag==(length*orderLength)){
+                  // console.log("length*orderLength"+length*orderLength);
+                  if(flag==orderLength){
                     console.log(flag);
                     resolve();
                   }
