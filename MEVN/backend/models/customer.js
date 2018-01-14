@@ -39,20 +39,20 @@ var customserSchema = new mongoose.Schema({
         "saleNumber":String,//卖的数量
       }
     ],
-      "DoorGoodsOrder":[ //定们单
-        {
-        "spec":String,//型号
-        "color":String,//颜色
-        "doorwayHeight":String,//门扇尺寸－高
-        "doorwayWidth":String,//门扇尺寸－宽
-        "wallHeight": String,//门洞尺寸－高
-        "wallWidth": String,//门洞尺寸－宽
-        "wall":String,     //门洞尺寸－墙厚
-        "doorLine":String,//门套线类型
-        "number":String,//数量
-        "price":String,//金额（元）
-        "remark":String,//备注
-      }],
+    "DoorGoodsOrder":[ //定们单
+      {
+      "spec":String,//型号
+      "color":String,//颜色
+      "doorwayHeight":String,//门扇尺寸－高
+      "doorwayWidth":String,//门扇尺寸－宽
+      "wallHeight": String,//门洞尺寸－高
+      "wallWidth": String,//门洞尺寸－宽
+      "wall":String,     //门洞尺寸－墙厚
+      "doorLine":String,//门套线类型
+      "number":String,//数量
+      "price":String,//金额（元）
+      "remark":String,//备注
+    }],
   }]
 });
 

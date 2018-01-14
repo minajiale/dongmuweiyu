@@ -49,19 +49,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     data() {
       return {
-        tableData3: [{
-          spec:"型号",//型号
-          color:"红色",//颜色
-          doorwayHeight:"23",//门扇尺寸－高
-          doorwayWidth:"45",//门扇尺寸－宽
-          wallHeight: "4",//门洞尺寸－高
-          wallWidth: "3",//门洞尺寸－宽
-          wall:"1",     //门洞尺寸－墙厚
-          doorLine:"外白",//门套线类型
-          number:"1",//数量
-          price:"1983",//金额（元）
-          remark:"lalalalala阿拉拉拉",//备注
-        }],
+        tableData3: [],
         tableData: [],//普通货物
         allAmount:0,
         orderStatus:{

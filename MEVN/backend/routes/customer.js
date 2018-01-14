@@ -458,13 +458,53 @@ router.get("/findOrderByCusId",function(req,res,next){
       });
     }else{
       var Orders = doc[0].orderList
-      res.json({
-        status:'1',
-        msg:'get all classification suecess!',
-        result:{
-          count:Orders.length,
-          Orders:Orders,
-        }
+      var result=[];
+      var orderLength = Orders.length;
+      function promise(result,Orders,orderLength){
+        var flag=0;
+        return new Promise((resolve,reject)=>{
+          Orders.forEach((item,index,array)=>{
+            result[index]={};
+            result[index].DoorGoodsOrder = item.DoorGoodsOrder;
+            result[index].generalGoodsOrder = item.generalGoodsOrder;
+            result[index].id = item._id;
+            var data =item.generalGoodsOrder || '';
+            result[index].generalGoods = [];
+            var temp=index;
+            var length=data.length;
+            data.forEach(function(item,index,array){
+              product.find({"_id":item.id},function(errP,docP){
+                if(errP){
+                  res.json({
+                    status:'0',
+                    msg:errP.message
+                  });
+                }else{
+                  result[temp].generalGoods.push(docP[0]);
+                  flag++;
+                  console.log(flag);
+                  if(flag==(length*orderLength)){
+                    console.log(flag);
+                    resolve();
+                  }
+                }
+              })
+            })
+          })
+        })
+      }
+      promise(result,Orders,orderLength).then(()=>{
+        console.log("你说呢？？？joson");
+        res.json({
+          status:'1',
+          msg:'get all classification suecess!',
+          result:{
+            count:doc.length,
+            Orders:result,
+          }
+        })
+      },()=>{
+        console.log("错？？");
       })
     }})
 })

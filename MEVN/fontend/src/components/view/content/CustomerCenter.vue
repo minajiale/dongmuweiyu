@@ -8,12 +8,14 @@
         <span>2017-08-23</span>
       </div>
     </div>
-    <div class="">
-      <Verify-general @generalAomunt="getGeneralAomunt"></Verify-general>
+    <div class="" v-for="order in orders">
+      普通：{{order.generalGoodsOrder}}
+      定门单：{{order.DoorGoodsOrder}}
+      <!-- <Verify-general table-data="order.generalGoodsOrder" @generalAomunt="getGeneralAomunt"></Verify-general>
       <div class="style"></div>
-      <Verify-door @doorAomunt="getDoorAmount"></Verify-door>
+      <Verify-door table-data3="order.DoorGoodsOrder" @doorAomunt="getDoorAmount"></Verify-door> -->
     </div>
-  
+
     <div class="">
       合计:{{this.allAmount}}
     </div>
@@ -36,7 +38,9 @@ import VerifyDoor from './detailes/VerifyDoor.vue'
 import VerifyGeneral from './detailes/VerifyGeneral.vue'
 export default {
   data () {
-    return {}
+    return {
+      orders:[]
+    }
   },
   computed: {},
   ready () {},
@@ -49,7 +53,7 @@ export default {
       this.$http({
         url:"/customer/findOrderByCusId"
       }).then(res=>{
-        console.log(res.data.result.Orders);
+        this.orders=res.data.result.Orders;
       },error=>{
         this.$notify.error({
           title: '错误',
