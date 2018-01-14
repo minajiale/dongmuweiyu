@@ -468,6 +468,7 @@ router.get("/findOrderByCusId",function(req,res,next){
             result[index]={};
             result[index].DoorGoodsOrder = item.DoorGoodsOrder;
             result[index].id = item._id;
+            result[index].time = item._id.getTimestamp();
             result[index].general=[];
 
             // result[index].generalGoodsOrder = item.generalGoodsOrder;

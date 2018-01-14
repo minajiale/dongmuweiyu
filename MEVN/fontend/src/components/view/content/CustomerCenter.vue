@@ -9,9 +9,12 @@
       </div>
     </div>
     <div class="" v-for="order in orders">
-      <Verify-general table-data="order.generalGoodsOrder" @generalAomunt="getGeneralAomunt"></Verify-general>
+      <div class="" v-if="order.DoorGoodsOrder.length != 0 || order.general.length != 0">
+        {{order.time}}
+      </div>
+      <Verify-general  v-if="order.general.length != 0" v-bind:table-data="order.general" @generalAomunt="getGeneralAomunt"></Verify-general>
       <div class="style"></div>
-      <Verify-door table-data3="order.DoorGoodsOrder" @doorAomunt="getDoorAmount"></Verify-door>
+      <Verify-door v-if="order.DoorGoodsOrder.length != 0" v-bind:table-data3="order.DoorGoodsOrder" @doorAomunt="getDoorAmount"></Verify-door>
     </div>
 
     <div class="">
