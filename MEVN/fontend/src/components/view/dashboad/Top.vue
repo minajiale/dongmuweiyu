@@ -110,7 +110,7 @@ import axios from "axios"
                     })
                 }
                 if(command="me"){
-                  alert("me")
+                  console.log("me");
                 }
             },
           updateMessage(){
