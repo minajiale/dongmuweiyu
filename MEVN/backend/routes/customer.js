@@ -14,7 +14,7 @@ mongoose.connection.on("error",function(){
 mongoose.connection.on("disconnected",function(){
   console.log("mongoose connect disconnected");
 })
-//取得这张表中所有数据
+//取得顾客列表
 router.get("/",function(req,res,next){
   customer.find({},function(err,doc){
     if(err){
@@ -195,6 +195,7 @@ router.get("/DoorGoodscart",function(req,res,next){
       });
     }else{
       var DoorGoods = doc[0].DoorGoodscart
+      console.log("DoorGoods",DoorGoods);
       res.json({
         status:'1',
         msg:'get all classification suecess!',
@@ -215,46 +216,60 @@ router.get("/cart",function(req,res,next){
         msg:err.message
       });
     }else{
-      var data =doc[0].generalGoodscart;
-      var cart=[];
-      function promise (cart,data){
-        return  new Promise((resolve,reject)=>{
-          var flag=0;
-          var length=data.length
-          for(var i=0;i<length;i++){
-            (function(i){
-              product.find({"_id":data[i].id},function(errP,docP){
-                if(errP){
-                  res.json({
-                    status:'0',
-                    msg:errP.message
-                  });
-                }else{
-                  flag++;
-                  if(flag==(length)){
-                    console.log(flag);
-                    resolve();
+      var data =doc[0].generalGoodscart || '';
+      if(data != '' && data!= undefined){
+        console.log("有数据");
+        var cart=[];
+        function promise (cart,data){
+          return  new Promise((resolve,reject)=>{
+            var flag=0;
+            var length=data.length
+            for(var i=0;i<length;i++){
+              (function(i){
+                product.find({"_id":data[i].id},function(errP,docP){
+                  if(errP){
+                    res.json({
+                      status:'0',
+                      msg:errP.message
+                    });
+                  }else{
+                    flag++;
+                    if(flag==(length)){
+                      console.log(flag);
+                      resolve();
+                    }
+                    cart.push(docP[0]);
                   }
-                  cart.push(docP[0]);
-                }
-              })
-            })(i)
-          }
+                })
+              })(i)
+            }
+          })
+        }
+        promise(cart,data).then(()=>{
+          res.json({
+            status:'1',
+            msg:'get all classification suecess!',
+            result:{
+              count:doc.length,
+              products:data,
+              cartList:cart
+            }
+          })
+        },()=>{
+          console.log("错？？");
         })
-      }
-      promise(cart,data).then(()=>{
+      }else{
+        console.log("没有普通货物");
         res.json({
           status:'1',
           msg:'get all classification suecess!',
           result:{
             count:doc.length,
             products:data,
-            cartList:cart
+            cartList:""
           }
         })
-      },()=>{
-        console.log("错？？");
-      })
+      }
     }
   })
 })
