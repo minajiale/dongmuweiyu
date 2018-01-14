@@ -23,12 +23,35 @@ router.get("/",function(req,res,next){
         msg:err.message
       });
     }else{
+      var customer=[];
+      doc.forEach(function(item,index,array){
+        customer[index]={};
+        customer[index].time=item._id.getTimestamp();
+        customer[index].name=item.name;
+        customer[index].phone=item.phone;
+        customer[index].all=item.all;
+        customer[index].paied=item.paied;
+        if(item.all>item.paied){
+          customer[index].status="欠款";
+          customer[index].owned=item.all-item.paied;
+        }
+        if(item.all=item.paied){
+          customer[index].status="完成";
+          customer[index].owned=0;
+        }
+        if(item.all<item.paied){
+          customer[index].status="出错订单";
+        }
+        if(item.status==1){
+          customer[index].status="作废订单";
+        }
+      })
       res.json({
         status:'1',
         msg:'get all order suecess!',
         result:{
           count:doc.length,
-          allClass:doc
+          allCustomer:customer
         }
       })
     }
@@ -398,20 +421,9 @@ router.post("/createOrder",function(req,res,next){
         }
       }})
 })
-//根据顾客ID和表单 插入普通订单 //暂时无用
+//
 router.post("/insertGeneralGoods",function(req,res,next){
-  var param=req.body;
-  let oneNomalProduct={};
-  // 把GoodsListId和time放在session里面，设置时间为绝对时间，当天晚上12点过期
-  //判断session，如果时间有效，则加入到已有的generalGoods
-  //否则新建generalGoods
-  req.session.cartId
-  if(req.session.cartId){
-    //插入generalGoods.lists数组中
-  }else{
-    //新建generalGoods
 
-  }
 })
 //获得订单列表
 router.get("orders",function(req,res,next){

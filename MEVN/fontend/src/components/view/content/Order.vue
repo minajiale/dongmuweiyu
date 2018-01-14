@@ -25,16 +25,19 @@
         <template scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="订单总金额">
-              <span>{{ props.row.name }}</span>
+              <span>{{ props.row.all }}</span>
             </el-form-item>
             <el-form-item label="欠款金额">
-              <span>{{ props.row.shop }}</span>
+              <span>{{ props.row.owned }}</span>
+            </el-form-item>
+            <el-form-item label="已付金额">
+              <span>{{ props.row.paied }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column
-      prop="date"
+      prop="time"
       label="日期"
       sortable
       width="180">
@@ -49,7 +52,7 @@
       </el-table-column>
       <el-table-column
         label="订单状态"
-        prop="state">
+        prop="status">
       </el-table-column>
       <el-table-column
       label="操作"
@@ -98,62 +101,38 @@
         order:{
           paied:100
         },
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
         formLabelWidth: '120px',
-
         dialogFormVisible: false,
         tableData5: [{
-          date: '2016-05-02',
-          id: '12987122',
-          name: '尤玉溪',
-          phone: '13177918633',
-          state: '进行中',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          date: '2016-05-02',
-          id: '12987123',
-          name: '将大大',
-          phone: '15929159416',
-          state: '完成',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          date: '2016-05-02',
-          id: '12987125',
-          name: '隔壁家的',
-          phone: '13607030062',
-          state: '欠款',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          date: '2016-05-02',
-          id: '12987126',
-          name: '尤玉溪',
-          phone: '13177918633',
-          state: '进行中',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
+          time:"2018-1-10",
+          name:"刘那",
+          phone:"1111111",
+          status:"完成",
+          all:19000,
+          owned:"1000",
+          paied:"0"
         }]
       }
     },
     components:{
       orderDetails
     },
+    mounted: function(){
+      this.getCustomers();
+    },
     methods:{
+      getCustomers(){
+        this.$http({
+          url:"/customer",
+        }).then(res=>{
+          this.tableData5=res.data.result.allCustomer;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
       handleClick(){},
       handleEdit(index, row) {
         this.dialogFormVisible=true;

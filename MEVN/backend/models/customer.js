@@ -9,7 +9,7 @@ var customserSchema = new mongoose.Schema({
   "address":Array,
   "all":String,//总的金额
   "paied":String,//已经付款金额
-  "status":String,//订单状态0表示完成1表示欠款-1表示作废（顾客没拿货）
+  "status":String,//订单状态0表示正常1表示作废（顾客没拿货）
   "generalGoodscart":[ //普通销售清单
     {
       "id":String,
