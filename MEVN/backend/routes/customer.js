@@ -238,9 +238,8 @@ router.get("/cart",function(req,res,next){
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
-        paied = req.body.paied,
-        allAmount=req.body.allAmount;
-
+        paiedFirst = req.body.paied || '',
+        allAmount=req.body.allAmount || '';
     customer.find({"_id":customerId},function(err,doc){
       if(err){
         res.json({
@@ -250,36 +249,153 @@ router.post("/createOrder",function(req,res,next){
       }else{
         var DoorGoods = doc[0].DoorGoodscart;
         var generalGoodscart = doc[0].generalGoodscart;
-        console.log(DoorGoods);
-        console.log(generalGoodscart);
-        var cart = DoorGoods.concat(generalGoodscart);
-        console.log(cart);
-        customer.update(
-        {"_id":customerId},
-        {$push:{orderList:{"orderList":cart}}},
-        function(err,doc){
-        if(err){
-          res.json({
-            status:1,
-            msg:err.message,
-            result:'',
-          })
-        }else{
-          if(doc.nModified != 0){
-            res.json({
-              status:0,
-              msg:"创建订单成功",
-              result:doc
-            })
-          }else{
+        if(DoorGoods != undefined && generalGoodscart== undefined){
+          customer.update(
+          {"_id":customerId},
+          {$push:{orderList:{"DoorGoodsOrder":DoorGoods}}},
+          function(err,doc){
+          if(err){
             res.json({
               status:1,
-              msg:"err3.message",
-              result:''
+              msg:err.message,
+              result:'',
             })
+          }else{
+            if(doc.nModified != 0){
+              customer.update(
+              {"_id":customerId},
+              {$set:{"all":allAmount,"paied":paiedFirst,"generalGoodscart":[],"DoorGoodscart":[]}},
+              function(err,doc){
+              if(err){
+                res.json({
+                  status:1,
+                  msg:err.message,
+                  result:'',
+                })
+              }else{
+                if(doc.nModified != 0){
+                  res.json({
+                    status:0,
+                    msg:"创建订单成功",
+                    result:doc
+                  })
+                }else{
+                  res.json({
+                    status:1,
+                    msg:"err3.message",
+                    result:''
+                  })
+                }
+              }
+            })
+            }else{
+              res.json({
+                status:1,
+                msg:"err3.message",
+                result:''
+              })
+            }
           }
+        });
         }
-      })
+        if(DoorGoods == undefined && generalGoodscart != undefined){
+          customer.update(
+          {"_id":customerId},
+          {$push:{orderList:{"generalGoodsOrder":generalGoodscart}}},
+          function(err,doc){
+          if(err){
+            res.json({
+              status:1,
+              msg:err.message,
+              result:'',
+            })
+          }else{
+            if(doc.nModified != 0){
+              customer.update(
+              {"_id":customerId},
+              {$set:{"all":allAmount,"paied":paiedFirst,"generalGoodscart":[],"DoorGoodscart":[]}},
+              function(err,doc){
+              if(err){
+                res.json({
+                  status:1,
+                  msg:err.message,
+                  result:'',
+                })
+              }else{
+                if(doc.nModified != 0){
+                  res.json({
+                    status:0,
+                    msg:"创建订单成功",
+                    result:doc
+                  })
+                }else{
+                  res.json({
+                    status:1,
+                    msg:"err3.message",
+                    result:''
+                  })
+                }
+              }
+            })
+            }else{
+              res.json({
+                status:1,
+                msg:"err3.message",
+                result:''
+              })
+            }
+          }
+        })
+        }
+        if(DoorGoods != undefined && generalGoodscart != undefined){
+          customer.update(
+          {"_id":customerId},
+          {$push:{orderList:{"generalGoodsOrder":generalGoodscart,"DoorGoodsOrder":DoorGoods}}},
+          function(err,doc){
+          if(err){
+            res.json({
+              status:1,
+              msg:err.message,
+              result:'',
+            })
+          }else{
+            if(doc.nModified != 0){
+              customer.update(
+              {"_id":customerId},
+              {$set:{"all":allAmount,"paied":paiedFirst,"generalGoodscart":[],"DoorGoodscart":[]}},
+              function(err,doc){
+              if(err){
+                res.json({
+                  status:1,
+                  msg:err.message,
+                  result:'',
+                })
+              }else{
+                if(doc.nModified != 0){
+                  res.json({
+                    status:0,
+                    msg:"创建订单成功",
+                    result:doc
+                  })
+                }else{
+                  res.json({
+                    status:1,
+                    msg:"err3.message",
+                    result:''
+                  })
+                }
+              }
+            })
+            }else{
+              res.json({
+                status:1,
+                msg:"err3.message",
+                result:''
+              })
+            }
+          }
+        })
+        }
       }})
 })
 //根据顾客ID和表单 插入普通订单 //暂时无用

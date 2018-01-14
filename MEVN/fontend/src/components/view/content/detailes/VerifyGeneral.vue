@@ -123,8 +123,8 @@ export default {
         this.tableData.forEach(function(item,index,array){
           amount= amount+ item.price*item.num
         })
+        this.all=amount;
         this.$emit("generalAomunt",amount);
-        return amount
       },
       // 这是我们为判定http请求完毕等待的毫秒数
       100
