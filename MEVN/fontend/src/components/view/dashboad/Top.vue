@@ -10,6 +10,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="loginoutC">退出登录</el-dropdown-item>
       <el-dropdown-item command="customer"> <router-link to="/customerCenter">顾客中心</router-link> </el-dropdown-item>
+      <el-dropdown-item command="customer"> <router-link to="/order/addOrder">登录</router-link> </el-dropdown-item>
       <el-dropdown-item command="cart">购物车</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -22,6 +23,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
       <el-dropdown-item command="me"><router-link to="/managerCenter">个人中心</router-link></el-dropdown-item>
+      <el-dropdown-item command="customer"> <router-link to="/login">登录</router-link> </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </el-menu>
