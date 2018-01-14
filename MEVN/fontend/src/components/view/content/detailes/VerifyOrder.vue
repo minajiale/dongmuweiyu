@@ -6,11 +6,11 @@
     <div class="">
       <span>2017-08-23</span>
     </div>
-    <Verify-general @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"></Verify-general>
+    <Verify-general v-if="tableData.length !=0" @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"></Verify-general>
     <div class="style">
 
     </div>
-    <Verify-door @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3"></Verify-door>
+    <Verify-door v-if="tableData3.length !=0" @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3"></Verify-door>
     <div class="">
       合计:{{this.allAmount}}
     </div>
