@@ -90,7 +90,34 @@ export default {
   },
   computed:{
   },
+  mounted: function(){
+    this.getClass();
+  },
   methods: {
+    getClass(){
+      axios({
+        url:'/class',
+      }).then(res=>{
+        var data = res.data.result.allClass;
+        data.forEach((item,index,array)=>{
+          this.options[index]={};
+          this.options[index].value = item._id;
+          this.options[index].label = item.label;
+          var temp =index;
+          this.options[index].children=[];
+
+          if(item.children.length != 0){
+            item.children.forEach((item,index,array)=>{
+              this.options[temp].children[index]={}
+              this.options[temp].children[index].value=item._id;
+              this.options[temp].children[index].label=item.label;
+            })
+          }
+        })
+      },error=>{
+        console.log("error");
+      })
+    },
     onSubmit(){
       this.transferProducts();
       this.$emit('changeDialogFormVisible');
@@ -168,9 +195,6 @@ export default {
     },
     formChange(values){
     },
-  },
-  mounted: function(){
-    // this.transferProducts();
   },
   activated:function(){
     this.form = this.prodictInit;
