@@ -74,7 +74,7 @@ router.post("/edit",function(req,res,next){
 router.get("/SClass",function(req,res,next){
   var secondClassId=req.param("secondClass");
   var firstClassId=req.param("firstClass");
-  product.findOne({secondClass:secondClassId,firstClass:firstClassId},function(err1,productsByclass){
+  product.find({secondClass:secondClassId,firstClass:firstClassId},function(err1,productsByclass){
     if(err1){
       res.json({
         status:"1",
@@ -103,7 +103,7 @@ router.get("/SClass",function(req,res,next){
 //取得某个一级分类下的所有产品
 router.get("/FClass",function(req,res,next){
   var firstClassId=req.param("firstClass");
-  product.findOne({firstClass:firstClassId},function(err1,productsByclass){
+  product.find({firstClass:firstClassId},function(err1,productsByclass){
     if(err1){
       res.json({
         status:"1",

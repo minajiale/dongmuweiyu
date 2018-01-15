@@ -28,7 +28,7 @@
             placeholder="试试搜索：指南"
             :options="options"
             expand-trigger="hover"
-            v-model="form.firstClass"
+            v-model="classTemp"
             filterable
           ></el-cascader>
           <!-- <el-input v-model="form.minNUm" auto-complete="off"></el-input> -->
@@ -56,16 +56,20 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      classTemp:[],//分类的处理的变量
       form:{
-        id:'',
-        name:"",
-        spec:"",
-        sellPrice:"",
-        minNUm:"",
-        num:"",
-        buyPrice:"",
-        classification:"",
-        img:""
+        id:"String",
+        name:"String",
+        code:"String", //商品货号
+        spec:"String", //规格
+        sellPrice:"String",//规定卖价
+        buyPrice:"String", //成交价格
+        minNUm:"String", //最小库存
+        num:"String", //剩余数量
+        firstClass:"String", //第一级别分类
+        secondClass:"String", //第二季别分类
+        img:[], //图片
+        desc:"String",//商品简单描述
       },
       options: [{
           value: 'zhinan',
@@ -90,10 +94,21 @@ export default {
   },
   computed:{
   },
+  watch: {
+    // 如果 `classTemp` 发生改变，这个函数就会运行
+    classTemp: function (newQuestion) {
+      this.resolveClassTemp()
+    }
+  },
   mounted: function(){
     this.getClass();
   },
   methods: {
+    resolveClassTemp(){
+      this.form.firstClass=this.classTemp[0];
+      this.form.secondClass=this.classTemp[1];
+      console.log("this.form.secondClass"+this.form.secondClass);
+    },
     getClass(){
       axios({
         url:'/class',

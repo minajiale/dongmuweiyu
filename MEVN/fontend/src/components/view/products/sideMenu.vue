@@ -44,7 +44,6 @@ export default {
   methods: {
     //点击一级菜单
     handleOpen(key, keyPath) {
-      alert(key)
       if(key==1){
         this.$emit('muenuClick',key)
       }
