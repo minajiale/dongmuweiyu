@@ -3,36 +3,33 @@
     <br>
     <br>
   <el-form :model="form">
-    <el-row :gutter="15">
-      <el-col :span="8"><el-form-item label="订单日期" :label-width="formLabelWidth" >
-      <el-date-picker
-        v-model="form.time"
-        type="date"
-        placeholder="选择日期"
-        :picker-options="pickerOptions0">
-      </el-date-picker>
-      </el-form-item></el-col>
-  </el-row>
-  <el-row :gutter="3">
-     <el-col :span="8"><el-form-item label="顾客姓名" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item></el-col>
-    <el-col :span="8"> <el-form-item label="顾客电话" :label-width="formLabelWidth">
-   <el-input v-model="form.phone" auto-complete="off"></el-input>
-    </el-form-item></el-col>
-      <el-col :span="12"><el-form-item label="顾客住址" :label-width="formLabelWidth">
+    <div v-if="customerid =='' || customerid ==-1" class="customer">
+      <el-row :gutter="3">
+        <el-col :span="12">
+          <el-form-item label="顾客姓名" :label-width="formLabelWidth">
+            <el-input v-model="form.name" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="顾客电话" :label-width="formLabelWidth">
+            <el-input v-model="form.phone" auto-complete="off"></el-input>
+         </el-form-item>
+        </el-col>
+      </el-row>
+      <el-form-item label="顾客住址" :label-width="formLabelWidth">
         <el-input v-model="form.address" auto-complete="off"></el-input>
-    </el-form-item></el-col>
-  </el-row>
-<br>
+      </el-form-item>
+      <br>
 
-    <el-form-item class="customerSumit">
-      <el-button type="warning" @click="onLogin">注册</el-button>
-      <el-button　 @click="loginSuspend">取消</el-button>
-      <span>
-        注意：此处的填写的如果和电话和姓名均相同，则会添加到同一个的消费记录中。
-      </span>
-    </el-form-item>
+      <el-form-item class="customerSumit">
+        <el-button type="warning" @click="onLogin">注册</el-button>
+        <el-button　 @click="loginSuspend">取消</el-button>
+        <span>
+          注意：此处的填写的如果和电话和姓名均相同，则会添加到同一个的消费记录中。
+        </span>
+      </el-form-item>
+    </div>
+
     <div class="clear">  </div>
     <el-collapse accordion>
       <el-collapse-item title="定门单" name="1">
@@ -59,6 +56,7 @@ export default {
     },
   data() {
     return {
+      customerid:'',
       pickerOptions0: {
         disabledDate(time) {
           return time.getTime() < Date.now() - 8.64e7;
@@ -80,7 +78,7 @@ export default {
         name: '',
         type: [],
       },
-      formLabelWidth: '120px'
+      formLabelWidth: '100px'
     };
   },
   methods: {
@@ -205,8 +203,15 @@ export default {
     },
     onSubmit(){
       this.$router.push('/order/addOrder/verify');
-    }
-  }
+    },
+    getCustomerId(){
+      console.log("customerid"+this.customerid);
+      this.customerid=this.getCookie("customerId");
+    },
+  },
+  mounted: function(){
+    this.getCustomerId();
+  },
 }
 </script>
 <style lang="css">
