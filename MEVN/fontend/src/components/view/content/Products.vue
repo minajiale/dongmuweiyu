@@ -33,7 +33,7 @@
                   <span>{{ props.row.desc }}</span>
                 </el-form-item>
               </el-form></el-col>
-            </el-row>
+              </el-row>
             </template>
           </el-table-column>
           <el-table-column
@@ -48,7 +48,7 @@
             label="规格"
             prop="spec">
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作"   width="300">
             <template scope="scope">
               <el-button
               size="small"
@@ -60,7 +60,7 @@
               <el-button
               size="small"
               type="primary"
-              @click="handleAdd(scope.$index, scope.row)">加入订单</el-button>
+              @click="handleAdd(scope.$index, scope.row)">加入购物车</el-button>
             </template>
           </el-table-column>
         </el-table>
