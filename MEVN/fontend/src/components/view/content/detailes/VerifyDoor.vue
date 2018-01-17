@@ -242,7 +242,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.deleteProduct(row,row._id);
+        this.deleteProduct(index,row,row._id);
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -250,7 +250,7 @@ export default {
         });
       });
     },
-    deleteProduct(row,item){
+    deleteProduct(index,row,item){
       this.$http({
         method: 'delete',
         url:'/customer/cart/delete',
@@ -265,7 +265,7 @@ export default {
              type: 'success'
            });
           // var index = this.tableData5.indexOf(row);
-          //  this.tableData5.splice(index,1);
+           this.tableData3.splice(index,1);
         }else{
           this.$notify.error({
             title: '错误',
