@@ -288,9 +288,10 @@ router.get("/cart",function(req,res,next){
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
-        paiedFirst = req.body.paied || '',
-        allAmount=req.body.allAmount || '';
-        console.log("paiedFirst"+paiedFirst);
+        paiedFirstt = parseInt(req.body.paied) ,
+        allAmountt=parseInt(req.body.allAmount);
+        console.log("paiedFirst"+paiedFirstt);
+        console.log("allAmountt"+allAmountt);
     customer.find({"_id":customerId},function(err,doc){
       if(err){
         res.json({
@@ -299,7 +300,11 @@ router.post("/createOrder",function(req,res,next){
         });
       }else{
         var DoorGoods = doc[0].DoorGoodscart;
-        var generalGoodscart = doc[0].generalGoodscart;
+        var generalGoodscart = doc[0].generalGoodscart,
+            paied = parseInt(doc[0].paied)|| 0,
+            Amount=parseInt(doc[0].all) || 0,
+            paiedFirst = paied+paiedFirstt,
+            allAmount = Amount+allAmountt;
         if(DoorGoods != undefined && generalGoodscart== undefined){
           customer.update(
           {"_id":customerId},
