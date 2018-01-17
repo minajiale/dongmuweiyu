@@ -103,6 +103,7 @@
         },
         formLabelWidth: '120px',
         dialogFormVisible: false,
+        operateId:0,
         tableData5: [{
           time:"2018-1-10",
           name:"刘那",
@@ -136,7 +137,32 @@
       handleClick(){},
       handleEdit(index, row) {
         this.dialogFormVisible=true;
-        console.log(index, row);
+        console.log(row.id);
+        this.operateId=row.id;
+      },
+      handleCart(){
+        this.$http({
+          method: 'post',
+          url:'/customer/pay',
+          data:{
+           customerId:this.operateId,
+           money:this.order.paied
+          }
+        }).then(res=>{
+          if(res.data.status ==0){
+            this.dialogFormVisible=false;
+            this.$notify({
+              title: '成功',
+              message: '付款成功',
+              type: 'success'
+            });
+          }else{
+            this.$message.error('付款失败');
+          }
+        },error=>{
+          console.log("error");
+          this.$message.error('付款失败');
+        })
       },
       handleAdd(index,row){
         this.$router.push("/order/addOrder");

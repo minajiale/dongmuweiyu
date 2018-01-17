@@ -31,6 +31,7 @@ router.get("/",function(req,res,next){
         customer[index].phone=item.phone;
         customer[index].all=item.all;
         customer[index].paied=item.paied;
+        customer[index].id=item._id;
         if(item.all>item.paied){
           customer[index].status="欠款";
           customer[index].owned=item.all-item.paied;
@@ -289,6 +290,7 @@ router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
         paiedFirst = req.body.paied || '',
         allAmount=req.body.allAmount || '';
+        console.log("paiedFirst"+paiedFirst);
     customer.find({"_id":customerId},function(err,doc){
       if(err){
         res.json({
@@ -644,25 +646,45 @@ router.delete("/cart/deleteGeneral",function(req,res,next){
   }
 );
 });
-//编辑某条商品
-router.post("/editGeneral",function(req,res,next){
-  var getNew= req.body.oneProduct;
-  var key=getNew.proId;
-  var oldValue  = {_id:key};
-  var newData = {$set:getNew};
-  customer.update(oldValue,newData,function(err5,result){
-    if(err5){
-      console.log(err5);
+//付款
+router.post("/pay",function(req,res,next){
+  var customerId=req.body.customerId || '';
+  var money=parseInt(req.body.money);
+  var oldValue  = {_id:customerId};
+  console.log("money"+money);
+  customer.find(oldValue,function(err1,doc){
+    if(err1){
       res.json({
         status:"1",
-        message:err.message
+        message:err1.message,
+        result:null
       });
     }else{
-      res.json({
-        status:"0",
-        msg:"",
-        result:"sucess"
-      })
+      if(doc){
+        var paied = parseInt((doc[0].paied));
+        console.log("paied"+paied);
+        var newData = {$set:{paied:(paied+money)}};
+        customer.update(oldValue,newData,function(err5,result){
+          if(err5){
+            console.log(err5);
+            res.json({
+              status:"1",
+              message:err.message
+            });
+          }else{
+            res.json({
+              status:"0",
+              msg:"",
+              result:"sucess"
+            })
+          }
+        })
+      }else{
+        res.json({
+          status:'0',
+          msg:'查询结果为null',
+        })
+      }
     }
   })
 })
