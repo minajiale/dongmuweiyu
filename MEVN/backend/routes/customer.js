@@ -77,7 +77,7 @@ router.get("/oneCustomer",function(req,res,next){
     }else{
       var customer ={};
       customer.name=doc[0].name;
-      customer.address=doc[0].address;
+      customer.address=doc[0].address[0];
       customer.phone=doc[0].phone;
       res.json({
         status:'1',
