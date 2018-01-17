@@ -603,7 +603,6 @@ router.post("/cart/editDoor",function(req,res,next){
      "DoorGoodscart.$.doorwayWidth" : newdata.doorwayWidth,
      "DoorGoodscart.$.doorwayHeight" : newdata.doorwayHeight,
      "DoorGoodscart.$.color" : newdata.color,
-     "DoorGoodscart.$.spec" : newdata.spec
      } },
    function(err,doc){
      if(err){

@@ -221,7 +221,11 @@ export default {
       }).then(res=>{
         if(res.data.status ==0 && res.data.msg.nModified != 0){
           var key=this.tempKey;
-          this.tableData3[key]=this.product;
+          var temp = this.product;
+          temp.spec=this.tableData3[key].spec;
+          temp._id=this.tableData3[key]._id;
+          console.log(temp);
+          this.tableData3.splice(key,1,this.product);
           this.$notify({
             title: '成功',
             message: '修改商品信息成功',
