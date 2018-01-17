@@ -42,7 +42,9 @@
     </el-table-column>
     <el-table-column
       label="操作"
-      width="120">
+      width="120"
+      v-if="visibility"
+      >
       <template scope="scope">
         <el-button
           @click.native.prevent="editRow(scope.$index, scope.row)"
@@ -220,7 +222,8 @@ export default {
   },
   components: {},
   props: {
-    tableData:Array
+    tableData:Array,
+    visibility:Boolean
   },
 }
 </script>

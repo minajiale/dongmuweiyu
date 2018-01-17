@@ -6,11 +6,11 @@
     <div class="">
       <span>2017-08-23</span>
     </div>
-    <Verify-general v-if="tableData.length !=0" @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"></Verify-general>
+    <Verify-general v-if="tableData.length !=0" @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"  v-bind:visibility="true"></Verify-general>
     <div class="style">
 
     </div>
-    <Verify-door v-if="tableData3.length !=0" @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3"></Verify-door>
+    <Verify-door v-if="tableData3.length !=0" @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3" v-bind:visibility="true"></Verify-door>
     <div class="">
       合计:{{this.allAmount}}
     </div>
@@ -124,6 +124,8 @@ import VerifyGeneral from './VerifyGeneral.vue'
             allAmount:this.allAmount
           }
         }).then(res=>{
+          this.tableData=[];
+          this.tableData3=[];
           this.$notify({
              title: '成功',
              message: '创建订单成功',
