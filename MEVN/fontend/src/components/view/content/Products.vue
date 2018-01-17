@@ -53,10 +53,10 @@
               <el-button
               size="small"
               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-              <el-button
+              <!-- <el-button
               size="small"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
               <el-button
               size="small"
               type="primary"
