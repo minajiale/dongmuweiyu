@@ -61,6 +61,8 @@
   </el-table>
 
    <el-dialog title="修改订单" :visible.sync="editGeneral">
+     {{name}}
+     {{spec}}
      <el-form :model="product">
        <el-form-item label="请输入商品单价">
          <el-input v-model="product.price" auto-complete="off"></el-input>
@@ -85,6 +87,8 @@ import _ from 'lodash';
 export default {
   data () {
     return {
+      name:'',
+      spec:'',
       operatTemp:{},
       tempKey:-1,
       all:0,
@@ -92,7 +96,7 @@ export default {
     product:
       {
         price:"1900",//规定卖价
-        num:1,
+        num:7,
       },
     }
   },
@@ -127,8 +131,10 @@ export default {
       this.editGeneral=true;
       this.operatTemp=row;
       this.tempKey=index;
-      this.product.num=num;
-      this.product.price=price;
+      this.product.num=row.num;
+      this.product.price=row.price;
+      this.name=row.name;
+      this.spec=row.code;
       console.log(this.operatTemp.id);
     },
     deleteRow(index,row){
