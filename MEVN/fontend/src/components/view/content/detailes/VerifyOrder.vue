@@ -1,15 +1,10 @@
 <template>
   <div class="">
     <div class="personal-info">
-      <h2> 刘联友 </h2><span>赵湾镇 &nbsp &nbsp</span><span>15929159416</span>
-    </div>
-    <div class="">
-      <span>2017-08-23</span>
+      <h2> {{customer.name}} </h2><span>{{customer.address}} &nbsp &nbsp</span><span>{{customer.phone}}</span>
     </div>
     <Verify-general v-if="tableData.length !=0" @generalAomunt="getGeneralAomunt"  v-bind:table-data="tableData"  v-bind:visibility="true"></Verify-general>
-    <div class="style">
-
-    </div>
+    <div class="style"></div>
     <Verify-door v-if="tableData3.length !=0" @doorAomunt="getDoorAmount"  v-bind:table-data3="tableData3" v-bind:visibility="true"></Verify-door>
     <div class="">
       合计:{{this.allAmount}}
@@ -37,6 +32,10 @@
   .style{
     height: 30px;
   }
+  .personal-info{
+    text-align: center;
+    margin-bottom: 50px;
+  }
 </style>
 <script>
 import VerifyDoor from './VerifyDoor.vue'
@@ -49,6 +48,11 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     data() {
       return {
+        customer:{
+          name:'',
+          address:'',
+          phone:''
+        },
         tableData3: [],
         tableData: [],//普通货物
         allAmount:0,
@@ -63,8 +67,21 @@ import VerifyGeneral from './VerifyGeneral.vue'
     mounted:function(){
       this.getDoorGoodscart();
       this.queryCart();
+      this.getThisCustomer();
     },
     methods: {
+      getThisCustomer(){
+        this.$http({
+          url:"/customer/oneCustomer"
+        }).then(res=>{
+          this.customer=res.data.result.cus;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
       getGeneralAomunt(generalAmount){
         this.allAmount-=this.generalAll;
         this.allAmount+=generalAmount

@@ -58,6 +58,31 @@ router.get("/",function(req,res,next){
     }
   })
 })
+//获取某一个顾客的信息
+router.get("/oneCustomer",function(req,res,next){
+  var customerId=req.cookies.customerId;
+  customer.find({"_id":customerId},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      var customer ={};
+      customer.name=doc[0].name;
+      customer.address=doc[0].address;
+      customer.phone=doc[0].phone;
+      res.json({
+        status:'1',
+        msg:'get customer suecess!',
+        result:{
+          count:doc.length,
+          cus:customer,
+        }
+      })
+    }
+});
+});
 // 普通商品加入购物车
 router.post("/insertCart",function(req,res,next){
   var generalId=req.body.commodityId ||'',

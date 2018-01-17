@@ -2,10 +2,7 @@
   <div class="">
     <div class="customerMessage">
       <div class="personal-info">
-        <h2> 刘联友 </h2><span>赵湾镇 &nbsp &nbsp</span><span>15929159416</span>
-      </div>
-      <div class="">
-        <span>2017-08-23</span>
+        <h2> {{customer.name}} </h2><span>{{customer.address}} &nbsp &nbsp</span><span>{{customer.phone}}</span>
       </div>
     </div>
     <div class="" v-for="order in orders">
@@ -40,7 +37,12 @@ import VerifyGeneral from './detailes/VerifyGeneral.vue'
 export default {
   data () {
     return {
-      orders:[]
+      orders:[],
+      customer:{
+        name:'',
+        address:'',
+        phone:''
+      }
     }
   },
   computed: {},
@@ -48,8 +50,21 @@ export default {
   attached () {},
   mounted: function(){
     this.getOrderByCusId();
+    this.getThisCustomer();
   },
   methods: {
+    getThisCustomer(){
+      this.$http({
+        url:"/customer/oneCustomer"
+      }).then(res=>{
+        this.customer=res.data.result.cus;
+      },error=>{
+        this.$notify.error({
+          title: '错误',
+          message: '获取订单列表失败'
+        });
+      })
+    },
     getOrderByCusId(){
       this.$http({
         url:"/customer/findOrderByCusId"
@@ -71,4 +86,8 @@ export default {
 </script>
 
 <style lang="css">
+.personal-info{
+  text-align: center;
+  margin-bottom: 50px;
+}
 </style>
