@@ -849,7 +849,7 @@ router.get('/searchCostomer',function(req,res,next){
 //顾客登录 这里可以使用get么？
 router.post('/login', function(req, res, next) {
   var param = req.body.customer;
-  var time = req.body.time;
+  // var time = req.body.time;
   customer.findOne({'_id':param},function(err,managerDoc){
     if(err){
       res.json({
