@@ -128,6 +128,8 @@ import axios from 'axios'
         var key =data._id;
         var fatherKey= node.parent.data._id;
         this.deleteClass(key,fatherKey);
+        console.log("key"+key);
+        console.log("fatherKey"+fatherKey);
       },
       edit(node,data,store){
         this.eddTemp.lable=data.label;

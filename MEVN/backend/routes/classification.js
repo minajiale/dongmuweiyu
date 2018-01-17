@@ -163,7 +163,7 @@ if(fatherId && editId){
     }
   })
 }
-if(fatherId == '' && editId != ''){
+if(fatherId == ''|| fatherId==undefined){
   //删除一级分类和其自分类
   console.log("删除一级分类和其子分类")
   classification.findByIdAndRemove(query,function(err,raw){
