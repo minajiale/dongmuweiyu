@@ -806,13 +806,39 @@ router.get("/pagination",function(req,res,next){
         message:err.message
       });
     }else{
-      console.log("seccess");
+      var customer=[];
+      doc.forEach(function(item,index,array){
+        customer[index]={};
+        customer[index].time=item._id.getTimestamp();
+        customer[index].name=item.name;
+        customer[index].phone=item.phone;
+        customer[index].all=item.all;
+        customer[index].paied=item.paied;
+        customer[index].id=item._id;
+        var allInt=parseInt(item.all);
+        var paiedInt=parseInt(item.paied);
+        if(item.status==1){
+          customer[index].status="作废订单";
+        }else{
+          if(allInt>paiedInt){
+            customer[index].status="欠款";
+            customer[index].owned=allInt-paiedInt;
+          }
+          if(allInt==paiedInt){
+            customer[index].status="完成";
+            customer[index].owned=0;
+          }
+          if(allInt<paiedInt){
+            customer[index].status="出错订单";
+          }
+        }
+      })
       res.json({
-        status:"0",
-        msg:"sucess",
+        status:'1',
+        msg:'get all order suecess!',
         result:{
           count:doc.length,
-          customers:doc
+          customers:customer
         }
       })
     }
