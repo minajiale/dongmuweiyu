@@ -529,6 +529,96 @@ router.get("/findOrderByCusId",function(req,res,next){
 router.get("orders",function(req,res,next){
 
 });
+//修改购物车中的普通商品
+router.post("/cart/edit",function(req,res,next){
+  var customerId=req.cookies.customerId || '',
+      target = req.body.id,
+      newdata = req.body.newdata;
+  console.log("target"+target);
+  console.log("newdata"+newdata);
+  customer.updateOne(
+   { _id: customerId, "generalGoodscart._id": target },
+   { $set: { "generalGoodscart.$.saleNumber" : newdata.num, "generalGoodscart.$.salePrice": newdata.price} },
+   function(err,doc){
+     if(err){
+       res.json({
+         status:"1",
+         message:err.message
+       });
+     }else{
+       res.json({
+         status:"0",
+         msg:doc,
+         result:"sucess"
+       })
+     }
+   }
+)
+});
+//修改购物车中的定门单
+router.post("/cart/editDoor",function(req,res,next){
+  var customerId=req.cookies.customerId || '',
+      target = req.body.id,
+      newdata = req.body.newdata,
+      spec=req.body.spec;
+  console.log("target"+target);
+  console.log("newdata"+spec);
+  customer.updateOne(
+   { _id: customerId, "DoorGoodscart._id": target },
+   { $set: {
+    // "DoorGoodscart.$" : newdata,
+     "DoorGoodscart.$.remark" : newdata.remark,
+     "DoorGoodscart.$.spec" : spec,
+     "DoorGoodscart.$._id" :  target,
+     "DoorGoodscart.$.price" : newdata.price,
+     "DoorGoodscart.$.number" : newdata.number,
+     "DoorGoodscart.$.doorLine" : newdata.doorLine,
+     "DoorGoodscart.$.wall" : newdata.wall,
+     "DoorGoodscart.$.wallWidth" : newdata.wallWidth,
+     "DoorGoodscart.$.wallHeight" : newdata.wallHeight,
+     "DoorGoodscart.$.doorwayWidth" : newdata.doorwayWidth,
+     "DoorGoodscart.$.doorwayHeight" : newdata.doorwayHeight,
+     "DoorGoodscart.$.color" : newdata.color,
+     "DoorGoodscart.$.spec" : newdata.spec
+     } },
+   function(err,doc){
+     if(err){
+       res.json({
+         status:"1",
+         message:err.message
+       });
+     }else{
+       res.json({
+         status:"0",
+         msg:doc,
+         result:"sucess"
+       })
+     }
+   }
+)
+})
+//编辑某条商品
+router.post("/editGeneral",function(req,res,next){
+  var getNew= req.body.oneProduct;
+  var key=getNew.proId;
+  var oldValue  = {_id:key};
+  var newData = {$set:getNew};
+  customer.update(oldValue,newData,function(err5,result){
+    if(err5){
+      console.log(err5);
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      res.json({
+        status:"0",
+        msg:"",
+        result:"sucess"
+      })
+    }
+  })
+})
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;

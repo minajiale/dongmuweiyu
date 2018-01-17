@@ -85,6 +85,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
             for(var n =0;n<cart.length;n++){
               if(data[m].id == cart[n]._id){
                 result[m] = {};
+                result[m].id=data[m]._id;
                 result[m].proId=data[m].id;
                 result[m].price=data[m].salePrice;
                 result[m].num=data[m].saleNumber;

@@ -85,6 +85,8 @@ import _ from 'lodash';
 export default {
   data () {
     return {
+      operatTemp:{},
+      tempKey:-1,
       all:0,
       editGeneral:false,
     product:
@@ -123,9 +125,36 @@ export default {
     },
     editRow(index,row){
       this.editGeneral=true;
-      console.log(index);
-      console.log(row);
+      this.operatTemp=row[index];
+      this.tempKey=index;
+      console.log(this.operatTemp.id);
     },
+    handleCart(){
+      this.editGeneral=false;
+      this.$http({
+        method: 'post',
+        url:'/customer/cart/edit',
+        data:{
+         id:this.operatTemp.id,
+         newdata:this.product
+        }
+      }).then(res=>{
+        if(res.data.status ==0 && res.data.msg.nModified != 0){
+          var key=this.tempKey;
+          this.tableData[key]=this.product;
+          this.$notify({
+            title: '成功',
+            message: '修改商品信息成功',
+            type: 'success'
+          });
+        }else{
+          this.$message.error('修改商品失败');
+        }
+      },error=>{
+        console.log("error");
+        this.$message.error('修改商品失败');
+      })
+    }
   },
   components: {},
   props: {

@@ -3,7 +3,7 @@
     <br>
     <br>
   <el-form :model="form">
-    <div v-if="customerid =='' || customerid ==-1" class="customer">
+    <div  class="customer">
       <el-row :gutter="3">
         <el-col :span="12">
           <el-form-item label="顾客姓名" :label-width="formLabelWidth">

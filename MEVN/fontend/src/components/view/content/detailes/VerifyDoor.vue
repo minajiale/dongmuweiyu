@@ -69,13 +69,13 @@
      width="180">
      <template scope="scope">
        <el-button
-         @click.native.prevent="editRow(scope.$index, tableData)"
+         @click.native.prevent="editRow(scope.$index, tableData3)"
          type="text"
          size="small">
          修改
        </el-button>
        <el-button
-         @click.native.prevent="deleteRow(scope.$index, tableData)"
+         @click.native.prevent="deleteRow(scope.$index, tableData3)"
          type="text"
          size="small">
          删除
@@ -160,6 +160,9 @@ export default {
     return {
       all:0,
       editDoor:false,
+      tableData3:[],
+      tempDoor:[],
+      tempKey:-1,
       product: {
         color:"红色",//颜色
         doorwayHeight:"23",//门扇尺寸－高
@@ -199,9 +202,39 @@ export default {
       // 这是我们为判定http请求完毕等待的毫秒数
       100
     ),
-    editRow(){
+    editRow(index,row){
       this.editDoor=true;
+      this.tempDoor=row[index];
+      this.tempKey=index;
+      console.log(this.tempDoor);
     },
+    handleCart(){
+      this.editDoor=false;
+      this.$http({
+        method: 'post',
+        url:'/customer/cart/editDoor',
+        data:{
+         id:this.tempDoor._id,
+         newdata:this.product,
+         spec:this.tableData3[this.tempKey].spec
+        }
+      }).then(res=>{
+        if(res.data.status ==0 && res.data.msg.nModified != 0){
+          var key=this.tempKey;
+          this.tableData3[key]=this.product;
+          this.$notify({
+            title: '成功',
+            message: '修改商品信息成功',
+            type: 'success'
+          });
+        }else{
+          this.$message.error('修改商品失败');
+        }
+      },error=>{
+        console.log("error");
+        this.$message.error('修改商品失败');
+      })
+    }
   },
   components: {},
   props: {
