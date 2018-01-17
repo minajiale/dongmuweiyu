@@ -115,7 +115,7 @@
         tempdata1:[], // 处理商品的中间变量,查询商品的collection
         classifacation:[],//，查询分类的collection
         tableData5: [], //商品信息
-        prodictTemp:[],//row
+        prodictTemp:{},//row
         param:{
           secondClass:'',
           firstClass:""
@@ -133,6 +133,7 @@
       handleEdit(index, row) {
         this.dialogFormVisible=true;
         this.prodictTemp=row;
+        console.log(row.name);
         this.currentView=productDetails;
       },
       watchDialogFormVisible(value){
