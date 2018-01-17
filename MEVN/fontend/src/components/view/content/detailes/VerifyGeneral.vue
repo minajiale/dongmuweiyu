@@ -70,7 +70,7 @@
        </el-form-item>
      </el-form>
      <div slot="footer" class="dialog-footer">
-       <el-button @click="addCartVisible = false">取 消</el-button>
+       <el-button @click="editGeneral = false">取 消</el-button>
        <el-button type="primary" @click="handleCart">确 定</el-button>
      </div>
    </el-dialog>
@@ -127,6 +127,8 @@ export default {
       this.editGeneral=true;
       this.operatTemp=row;
       this.tempKey=index;
+      this.product.num=num;
+      this.product.price=price;
       console.log(this.operatTemp.id);
     },
     deleteRow(index,row){
