@@ -146,9 +146,13 @@
       },
       getCustomers(){
         this.$http({
-          url:"/customer",
+          url:"/customer/pagination",
+          params:{
+            currentPage:1,
+            pageSize:2
+          }
         }).then(res=>{
-          this.tableData5=res.data.result.allCustomer;
+          this.tableData5=res.data.result.customers;
         },error=>{
           this.$notify.error({
             title: '错误',
