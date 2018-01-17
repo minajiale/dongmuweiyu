@@ -112,6 +112,7 @@ export default {
   ready () {},
   attached () {},
   mounted:function(){
+    this.getAllAmount()
   },
   methods: {
     getAllAmount: _.debounce(
@@ -121,6 +122,7 @@ export default {
           amount= amount+ item.price*item.num
         })
         this.all=amount;
+        console.log("amount"+amount);
         this.$emit("generalAomunt",amount);
       },
       // 这是我们为判定http请求完毕等待的毫秒数

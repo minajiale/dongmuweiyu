@@ -52,6 +52,8 @@ import VerifyGeneral from './VerifyGeneral.vue'
         tableData3: [],
         tableData: [],//普通货物
         allAmount:0,
+        generalAll:0,
+        doorAll:0,
         orderStatus:{
           status:1000
         },
@@ -64,11 +66,15 @@ import VerifyGeneral from './VerifyGeneral.vue'
     },
     methods: {
       getGeneralAomunt(generalAmount){
+        this.allAmount-=this.generalAll;
         this.allAmount+=generalAmount
+        this.generalAll=generalAmount;
         console.log("generalAmount"+generalAmount);
       },
       getDoorAmount(doorAmount){
-        this.allAmount+=doorAmount
+        this.allAmount-=this.doorAll;
+        this.allAmount+=doorAmount;
+        this.doorAll=doorAmount;
         console.log("doorAmount"+doorAmount);
       },
       onSubmit(){

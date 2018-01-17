@@ -189,6 +189,7 @@ export default {
   ready () {},
   attached () {},
   mounted:function(){
+    this.getAllAmount()
   },
   methods: {
     getAllAmount: _.debounce(
