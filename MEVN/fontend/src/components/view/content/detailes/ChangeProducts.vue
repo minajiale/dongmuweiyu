@@ -103,7 +103,6 @@ export default {
   },
   mounted: function(){
     this.getClass();
-    this.form = this.prodictInit;
   },
   methods: {
     resolveClassTemp(){
@@ -214,7 +213,6 @@ export default {
     },
   },
   activated:function(){
-    this.form = this.prodictInit;
   },
 }
 </script>
