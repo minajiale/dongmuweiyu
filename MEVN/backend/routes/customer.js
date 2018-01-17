@@ -32,19 +32,26 @@ router.get("/",function(req,res,next){
         customer[index].all=item.all;
         customer[index].paied=item.paied;
         customer[index].id=item._id;
-        if(item.all>item.paied){
-          customer[index].status="欠款";
-          customer[index].owned=item.all-item.paied;
-        }
-        if(item.all=item.paied){
-          customer[index].status="完成";
-          customer[index].owned=0;
-        }
-        if(item.all<item.paied){
-          customer[index].status="出错订单";
-        }
+        var allInt=parseInt(item.all);
+        var paiedInt=parseInt(item.paied);
+        console.log("allInt"+allInt);
+        console.log("paiedInt"+paiedInt);
         if(item.status==1){
           customer[index].status="作废订单";
+        }else{
+          if(allInt>paiedInt){
+            console.log("欠款");
+            customer[index].status="欠款";
+            customer[index].owned=allInt-paiedInt;
+          }
+          if(allInt==paiedInt){
+            console.log("wanchegn ");
+            customer[index].status="完成";
+            customer[index].owned=0;
+          }
+          if(allInt<paiedInt){
+            customer[index].status="出错订单";
+          }
         }
       })
       res.json({
