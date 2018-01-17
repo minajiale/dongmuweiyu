@@ -198,6 +198,7 @@ import axios from 'axios'
               message: '新增一级分类失败失败'
             });
           }else{
+            this.getClass();
             this.$notify({
                title: '成功',
                message: '新增一级分类成功',
@@ -228,6 +229,7 @@ import axios from 'axios'
               message: '新增二级分类失败失败'
             });
           }else{
+            this.getClass();
             this.$notify({
                title: '成功',
                message: '新增二级分类成功',
@@ -257,6 +259,7 @@ import axios from 'axios'
         }).then(res=>{
           console.log(res);
           if(res.status == 200 && res.data.status == 0){
+            this.getClass();
             this.$notify({
                title: '成功',
                message: '编辑分类成功',
@@ -290,6 +293,7 @@ import axios from 'axios'
               message: '删除分类失败失败'
             });
           }else{
+            this.getClass();
             this.$notify({
                title: '成功',
                message: '删除分类成功',
