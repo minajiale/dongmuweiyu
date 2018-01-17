@@ -305,40 +305,6 @@ router.post("/createOrder",function(req,res,next){
             Amount=parseInt(doc[0].all) || 0,
             paiedFirst = paied+paiedFirstt,
             allAmount = Amount+allAmountt;
-        generalGoodscart.forEach((item,index,array)=>{
-          var key=item.id;
-          console.log("item"+item);
-          var oldValue  = {_id:key};
-          product.find(oldValue,function(err1,products){
-            if(err1){
-              res.json({
-                status:"1",
-                message:err1.message,
-                result:null
-              });
-            }else{
-              if(products){
-                var number = parseInt(products[0].num)-item.saleNumber;
-                var newData = {$set:{num:number}};
-                console.log("number"+number);
-                product.update(oldValue,newData,function(err5,result){
-                  if(err5){
-                    console.log(err5);
-                    res.json({
-                      status:"1",
-                      message:err.message
-                    });
-                  }
-                })
-              }else{
-                res.json({
-                  status:'0',
-                  msg:'查询结果为null',
-                })
-              }
-            }
-          })
-        });
         if(DoorGoods != undefined && generalGoodscart== undefined){
           customer.update(
           {"_id":customerId},
@@ -389,6 +355,40 @@ router.post("/createOrder",function(req,res,next){
         });
         }
         if(DoorGoods == undefined && generalGoodscart != undefined){
+          generalGoodscart.forEach((item,index,array)=>{
+            var key=item.id;
+            console.log("item"+item);
+            var oldValue  = {_id:key};
+            product.find(oldValue,function(err1,products){
+              if(err1){
+                res.json({
+                  status:"1",
+                  message:err1.message,
+                  result:null
+                });
+              }else{
+                if(products){
+                  var number = parseInt(products[0].num)-item.saleNumber;
+                  var newData = {$set:{num:number}};
+                  console.log("number"+number);
+                  product.update(oldValue,newData,function(err5,result){
+                    if(err5){
+                      console.log(err5);
+                      res.json({
+                        status:"1",
+                        message:err.message
+                      });
+                    }
+                  })
+                }else{
+                  res.json({
+                    status:'0',
+                    msg:'查询结果为null',
+                  })
+                }
+              }
+            })
+          });
           customer.update(
           {"_id":customerId},
           {$push:{orderList:{"generalGoodsOrder":generalGoodscart}}},
@@ -438,6 +438,40 @@ router.post("/createOrder",function(req,res,next){
         })
         }
         if(DoorGoods != undefined && generalGoodscart != undefined){
+          generalGoodscart.forEach((item,index,array)=>{
+            var key=item.id;
+            console.log("item"+item);
+            var oldValue  = {_id:key};
+            product.find(oldValue,function(err1,products){
+              if(err1){
+                res.json({
+                  status:"1",
+                  message:err1.message,
+                  result:null
+                });
+              }else{
+                if(products){
+                  var number = parseInt(products[0].num)-item.saleNumber;
+                  var newData = {$set:{num:number}};
+                  console.log("number"+number);
+                  product.update(oldValue,newData,function(err5,result){
+                    if(err5){
+                      console.log(err5);
+                      res.json({
+                        status:"1",
+                        message:err.message
+                      });
+                    }
+                  })
+                }else{
+                  res.json({
+                    status:'0',
+                    msg:'查询结果为null',
+                  })
+                }
+              }
+            })
+          });
           customer.update(
           {"_id":customerId},
           {$push:{orderList:{"generalGoodsOrder":generalGoodscart,"DoorGoodsOrder":DoorGoods}}},
