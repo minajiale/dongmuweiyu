@@ -72,7 +72,7 @@
         v-bind:is="currentView"
         :isChange="true"
         v-on:changeDialogFormVisible="watchDialogFormVisible"
-        :prodictInit="prodictTemp">
+        :form="prodictTemp">
         </component>
       </keep-alive>
     </el-dialog>

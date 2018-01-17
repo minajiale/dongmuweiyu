@@ -90,7 +90,8 @@ export default {
   },
   props:{
     isChange:Boolean,
-    prodictInit:Object,
+    // prodictInit:Object,
+    form:Object,
   },
   computed:{
   },
