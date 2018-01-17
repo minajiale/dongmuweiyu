@@ -76,7 +76,11 @@
     <div class="block">
       <el-pagination
       layout="prev, pager, next"
-      :total="1000">
+      :total="1000"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="100"
+      >
       </el-pagination>
     </div>
     <el-dialog title="付款" :visible.sync="dialogFormVisible">
@@ -98,6 +102,7 @@
   export default {
     data() {
       return {
+        currentPage:1,
         order:{
           paied:100
         },
@@ -122,6 +127,23 @@
       this.getCustomers();
     },
     methods:{
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+        this.$http({
+          url:"/customer/pagination",
+          params:{
+            currentPage:val,
+            pageSize:2
+          }
+        }).then(res=>{
+          this.tableData5=res.data.result.customers;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
       getCustomers(){
         this.$http({
           url:"/customer",

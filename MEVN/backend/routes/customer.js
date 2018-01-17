@@ -793,6 +793,31 @@ router.post("/pay",function(req,res,next){
     }
   })
 })
+//订单页面的分页处理
+router.get("/pagination",function(req,res,next){
+  var currentPage = parseInt(req.query.currentPage),
+      pageSize = parseInt(req.query.pageSize);
+  var querry = customer.find().sort({"ID":1}).skip((currentPage-1)*pageSize).limit(pageSize);
+  querry.exec(function(err,doc){
+    if(err){
+      console.log("err");
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      console.log("seccess");
+      res.json({
+        status:"0",
+        msg:"sucess",
+        result:{
+          count:doc.length,
+          customers:doc
+        }
+      })
+    }
+  })
+})
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;
