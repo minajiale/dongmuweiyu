@@ -174,11 +174,7 @@
             number:this.product.number
           },
         }).then(res=>{
-          this.$notify({
-             title: '成功',
-             message: '加入购物车成功',
-             type: 'success'
-           });
+        this.$message('加入购物车成功');
         },error=>{
           this.$notify.error({
             title: '错误',
