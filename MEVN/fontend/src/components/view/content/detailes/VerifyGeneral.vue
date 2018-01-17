@@ -129,6 +129,51 @@ export default {
       this.tempKey=index;
       console.log(this.operatTemp.id);
     },
+    deleteRow(index,row){
+      console.log(index, row);
+      this.$confirm('此操作将永久删除该该产品, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteProduct(row,row._id);
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    deleteProduct(row,item){
+      console.log("item"+item);
+      this.$http({
+        method: 'delete',
+        url:'/customer/cart/deleteGeneral',
+        data:{
+          id:item,
+        }
+      }).then(res=>{
+        if(res.data.status == 0 && res.data.msg.nModified !=0){
+          this.$notify({
+             title: '成功',
+             message: '删除产品成功',
+             type: 'success'
+           });
+          // var index = this.tableData5.indexOf(row);
+          //  this.tableData5.splice(index,1);
+        }else{
+          this.$notify.error({
+            title: '错误',
+            message: '删除产品失败'
+          });
+        }
+      },error=>{
+        this.$notify.error({
+          title: '错误',
+          message: '删除产品失败'
+        });
+      })
+    },
     handleCart(){
       this.editGeneral=false;
       this.$http({

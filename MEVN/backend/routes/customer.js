@@ -621,6 +621,30 @@ router.post("/cart/editDoor",function(req,res,next){
    }
 )
 })
+//删除购物车中的普通商品
+router.delete("/cart/deleteGeneral",function(req,res,next){
+  var customerId=req.cookies.customerId || '',
+      target = req.body.id;
+  console.log("target"+target);
+  customer.update(
+   { _id: customerId},
+  { $pull: { 'generalGoodscart': { _id: target } } },
+  function(err,doc){
+    if(err){
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      res.json({
+        status:"0",
+        msg:doc,
+        result:"sucess"
+      })
+    }
+  }
+);
+});
 //编辑某条商品
 router.post("/editGeneral",function(req,res,next){
   var getNew= req.body.oneProduct;
