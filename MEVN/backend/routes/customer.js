@@ -555,6 +555,30 @@ router.post("/cart/edit",function(req,res,next){
    }
 )
 });
+//删除购物车中的定门单中商品
+router.delete("/cart/delete",function(req,res,next){
+  var customerId=req.cookies.customerId || '',
+      target = req.body.id;
+  console.log("target"+target);
+  customer.update(
+   { _id: customerId},
+  { $pull: { 'DoorGoodscart': { _id: target } } },
+  function(err,doc){
+    if(err){
+      res.json({
+        status:"1",
+        message:err.message
+      });
+    }else{
+      res.json({
+        status:"0",
+        msg:doc,
+        result:"sucess"
+      })
+    }
+  }
+);
+});
 //修改购物车中的定门单
 router.post("/cart/editDoor",function(req,res,next){
   var customerId=req.cookies.customerId || '',

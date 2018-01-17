@@ -45,13 +45,13 @@
       width="120">
       <template scope="scope">
         <el-button
-          @click.native.prevent="editRow(scope.$index, tableData)"
+          @click.native.prevent="editRow(scope.$index, scope.row)"
           type="text"
           size="small">
           修改
         </el-button>
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          @click.native.prevent="deleteRow(scope.$index, scope.row)"
           type="text"
           size="small">
           删除
@@ -125,7 +125,7 @@ export default {
     },
     editRow(index,row){
       this.editGeneral=true;
-      this.operatTemp=row[index];
+      this.operatTemp=row;
       this.tempKey=index;
       console.log(this.operatTemp.id);
     },
