@@ -34,18 +34,14 @@ router.get("/",function(req,res,next){
         customer[index].id=item._id;
         var allInt=parseInt(item.all);
         var paiedInt=parseInt(item.paied);
-        console.log("allInt"+allInt);
-        console.log("paiedInt"+paiedInt);
         if(item.status==1){
           customer[index].status="作废订单";
         }else{
           if(allInt>paiedInt){
-            console.log("欠款");
             customer[index].status="欠款";
             customer[index].owned=allInt-paiedInt;
           }
           if(allInt==paiedInt){
-            console.log("wanchegn ");
             customer[index].status="完成";
             customer[index].owned=0;
           }
@@ -114,8 +110,6 @@ router.post("/insertCart",function(req,res,next){
             }
           }
           if(exit == true){
-            console.log(generalId);
-            console.log("exit");
             customer.update(
               {"_id":customerId,
                 "generalGoodscart._id":data[i]._id
@@ -153,7 +147,6 @@ router.post("/insertCart",function(req,res,next){
               }
             })
           }else{
-            console.log("no exit");
             customer.update(
               {"_id":customerId},
               {$push:{generalGoodscart:{"id":generalId,"salePrice":genralPrice,"saleNumber":genetalNumb}}},
@@ -189,7 +182,6 @@ router.post("/insertCart",function(req,res,next){
 router.post("/insertDoorGoodscart",function(req,res,next){
   var door=req.body ||'',
       customerId=req.cookies.customerId;//从cookie中取
-      console.log(door);
   customer.update(
     {"_id":customerId},
     {$push:{DoorGoodscart:door}},
@@ -279,7 +271,6 @@ router.get("/cart",function(req,res,next){
                   }else{
                     flag++;
                     if(flag==(length)){
-                      console.log(flag);
                       resolve();
                     }
                     cart.push(docP[0]);
@@ -322,8 +313,6 @@ router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
         paiedFirstt = parseInt(req.body.paied) ,
         allAmountt=parseInt(req.body.allAmount);
-        console.log("paiedFirst"+paiedFirstt);
-        console.log("allAmountt"+allAmountt);
     customer.find({"_id":customerId},function(err,doc){
       if(err){
         res.json({
@@ -389,7 +378,6 @@ router.post("/createOrder",function(req,res,next){
         if(DoorGoods == undefined && generalGoodscart != undefined){
           generalGoodscart.forEach((item,index,array)=>{
             var key=item.id;
-            console.log("item"+item);
             var oldValue  = {_id:key};
             product.find(oldValue,function(err1,products){
               if(err1){
@@ -402,10 +390,8 @@ router.post("/createOrder",function(req,res,next){
                 if(products){
                   var number = parseInt(products[0].num)-item.saleNumber;
                   var newData = {$set:{num:number}};
-                  console.log("number"+number);
                   product.update(oldValue,newData,function(err5,result){
                     if(err5){
-                      console.log(err5);
                       res.json({
                         status:"1",
                         message:err.message
@@ -472,7 +458,6 @@ router.post("/createOrder",function(req,res,next){
         if(DoorGoods != undefined && generalGoodscart != undefined){
           generalGoodscart.forEach((item,index,array)=>{
             var key=item.id;
-            console.log("item"+item);
             var oldValue  = {_id:key};
             product.find(oldValue,function(err1,products){
               if(err1){
@@ -485,10 +470,8 @@ router.post("/createOrder",function(req,res,next){
                 if(products){
                   var number = parseInt(products[0].num)-item.saleNumber;
                   var newData = {$set:{num:number}};
-                  console.log("number"+number);
                   product.update(oldValue,newData,function(err5,result){
                     if(err5){
-                      console.log(err5);
                       res.json({
                         status:"1",
                         message:err.message
@@ -567,20 +550,16 @@ router.get("/findOrderByCusId",function(req,res,next){
       var Orders = doc[0].orderList
       var result=[];
       var orderLength = Orders.length;
-
       function promise(result,Orders,orderLength){
-        var flag=0;
         return new Promise((resolve,reject)=>{
+          var flag=0;
           Orders.forEach((item,index,array)=>{
             result[index]={};
-            result[index].DoorGoodsOrder = item.DoorGoodsOrder;
+            result[index].DoorGoodsOrder = item.DoorGoodsOrder || [];
             result[index].id = item._id;
             result[index].time = item._id.getTimestamp();
             result[index].general=[];
-
-            // result[index].generalGoodsOrder = item.generalGoodsOrder;
-            var data =item.generalGoodsOrder || '';
-            // result[index].generalGoods = [];
+            var data =item.generalGoodsOrder || [];
             var temp=index;
             data.forEach(function(item,index,array){
               var temp2 = index;
@@ -597,18 +576,15 @@ router.get("/findOrderByCusId",function(req,res,next){
                       temp3.proId=item.id;
                       temp3.price=item.salePrice;
                       temp3.num=item.saleNumber;
-                      // result[m].unit=data[m].unit;
                       temp3.name=docP[0].name;
                       temp3.spec=docP[0].spec;
                       temp3.code=docP[0].code;
                     }
                   })
-                  // result[temp].generalGoods.push(docP[0]);
-                  flag++;
-                  console.log(flag);
-                  // console.log("length*orderLength"+length*orderLength);
+                  console.log("falg:   "+flag);
+                  console.log("orderLength:   "+orderLength);
+                  ++flag;
                   if(flag==orderLength){
-                    console.log(flag);
                     resolve();
                   }
                 }
@@ -618,7 +594,6 @@ router.get("/findOrderByCusId",function(req,res,next){
         })
       }
       promise(result,Orders,orderLength).then(()=>{
-        console.log("你说呢？？？joson");
         res.json({
           status:'1',
           msg:'get all classification suecess!',
@@ -632,17 +607,11 @@ router.get("/findOrderByCusId",function(req,res,next){
       })
     }})
 })
-//获得订单列表
-router.get("orders",function(req,res,next){
-
-});
 //修改购物车中的普通商品
 router.post("/cart/edit",function(req,res,next){
   var customerId=req.cookies.customerId || '',
       target = req.body.id,
       newdata = req.body.newdata;
-  console.log("target"+target);
-  console.log("newdata"+newdata);
   customer.updateOne(
    { _id: customerId, "generalGoodscart._id": target },
    { $set: { "generalGoodscart.$.saleNumber" : newdata.num, "generalGoodscart.$.salePrice": newdata.price} },
@@ -666,7 +635,6 @@ router.post("/cart/edit",function(req,res,next){
 router.delete("/cart/delete",function(req,res,next){
   var customerId=req.cookies.customerId || '',
       target = req.body.id;
-  console.log("target"+target);
   customer.update(
    { _id: customerId},
   { $pull: { 'DoorGoodscart': { _id: target } } },
@@ -692,8 +660,6 @@ router.post("/cart/editDoor",function(req,res,next){
       target = req.body.id,
       newdata = req.body.newdata,
       spec=req.body.spec;
-  console.log("target"+target);
-  console.log("newdata"+spec);
   customer.updateOne(
    { _id: customerId, "DoorGoodscart._id": target },
    { $set: {
@@ -730,7 +696,6 @@ router.post("/cart/editDoor",function(req,res,next){
 router.delete("/cart/deleteGeneral",function(req,res,next){
   var customerId=req.cookies.customerId || '',
       target = req.body.id;
-  console.log("target"+target);
   customer.update(
    { _id: customerId},
   { $pull: { 'generalGoodscart': { _id: target } } },
@@ -755,7 +720,6 @@ router.post("/pay",function(req,res,next){
   var customerId=req.body.customerId || '';
   var money=parseInt(req.body.money);
   var oldValue  = {_id:customerId};
-  console.log("money"+money);
   customer.find(oldValue,function(err1,doc){
     if(err1){
       res.json({
@@ -766,11 +730,9 @@ router.post("/pay",function(req,res,next){
     }else{
       if(doc){
         var paied = parseInt((doc[0].paied));
-        console.log("paied"+paied);
         var newData = {$set:{paied:(paied+money)}};
         customer.update(oldValue,newData,function(err5,result){
           if(err5){
-            console.log(err5);
             res.json({
               status:"1",
               message:err.message
@@ -799,7 +761,6 @@ router.get("/pagination",function(req,res,next){
   var querry = customer.find().sort({"ID":1}).skip((currentPage-1)*pageSize).limit(pageSize);
   querry.exec(function(err,doc){
     if(err){
-      console.log("err");
       res.json({
         status:"1",
         message:err.message

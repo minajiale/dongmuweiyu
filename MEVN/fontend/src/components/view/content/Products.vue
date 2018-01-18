@@ -159,6 +159,7 @@
         this.addCartVisible=true;
         console.log(row._id);
         this.product.id=row._id;
+        this.product.price=row.sellPrice;
       },
       handleCart(){
          this.addCartVisible = false
