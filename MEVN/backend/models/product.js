@@ -14,7 +14,6 @@ var productSchema = new mongoose.Schema({
   "img":[], //图片
   "desc":String,//商品简单描述
   "sales":[{
-    "month":String,
     "salesNumber":String
   }],     //月销售量
   "salesNumbers":String,//总销售额

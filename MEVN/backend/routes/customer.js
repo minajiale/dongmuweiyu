@@ -220,7 +220,7 @@ router.get("/DoorGoodscart",function(req,res,next){
       });
     }else{
       var DoorGoods = doc[0].DoorGoodscart || ''
-      if(DoorGoods != "" && DoorGoods != undefined){
+      if(DoorGoods != "" && DoorGoods != undefined && DoorGoods.length !=0){
         res.json({
           status:'1',
           msg:'get all classification suecess!',
@@ -321,6 +321,7 @@ router.post("/createOrder",function(req,res,next){
         });
       }else{
         var generalGoodscart = doc[0].generalGoodscart,
+            DoorGoods = doc[0].DoorGoodscart,
             paied = parseInt(doc[0].paied)|| 0,
             Amount=parseInt(doc[0].all) || 0,
             paiedFirst = paied+paiedFirstt,
@@ -391,8 +392,8 @@ router.post("/createOrder",function(req,res,next){
                       salesNumbers = products[0].salesNumbers,//总销量
                       lastMonthSales = sales[sales.length-1],
                       salesTarget=lastMonthSales._id,
-                      lastMonthSalesYear = lastMonthSales.month.getFullYear(),
-                      lastMonthSalesMonth = lastMonthSales.month.getMonth(),
+                      lastMonthSalesYear = salesTarget.getTimestamp().getFullYear(),
+                      lastMonthSalesMonth = salesTarget.getTimestamp().getMonth(),
                       lastMonthSalesNumber = lastMonthSales.salesNumber;//月销量
                   var now = new Date(),
                       nowMonth = now.getMonth(),
@@ -414,8 +415,7 @@ router.post("/createOrder",function(req,res,next){
                      }
                   )
                   }else{
-                    var temp4 = {},
-                    temp4.month = now;
+                    var temp4 = {};
                     temp4.salesNumber = item.saleNumber;
                     product.update(
                       {"_id":customerId},
@@ -521,9 +521,62 @@ router.post("/createOrder",function(req,res,next){
                 });
               }else{
                 if(products){
+                  var sales = products[0].sales,
+                      salesNumbers = products[0].salesNumbers,//总销量
+                      lastMonthSales = sales[sales.length-1],
+                      salesTarget=lastMonthSales._id,
+                      lastMonthSalesYear = salesTarget.getTimestamp().getFullYear(),
+                      lastMonthSalesMonth = salesTarget.getTimestamp().getMonth(),
+                      lastMonthSalesNumber = lastMonthSales.salesNumber;//月销量
+                  var now = new Date(),
+                      nowMonth = now.getMonth(),
+                      nowYear = now.getFullYear();
+                  if(nowMonth == lastMonthSalesMonth && nowYear == lastMonthSalesYear){
+                    var MonthSaleNumber = parseInt(lastMonthSalesNumber)+item.saleNumber;//销售量
+                    product.updateOne(
+                     { _id: key, "sales._id": salesTarget },
+                     { $set: { "sales.$.salesNumber" : MonthSaleNumber} },
+                     function(err,doc){
+                       if(err){
+                         res.json({
+                           status:"1",
+                           message:err.message
+                         });
+                       }else{
+                         console.log("修改着一个月的月销售额成功");
+                       }
+                     }
+                  )
+                  }else{
+                    var temp4 = {};
+                    temp4.salesNumber = item.saleNumber;
+                    product.update(
+                      {"_id":customerId},
+                      {$push:{sales:temp4}},
+                      function(errCC,docCC){
+                      if(errCC){
+                        res.json({
+                          status:1,
+                          msg:errCC.message,
+                          result:''
+                        })
+                      }else{
+                        if(docCC.nModified != 0){
+                          console.log("修改月销售额成功");
+                        }else{
+                          res.json({
+                            status:1,
+                            msg:"err3.message",
+                            result:''
+                          })
+                        }
+                      }
+                    })
+                  }
+                  var allSaleNumber = parseInt(salesNumbers)+item.saleNumber;//销售量
                   var number = parseInt(products[0].num)-item.saleNumber;
-                  var newData = {$set:{num:number}};
-                  product.update(oldValue,newData,function(err5,result){
+                  var newData = {num:number,salesNumbers:allSaleNumber};
+                  product.update(oldValue,{$set:newData},function(err5,result){
                     if(err5){
                       res.json({
                         status:"1",
