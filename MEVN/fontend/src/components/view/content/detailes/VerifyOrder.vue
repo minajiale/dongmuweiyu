@@ -59,7 +59,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
         generalAll:0,
         doorAll:0,
         orderStatus:{
-          status:1000
+          status:''
         },
         createOrder:false
       }
@@ -96,6 +96,7 @@ import VerifyGeneral from './VerifyGeneral.vue'
       },
       onSubmit(){
         this.createOrder=true;
+        this.orderStatus.status = this.allAmount
       },
       queryCart(){
         this.$http({
