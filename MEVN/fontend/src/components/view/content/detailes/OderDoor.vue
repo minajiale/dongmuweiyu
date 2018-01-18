@@ -1,19 +1,19 @@
 <template>
   <div class="order" id="oderDoor">
-    <el-row type="flex" class="row-bg" justify="end">
+    <!-- <el-row type="flex" class="row-bg" justify="end">
       <el-button type="text" :disabled="false">+新增定门单</el-button>
-    </el-row>
-    <Preview-door></Preview-door>
+    </el-row> -->
+    <!-- <Preview-door></Preview-door> -->
     <oder-door-template></oder-door-template>
 </div>
 </template>
 <script>
 import oderDoorTemplate from './OderDoorTemplate.vue'
-import PreviewDoor from './PreviewDoor.vue'
+// import PreviewDoor from './PreviewDoor.vue'
 
   export default {
     components:{
-      PreviewDoor,
+      // PreviewDoor,
       oderDoorTemplate
     },
     data() {

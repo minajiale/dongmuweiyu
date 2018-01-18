@@ -2,44 +2,37 @@
       <div class="" id="oderDoorTemplate">
       <el-form ref="form" :model="form" label-width="200px" id="oderDoorForm">
 
-        <el-row :gutter="15">
-          <el-col :span="12"><el-form-item label="型号">
+        <el-row :gutter="10">
+          <el-col :span="8"><el-form-item label="型号">
             <el-input v-model="form.spec"></el-input>
           </el-form-item></el-col>
-          <el-col :span="12"><el-form-item label="颜色">
+          <el-col :span="8"><el-form-item label="产品名称">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item></el-col>
+          <el-col :span="8"><el-form-item label="油漆颜色">
             <el-input v-model="form.color"></el-input>
           </el-form-item></el-col>
         </el-row>
 
         <el-row :gutter="15">
-          <el-col :span="8"> <el-form-item label="门洞尺寸－高">
-            <el-input v-model="form.wallHeight"></el-input>
-          </el-form-item></el-col>
-          <el-col :span="8"> <el-form-item label="门洞尺寸－宽">
-            <el-input v-model="form.wallWidth"></el-input>
-          </el-form-item></el-col>
-          <el-col :span="8"> <el-form-item label="门洞尺寸－墙厚">
+          <el-col :span="8"> <el-form-item label="门洞尺寸（高*宽*墙厚）">
             <el-input v-model="form.wall"></el-input>
           </el-form-item></el-col>
-        </el-row>
-
-        <el-row :gutter="15">
-          <el-col :span="8"> <el-form-item label="门扇尺寸－高">
-            <el-input v-model="form.doorwayHeight"></el-input>
+          <el-col :span="8"> <el-form-item label="材质">
+            <el-input v-model="form.material"></el-input>
           </el-form-item></el-col>
-          <el-col :span="8"> <el-form-item label="门扇尺寸－宽">
-            <el-input v-model="form.doorwayWidth"></el-input>
+          <el-col :span="8"> <el-form-item label="单位">
+            <el-input v-model="form.unit"></el-input>
           </el-form-item></el-col>
         </el-row>
-        <el-form-item label="门套线类型">
-          <el-input v-model="form.doorLine"></el-input>
-        </el-form-item>
-
         <el-row :gutter="15">
-          <el-col :span="12"><el-form-item label="数量">
+          <el-col :span="8"> <el-form-item label="门套线">
+            <el-input v-model="form.doorLine"></el-input>
+          </el-form-item></el-col>
+          <el-col :span="8"><el-form-item label="数量">
             <el-input v-model="form.number"></el-input>
           </el-form-item></el-col>
-          <el-col :span="12"><el-form-item label="金额（元）">
+          <el-col :span="8"><el-form-item label="单价（元）">
             <el-input v-model="form.price"></el-input>
           </el-form-item></el-col>
         </el-row>
@@ -59,17 +52,16 @@ export default {
   data () {
     return {
       form: {
-        spec:"型号",//型号
-        color:"红色",//颜色
-        doorwayHeight:"23",//门扇尺寸－高
-        doorwayWidth:"45",//门扇尺寸－宽
-        wallHeight: "4",//门洞尺寸－高
-        wallWidth: "3",//门洞尺寸－宽
-        wall:"1",     //门洞尺寸－墙厚
-        doorLine:"外白",//门套线类型
-        number:"1",//数量
-        price:"1983",//金额（元）
-        remark:"lalalalala阿拉拉拉",//备注
+        spec:"",//型号
+        name:'',//产品名称
+        color:"",//油漆颜色
+        wall: '',//门洞尺寸－高×宽×墙厚
+        material: '',//材质
+        unit: '',//单位
+        doorLine:"",//门套线类型
+        number:"",//数量
+        price:"",//金额（元）
+        remark:"",//备注
       }
     }
   },
