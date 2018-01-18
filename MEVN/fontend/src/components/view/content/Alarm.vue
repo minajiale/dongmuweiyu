@@ -32,24 +32,36 @@
   export default {
     data() {
       return {
-        tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }],
+        tableData: [],
       };
     },
+    methods: {
+      getLackProduct(){
+        this.$http({
+          url:'/products/lack',
+        }).then(res=>{
+          var data = res.data.result.allProducts;
+          var temp=[];
+          data.forEach((dataitem,dataindex,dataarray)=>{
+            var Ifexit = this.tableData.some((item,index,array)=>{
+              return (dataitem._id == item._id)
+            })
+            if(Ifexit == false){
+              var temp ={};
+              temp.name=dataitem.name+"     的库存为0个或者更少";
+              temp._id=dataitem._id;
+              temp.date=(new Date());
+              this.tableData.push(temp);
+            }
+          })
+        },error=>{
+          console.log("error");
+        })
+      }
+    },
+    mounted:function(){
+      this.getLackProduct()
+    },
+    components: {},
   };
 </script>

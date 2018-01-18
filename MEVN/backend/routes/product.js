@@ -44,6 +44,27 @@ router.get("/",function(req,res,next){
     }
   })
 })
+//取得库存紧张的货物
+router.get("/lack",function(req,res,next){
+  var limit = {"num":{$lt:1}};
+  product.find(limit,function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      res.json({
+        status:'1',
+        msg:'get all classification suecess!',
+        result:{
+          count:doc.length,
+          allProducts:doc
+        }
+      })
+    }
+  })
+})
 // 加入购物车
 router.post("/addcart",function(req,res,next){
   var customerId="";
