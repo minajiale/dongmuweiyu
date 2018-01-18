@@ -387,9 +387,63 @@ router.post("/createOrder",function(req,res,next){
                 });
               }else{
                 if(products){
+                  var sales = products[0].sales,
+                      salesNumbers = products[0].salesNumbers,//总销量
+                      lastMonthSales = sales[sales.length-1],
+                      salesTarget=lastMonthSales._id,
+                      lastMonthSalesYear = lastMonthSales.month.getFullYear(),
+                      lastMonthSalesMonth = lastMonthSales.month.getMonth(),
+                      lastMonthSalesNumber = lastMonthSales.salesNumber;//月销量
+                  var now = new Date(),
+                      nowMonth = now.getMonth(),
+                      nowYear = now.getFullYear();
+                  if(nowMonth == lastMonthSalesMonth && nowYear == lastMonthSalesYear){
+                    var MonthSaleNumber = parseInt(lastMonthSalesNumber)+item.saleNumber;//销售量
+                    product.updateOne(
+                     { _id: key, "sales._id": salesTarget },
+                     { $set: { "sales.$.salesNumber" : MonthSaleNumber} },
+                     function(err,doc){
+                       if(err){
+                         res.json({
+                           status:"1",
+                           message:err.message
+                         });
+                       }else{
+                         console.log("修改着一个月的月销售额成功");
+                       }
+                     }
+                  )
+                  }else{
+                    var temp4 = {},
+                    temp4.month = now;
+                    temp4.salesNumber = item.saleNumber;
+                    product.update(
+                      {"_id":customerId},
+                      {$push:{sales:temp4}},
+                      function(errCC,docCC){
+                      if(errCC){
+                        res.json({
+                          status:1,
+                          msg:errCC.message,
+                          result:''
+                        })
+                      }else{
+                        if(docCC.nModified != 0){
+                          console.log("修改月销售额成功");
+                        }else{
+                          res.json({
+                            status:1,
+                            msg:"err3.message",
+                            result:''
+                          })
+                        }
+                      }
+                    })
+                  }
+                  var allSaleNumber = parseInt(salesNumbers)+item.saleNumber;//销售量
                   var number = parseInt(products[0].num)-item.saleNumber;
-                  var newData = {$set:{num:number}};
-                  product.update(oldValue,newData,function(err5,result){
+                  var newData = {num:number,salesNumbers:allSaleNumber};
+                  product.update(oldValue,{$set:newData},function(err5,result){
                     if(err5){
                       res.json({
                         status:"1",
