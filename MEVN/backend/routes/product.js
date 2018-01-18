@@ -5,9 +5,16 @@ var product = require('../models/product.js');
 
 //添加商品
 router.post("/insert",function(req,res,next){
-  let oneProduct = req.body.oneProduct || '';
+  var oneProduct = req.body.oneProduct || '',
+      date = (new Date());
+
   console.log(oneProduct);
   if(oneProduct != ''){
+    oneProduct.sales=[];
+    oneProduct.sales[0]={};
+    oneProduct.sales[0].month=date;
+    oneProduct.sales[0].salesNumber=0;
+    oneProduct.salesNumbers=0;
     product.create(oneProduct,function(err3,doc){
       if(err3){
         res.json({
