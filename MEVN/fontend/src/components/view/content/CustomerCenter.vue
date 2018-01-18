@@ -70,6 +70,7 @@ export default {
         url:"/customer/findOrderByCusId"
       }).then(res=>{
         this.orders=res.data.result.Orders;
+        this.allAmount= res.data.result.allAmount;
       },error=>{
         this.$notify.error({
           title: '错误',

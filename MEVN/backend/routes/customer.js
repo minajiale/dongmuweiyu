@@ -547,7 +547,8 @@ router.get("/findOrderByCusId",function(req,res,next){
         msg:err.message
       });
     }else{
-      var Orders = doc[0].orderList
+      var allAmounts = doc[0].all;
+      var Orders = doc[0].orderList;
       var result=[];
       var orderLength = Orders.length;
       function promise(result,Orders,orderLength){
@@ -561,35 +562,42 @@ router.get("/findOrderByCusId",function(req,res,next){
             result[index].general=[];
             var data =item.generalGoodsOrder || [];
             var temp=index;
-            data.forEach(function(item,index,array){
-              var temp2 = index;
-              product.find({"_id":item.id},function(errP,docP){
-                if(errP){
-                  res.json({
-                    status:'0',
-                    msg:errP.message
-                  });
-                }else{
-                  data.forEach((item,index,array)=>{
-                    if(item.id == docP[0]._id){
-                      var temp3 = result[temp].general[temp2] = {};
-                      temp3.proId=item.id;
-                      temp3.price=item.salePrice;
-                      temp3.num=item.saleNumber;
-                      temp3.name=docP[0].name;
-                      temp3.spec=docP[0].spec;
-                      temp3.code=docP[0].code;
+            if(data.length != 0){
+              data.forEach(function(item,index,array){
+                var temp2 = index;
+                product.find({"_id":item.id},function(errP,docP){
+                  if(errP){
+                    res.json({
+                      status:'0',
+                      msg:errP.message
+                    });
+                  }else{
+                    data.forEach((item,index,array)=>{
+                      if(item.id == docP[0]._id){
+                        var temp3 = result[temp].general[temp2] = {};
+                        temp3.proId=item.id;
+                        temp3.price=item.salePrice;
+                        temp3.num=item.saleNumber;
+                        temp3.name=docP[0].name;
+                        temp3.spec=docP[0].spec;
+                        temp3.code=docP[0].code;
+                      }
+                    })
+                    console.log("falg:   "+flag);
+                    console.log("orderLength:   "+orderLength);
+                    ++flag;
+                    if(flag==orderLength){
+                      resolve();
                     }
-                  })
-                  console.log("falg:   "+flag);
-                  console.log("orderLength:   "+orderLength);
-                  ++flag;
-                  if(flag==orderLength){
-                    resolve();
                   }
-                }
+                })
               })
-            })
+            }else{
+              ++flag;
+              if(flag==orderLength){
+                resolve();
+              }
+            }
           })
         })
       }
@@ -600,6 +608,7 @@ router.get("/findOrderByCusId",function(req,res,next){
           result:{
             count:doc.length,
             Orders:result,
+            allAmount:allAmounts
           }
         })
       },()=>{
