@@ -219,7 +219,32 @@
         })
       },
       handledatail(index, row) {
-        this.$router.push("/customerCenter")
+        console.log(row.id);
+        this.$http.post("/customer/loginOut").then((response)=>{
+          let res=response.data;
+          if(res.status == 0){
+            this.$http({
+              method:'post',
+              url:'/customer/login',
+              data:{
+                customer:row.id,
+              }
+            }).then((res)=>{
+              //并且改变store中的customerName的值
+              this.$router.push("/customerCenter")
+              var customername = res.data.result.managerName;
+              this.$store.commit('updatecustomerName',customername);
+              this.insert(customerId);
+            },(error)=>{
+              this.$notify.error({
+                title: '错误',
+                message: '顾客登录失败'
+              });
+            })
+          }else{
+            this.$message.error('退出登录失败');
+          }
+        })
       }
     }
   }
