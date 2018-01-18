@@ -320,8 +320,6 @@ router.post("/createOrder",function(req,res,next){
           msg:err.message
         });
       }else{
-        var sales = doc[0].sales;
-        var DoorGoods = doc[0].DoorGoodscart;
         var generalGoodscart = doc[0].generalGoodscart,
             paied = parseInt(doc[0].paied)|| 0,
             Amount=parseInt(doc[0].all) || 0,
@@ -340,9 +338,6 @@ router.post("/createOrder",function(req,res,next){
             })
           }else{
             if(doc.nModified != 0){
-              //销量加，库存减少
-              var lastMonthSales = sales[sales.length-1];
-
               customer.update(
               {"_id":customerId},
               {$set:{"all":allAmount,"paied":paiedFirst,"generalGoodscart":[],"DoorGoodscart":[]}},
