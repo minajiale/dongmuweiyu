@@ -149,7 +149,8 @@ export default {
         orderId:'',
         oldnumber:'',
         orderListId:'',
-        salePrice:''
+        salePrice:'',
+        proId:''
       },
       name:'',
       spec:'',
@@ -191,6 +192,7 @@ export default {
       this.returnp.orderId=row.orderId;
       this.returnp.oldnumber=row.num;
       this.returnp.salePrice=row.price;
+      this.returnp.proId=row.proId;
     },
     returnPClick(){
       this.$http({
