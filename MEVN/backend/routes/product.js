@@ -11,6 +11,10 @@ router.post("/insert",function(req,res,next){
     oneProduct.sales[0]={};
     oneProduct.sales[0].salesNumber=0;
     oneProduct.salesNumbers=0;
+
+    oneProduct.back=[];
+    oneProduct.back[0]={};
+    oneProduct.back[0].backNumber=0;
     product.create(oneProduct,function(err3,doc){
       if(err3){
         res.json({
@@ -79,7 +83,7 @@ router.get("/monthSales",function(req,res,next){
     }else{
       var result = [{
         month:"",
-        
+
       }];
       doc.forEach((item,index,array)=>{
         var oneProductSales = item.sales;

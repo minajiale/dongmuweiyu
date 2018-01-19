@@ -72,6 +72,12 @@
           size="small">
           退货
         </el-button>
+        <el-button
+          @click.native.prevent="addRow(scope.$index, scope.row)"
+          type="text"
+          size="small">
+          补货
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -105,6 +111,19 @@
        <el-button type="primary" @click="returnPClick">确 定</el-button>
      </div>
    </el-dialog>
+   <el-dialog title="补货" :visible.sync="addGeneral">
+     {{name}}
+     {{spec}}
+     <el-form :model="addp">
+       <el-form-item label="请输入商品数量">
+         <el-input-number v-model="addp.num" @change="handleChange" :min="0" ></el-input-number>
+       </el-form-item>
+     </el-form>
+     <div slot="footer" class="dialog-footer">
+       <el-button @click="addGeneral = false">取 消</el-button>
+       <el-button type="primary" @click="addPClick">确 定</el-button>
+     </div>
+   </el-dialog>
    <div class="">
      合计(元)：{{this.all}}
    </div>
@@ -117,6 +136,11 @@ export default {
   data () {
     return {
       returnGeneral:false,
+      addGeneral:false,
+      addp:{
+        num:'',
+        addId:''
+      },
       returnp:{
         num:'',
         returnId:''
@@ -147,6 +171,12 @@ export default {
     this.getAllAmount()
   },
   methods: {
+    addRow(index,row){
+      this.addGeneral=true;
+      this.name=row.name;
+      this.spec=row.code;
+      this.addp.addId=row._id;
+    },
     returnRow(index,row){
       this.returnGeneral=true;
       this.name=row.name;
@@ -154,7 +184,7 @@ export default {
       this.returnp.returnId=row._id;
     },
     returnPClick(){
-      
+
     },
     getAllAmount: _.debounce(
       function(){

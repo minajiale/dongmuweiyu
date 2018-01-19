@@ -53,6 +53,11 @@ var customserSchema = new mongoose.Schema({
         "price":String,//金额（元）
         "remark":String,//备注
     }],
+  }],
+  "returnBack":[{
+    "orderId":String,
+    "ProId":String,
+    "number":String
   }]
 });
 

@@ -643,7 +643,158 @@ router.post("/createOrder",function(req,res,next){
         }
       }})
 })
-//退货 product数量，总销量减，月销量减少，customer表
+//退货 product数量，总销量减，月销量减少，customer表generalGoodsOrder减少一个returnBack加一个记录
+router.post("/returnBack",function(req,res,next){
+  var data = req.body.data,
+      proId= data.proId,
+      backnumber=parseInt(data.backnumber),
+      orderId=data.orderId,
+      oldnumber=parseInt(data.oldnumber),
+      orderListId=data.orderListId,
+      salePrice=data.salePrice,
+      customerId=req.cookies.customerId || '';
+var allSucess = true;//只要有一个回调没完成，就会改成false
+var returnBackData = {},
+    oldValue = {"_id":customerId};
+returnBackData.orderId=orderId;
+returnBackData.ProId=proId;
+returnBackData.number=backnumber;
+//添加修改记录
+function pushreturnBack(){
+  customer.update(
+    oldValue,
+    {$push:{returnBack:returnBackData}},
+    function(err,doc){
+      if(err){
+        allSucess=false;
+        console.log("pushreturnBack失败"+err);
+      }
+    }
+  )
+};
+//找到嵌套数组generalGoodsOrder的下标
+function findgeneralTarget(){
+  return new Promise(function(resolve,reject){
+    var targrt = {"_id":customerId,"orderList":{"_id":orderListId}};
+    customer.find(targrt,function(err,doc){
+      if(err){
+        reject(err);
+      }else{
+        doc.generalGoodsOrder.forEach((item,index,array)=>{
+          if(item._id==orderId){
+            resolve(index);
+          }
+        })
+      }
+    })
+  })
+}
+//更新orderList.generalGoodsOrder的salePrice
+function updateGoodsOrder(){
+  var saleNumber = parseInt(oldnumber)-parseInt(backnumber);//销售量
+  var targrt = {"_id":customerId,"orderList":{"_id":orderListId}};
+  var newData = { $set: { "sales.$.generalGoodsOrder.index" : saleNumber} };
+
+  product.update(targrt,newData,function(err5,result){
+    if(err5){
+      allSucess=false;
+      console.log("updateGoodsOrder失败"+err5);
+    }
+  })
+}
+//更新某一个顾客总的金额all
+function updateAll(){
+  var reduceAll = parseInt(backnumber)*parseInt(salePrice);
+  customer.findAndModify(
+    oldValue,
+    { $inc: { all: -reduceAll}},
+    function(err,doc){
+      if(err){
+        allSucess=false;
+        console.log("updateAll失败"+err);
+      }
+  })
+}
+//更新product表中的商品数量和总的销量
+function updatePro(){
+  product.findAndModify(
+    {"_id":proId},
+    { $inc: { "num": -backnumber,"salesNumbers":-backnumber}},
+    function(err,doc){
+      if(err){
+        allSucess=false;
+        console.log("updatePro失败"+err);
+      }
+  })
+}
+//更新某个product的月退货销量
+function updateMonthSales(){
+  var targrt = {"_id":proId};
+  customer.find(targrt,function(err,doc){
+    if(err){
+
+    }else{
+      var back = doc.back;
+      lastMonthSales = back[sales.length-1],
+      salesTarget=lastMonthSales._id,
+      lastMonthBackNumber=parseInt(lastMonthSales.backNumber),
+      lastMonthSalesYear = salesTarget.getTimestamp().getFullYear(),
+      lastMonthSalesMonth = salesTarget.getTimestamp().getMonth();
+      var now = new Date(),
+          nowMonth = now.getMonth(),
+          nowYear = now.getFullYear();
+
+      if(nowMonth == lastMonthSalesMonth && nowYear == lastMonthSalesYear){
+        var MonthBackNumber = lastMonthBackNumber+backnumber;//月退货量
+        product.updateOne(
+         { _id: proId, "back._id": salesTarget },
+         { $set: { "back.$.backNumber" : MonthBackNumber} },
+         function(err,doc){
+           if(err){
+             res.json({
+               status:"1",
+               message:err.message
+             });
+           }else{
+             console.log("修改着一个月的月销售额成功");
+           }
+         }
+      )
+      }else{
+        var temp4 = {};
+        temp4.backNumber = backnumber;
+        product.update(
+          {"_id":proId},
+          {$push:{back:temp4}},
+          function(errCC,docCC){
+          if(errCC){
+            res.json({
+              status:1,
+              msg:errCC.message,
+              result:''
+            })
+          }else{
+            if(docCC.nModified != 0){
+              console.log("修改月销售额成功");
+            }else{
+              res.json({
+                status:1,
+                msg:"err3.message",
+                result:''
+              })
+            }
+          }
+        })
+      }
+    }
+  })
+}
+updateMonthSales();
+pushreturnBack();
+updateAll();
+updatePro();
+findgeneralTarget().then(updateGoodsOrder());
+})
 //根据某个顾客ID查询所有的订单
 router.get("/findOrderByCusId",function(req,res,next){
   var customerId=req.cookies.customerId || '';
