@@ -103,7 +103,7 @@
      {{spec}}
      <el-form :model="returnp">
        <el-form-item label="请输入商品数量">
-         <el-input-number v-model="returnp.num" @change="handleChange" :min="0" ></el-input-number>
+         <el-input-number v-model="returnp.backnumber" @change="handleChange" :min="0" ></el-input-number>
        </el-form-item>
      </el-form>
      <div slot="footer" class="dialog-footer">
@@ -139,11 +139,17 @@ export default {
       addGeneral:false,
       addp:{
         num:'',
-        addId:''
-      },
+        orderId:'',
+        oldnumber:'',
+        orderListId:'',
+        salePrice:''
+       },
       returnp:{
-        num:'',
-        returnId:''
+        backnumber:'',
+        orderId:'',
+        oldnumber:'',
+        orderListId:'',
+        salePrice:''
       },
       name:'',
       spec:'',
@@ -181,10 +187,29 @@ export default {
       this.returnGeneral=true;
       this.name=row.name;
       this.spec=row.code;
-      this.returnp.returnId=row._id;
+      this.returnp.orderListId=row.orderListId;
+      this.returnp.orderId=row.orderId;
+      this.returnp.oldnumber=row.num;
+      this.returnp.salePrice=row.price;
     },
     returnPClick(){
-
+      this.$http({
+        url:"/customer/returnBack",
+        method:'post',
+        data:this.returnp
+      }).then(res=>{
+        this.returnGeneral=false;
+        this.$notify({
+           title: '成功',
+           message: '退货成功',
+           type: 'success'
+         });
+      },error=>{
+        this.$notify.error({
+          title: '错误',
+          message: '退货失败'
+        });
+      })
     },
     getAllAmount: _.debounce(
       function(){
