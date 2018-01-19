@@ -311,6 +311,7 @@ router.get("/cart",function(req,res,next){
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
+        customerId=req.cookies.managerId || '',
         paiedFirstt = parseInt(req.body.paied) ,
         allAmountt=parseInt(req.body.allAmount);
     customer.find({"_id":customerId},function(err,doc){
