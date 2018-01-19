@@ -60,6 +60,20 @@
         </el-button>
       </template>
     </el-table-column>
+    <el-table-column
+      label="操作"
+      width="120"
+      v-if="visibility==false"
+      >
+      <template scope="scope">
+        <el-button
+          @click.native.prevent="returnRow(scope.$index, scope.row)"
+          type="text"
+          size="small">
+          退货
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
 
    <el-dialog title="修改订单" :visible.sync="editGeneral">
@@ -78,6 +92,19 @@
        <el-button type="primary" @click="handleCart">确 定</el-button>
      </div>
    </el-dialog>
+   <el-dialog title="退货" :visible.sync="returnGeneral">
+     {{name}}
+     {{spec}}
+     <el-form :model="returnp">
+       <el-form-item label="请输入商品数量">
+         <el-input-number v-model="returnp.num" @change="handleChange" :min="0" ></el-input-number>
+       </el-form-item>
+     </el-form>
+     <div slot="footer" class="dialog-footer">
+       <el-button @click="returnGeneral = false">取 消</el-button>
+       <el-button type="primary" @click="returnPClick">确 定</el-button>
+     </div>
+   </el-dialog>
    <div class="">
      合计(元)：{{this.all}}
    </div>
@@ -89,6 +116,11 @@ import _ from 'lodash';
 export default {
   data () {
     return {
+      returnGeneral:false,
+      returnp:{
+        num:'',
+        returnId:''
+      },
       name:'',
       spec:'',
       operatTemp:{},
@@ -115,6 +147,15 @@ export default {
     this.getAllAmount()
   },
   methods: {
+    returnRow(index,row){
+      this.returnGeneral=true;
+      this.name=row.name;
+      this.spec=row.code;
+      this.returnp.returnId=row._id;
+    },
+    returnPClick(){
+      
+    },
     getAllAmount: _.debounce(
       function(){
         var amount=0;

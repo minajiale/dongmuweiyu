@@ -68,6 +68,38 @@ router.get("/lack",function(req,res,next){
     }
   })
 })
+//取得月销售额
+router.get("/monthSales",function(req,res,next){
+  product.find({},function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      var result = [{
+        month:"",
+        
+      }];
+      doc.forEach((item,index,array)=>{
+        var oneProductSales = item.sales;
+
+        result[index] ={}
+        result[index].month = item.sales
+        result[index].salesNumber = item.sales
+      })
+
+      res.json({
+        status:'1',
+        msg:'get all classification suecess!',
+        result:{
+          count:doc.length,
+          allProducts:doc
+        }
+      })
+    }
+  })
+})
 // 加入购物车
 router.post("/addcart",function(req,res,next){
   var customerId="";

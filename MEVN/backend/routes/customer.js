@@ -643,6 +643,7 @@ router.post("/createOrder",function(req,res,next){
         }
       }})
 })
+//退货 product数量，总销量减，月销量减少，customer表
 //根据某个顾客ID查询所有的订单
 router.get("/findOrderByCusId",function(req,res,next){
   var customerId=req.cookies.customerId || '';
@@ -682,6 +683,7 @@ router.get("/findOrderByCusId",function(req,res,next){
                       if(item.id == docP[0]._id){
                         var temp3 = result[temp].general[temp2] = {};
                         temp3.proId=item.id;
+                        temp3.orderId=item._id;
                         temp3.price=item.salePrice;
                         temp3.num=item.saleNumber;
                         temp3.name=docP[0].name;

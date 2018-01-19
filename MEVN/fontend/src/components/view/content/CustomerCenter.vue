@@ -17,17 +17,6 @@
     <div class="">
       合计:{{this.allAmount}}
     </div>
- <!-- <el-dialog title="创建订单" :visible.sync="createOrder">
-   <el-form :model="orderStatus">
-     <el-form-item label="定金（元）">
-       <el-input v-model="orderStatus.status" auto-complete="off"></el-input>
-     </el-form-item>
-   </el-form>
-   <div slot="footer" class="dialog-footer">
-     <el-button @click="addCartVisible = false">取 消</el-button>
-     <el-button type="primary" @click="handleCart">确 定</el-button>
-   </div>
- </el-dialog> -->
   </div>
 </template>
 
@@ -70,6 +59,7 @@ export default {
         url:"/customer/findOrderByCusId"
       }).then(res=>{
         this.orders=res.data.result.Orders;
+        console.log(this.orders[0].general);
         this.allAmount= res.data.result.allAmount;
       },error=>{
         this.$notify.error({
