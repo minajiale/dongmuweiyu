@@ -712,7 +712,11 @@ router.post("/returnBack",function(req,res,next){
         allSucess=false;
         console.log("updateGoodsOrder失败"+err5);
       }else{
-        console.log("更新orderList.generalGoodsOrder的saleNumber成功");
+        if(result.nModified ==0){
+          console.log("更新orderList.generalGoodsOrder的saleNumber失败");
+        }else{
+          console.log("更新orderList.generalGoodsOrder的saleNumber成功");
+        }
       }
     })
   }
