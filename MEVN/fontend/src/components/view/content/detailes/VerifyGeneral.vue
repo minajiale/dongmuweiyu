@@ -195,7 +195,7 @@ export default {
         method:'post',
         data:this.addp
       }).then(res=>{
-        this.returnGeneral=false;
+        this.addGeneral=false;
         this.$notify({
            title: '成功',
            message: '补货成功',
