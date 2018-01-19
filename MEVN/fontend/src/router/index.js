@@ -16,7 +16,7 @@ import Products from '@/components/view/content/Products.vue'
 import classification from '@/components/view/content/classification.vue'
 import customerCenter from '@/components/view/content/CustomerCenter.vue'
 import managerCenter from '@/components/view/content/ManagerCenter.vue'
-import Login from '@/components/view/dashboad/Login.vue'
+import Login from '@/components/Login.vue'
 import Register from '@/components/view/dashboad/Register.vue'
 
 
