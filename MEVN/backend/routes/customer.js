@@ -653,6 +653,7 @@ router.post("/returnBack",function(req,res,next){
       orderListId=data.orderListId,
       salePrice=data.salePrice,
       customerId=req.cookies.customerId || '';
+  console.log("orderListId"+orderListId);
   var allSucess = true;//只要有一个回调没完成，就会改成false
   var returnBackData = {},
       oldValue = {"_id":customerId};
@@ -794,6 +795,17 @@ router.post("/returnBack",function(req,res,next){
   updateAll();
   updatePro();
   findgeneralTarget().then(updateGoodsOrder());
+  if(allSucess ==true){
+    res.json({
+      status:'1',
+      msg:"退货成功"
+    });
+    }else{
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+  }
 })
 //根据某个顾客ID查询所有的订单
 router.get("/findOrderByCusId",function(req,res,next){
