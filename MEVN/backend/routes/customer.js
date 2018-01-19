@@ -311,7 +311,7 @@ router.get("/cart",function(req,res,next){
 //生成一张订单
 router.post("/createOrder",function(req,res,next){
     var customerId=req.cookies.customerId || '',
-        customerId=req.cookies.managerId || '',
+        managerId=req.cookies.managerId || '',
         paiedFirstt = parseInt(req.body.paied) ,
         allAmountt=parseInt(req.body.allAmount);
     customer.find({"_id":customerId},function(err,doc){
@@ -330,7 +330,7 @@ router.post("/createOrder",function(req,res,next){
         if(DoorGoods != undefined && generalGoodscart== undefined){
           customer.update(
           {"_id":customerId},
-          {$push:{orderList:{"DoorGoodsOrder":DoorGoods}}},
+          {$push:{orderList:{"DoorGoodsOrder":DoorGoods,"owner":managerId}}},
           function(err,doc){
           if(err){
             res.json({
@@ -463,7 +463,7 @@ router.post("/createOrder",function(req,res,next){
           });
           customer.update(
           {"_id":customerId},
-          {$push:{orderList:{"generalGoodsOrder":generalGoodscart}}},
+          {$push:{orderList:{"generalGoodsOrder":generalGoodscart,"owner":managerId}}},
           function(err,doc){
           if(err){
             res.json({
@@ -596,7 +596,7 @@ router.post("/createOrder",function(req,res,next){
           });
           customer.update(
           {"_id":customerId},
-          {$push:{orderList:{"generalGoodsOrder":generalGoodscart,"DoorGoodsOrder":DoorGoods}}},
+          {$push:{orderList:{"generalGoodsOrder":generalGoodscart,"DoorGoodsOrder":DoorGoods,"owner":managerId}}},
           function(err,doc){
           if(err){
             res.json({

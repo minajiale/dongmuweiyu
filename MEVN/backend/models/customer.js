@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 var customserSchema = new mongoose.Schema({
-  "owner":String,//哪个店员下的单
   "customerId":String,
   "usePwd":String,
   "name":String,
@@ -32,6 +31,7 @@ var customserSchema = new mongoose.Schema({
       "remark":String,//备注
     }],
   "orderList":[{
+    "owner":String,//哪个店员下的单
     "generalGoodsOrder":[ //普通销售清单
       {
         "id":String,
@@ -61,7 +61,7 @@ var customserSchema = new mongoose.Schema({
     "orderListId":String,
   }], //退货
   "addBack":[{
-    "orderId":String, 
+    "orderId":String,
     "ProId":String,
     "number":Number,
     "orderListId":String,
