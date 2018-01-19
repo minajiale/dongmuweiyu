@@ -686,7 +686,11 @@ router.post("/returnBack",function(req,res,next){
             if(item._id==orderListId){
               item.generalGoodsOrder.forEach((itemm,indexx,arrayy)=>{
                 if(itemm._id ==orderId){
-                  resolve(index,indexx);
+                  console.log("index： "+index+"  indexx:  "+indexx);
+                  var key={};
+                  key.index=index;
+                  key.indexx=indexx;
+                  resolve(key);
                 }
               })
             }
@@ -696,11 +700,13 @@ router.post("/returnBack",function(req,res,next){
     })
   }
   //更新orderList.generalGoodsOrder的saleNumber
-  function updateGoodsOrder(index,indexx){
+  function updateGoodsOrder(key){
     var saleNumber = parseInt(oldnumber)-parseInt(backnumber);//销售量
     var targrt = {"_id":customerId};
+    var index = key.index;
+    var indexx= key.indexx;
     var newData = { $set: { "orderList.index.generalGoodsOrder.indexx.saleNumber" : saleNumber} };
-
+    console.log("index： "+index+"  indexx:  "+indexx);
     product.update(targrt,newData,function(err5,result){
       if(err5){
         allSucess=false;
