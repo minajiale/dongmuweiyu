@@ -7,14 +7,14 @@ var customserSchema = new mongoose.Schema({
   "name":String,
   "phone":String,
   "address":Array,
-  "all":String,//总的金额
+  "all":Number,//总的金额
   "paied":String,//已经付款金额
   "status":String,//订单状态0表示正常1表示作废（顾客没拿货）
   "generalGoodscart":[ //普通销售清单
     {
       "id":String,
       "salePrice":String,// 实际上卖的金额
-      "saleNumber":String,//卖的数量
+      "saleNumber":Number,//卖的数量
     }
   ],
   "DoorGoodscart":[ //定们单
@@ -27,7 +27,7 @@ var customserSchema = new mongoose.Schema({
       "material": String,//材质
       "unit": String,//单位
       "doorLine":String,//门套线类型
-      "number":String,//数量
+      "number":Number,//数量
       "price":String,//金额（元）
       "remark":String,//备注
     }],
@@ -36,7 +36,7 @@ var customserSchema = new mongoose.Schema({
       {
         "id":String,
         "salePrice":String,// 实际上卖的金额
-        "saleNumber":String,//卖的数量
+        "saleNumber":Number,//卖的数量
       }
     ],
     "DoorGoodsOrder":[ //定们单
@@ -49,7 +49,7 @@ var customserSchema = new mongoose.Schema({
         "material": String,//材质
         "unit": String,//单位
         "doorLine":String,//门套线类型
-        "number":String,//数量
+        "number":Number,//数量
         "price":String,//金额（元）
         "remark":String,//备注
     }],
@@ -57,7 +57,7 @@ var customserSchema = new mongoose.Schema({
   "returnBack":[{
     "orderId":String,
     "ProId":String,
-    "number":String
+    "number":Number
   }]
 });
 

@@ -677,14 +677,18 @@ router.post("/returnBack",function(req,res,next){
   //找到嵌套数组generalGoodsOrder的下标
   function findgeneralTarget(){
     return new Promise(function(resolve,reject){
-      var targrt = {"_id":customerId,"orderList":{"_id":orderListId}};
+      var targrt = {"_id":customerId};
       customer.find(targrt,function(err,doc){
         if(err){
           reject(err);
         }else{
-          doc.generalGoodsOrder.forEach((item,index,array)=>{
-            if(item._id==orderId){
-              resolve(index);
+          doc[0].orderList.forEach((item,index,array)=>{
+            if(item._id==orderListId){
+              item.generalGoodsOrder.forEach((itemm,indexx,arrayy)=>{
+                if(itemm._id ==orderId){
+                  resolve(index,indexx);
+                }
+              })
             }
           })
         }
@@ -692,10 +696,10 @@ router.post("/returnBack",function(req,res,next){
     })
   }
   //更新orderList.generalGoodsOrder的saleNumber
-  function updateGoodsOrder(){
+  function updateGoodsOrder(index,indexx){
     var saleNumber = parseInt(oldnumber)-parseInt(backnumber);//销售量
-    var targrt = {"_id":customerId,"orderList":{"_id":orderListId}};
-    var newData = { $set: { "sales.$.generalGoodsOrder.index" : saleNumber} };
+    var targrt = {"_id":customerId};
+    var newData = { $set: { "orderList.index.generalGoodsOrder.indexx.saleNumber" : saleNumber} };
 
     product.update(targrt,newData,function(err5,result){
       if(err5){
@@ -709,10 +713,9 @@ router.post("/returnBack",function(req,res,next){
   //更新某一个顾客总的金额all
   function updateAll(){
     var reduceAll = parseInt(backnumber)*parseInt(salePrice);
-    console.log(reduceAll);
-    customer.findAndModify(
+    customer.update(
       oldValue,
-      { $inc: { all: -reduceAll}},
+      {$inc: {all: -reduceAll}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -724,9 +727,9 @@ router.post("/returnBack",function(req,res,next){
   }
   //更新product表中的商品数量和总的销量
   function updatePro(){
-    product.findAndModify(
+    product.update(
       {"_id":proId},
-      { $inc: { "num": -backnumber,"salesNumbers":-backnumber}},
+      { $inc: { "num": +backnumber,"salesNumbers":-backnumber}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -798,11 +801,12 @@ router.post("/returnBack",function(req,res,next){
       }
     })
   }
-  updateMonthSales();
   pushreturnBack();
   updateAll();
   updatePro();
-  findgeneralTarget().then(updateGoodsOrder());
+  updateMonthSales();
+
+  findgeneralTarget().then(updateGoodsOrder);
   if(allSucess ==true){
     res.json({
       status:'1',
