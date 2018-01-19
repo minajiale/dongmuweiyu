@@ -659,6 +659,8 @@ router.post("/returnBack",function(req,res,next){
   returnBackData.orderId=orderId;
   returnBackData.ProId=proId;
   returnBackData.number=backnumber;
+  returnBackData.orderListId=orderListId;
+
   //添加修改记录
   function pushreturnBack(){
     customer.update(
@@ -843,17 +845,18 @@ router.post("/addBack",function(req,res,next){
   var returnBackData = {},
       oldValue = {"_id":customerId};
   returnBackData.orderId=orderId;
+  returnBackData.orderListId=orderListId;
   returnBackData.ProId=proId;
   returnBackData.number=backnumber;
-  //添加修改记录
+  //添加补货记录
   function pushreturnBack(){
     customer.update(
       oldValue,
-      {$push:{returnBack:returnBackData}},
+      {$push:{addBack:returnBackData}},
       function(err,doc){
         if(err){
           allSucess=false;
-          console.log("pushreturnBack失败"+err);
+          console.log("pushAddBack失败"+err);
         }else{
           console.log("添加退货记录成功");
         }
@@ -911,7 +914,7 @@ router.post("/addBack",function(req,res,next){
     var reduceAll = parseInt(backnumber)*parseInt(salePrice);
     customer.update(
       oldValue,
-      {$inc: {all: -reduceAll}},
+      {$inc: {all: +reduceAll}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -925,7 +928,7 @@ router.post("/addBack",function(req,res,next){
   function updatePro(){
     product.update(
       {"_id":proId},
-      { $inc: { "num": +backnumber,"salesNumbers":-backnumber}},
+      { $inc: { "num": -backnumber,"salesNumbers":+backnumber}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -1000,7 +1003,7 @@ router.post("/addBack",function(req,res,next){
   pushreturnBack();
   updateAll();
   updatePro();
-  updateMonthSales();
+  // updateMonthSales();
 
   findgeneralTarget().then(updateGoodsOrder);
   if(allSucess ==true){

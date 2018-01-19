@@ -116,7 +116,7 @@
      {{spec}}
      <el-form :model="addp">
        <el-form-item label="请输入商品数量">
-         <el-input-number v-model="addp.num" @change="handleChange" :min="0" ></el-input-number>
+         <el-input-number v-model="addp.backnumber" @change="handleChange" :min="0" ></el-input-number>
        </el-form-item>
      </el-form>
      <div slot="footer" class="dialog-footer">
@@ -138,11 +138,12 @@ export default {
       returnGeneral:false,
       addGeneral:false,
       addp:{
-        num:'',
+        backnumber:'',
         orderId:'',
         oldnumber:'',
         orderListId:'',
-        salePrice:''
+        salePrice:'',
+        proId:''
        },
       returnp:{
         backnumber:'',
@@ -182,7 +183,30 @@ export default {
       this.addGeneral=true;
       this.name=row.name;
       this.spec=row.code;
-      this.addp.addId=row._id;
+      this.addp.orderListId=row.orderListId;
+      this.addp.orderId=row.orderId;
+      this.addp.oldnumber=row.num;
+      this.addp.salePrice=row.price;
+      this.addp.proId=row.proId;
+    },
+    addPClick(){
+      this.$http({
+        url:"/customer/addBack",
+        method:'post',
+        data:this.addp
+      }).then(res=>{
+        this.returnGeneral=false;
+        this.$notify({
+           title: '成功',
+           message: '补货成功',
+           type: 'success'
+         });
+      },error=>{
+        this.$notify.error({
+          title: '错误',
+          message: '补货失败'
+        });
+      })
     },
     returnRow(index,row){
       this.returnGeneral=true;

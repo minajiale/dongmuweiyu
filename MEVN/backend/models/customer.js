@@ -57,8 +57,15 @@ var customserSchema = new mongoose.Schema({
   "returnBack":[{
     "orderId":String,
     "ProId":String,
-    "number":Number
-  }]
+    "number":Number,
+    "orderListId":String,
+  }], //退货
+  "addBack":[{
+    "orderId":String, 
+    "ProId":String,
+    "number":Number,
+    "orderListId":String,
+  }] // 补货
 });
 
 module.exports=mongoose.model("customer",customserSchema)

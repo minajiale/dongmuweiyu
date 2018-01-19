@@ -19,6 +19,9 @@ var productSchema = new mongoose.Schema({
   "back":[{
     "backNumber":Number
   }],     //月退货量
+  "addBack":[{
+    "backNumber":Number
+  }],     //月补货量
   "salesNumbers":Number,//总销售额
 })
 
