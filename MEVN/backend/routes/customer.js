@@ -645,7 +645,7 @@ router.post("/createOrder",function(req,res,next){
 })
 //退货 product数量，总销量减，月销量减少，customer表generalGoodsOrder减少一个returnBack加一个记录
 router.post("/returnBack",function(req,res,next){
-  var data = req.body.data,
+  var data = req.body,
       proId= data.proId,
       backnumber=parseInt(data.backnumber),
       orderId=data.orderId,
@@ -653,7 +653,6 @@ router.post("/returnBack",function(req,res,next){
       orderListId=data.orderListId,
       salePrice=data.salePrice,
       customerId=req.cookies.customerId || '';
-  console.log("orderListId"+orderListId);
   var allSucess = true;//只要有一个回调没完成，就会改成false
   var returnBackData = {},
       oldValue = {"_id":customerId};
@@ -669,6 +668,8 @@ router.post("/returnBack",function(req,res,next){
         if(err){
           allSucess=false;
           console.log("pushreturnBack失败"+err);
+        }else{
+          console.log("添加退货记录成功");
         }
       }
     )
@@ -690,7 +691,7 @@ router.post("/returnBack",function(req,res,next){
       })
     })
   }
-  //更新orderList.generalGoodsOrder的salePrice
+  //更新orderList.generalGoodsOrder的saleNumber
   function updateGoodsOrder(){
     var saleNumber = parseInt(oldnumber)-parseInt(backnumber);//销售量
     var targrt = {"_id":customerId,"orderList":{"_id":orderListId}};
@@ -700,12 +701,15 @@ router.post("/returnBack",function(req,res,next){
       if(err5){
         allSucess=false;
         console.log("updateGoodsOrder失败"+err5);
+      }else{
+        console.log("更新orderList.generalGoodsOrder的saleNumber成功");
       }
     })
   }
   //更新某一个顾客总的金额all
   function updateAll(){
     var reduceAll = parseInt(backnumber)*parseInt(salePrice);
+    console.log(reduceAll);
     customer.findAndModify(
       oldValue,
       { $inc: { all: -reduceAll}},
@@ -713,6 +717,8 @@ router.post("/returnBack",function(req,res,next){
         if(err){
           allSucess=false;
           console.log("updateAll失败"+err);
+        }else {
+          console.log("更新某一个顾客总的金额all成功");
         }
     })
   }
@@ -725,18 +731,20 @@ router.post("/returnBack",function(req,res,next){
         if(err){
           allSucess=false;
           console.log("updatePro失败"+err);
+        }else{
+          console.log("更新product表中的商品数量和总的销量成功");
         }
     })
   }
   //更新某个product的月退货销量
   function updateMonthSales(){
     var targrt = {"_id":proId};
-    customer.find(targrt,function(err,doc){
+    product.find(targrt,function(err,doc){
       if(err){
-
+        console.log("查找id为proId的产品失败");
       }else{
-        var back = doc.back;
-        lastMonthSales = back[sales.length-1],
+        var back = doc[0].back;
+        lastMonthSales = back[back.length-1],
         salesTarget=lastMonthSales._id,
         lastMonthBackNumber=parseInt(lastMonthSales.backNumber),
         lastMonthSalesYear = salesTarget.getTimestamp().getFullYear(),
