@@ -62,16 +62,12 @@
                             oneProduct:this.ruleForm,
                           }
                         }).then(res=>{
-                          this.$notify({
-                             title: '成功',
-                             message: '新增产品成功',
-                             type: 'success'
-                           });
+
                         },error=>{
                           console.log("error");
                           this.$notify.error({
                             title: '错误',
-                            message: '这是一条错误的提示消息'
+                            message: '注册失败'
                           });
                         })
                     } else {

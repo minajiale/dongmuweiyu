@@ -32,6 +32,7 @@ router.post('/login', function(req, res, next) {
           msg:'登录成功',
           result:{
             managerID:managerDoc._id,
+            role:managerDoc.role,
             managerName:managerDoc.username
           }
         })

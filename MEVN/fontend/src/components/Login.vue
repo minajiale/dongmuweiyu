@@ -50,6 +50,7 @@ import axios from 'axios'
                   if(res.data.status == '0'){
                     //成功
                     // this.$store.commit("updateManager",res.data.result.managerName);
+                    alert(res.data.result.role)
                     if(res.data.result.role == 0){
                       self.$router.push('/admin');
                     }else{
