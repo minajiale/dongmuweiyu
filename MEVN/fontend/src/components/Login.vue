@@ -50,7 +50,11 @@ import axios from 'axios'
                   if(res.data.status == '0'){
                     //成功
                     this.$store.commit("updateManager",res.data.result.managerName);
-                    self.$router.push('/');
+                    if(res.data.result.role == 0){
+                      self.$router.push('/admin');
+                    }else{
+                      self.$router.push('/noadmin');
+                    }
                   }else{
                     //失败
                      this.$message.error('请输入正确的用户名和密码');
