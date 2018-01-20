@@ -16,9 +16,9 @@
                   <el-input v-model.number="ruleForm.phone"></el-input>
                 </el-form-item>
                 <el-form-item label="您的身份" prop="identity">
-                  <el-radio-group v-model="ruleForm.identity">
-                    <el-radio label="店主"></el-radio>
-                    <el-radio label="店员"></el-radio>
+                  <el-radio-group v-model="ruleForm.role">
+                    <el-radio label=0>店主</el-radio>
+                    <el-radio label=1>店员</el-radio>
                   </el-radio-group>
                 </el-form-item>
                 <div class="login-btn">
@@ -37,7 +37,7 @@
                     username: '',
                     password: '',
                     phone:'',
-                    identity:''
+                    role:''
                 },
                 rules: {
                     username: [
@@ -55,7 +55,25 @@
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
+                        this.$http({
+                          method: 'post',
+                          url:'/manager/register',
+                          data:{
+                            oneProduct:this.ruleForm,
+                          }
+                        }).then(res=>{
+                          this.$notify({
+                             title: '成功',
+                             message: '新增产品成功',
+                             type: 'success'
+                           });
+                        },error=>{
+                          console.log("error");
+                          this.$notify.error({
+                            title: '错误',
+                            message: '这是一条错误的提示消息'
+                          });
+                        })
                     } else {
                         console.log('error submit!!');
                         return false;

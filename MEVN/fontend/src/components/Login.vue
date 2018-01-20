@@ -49,7 +49,7 @@ import axios from 'axios'
                 }).then((res)=>{
                   if(res.data.status == '0'){
                     //成功
-                    this.$store.commit("updateManager",res.data.result.managerName);
+                    // this.$store.commit("updateManager",res.data.result.managerName);
                     if(res.data.result.role == 0){
                       self.$router.push('/admin');
                     }else{

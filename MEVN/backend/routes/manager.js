@@ -62,6 +62,22 @@ router.post('/loginOut', function(req, res, next) {
   })
 });
 router.post('/register',function(req,res,next){
-  
+  var oneProduct = req.body.oneProduct || '';
+  if(oneProduct != ''){
+    manager.create(oneProduct,function(err3,doc){
+      if(err3){
+        res.json({
+          status:"1",
+          message:err3.message
+        });
+      }else{
+        res.json({
+          status:"0",
+          msg:"",
+          result:"sucess"
+        })
+      }
+    })
+  }
 })
 module.exports = router;
