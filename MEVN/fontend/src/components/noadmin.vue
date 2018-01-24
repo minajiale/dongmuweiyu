@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import rightMenu from './view/dashboad/Menu.vue'
-import topMenu from './view/dashboad/Top.vue'
+import rightMenu from './noadminview/dashboad/Menu.vue'
+import topMenu from './noadminview/dashboad/Top.vue'
 
 export default {
   name: 'Index',

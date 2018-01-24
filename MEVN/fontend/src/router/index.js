@@ -23,7 +23,6 @@ import noadmin from '@/components/noadmin'
 import NVerifyOrder from '@/components/noadminview/content/detailes/VerifyOrder.vue'
 import NAddOrder from '@/components/noadminview/content/detailes/AddOrder.vue'
 import NAlarm from '@/components/noadminview/content/Alarm.vue'
-import NFinance from '@/components/noadminview/content/Finance.vue'
 import NOrder from '@/components/noadminview/content/Order.vue'
 import NProducts from '@/components/noadminview/content/Products.vue'
 import Nclassification from '@/components/noadminview/content/classification.vue'
@@ -163,93 +162,58 @@ const routes = [
           },
           components: {
             default: noadmin,
-            rightContent: Analyse
+            rightContent: NOrder
           },
           children:[
             {
-              path: '/customerCenter',
+              path: '/ncustomerCenter',
                 requireAuth: true,
               components: {
-                default: Index,
-                rightContent: customerCenter
+                default: noadmin,
+                rightContent: NcustomerCenter
               },
             },
             {
-              path: '/managerCenter',
+              path: '/nmanagerCenter',
                 requireAuth: true,
               components: {
-                default: Index,
+                default: noadmin,
                 rightContent: NmanagerCenter
               },
             },
             {
-              path: '/product/addProduct',
+              path: '/norder/addOrder/verify',
               components: {
-                default: Index,
-                rightContent: AddProduct
-              },
-            },
-            {
-              path: '/order/addOrder/verify',
-              components: {
-                default:Index,
-                rightContent: VerifyOrder
+                default:noadmin,
+                rightContent: NVerifyOrder
               },
             },
               {
-                path: '/order/addOrder',
-                components: {
-                  default: Index,
-                  rightContent: AddOrder
-                },
-              },
-              {
-                  path: '/analyse',
+                  path: '/nalarm',
                   components: {
-                    default: Index,
-                    rightContent: Analyse
+                    default: noadmin,
+                    rightContent: NAlarm
                   },
               },
               {
-                  path: '/alarm',
+                  path: '/norder',
                   components: {
-                    default: Index,
-                    rightContent: Alarm
+                    default:noadmin,
+                    rightContent: NOrder
                   },
               },
               {
-                  path: '/finance',
+                  path: '/nproducts',
                   components: {
-                    default: Index,
-                    rightContent: Finance
+                    default: noadmin,
+                    rightContent: NProducts
                   },
               },
               {
-                  path: '/order',
+                  path: '/nclassification',
                   components: {
-                    default:Index,
-                    rightContent: Order
-                  },
-              },
-              {
-                  path: '/peopleManage',
-                  components: {
-                    default: Index,
-                    rightContent: Peoplemanage
-                  },
-              },
-              {
-                  path: '/products',
-                  components: {
-                    default: Index,
-                    rightContent: Products
-                  },
-              },
-              {
-                  path: '/classification',
-                  components: {
-                    default: Index,
-                    rightContent: classification
+                    default: noadmin,
+                    rightContent: Nclassification
                   },
               },
           ]

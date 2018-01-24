@@ -37,7 +37,7 @@ export default{
     }
   },
   mounted:function(){
-    this.$router.push('/order');
+    // this.$router.push('/order');
   },
   methods:{
     handleOpen(key, keyPath) {

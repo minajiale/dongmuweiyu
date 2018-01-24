@@ -1,6 +1,6 @@
 <template>
   <div class="products"   style="width: 1100px">
-    <h1>产品管理 &nbsp<router-link to="/product/addProduct">+</router-link> </h1>
+    <h1>产品管理</h1>
     <el-row>
     <el-col class="" :span="2"><sideMenu v-on:itemClick ="getProductsBySecClass" v-on:muenuClick='getProductsByFirClass'></sideMenu></el-col>
       <el-col :span="22">
@@ -50,9 +50,9 @@
           </el-table-column>
           <el-table-column label="操作"   width="300">
             <template scope="scope">
-              <el-button
+              <!-- <el-button
               size="small"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
               <!-- <el-button
               size="small"
               type="danger"
