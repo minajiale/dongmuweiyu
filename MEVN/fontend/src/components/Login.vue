@@ -11,6 +11,7 @@
                 </el-form-item>
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
+                    <el-button type="primary" @click="register()">注册</el-button>
                 </div>
             </el-form>
         </div>
@@ -37,6 +38,9 @@ import axios from 'axios'
             }
         },
         methods: {
+          register(){
+            this.$router.push('/register');
+          },
             submitForm() {
               const self = this;
                 if(!this.ruleForm.password || !this.ruleForm.username){

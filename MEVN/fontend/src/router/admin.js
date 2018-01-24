@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import store from '../store/store'
 import Index from '@/components/Index'
 import Test from '@/components/test.vue'
 import Testtwo from '@/components/testTwo.vue'
@@ -16,23 +13,7 @@ import Products from '@/components/view/content/Products.vue'
 import classification from '@/components/view/content/classification.vue'
 import customerCenter from '@/components/view/content/CustomerCenter.vue'
 import managerCenter from '@/components/view/content/ManagerCenter.vue'
-import Login from '@/components/Login.vue'
-import Register from '@/components/Register.vue'
 
-import noadmin from '@/components/noadmin'
-import NVerifyOrder from '@/components/noadminview/content/detailes/VerifyOrder.vue'
-import NAddOrder from '@/components/noadminview/content/detailes/AddOrder.vue'
-import NAlarm from '@/components/noadminview/content/Alarm.vue'
-import NFinance from '@/components/noadminview/content/Finance.vue'
-import NOrder from '@/components/noadminview/content/Order.vue'
-import NProducts from '@/components/noadminview/content/Products.vue'
-import Nclassification from '@/components/noadminview/content/classification.vue'
-import NcustomerCenter from '@/components/noadminview/content/CustomerCenter.vue'
-import NmanagerCenter from '@/components/noadminview/content/ManagerCenter.vue'
-
-
-
-Vue.use(Router)
 
 const routes = [
       {
@@ -156,104 +137,6 @@ const routes = [
         path: '/register',
         component: Register
       },
-      {
-          path: '/noadmin',
-          meta: {
-            // requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-          },
-          components: {
-            default: noadmin,
-            rightContent: Analyse
-          },
-          children:[
-            {
-              path: '/customerCenter',
-                requireAuth: true,
-              components: {
-                default: Index,
-                rightContent: customerCenter
-              },
-            },
-            {
-              path: '/managerCenter',
-                requireAuth: true,
-              components: {
-                default: Index,
-                rightContent: NmanagerCenter
-              },
-            },
-            {
-              path: '/product/addProduct',
-              components: {
-                default: Index,
-                rightContent: AddProduct
-              },
-            },
-            {
-              path: '/order/addOrder/verify',
-              components: {
-                default:Index,
-                rightContent: VerifyOrder
-              },
-            },
-              {
-                path: '/order/addOrder',
-                components: {
-                  default: Index,
-                  rightContent: AddOrder
-                },
-              },
-              {
-                  path: '/analyse',
-                  components: {
-                    default: Index,
-                    rightContent: Analyse
-                  },
-              },
-              {
-                  path: '/alarm',
-                  components: {
-                    default: Index,
-                    rightContent: Alarm
-                  },
-              },
-              {
-                  path: '/finance',
-                  components: {
-                    default: Index,
-                    rightContent: Finance
-                  },
-              },
-              {
-                  path: '/order',
-                  components: {
-                    default:Index,
-                    rightContent: Order
-                  },
-              },
-              {
-                  path: '/peopleManage',
-                  components: {
-                    default: Index,
-                    rightContent: Peoplemanage
-                  },
-              },
-              {
-                  path: '/products',
-                  components: {
-                    default: Index,
-                    rightContent: Products
-                  },
-              },
-              {
-                  path: '/classification',
-                  components: {
-                    default: Index,
-                    rightContent: classification
-                  },
-              },
-          ]
-      },
   ];
 
   const router = new Router({
@@ -263,7 +146,6 @@ const routes = [
   router.beforeEach((to, from, next) => {
       if (to.matched.some(r => r.meta.requireAuth)) {
           if (store.state.token) {
-            if(this.getCookie(managerId) != -1 && this.getCookie(managerId) != ''&& this.getCookie(managerId) != undefined )
               next();
           }
           else {

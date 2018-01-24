@@ -24,10 +24,41 @@
       <el-dropdown-item command="loginout">退出登录</el-dropdown-item>
       <el-dropdown-item command="me"><router-link to="/managerCenter">个人中心</router-link></el-dropdown-item>
       <el-dropdown-item command="customer"> <router-link to="/login">登录</router-link> </el-dropdown-item>
+      <el-dropdown-item command="register"> 注册</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </el-menu>
 
+
+<el-dialog title="注册新的店员" :visible.sync="register">
+  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+      <el-form-item prop="username">
+          <el-input v-model="ruleForm.username" placeholder="username"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+          <el-input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+      </el-form-item>
+      <el-form-item label="确认密码" prop="checkPass">
+        <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="电话" prop="phone">
+        <el-input v-model.number="ruleForm.phone"></el-input>
+      </el-form-item>
+      <el-form-item label="您的身份" prop="identity">
+        <el-radio-group v-model="ruleForm.role">
+          <el-radio label=0>店主</el-radio>
+          <el-radio label=1>店员</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <div class="login-btn">
+          <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
+      </div>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="addCartVisible = false">取 消</el-button>
+    <el-button type="primary" @click="handleCart">确 定</el-button>
+  </div>
+</el-dialog>
   </div>
 </template>
 <style>
@@ -70,6 +101,21 @@ import axios from "axios"
     export default {
         data() {
             return {
+              register:false,
+              ruleForm: {
+                  username: '',
+                  password: '',
+                  phone:'',
+                  role:''
+              },
+              rules: {
+                  username: [
+                      { required: true, message: '请输入用户名', trigger: 'blur' }
+                  ],
+                  password: [
+                      { required: true, message: '请输入密码', trigger: 'blur' }
+                  ]
+              },
               username:'',
               // customerName:''
             }
@@ -80,43 +126,72 @@ import axios from "axios"
             }
         },
         methods:{
-            customerCommand(command){
-              if(command=="loginoutC"){
-                axios.post("/customer/loginOut").then((response)=>{
-                  let res=response.data;
-                  if(res.status == 0){
-                    this.$router.push('/order/addOrder');
-                    this.$store.commit("updatecustomerName","");
-                  }else{
-                    this.$message.error('退出登录失败');
+          submitForm(formName) {
+              const self = this;
+              self.$refs[formName].validate((valid) => {
+                  if (valid) {
+                      localStorage.setItem('ms_username',self.ruleForm.username);
+                      this.$http({
+                        method: 'post',
+                        url:'/manager/register',
+                        data:{
+                          oneProduct:this.ruleForm,
+                        }
+                      }).then(res=>{
+
+                      },error=>{
+                        console.log("error");
+                        this.$notify.error({
+                          title: '错误',
+                          message: '注册失败'
+                        });
+                      })
+                  } else {
+                      console.log('error submit!!');
+                      return false;
                   }
-                })
-              }
-              if(command=="cart"){
-                  this.$router.push('/order/addOrder/verify');
-              }
-            },
-            handleCommand(command) {
-                if(command == 'loginout'){
-                    //TO-DO 清除cookie
-                    axios.post("/manager/loginOut").then((response)=>{
-                      let res=response.data;
-                      if(res.status == 0){
-                        this.$router.push('/login');
-                        this.$store.commit("updateManager","");
-                      }else{
-                        this.$message.error('退出登录失败');
-                      }
-                    })
-                }
-                if(command="me"){
-                  console.log("me");
-                }
-            },
-          updateMessage(){
-            this.username=this.getCookie("managerName");
-            this.$store.commit('updatecustomerName',this.getCookie("customerName"))
+              });
           },
+          customerCommand(command){
+            if(command=="loginoutC"){
+              axios.post("/customer/loginOut").then((response)=>{
+                let res=response.data;
+                if(res.status == 0){
+                  this.$router.push('/order/addOrder');
+                  this.$store.commit("updatecustomerName","");
+                }else{
+                  this.$message.error('退出登录失败');
+                }
+              })
+            }
+            if(command=="cart"){
+                this.$router.push('/order/addOrder/verify');
+            }
+          },
+          handleCommand(command) {
+              if(command == 'loginout'){
+                  //TO-DO 清除cookie
+                  axios.post("/manager/loginOut").then((response)=>{
+                    let res=response.data;
+                    if(res.status == 0){
+                      this.$router.push('/login');
+                      this.$store.commit("updateManager","");
+                    }else{
+                      this.$message.error('退出登录失败');
+                    }
+                  })
+              }
+              if(command=="me"){
+                console.log("me");
+              }
+              if(command == "register"){
+                this.register =true;
+              }
+          },
+          updateMessage(){
+          this.username=this.getCookie("managerName");
+          this.$store.commit('updatecustomerName',this.getCookie("customerName"))
+        },
         },
     mounted (){
       this.updateMessage();
