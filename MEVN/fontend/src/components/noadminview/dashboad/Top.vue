@@ -10,7 +10,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="loginoutC">退出登录</el-dropdown-item>
       <el-dropdown-item command="customer"> <router-link to="/customerCenter">顾客中心</router-link> </el-dropdown-item>
-      <el-dropdown-item command="customer"> <router-link to="/order/addOrder">登录</router-link> </el-dropdown-item>
+      <el-dropdown-item command="customer"> <router-link to="/norder/addOrder">登录</router-link> </el-dropdown-item>
       <el-dropdown-item command="cart">购物车</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -85,7 +85,7 @@ import axios from "axios"
                 axios.post("/customer/loginOut").then((response)=>{
                   let res=response.data;
                   if(res.status == 0){
-                    this.$router.push('/order/addOrder');
+                    this.$router.push('/norder/addOrder');
                     this.$store.commit("updatecustomerName","");
                   }else{
                     this.$message.error('退出登录失败');
@@ -93,7 +93,7 @@ import axios from "axios"
                 })
               }
               if(command=="cart"){
-                  this.$router.push('/order/addOrder/verify');
+                  this.$router.push('/norder/addOrder/verify');
               }
             },
             handleCommand(command) {

@@ -13,7 +13,6 @@
           </el-badge>
           <el-menu-item index="/nproducts"><i class="el-icon-menu"></i>产品管理</el-menu-item>
           <el-menu-item index="/norder"><i class="el-icon-setting"></i>订单管理</el-menu-item>
-          <el-menu-item index="/nclassification"><i class="el-icon-minus"></i>产品分类管理</el-menu-item>
         </el-menu>
       </el-col>
       </el-col>

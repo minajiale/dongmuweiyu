@@ -182,6 +182,13 @@ const routes = [
               },
             },
             {
+              path: '/norder/addOrder',
+              components: {
+                default: noadmin,
+                rightContent: NAddOrder
+              },
+            },
+            {
               path: '/norder/addOrder/verify',
               components: {
                 default:noadmin,

@@ -90,7 +90,7 @@ export default {
           message: '请先登录'
         });
       }else {
-        this.$router.push('/products');
+        this.$router.push('/nproducts');
       }
     },
     costomerSearch(phoneNumber){
@@ -140,7 +140,7 @@ export default {
         }
       }).then((res)=>{
         //并且改变store中的customerName的值
-        this.$router.push("/products");
+        this.$router.push("/nproducts");
         var customername = res.data.result.managerName;
         this.$store.commit('updatecustomerName',customername);
         this.insert(customerId);
@@ -202,7 +202,7 @@ export default {
       this.form={}
     },
     onSubmit(){
-      this.$router.push('/order/addOrder/verify');
+      this.$router.push('/norder/addOrder/verify');
     },
     getCustomerId(){
       console.log("customerid"+this.customerid);

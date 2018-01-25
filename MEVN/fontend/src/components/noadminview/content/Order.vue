@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1>订单管理 &nbsp<router-link to="/order/addOrder">+</router-link></h1>
+    <h1>订单管理 &nbsp<router-link to="/norder/addOrder">+</router-link></h1>
     <div class="additional-crew">
       <el-input
         class="search"
@@ -203,7 +203,7 @@
               }
             }).then((res)=>{
               //并且改变store中的customerName的值
-              this.$router.push('/order/addOrder');
+              this.$router.push('/norder/addOrder');
               var customername = res.data.result.managerName;
               this.$store.commit('updatecustomerName',customername);
               this.insert(customerId);
