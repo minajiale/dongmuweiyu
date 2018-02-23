@@ -74,7 +74,8 @@ export default {
       value1: '',
       value2: '',
       formLabelWidth: '120px',
-      fileList2: [{name: 'food.jpeg', url: './static/logo.png'}]
+      fileList2: [],
+      fileList:[]
     };
   },
   props:{
@@ -95,7 +96,8 @@ export default {
   },
   methods: {
     updateSeccess(response, file, fileList){
-      console.log(response);
+      this.fileList.push(file.name);
+      this.form.img=this.fileList;
     },
     resolveClassTemp(){
       this.form.firstClass=this.classTemp[0];
