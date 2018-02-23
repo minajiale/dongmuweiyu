@@ -44,18 +44,20 @@ router.post('/uploadFile', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       console.log(err);
-      return
+      res.json({
+        status:"1",
+        message:err
+      });
+    }else{
+      console.log(req.file.originalname);
+      res.json({
+        status:"0",
+        msg:"",
+        result:"sucess"
+      })
     }
-    console.log(req.file.originalname);
-    // Everything went fine
   })
 })
-// router.post('/uploadFile', upload.single('avatar'), function (req,res,next) {
-//   // req.file is the `avatar` file
-//   // req.body will hold the text fields, if there were any
-//   console.log("文件上传");
-//   console.log(req.file.filename);
-// })
 //取得所有的产品
 router.get("/",function(req,res,next){
   product.find({},function(err,doc){

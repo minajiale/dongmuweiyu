@@ -40,6 +40,8 @@
         :on-remove="handleRemove"
         :file-list="fileList2"
         name="avatar"
+        multiple=true
+        :on-success="updateSeccess"
         list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -92,6 +94,9 @@ export default {
     this.getClass();
   },
   methods: {
+    updateSeccess(response, file, fileList){
+      console.log(response);
+    },
     resolveClassTemp(){
       this.form.firstClass=this.classTemp[0];
       this.form.secondClass=this.classTemp[1];
