@@ -1030,11 +1030,54 @@ router.get("/findOrderByCusId",function(req,res,next){
       });
     }else{
       var allAmounts = doc[0].all;
-      var returnBack = doc[0].returnBack;
-      var addBack = doc[0].addBack;//补
+      var paied = doc[0].paied;
+      var returnBackOld = doc[0].returnBack;
+      var addBackOld = doc[0].addBack;//补
       var Orders = doc[0].orderList;
       var result=[];
       var orderLength = Orders.length;
+      var returnBack=[];
+      var addBack = [];
+      //退货详细
+      function freturnBack(){
+        returnBackOld.forEach((item,index,array)=>{
+          returnBack[index] = {};
+          returnBack[index].num = item.number
+          returnBack[index].time = item._id.getTimestamp()
+          product.find({"_id":item.ProId},function(err,doc){
+            if(err){
+              res.json({
+                status:'0',
+                msg:errP.message
+              });
+            }else{
+              returnBack[index].name=doc[0].name;
+              returnBack[index].code=doc[0].code;
+              returnBack[index].spec=doc[0].spec;
+            }
+          })
+        })
+      }
+      //补货详细
+      function faddBack(){
+        addBackOld.forEach((item,index,array)=>{
+          addBack[index] = {};
+          addBack[index].num = item.number
+          addBack[index].time = item._id.getTimestamp()
+          product.find({"_id":item.ProId},function(err,doc){
+            if(err){
+              res.json({
+                status:'0',
+                msg:errP.message
+              });
+            }else{
+              addBack[index].name=doc[0].name;
+              addBack[index].code=doc[0].code;
+              addBack[index].spec=doc[0].spec;
+            }
+          })
+        })
+      }
       function promise(result,Orders,orderLength){
         return new Promise((resolve,reject)=>{
           var flag=0;
@@ -1092,13 +1135,18 @@ router.get("/findOrderByCusId",function(req,res,next){
         })
       }
       promise(result,Orders,orderLength).then(()=>{
+        faddBack();
+        freturnBack();
         res.json({
           status:'1',
           msg:'get all classification suecess!',
           result:{
             count:doc.length,
             Orders:result,
-            allAmount:allAmounts
+            allAmount:allAmounts,
+            paied:paied || String.parseInt(paied),
+            returnBack:returnBack,
+            addBack:returnBack,
           }
         })
       },()=>{

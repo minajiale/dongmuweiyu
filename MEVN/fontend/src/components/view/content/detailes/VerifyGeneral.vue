@@ -41,30 +41,6 @@
       width="150"
       label="金额(元)">
     </el-table-column>
-    <el-table-column label="退货" v-if="visibility==false">
-    <el-table-column
-      prop="province"
-      label="时间"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="city"
-      label="数量"
-      width="80">
-    </el-table-column>
-  </el-table-column>
-  <el-table-column label="补货" v-if="visibility==false">
-  <el-table-column
-    prop="province"
-    label="时间"
-    width="120">
-  </el-table-column>
-  <el-table-column
-    prop="city"
-    label="数量"
-    width="80">
-  </el-table-column>
-</el-table-column>
     <el-table-column
       label="操作"
       width="120"
