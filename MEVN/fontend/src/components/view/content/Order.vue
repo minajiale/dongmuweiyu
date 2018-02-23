@@ -133,7 +133,7 @@
           url:"/customer/pagination",
           params:{
             currentPage:val,
-            pageSize:2
+            pageSize:9
           }
         }).then(res=>{
           this.tableData5=res.data.result.customers;
@@ -149,7 +149,7 @@
           url:"/customer/pagination",
           params:{
             currentPage:1,
-            pageSize:2
+            pageSize:9
           }
         }).then(res=>{
           this.tableData5=res.data.result.customers;
