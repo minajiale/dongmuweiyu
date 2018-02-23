@@ -13,6 +13,9 @@ var customer = require('./routes/customer');
 var manager = require('./routes/manager');
 var product = require('./routes/product');
 
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+
 
 
 var app = express();

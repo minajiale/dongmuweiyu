@@ -53,6 +53,14 @@ const routes = [
               },
             },
             {
+              path: '/',
+                requireAuth: true,
+              components: {
+                default: Index,
+                rightContent: Test
+              },
+            },
+            {
               path: '/customerCenter',
                 requireAuth: true,
               components: {

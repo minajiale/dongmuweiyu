@@ -1030,6 +1030,8 @@ router.get("/findOrderByCusId",function(req,res,next){
       });
     }else{
       var allAmounts = doc[0].all;
+      var returnBack = doc[0].returnBack;
+      var addBack = doc[0].addBack;//补
       var Orders = doc[0].orderList;
       var result=[];
       var orderLength = Orders.length;
@@ -1048,6 +1050,9 @@ router.get("/findOrderByCusId",function(req,res,next){
             if(data.length != 0){
               data.forEach(function(item,index,array){
                 var temp2 = index;
+                if(addBack.length !=0){
+                  add
+                }
                 product.find({"_id":item.id},function(errP,docP){
                   if(errP){
                     res.json({

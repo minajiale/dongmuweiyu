@@ -35,10 +35,11 @@
         </el-form-item>
       <el-upload
         class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/products/uploadFile"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :file-list="fileList2"
+        name="avatar"
         list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -71,7 +72,7 @@ export default {
       value1: '',
       value2: '',
       formLabelWidth: '120px',
-      fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      fileList2: [{name: 'food.jpeg', url: './static/logo.png'}]
     };
   },
   props:{
@@ -196,6 +197,7 @@ export default {
       console.log(file);
     },
     formChange(values){
+      console.log(values);
     },
   },
   activated:function(){

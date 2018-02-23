@@ -3,6 +3,12 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var product = require('../models/product.js');
 
+// var fs = require('fs');
+// var multer  = require('multer');
+// var upload = multer({ dest: '../uploads/' });
+
+var muilter = require('./multer');
+
 //添加商品
 router.post("/insert",function(req,res,next){
   var oneProduct = req.body.oneProduct || '';
@@ -31,6 +37,25 @@ router.post("/insert",function(req,res,next){
     })
   }
 })
+//文件上传
+// var upload = multer().single('avatar')
+router.post('/uploadFile', function (req, res) {
+  var upload=muilter.single('avatar');
+  upload(req, res, function (err) {
+    if (err) {
+      console.log(err);
+      return
+    }
+    console.log(req.file.originalname);
+    // Everything went fine
+  })
+})
+// router.post('/uploadFile', upload.single('avatar'), function (req,res,next) {
+//   // req.file is the `avatar` file
+//   // req.body will hold the text fields, if there were any
+//   console.log("文件上传");
+//   console.log(req.file.filename);
+// })
 //取得所有的产品
 router.get("/",function(req,res,next){
   product.find({},function(err,doc){
