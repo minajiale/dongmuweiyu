@@ -11,7 +11,7 @@
             <template scope="props">
               <el-row >
                <el-col :span="12"><div class="">
-                <img v-bind:src="props.row.img[1]" class="image">
+                <img v-bind:src="props.row.img[0]" class="image">
               </div></el-col>
                <el-col :span="12"><el-form label-position="left" inline class="demo-table-expand">
                 <el-form-item label="商品ID">
@@ -53,10 +53,10 @@
               <el-button
               size="small"
               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-              <!-- <el-button
+              <el-button
               size="small"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
               <el-button
               size="small"
               type="primary"
@@ -213,7 +213,17 @@
         axios({
           url:'/products',
         }).then(res=>{
-          this.tableData5 = res.data.result.allProducts;
+          var data = res.data.result.allProducts
+          var path = "/static/uploads/"
+          data.forEach((item,index,array)=>{
+            if(item.img.length !=0){
+              item.img.forEach((itemimg,indeximg,arrayimg)=>{
+                itemimg=path+itemimg;
+                data[index].img[indeximg]=itemimg;
+              })
+            }
+          })
+          this.tableData5 = data;
         },error=>{
           console.log("error");
         })
@@ -266,6 +276,10 @@
 </script>
 
 <style>
+.image{
+  width: 400px;
+  height: 400px;
+}
   .products el-table{
     margin-right: -300px;
   }

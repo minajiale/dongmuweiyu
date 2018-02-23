@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     updateSeccess(response, file, fileList){
-      this.fileList.push(file.name);
+      this.fileList.push(response.msg);
       this.form.img=this.fileList;
     },
     resolveClassTemp(){
