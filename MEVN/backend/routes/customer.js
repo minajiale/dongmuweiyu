@@ -1039,48 +1039,82 @@ router.get("/findOrderByCusId",function(req,res,next){
       var returnBack=[];
       var addBack = [];
       //退货详细
-      function freturnBack(){
-        returnBackOld.forEach((item,index,array)=>{
-          returnBack[index] = {};
-          returnBack[index].num = item.number
-          returnBack[index].time = item._id.getTimestamp()
-          product.find({"_id":item.ProId},function(err,doc){
-            if(err){
-              res.json({
-                status:'0',
-                msg:errP.message
-              });
-            }else{
-              returnBack[index].name=doc[0].name;
-              returnBack[index].code=doc[0].code;
-              returnBack[index].spec=doc[0].spec;
-            }
+      var freturnBack =  new Promise((resolve, reject)=>{
+        console.log("进入freturnBack");
+        var returnLength = returnBackOld.length;
+        var i=0;
+        if(returnLength!=0){
+          returnBackOld.forEach((item,index,array)=>{
+            i++;
+            returnBack[index] = {};
+            returnBack[index].num = item.number
+            returnBack[index].time = item._id.getTimestamp()
+            product.find({"_id":item.ProId},function(err,doc){
+              if(err){
+                res.json({
+                  status:'0',
+                  msg:errP.message
+                });
+              }else{
+                returnBack[index].name=doc[0].name;
+                returnBack[index].code=doc[0].code;
+                returnBack[index].spec=doc[0].spec;
+              }
+              console.log("i" + i);
+              console.log("returnLength" + returnLength);
+              if(i==returnLength){
+                console.log("推出freturnBack");
+                resolve();
+              }
+            })
           })
-        })
-      }
+        }else{
+          console.log("推出freturnBack");
+          resolve()
+        }
+      })
       //补货详细
       function faddBack(){
-        addBackOld.forEach((item,index,array)=>{
-          addBack[index] = {};
-          addBack[index].num = item.number
-          addBack[index].time = item._id.getTimestamp()
-          product.find({"_id":item.ProId},function(err,doc){
-            if(err){
-              res.json({
-                status:'0',
-                msg:errP.message
-              });
-            }else{
-              addBack[index].name=doc[0].name;
-              addBack[index].code=doc[0].code;
-              addBack[index].spec=doc[0].spec;
-            }
-          })
+        return new Promise((resolve, reject)=>{
+          console.log("进入faddBack");
+          var addLength = addBackOld.length;
+          var i=0;
+          console.log("addLength:  "+ addLength);
+          if(addLength!=0){
+            addBackOld.forEach((item,index,array)=>{
+              i++;
+              addBack[index] = {};
+              addBack[index].num = item.number
+              addBack[index].time = item._id.getTimestamp()
+              product.find({"_id":item.ProId},function(err,doc){
+                if(err){
+                  res.json({
+                    status:'0',
+                    msg:errP.message
+                  });
+                }else{
+                  addBack[index].name=doc[0].name;
+                  addBack[index].code=doc[0].code;
+                  addBack[index].spec=doc[0].spec;
+                }
+                console.log("i" + i);
+                console.log("addLength" + addLength);
+                if(i==addLength){
+                    console.log("推出faddBack");
+                  resolve();
+                }
+              })
+            })
+          }else{
+              console.log("推出faddBack");
+            resolve()
+          }
         })
       }
-      function promise(result,Orders,orderLength){
+      function promise(){
         return new Promise((resolve,reject)=>{
           var flag=0;
+          console.log("进入promise");
           Orders.forEach((item,index,array)=>{
             var orderListId = item._id;
             result[index]={};
@@ -1093,9 +1127,6 @@ router.get("/findOrderByCusId",function(req,res,next){
             if(data.length != 0){
               data.forEach(function(item,index,array){
                 var temp2 = index;
-                if(addBack.length !=0){
-                  add
-                }
                 product.find({"_id":item.id},function(errP,docP){
                   if(errP){
                     res.json({
@@ -1120,6 +1151,7 @@ router.get("/findOrderByCusId",function(req,res,next){
                     console.log("orderLength:   "+orderLength);
                     ++flag;
                     if(flag==orderLength){
+                      console.log("推出promise");
                       resolve();
                     }
                   }
@@ -1128,30 +1160,31 @@ router.get("/findOrderByCusId",function(req,res,next){
             }else{
               ++flag;
               if(flag==orderLength){
+                console.log("推出promise");
                 resolve();
               }
             }
           })
         })
       }
-      promise(result,Orders,orderLength).then(()=>{
-        faddBack();
-        freturnBack();
-        res.json({
-          status:'1',
-          msg:'get all classification suecess!',
-          result:{
-            count:doc.length,
-            Orders:result,
-            allAmount:allAmounts,
-            paied:paied || String.parseInt(paied),
-            returnBack:returnBack,
-            addBack:returnBack,
-          }
-        })
-      },()=>{
-        console.log("错？？");
-      })
+      freturnBack.then(faddBack)
+                 .then(promise)
+                 .then(()=>{
+                   res.json({
+                     status:'1',
+                     msg:'get all classification suecess!',
+                     result:{
+                       count:doc.length,
+                       Orders:result,
+                       allAmount:allAmounts,
+                       paied:paied || String.parseInt(paied),
+                       returnBack:returnBack,
+                       addBack:addBack,
+                     }
+                   })
+                 },()=>{
+                   console.log("根据某个顾客ID查询所有的订单promise出错");
+                 })
     }})
 })
 //修改购物车中的普通商品
