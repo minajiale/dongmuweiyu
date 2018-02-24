@@ -190,7 +190,19 @@ import axios from "axios"
           },
           updateMessage(){
           this.username=this.getCookie("managerName");
-          this.$store.commit('updatecustomerName',this.getCookie("customerName"))
+          var customerId = this.getCookie("customerId")
+          if(customerId != undefined &&  customerId != -1){
+            this.$http({
+              url:"/customer/oneCustomer"
+            }).then(res=>{
+              this.$store.commit('updatecustomerName',res.data.result.cus.name)
+            },error=>{
+              this.$notify.error({
+                title: '错误',
+                message: '获取订单列表失败'
+              });
+            })
+          }
         },
         },
     mounted (){
