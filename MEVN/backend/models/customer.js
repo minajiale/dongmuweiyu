@@ -8,6 +8,8 @@ var customserSchema = new mongoose.Schema({
   "address":Array,
   "all":Number,//总的金额
   "paied":Number,//已经付款金额
+  "returnAmount":Number,//补货总金额
+  "addAmount":Number,//退货总金额
   "status":String,//订单状态0表示正常1表示作废（顾客没拿货）
   "generalGoodscart":[ //普通销售清单
     {

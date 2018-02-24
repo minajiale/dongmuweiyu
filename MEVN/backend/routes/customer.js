@@ -724,12 +724,12 @@ router.post("/returnBack",function(req,res,next){
       }
     })
   }
-  //更新某一个顾客总的金额all
+  //更新某一个顾客总的金额all, 退货金额
   function updateAll(){
     var reduceAll = parseInt(backnumber)*parseInt(salePrice);
     customer.update(
       oldValue,
-      {$inc: {all: -reduceAll}},
+      {$inc: {returnAmount: +reduceAll}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -819,19 +819,22 @@ router.post("/returnBack",function(req,res,next){
   updateAll();
   updatePro();
   updateMonthSales();
-
-  findgeneralTarget().then(updateGoodsOrder);
-  if(allSucess ==true){
-    res.json({
-      status:'1',
-      msg:"退货成功"
-    });
-    }else{
-      res.json({
-        status:'0',
-        msg:err.message
-      });
-  }
+  res.json({
+    status:'1',
+    msg:"退货成功"
+  });
+  // findgeneralTarget().then(updateGoodsOrder);
+  // if(allSucess ==true){
+  //   res.json({
+  //     status:'1',
+  //     msg:"退货成功"
+  //   });
+  //   }else{
+  //     res.json({
+  //       status:'0',
+  //       msg:err.message
+  //     });
+  // }
 })
 //补货
 router.post("/addBack",function(req,res,next){
@@ -912,12 +915,12 @@ router.post("/addBack",function(req,res,next){
       }
     })
   }
-  //更新某一个顾客总的金额all
+  //更新某一个顾客退货金额
   function updateAll(){
     var reduceAll = parseInt(backnumber)*parseInt(salePrice);
     customer.update(
       oldValue,
-      {$inc: {all: +reduceAll}},
+      {$inc: {addAmount: +reduceAll}},
       function(err,doc){
         if(err){
           allSucess=false;
@@ -1007,19 +1010,22 @@ router.post("/addBack",function(req,res,next){
   updateAll();
   updatePro();
   // updateMonthSales();
-
-  findgeneralTarget().then(updateGoodsOrder);
-  if(allSucess ==true){
-    res.json({
-      status:'1',
-      msg:"退货成功"
-    });
-    }else{
-      res.json({
-        status:'0',
-        msg:err.message
-      });
-  }
+  res.json({
+    status:'1',
+    msg:"退货成功"
+  });
+  // findgeneralTarget().then(updateGoodsOrder);
+  // if(allSucess ==true){
+  //   res.json({
+  //     status:'1',
+  //     msg:"退货成功"
+  //   });
+  //   }else{
+  //     res.json({
+  //       status:'0',
+  //       msg:err.message
+  //     });
+  // }
 })
 //根据某个顾客ID查询所有的订单
 router.get("/findOrderByCusId",function(req,res,next){
