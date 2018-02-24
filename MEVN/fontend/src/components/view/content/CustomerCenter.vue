@@ -46,11 +46,19 @@
             width="100">
           </el-table-column>
           <el-table-column
+            prop="salePrice"
+            label="成交价格"
+            width="80">
+          </el-table-column>
+          <el-table-column
             prop="num"
             label="数量"
             width="80">
           </el-table-column>
       </el-table>
+      <div class="">
+        退货合计(元):{{this.returnBackAmount}}
+      </div>
     </div>
     <div class="">
       补货：
@@ -85,11 +93,19 @@
           width="100">
         </el-table-column>
         <el-table-column
+          prop="salePrice"
+          label="成交价格"
+          width="80">
+        </el-table-column>
+        <el-table-column
           prop="num"
           label="数量"
           width="80">
         </el-table-column>
       </el-table>
+      <div class="">
+        补货合计(元):{{this.addBackAmount}}
+      </div>
     </div>
     <div class="">
       合计:{{this.allAmount}}
@@ -110,6 +126,8 @@ export default {
   data () {
     return {
       allAmount:0,
+      returnBackAmount:0,
+      addBackAmount:0,
       rest:0,
       paied:0,
       returnBack:[],
@@ -152,6 +170,8 @@ export default {
         this.paied= res.data.result.paied;
         this.rest= this.allAmount-this.paied;
         this.returnBack=res.data.result.returnBack;
+        this.returnBackAmount=res.data.result.returnBackAmount;
+        this.addBackAmount=res.data.result.addBackAmount;
         this.addBack=res.data.result.addBack;
       },error=>{
         this.$notify.error({

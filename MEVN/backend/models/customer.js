@@ -58,12 +58,14 @@ var customserSchema = new mongoose.Schema({
     "orderId":String,
     "ProId":String,
     "number":Number,
+    "salePrice":Number,//交易时的价格
     "orderListId":String,
   }], //退货
   "addBack":[{
     "orderId":String,
     "ProId":String,
     "number":Number,
+    "salePrice":Number,//交易时的价格
     "orderListId":String,
   }] // 补货
 });

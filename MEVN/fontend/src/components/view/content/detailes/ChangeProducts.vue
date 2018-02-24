@@ -11,6 +11,9 @@
         <el-form-item label="规格" :label-width="formLabelWidth">
           <el-input v-model="form.spec" auto-complete="off"></el-input>
         </el-form-item>
+        <el-form-item label="单位" :label-width="formLabelWidth">
+          <el-input v-model="form.unit" auto-complete="off"></el-input>
+        </el-form-item>
         <el-form-item label="进价" :label-width="formLabelWidth">
           <el-input v-model="form.buyPrice" auto-complete="off"></el-input>
         </el-form-item>

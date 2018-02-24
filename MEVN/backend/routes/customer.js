@@ -661,6 +661,7 @@ router.post("/returnBack",function(req,res,next){
   returnBackData.ProId=proId;
   returnBackData.number=backnumber;
   returnBackData.orderListId=orderListId;
+  returnBackData.salePrice=salePrice;
 
   //添加修改记录
   function pushreturnBack(){
@@ -849,6 +850,7 @@ router.post("/addBack",function(req,res,next){
   returnBackData.orderListId=orderListId;
   returnBackData.ProId=proId;
   returnBackData.number=backnumber;
+  returnBackData.salePrice=salePrice;
   //添加补货记录
   function pushreturnBack(){
     customer.update(
@@ -1022,6 +1024,7 @@ router.post("/addBack",function(req,res,next){
 //根据某个顾客ID查询所有的订单
 router.get("/findOrderByCusId",function(req,res,next){
   var customerId=req.cookies.customerId || '';
+
   customer.find({"_id":customerId},function(err,doc){
     if(err){
       res.json({
@@ -1038,6 +1041,9 @@ router.get("/findOrderByCusId",function(req,res,next){
       var orderLength = Orders.length;
       var returnBack=[];
       var addBack = [];
+      var returnBackAmount=0;
+      var addBackAmount = 0;
+
       //退货详细
       var freturnBack =  new Promise((resolve, reject)=>{
         console.log("进入freturnBack");
@@ -1047,7 +1053,9 @@ router.get("/findOrderByCusId",function(req,res,next){
           returnBackOld.forEach((item,index,array)=>{
             i++;
             returnBack[index] = {};
+            returnBackAmount += (item.number)*item.salePrice;
             returnBack[index].num = item.number
+            returnBack[index].salePrice = item.salePrice
             returnBack[index].time = item._id.getTimestamp()
             product.find({"_id":item.ProId},function(err,doc){
               if(err){
@@ -1057,6 +1065,7 @@ router.get("/findOrderByCusId",function(req,res,next){
                 });
               }else{
                 returnBack[index].name=doc[0].name;
+                returnBack[index].unit=doc[0].unit;
                 returnBack[index].code=doc[0].code;
                 returnBack[index].spec=doc[0].spec;
               }
@@ -1084,7 +1093,9 @@ router.get("/findOrderByCusId",function(req,res,next){
             addBackOld.forEach((item,index,array)=>{
               i++;
               addBack[index] = {};
+              addBackAmount += (item.number)*item.salePrice;
               addBack[index].num = item.number
+              addBack[index].salePrice = item.salePrice
               addBack[index].time = item._id.getTimestamp()
               product.find({"_id":item.ProId},function(err,doc){
                 if(err){
@@ -1095,6 +1106,7 @@ router.get("/findOrderByCusId",function(req,res,next){
                 }else{
                   addBack[index].name=doc[0].name;
                   addBack[index].code=doc[0].code;
+                  addBack[index].unit=doc[0].unit;
                   addBack[index].spec=doc[0].spec;
                 }
                 console.log("i" + i);
@@ -1177,6 +1189,8 @@ router.get("/findOrderByCusId",function(req,res,next){
                        count:doc.length,
                        Orders:result,
                        allAmount:allAmounts,
+                       returnBackAmount:returnBackAmount,
+                       addBackAmount:addBackAmount,
                        paied:paied || String.parseInt(paied),
                        returnBack:returnBack,
                        addBack:addBack,

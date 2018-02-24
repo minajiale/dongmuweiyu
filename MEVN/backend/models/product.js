@@ -5,6 +5,7 @@ var productSchema = new mongoose.Schema({
   "name":String,
   "code":String, //商品货号
   "spec":String, //规格
+  "unit":String,//单位
   "sellPrice":String,//规定卖价
   "buyPrice":String, //成交价格
   "minNUm":String, //最小库存
