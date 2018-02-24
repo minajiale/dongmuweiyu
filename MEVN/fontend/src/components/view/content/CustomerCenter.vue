@@ -168,11 +168,11 @@ export default {
         console.log(this.orders[0].general);
         this.allAmount= res.data.result.allAmount;
         this.paied= res.data.result.paied;
-        this.rest= this.allAmount-this.paied;
         this.returnBack=res.data.result.returnBack;
         this.returnBackAmount=res.data.result.returnBackAmount;
         this.addBackAmount=res.data.result.addBackAmount;
         this.addBack=res.data.result.addBack;
+        this.rest= this.allAmount-this.paied-this.returnBackAmount+this.addBackAmount;
       },error=>{
         this.$notify.error({
           title: '错误',
