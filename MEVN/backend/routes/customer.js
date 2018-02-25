@@ -340,11 +340,10 @@ router.post("/createOrder",function(req,res,next){
     //更新总金额all和已经支付金额和清空购物车中的数据
     function updateAll(){
       return new Promise((resolve,reject)=>{
-        var paied = paiedFirst + paiedFirstt;
         var all = Amount + allAmountt;
         customer.update(
         {"_id":customerId},
-        {$set:{"all":all,"paied":paied,"generalGoodscart":[],"DoorGoodscart":[]}},
+        {$set:{"all":all,"paied":paiedFirst,"generalGoodscart":[],"DoorGoodscart":[]}},
         function(err,doc){
         if(err){
           sucess=false;
