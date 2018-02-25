@@ -231,7 +231,7 @@
               }
             }).then((res)=>{
               //并且改变store中的customerName的值
-              this.$router.push("/customerCenter")
+              this.$router.push("/ncustomerCenter")
               var customername = res.data.result.managerName;
               this.$store.commit('updatecustomerName',customername);
               this.insert(customerId);
