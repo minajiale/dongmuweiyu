@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1>订单管理 &nbsp<router-link to="/order/addOrder">+</router-link></h1>
+    <h1>订单管理 &nbsp<router-link to="/norder/addOrder">+</router-link></h1>
     <div class="additional-crew">
       <el-input
         class="search"
@@ -26,6 +26,12 @@
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="订单总金额">
               <span>{{ props.row.all }}</span>
+            </el-form-item>
+            <el-form-item label="退货总金额">
+              <span>{{ props.row.returnAmount }}</span>
+            </el-form-item>
+            <el-form-item label="补货总金额">
+              <span>{{ props.row.addAmount }}</span>
             </el-form-item>
             <el-form-item label="欠款金额">
               <span>{{ props.row.owned }}</span>
@@ -133,7 +139,7 @@
           url:"/customer/pagination",
           params:{
             currentPage:val,
-            pageSize:9
+            pageSize:2
           }
         }).then(res=>{
           this.tableData5=res.data.result.customers;
@@ -149,7 +155,7 @@
           url:"/customer/pagination",
           params:{
             currentPage:1,
-            pageSize:9
+            pageSize:2
           }
         }).then(res=>{
           this.tableData5=res.data.result.customers;
@@ -203,7 +209,7 @@
               }
             }).then((res)=>{
               //并且改变store中的customerName的值
-              this.$router.push('/order/addOrder');
+              this.$router.push('/norder/addOrder');
               var customername = res.data.result.managerName;
               this.$store.commit('updatecustomerName',customername);
               this.insert(customerId);
@@ -231,7 +237,7 @@
               }
             }).then((res)=>{
               //并且改变store中的customerName的值
-              this.$router.push("/customerCenter")
+              this.$router.push("/ncustomerCenter")
               var customername = res.data.result.managerName;
               this.$store.commit('updatecustomerName',customername);
               this.insert(customerId);

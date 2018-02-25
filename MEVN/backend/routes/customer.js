@@ -1235,21 +1235,22 @@ router.get("/pagination",function(req,res,next){
         customer[index].phone=item.phone;
         customer[index].all=item.all;
         customer[index].paied=item.paied;
+        customer[index].returnAmount=item.returnAmount;
+        customer[index].addAmount=item.addAmount;
         customer[index].id=item._id;
-        var allInt=parseInt(item.all);
-        var paiedInt=parseInt(item.paied);
+        var owned = item.all-item.paied-item.returnAmount+item.addAmount;
         if(item.status==1){
           customer[index].status="作废订单";
         }else{
-          if(allInt>paiedInt){
+          if(owned>0){
             customer[index].status="欠款";
-            customer[index].owned=allInt-paiedInt;
+            customer[index].owned=owned;
           }
-          if(allInt==paiedInt){
+          if(owned==0){
             customer[index].status="完成";
             customer[index].owned=0;
           }
-          if(allInt<paiedInt){
+          if(owned<0){
             customer[index].status="出错订单";
           }
         }
@@ -1268,6 +1269,10 @@ router.get("/pagination",function(req,res,next){
 //顾客注册
 router.post('/register', function(req, res, next) {
   var param = req.body;
+  param.all=0;
+  param.paied=0;
+  param.returnAmount=0;
+  param.addAmount=0;
   if(param.name!='' && param.phone !== ''){
     customer.create(param,function(err3,customer){
         if(err3){

@@ -27,6 +27,12 @@
             <el-form-item label="订单总金额">
               <span>{{ props.row.all }}</span>
             </el-form-item>
+            <el-form-item label="退货总金额">
+              <span>{{ props.row.returnAmount }}</span>
+            </el-form-item>
+            <el-form-item label="补货总金额">
+              <span>{{ props.row.addAmount }}</span>
+            </el-form-item>
             <el-form-item label="欠款金额">
               <span>{{ props.row.owned }}</span>
             </el-form-item>
