@@ -57,7 +57,7 @@ const routes = [
                 requireAuth: true,
               components: {
                 default: Index,
-                rightContent: Test
+                rightContent: Products
               },
             },
             {
@@ -156,7 +156,7 @@ const routes = [
           ]
       },
       {
-          path: '/login',
+          path: '/',
           component: Login
       },
       {
@@ -173,6 +173,14 @@ const routes = [
             rightContent: NOrder
           },
           children:[
+            {
+              path: '/',
+                requireAuth: true,
+              components: {
+                default: noadmin,
+                rightContent: NProducts
+              },
+            },
             {
               path: '/ncustomerCenter',
                 requireAuth: true,
@@ -247,7 +255,7 @@ const routes = [
           }
           else {
               next({
-                  path: '/login',
+                  path: '/',
                   query: {redirect: to.fullPath}
               })
           }

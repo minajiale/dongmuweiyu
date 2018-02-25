@@ -39,7 +39,7 @@ export default {
             });
           }
         });
-        this.$router.push('/login');
+        this.$router.push('/');
       }
     },
   },
