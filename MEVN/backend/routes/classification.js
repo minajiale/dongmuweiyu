@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var classification = require('../models/classification');
+var product = require('../models/product.js');
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/DONGMU');
 mongoose.connection.on("connected",function(){
@@ -100,39 +102,68 @@ router.post("/insertFirst",function(req,res,next){
 }),
 //编辑某个分类
 router.post("/edit",function(req,res,next){
-  var editId = req.body.id,
-      name   =req.body.label,
-      index   =req.body.index,
-      father=req.body.father;
-    var query={};
-    var updateContaint={};
-  if(editId && father && index){
-     query = { "_id": "father._id", "children": "editId"};
-     updateContaint={$set:{"children.label":"name"}};
-  }else{
-     query = { _id: editId };
-     updateContaint={label:name};
+  var editId = req.body.id, //正在被编辑的分类的id，可能父或子
+      name   =req.body.label,//正在被编辑的分类的名字
+      // index   =req.body.index,
+      father=req.body.father; //父分类的ID或为undefined
+  var query,
+      updateContaint,
+      requirement,
+      operation,
+      index;
+  //设置修改条件
+  var set = new Promise((resolve,reject)=>{
+      if(father!=undefined){
+        //修改二级分类
+        console.log("修改二级分类");
+         query = { _id: father,"children._id":editId};
+         updateContaint={$set:{"children.$.label":name}};
+         resolve();
+       }else{
+        //修改一级分类
+        console.log("修改一级分类");
+         query = { _id: editId };
+         updateContaint={label:name};
+         resolve();
+       }
+    })
+  //修改class表中的相应分类
+  function updateClass(){
+    return new Promise((resolve,reject)=>{
+        classification.updateOne(query,updateContaint,function(err,raw){
+          if(err){
+            res.json({
+              status:"1",
+              message:err.message
+            });
+          }else {
+            if(raw.nModified !=0 ){
+              resolve();
+            }else{
+              res.json({
+                status:"1",
+                message:"err.message"
+              });
+            }
+          }
+          console.log('claa表', raw);
+        })
+    })
   }
-  classification.update(query,updateContaint,function(err,raw){
-    if(err){
-      res.json({
-        status:"1",
-        message:err.message
-      });
-    }else if(raw.nModified !=0 ){
-      res.json({
-        status:"0",
-        msg:name,
-        result:"edit secess"
-      })
-    }else{
-      res.json({
-        status:"1",
-        message:null
-      });
-    }
-    console.log('The raw response from Mongo was ', raw);
-  })
+  set.then(updateClass)
+     .then(()=>{
+       res.json({
+         status:"0",
+         msg:name,
+         result:"edit secess"
+       })
+     })
+     .catch(()=>{
+       res.json({
+         status:"1",
+         message:err.message
+       });
+     })
 }),
 //删除某个分类
 router.post("/delete",function(req,res,next){

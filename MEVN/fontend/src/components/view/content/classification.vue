@@ -133,16 +133,8 @@ import axios from 'axios'
       },
       edit(node,data,store){
         this.eddTemp.lable=data.label;
-        this.eddTemp.id =data;
+        this.eddTemp.id =data._id;
         this.eddTemp.father = node.parent.data._id;
-        var index = -1
-        var sibling=node.parent.childNodes;
-        for(var i = 0;i<sibling.length;i++){
-          if(sibling[i].data._id==  this.eddTemp.id){
-            index=i;
-          }
-        }
-        this.eddTemp.index=index;
         this.editClassVisible=true;
       },
       renderContent(h, { node, data, store }) {
