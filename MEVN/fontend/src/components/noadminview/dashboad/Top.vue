@@ -102,7 +102,7 @@ import axios from "axios"
                     axios.post("/manager/loginOut").then((response)=>{
                       let res=response.data;
                       if(res.status == 0){
-                        this.$router.push('/login');
+                        this.$router.push('/');
                         this.$store.commit("updateManager","");
                       }else{
                         this.$message.error('退出登录失败');
