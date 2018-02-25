@@ -17,6 +17,9 @@
                 <el-form-item label="商品ID">
                   <span>{{ props.row._id }}</span>
                 </el-form-item>
+                <el-form-item label="进价">
+                  <span>{{ props.row.buyPrice }}</span>
+                </el-form-item>
                 <el-form-item label="剩余库存">
                   <span>{{ props.row.num }}</span>
                 </el-form-item>
@@ -27,7 +30,7 @@
                   <span>{{ props.row.sellPrice }}</span>
                 </el-form-item>
                 <el-form-item label="分类">
-                  <span>{{ props.row.firstClass }}/{{props.row.secondClass}}</span>
+                  <span>{{ props.row.firstClass}}/{{props.row.secondClass}}</span>
                 </el-form-item>
                 <el-form-item label="商品描述">
                   <span>{{ props.row.desc }}</span>
@@ -224,6 +227,8 @@
             }
           })
           this.tableData5 = data;
+          console.log(this.tableData5);
+          console.log("this.tableData5");
         },error=>{
           console.log("error");
         })

@@ -7,7 +7,7 @@ var productSchema = new mongoose.Schema({
   "spec":String, //规格
   "unit":String,//单位
   "sellPrice":String,//规定卖价
-  "buyPrice":String, //成交价格
+  "buyPrice":String, //进价
   "minNUm":String, //最小库存
   "num":Number, //剩余数量
   "firstClass":String, //第一级别分类

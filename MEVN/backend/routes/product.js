@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require('mongoose');
 var product = require('../models/product.js');
+var classification = require('../models/classification');
 
 // var fs = require('fs');
 // var multer  = require('multer');
@@ -60,23 +61,57 @@ router.post('/uploadFile', function (req, res) {
 })
 //取得所有的产品
 router.get("/",function(req,res,next){
-  product.find({},function(err,doc){
-    if(err){
-      res.json({
-        status:'0',
-        msg:err.message
-      });
-    }else{
-      res.json({
-        status:'1',
-        msg:'get all classification suecess!',
-        result:{
-          count:doc.length,
-          allProducts:doc
-        }
+  var products=[];
+  //根据分类ID查询分类名字
+  function findClass(){
+    return new Promise((resolve,reject)=>{
+      var proLength=products.length,
+          i=0;
+      products.forEach((item,index,array)=>{
+        classification.find({"_id":item.firstClass},function(err,doc){
+          if(err){}else{
+            products[index].firstClass = doc[0].label;
+            var data = doc[0].children;
+            data.forEach((itemm,indexx,arrayy)=>{
+              if(itemm._id == item.secondClass){
+                products[index].secondClass = itemm.label;
+                ++i;
+                if(i==proLength){
+                  resolve();
+                }
+              }
+            })
+          }
+        })
       })
-    }
+    })
+  }
+  var findPro = new Promise((resolve,reject)=>{
+    product.find({},function(err,doc){
+      if(err){
+      }else{
+        products = doc;
+        resolve();
+      }
+    })
   })
+  findPro.then(findClass)
+         .then(()=>{
+           res.json({
+             status:'1',
+             msg:'get all classification suecess!',
+             result:{
+               count:products.length,
+               allProducts:products
+             }
+           })
+         })
+         .catch(()=>{
+           res.json({
+             status:'0',
+             msg:err.message
+           });
+         })
 })
 //取得库存紧张的货物
 router.get("/lack",function(req,res,next){

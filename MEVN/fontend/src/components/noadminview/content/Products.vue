@@ -27,7 +27,7 @@
                   <span>{{ props.row.sellPrice }}</span>
                 </el-form-item>
                 <el-form-item label="分类">
-                  <span>{{ props.row.firstClass }}/{{props.row.secondClass}}</span>
+                  <span>{{ props.row.firstClass}}/{{props.row.secondClass}}</span>
                 </el-form-item>
                 <el-form-item label="商品描述">
                   <span>{{ props.row.desc }}</span>
