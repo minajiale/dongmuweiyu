@@ -9,14 +9,8 @@
         v-model="input2"
         :on-icon-click="handleIconClick">
       </el-input>
-      <el-dropdown split-button type="primary" @click="handleClick">
-    欠款订单
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>已完成订单</el-dropdown-item>
-          <el-dropdown-item>预付定金</el-dropdown-item>
-          <el-dropdown-item>欠款</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <el-button :plain="true" type="info" @click="ownOrder">欠款订单</el-button>
+      <el-button :plain="true" type="info" @click="endOrder">已完成订单</el-button>
     </div>
     <el-table
       :data="tableData5"
@@ -133,6 +127,51 @@
       this.getCustomers();
     },
     methods:{
+      handleIconClick(){
+        this.$http({
+          url:"/customer/findByName",
+          params:{
+            name:this.input2,
+          }
+        }).then(res=>{
+          this.tableData5=res.data.result.customers;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
+      ownOrder(){
+        this.$http({
+          url:"/customer/findByName",
+          params:{
+            name:"ownOrder",
+          }
+        }).then(res=>{
+          this.tableData5=res.data.result.customers;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
+      endOrder(){
+        this.$http({
+          url:"/customer/findByName",
+          params:{
+            name:"endOrder",
+          }
+        }).then(res=>{
+          this.tableData5=res.data.result.customers;
+        },error=>{
+          this.$notify.error({
+            title: '错误',
+            message: '获取订单列表失败'
+          });
+        })
+      },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
         this.$http({

@@ -61,6 +61,65 @@ router.get("/",function(req,res,next){
     }
   })
 })
+//根据输入的名字查询一个顾客的信息
+router.get("/findByName",function(req,res,next){
+  var name = req.query.name;
+  var query={};
+  if(name =="endOrder"){
+    query={"$where":"this.all+this.addAmount-this.paied-this.returnAmount == 0"};
+  }else{
+    if(name =="ownOrder"){
+      query={"$where":"this.all+this.addAmount-this.paied-this.returnAmount > 0"};
+    }else{
+      query={"name":name};
+    }
+  }
+  customer.find(query,function(err,doc){
+    if(err){
+      res.json({
+        status:'0',
+        msg:err.message
+      });
+    }else{
+      var customer=[];
+      doc.forEach(function(item,index,array){
+        customer[index]={};
+        customer[index].time=item._id.getTimestamp();
+        customer[index].name=item.name;
+        customer[index].phone=item.phone;
+        customer[index].all=item.all;
+        customer[index].paied=item.paied;
+        customer[index].returnAmount=item.returnAmount;
+        customer[index].addAmount=item.addAmount;
+        customer[index].id=item._id;
+        var owned = item.all-item.paied-item.returnAmount+item.addAmount;
+        if(item.status==1){
+          customer[index].status="作废订单";
+        }else{
+          if(owned>0){
+            customer[index].status="欠款";
+            customer[index].owned=owned;
+          }
+          if(owned==0){
+            customer[index].status="完成";
+            customer[index].owned=0;
+          }
+          if(owned<0){
+            customer[index].status="出错订单";
+          }
+        }
+      })
+      res.json({
+        status:'1',
+        msg:'get all order suecess!',
+        result:{
+          count:doc.length,
+          customers:customer
+        }
+      })
+    }
+  })
+})
 //获取某一个顾客的信息
 router.get("/oneCustomer",function(req,res,next){
   var customerId=req.cookies.customerId;
