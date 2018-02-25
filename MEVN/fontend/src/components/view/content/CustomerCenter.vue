@@ -13,7 +13,7 @@
       <div class="style"></div>
       <Verify-door v-if="order.DoorGoodsOrder.length != 0" v-bind:table-data3="order.DoorGoodsOrder"v-bind:visibility="false" @doorAomunt="getDoorAmount"></Verify-door>
     </div>
-    <div class="">
+    <div class="" v-if="ifreturn">
       退货：
       <el-table
         :data="returnBack"
@@ -60,7 +60,7 @@
         退货合计(元):{{this.returnBackAmount}}
       </div>
     </div>
-    <div class="">
+    <div class="" v-if="ifadd">
       补货：
       <el-table
         :data="addBack"
@@ -125,6 +125,8 @@ import VerifyGeneral from './detailes/VerifyGeneral.vue'
 export default {
   data () {
     return {
+      ifadd:false,
+      ifreturn:false,
       allAmount:0,
       returnBackAmount:0,
       addBackAmount:0,
@@ -165,7 +167,6 @@ export default {
         url:"/customer/findOrderByCusId"
       }).then(res=>{
         this.orders=res.data.result.Orders;
-        console.log(this.orders[0].general);
         this.allAmount= res.data.result.allAmount;
         this.paied= res.data.result.paied;
         this.returnBack=res.data.result.returnBack;
@@ -173,6 +174,12 @@ export default {
         this.addBackAmount=res.data.result.addBackAmount;
         this.addBack=res.data.result.addBack;
         this.rest= this.allAmount-this.paied-this.returnBackAmount+this.addBackAmount;
+        if(this.returnBackAmount!=0){
+          this.ifreturn=true;
+        }
+        if(this.addBackAmount!=0){
+          this.ifadd=true;
+        }
       },error=>{
         this.$notify.error({
           title: '错误',
