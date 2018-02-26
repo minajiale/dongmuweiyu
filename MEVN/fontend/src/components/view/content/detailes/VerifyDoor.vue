@@ -60,7 +60,7 @@
      width="180"
      v-if="visibility"
      >
-     <template scope="scope">
+     <template slot-scope="scope">
        <el-button
          @click.native.prevent="editRow(scope.$index, scope.row)"
          type="text"
