@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var customer = require('../models/customer');
 var product = require('../models/product');
 
-mongoose.connect('mongodb://127.0.0.1:27017/DONGMU');
+mongoose.connect('mongodb://127.0.0.1:27017/DONGMU',{useMongoClient: true});
 mongoose.connection.on("connected",function(){
   console.log("mongoose connect sucess");
 })

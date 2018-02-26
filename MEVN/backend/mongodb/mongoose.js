@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/DONGMU');
+mongoose.connect('mongodb://127.0.0.1:27017/DONGMU',{useMongoClient: true});
 mongoose.connection.on("connected",function(){
   console.log("mongoose connect sucess");
 })
