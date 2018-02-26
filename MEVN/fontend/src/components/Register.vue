@@ -62,7 +62,7 @@
                             oneProduct:this.ruleForm,
                           }
                         }).then(res=>{
-
+                          this.$router.push('/');
                         },error=>{
                           console.log("error");
                           this.$notify.error({
