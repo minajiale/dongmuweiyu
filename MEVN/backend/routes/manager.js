@@ -62,8 +62,11 @@ router.post('/loginOut', function(req, res, next) {
     result:''
   })
 });
+//zhuce
 router.post('/register',function(req,res,next){
+  console.log("zhucece");
   var oneProduct = req.body.oneProduct || '';
+  console.log(oneProduct);
   if(oneProduct != ''){
     manager.create(oneProduct,function(err3,doc){
       if(err3){
@@ -72,6 +75,7 @@ router.post('/register',function(req,res,next){
           message:err3.message
         });
       }else{
+        console.log(doc);
         res.json({
           status:"0",
           msg:"",

@@ -46,11 +46,11 @@ app.use(function(req,res,next){
   if(req.cookies.managerId){
     next();
   }else{
-    if(req.originalUrl == "/manager/login"){
+    if(req.originalUrl == "/manager/login" || "/manager/register"){
       console.log("2");
       next()
     }else{
-      console.log(3);
+      console.log("3");
       res.json({
         status:'10001',
         msg:"当前未登录",
