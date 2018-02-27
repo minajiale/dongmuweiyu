@@ -83,8 +83,10 @@ router.get("/",function(req,res,next){
                 }
               })
             }else{
-              resolve
-            }
+              ++i;
+              if(i==proLength){
+                resolve();
+              }            }
           }
         })
       })
