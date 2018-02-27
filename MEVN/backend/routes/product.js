@@ -70,17 +70,21 @@ router.get("/",function(req,res,next){
       products.forEach((item,index,array)=>{
         classification.find({"_id":item.firstClass},function(err,doc){
           if(err){}else{
-            products[index].firstClass = doc[0].label;
-            var data = doc[0].children;
-            data.forEach((itemm,indexx,arrayy)=>{
-              if(itemm._id == item.secondClass){
-                products[index].secondClass = itemm.label;
-                ++i;
-                if(i==proLength){
-                  resolve();
+            if(doc){
+              products[index].firstClass = doc[0].label;
+              var data = doc[0].children;
+              data.forEach((itemm,indexx,arrayy)=>{
+                if(itemm._id == item.secondClass){
+                  products[index].secondClass = itemm.label;
+                  ++i;
+                  if(i==proLength){
+                    resolve();
+                  }
                 }
-              }
-            })
+              })
+            }else{
+              resolve
+            }
           }
         })
       })

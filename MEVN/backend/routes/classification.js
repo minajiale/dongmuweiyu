@@ -43,32 +43,22 @@ router.post("/insertSecond",function(req,res,next){
     let  sencondClass={
       "label":name
     }
-    classification.findOne({_id:father},function(err,doc){
-      if(err){
-        res.json({
-          status:"1",
-          message:err.message
-        });
-      }else{
-        if(doc){
-          doc.children.push(sencondClass);
-          doc.save(function(err2,doc2){
-            if(err2){
-              res.json({
-                status:"1",
-                message:err2.message
-              });
-            }else{
-              res.json({
-                status:"0",
-                msg:"",
-                result:"sucess"
-              })
-            }
-          })
-        }
-      }
-    })
+    classification.update({_id:father},
+                          {$push:{children:sencondClass}},
+                        function(err,doc){
+                          if(err){
+                            res.json({
+                              status:"1",
+                              message:err.message
+                            });
+                          }else{
+                            res.json({
+                              status:"0",
+                              msg:"",
+                              result:"sucess"
+                            })
+                          }
+                        })
 })
 //插入某个一级分类
 router.post("/insertFirst",function(req,res,next){
