@@ -68,27 +68,35 @@ router.get("/",function(req,res,next){
       var proLength=products.length,
           i=0;
       products.forEach((item,index,array)=>{
-        classification.find({"_id":item.firstClass},function(err,doc){
-          if(err){}else{
-            if(doc){
-              products[index].firstClass = doc[0].label;
-              var data = doc[0].children;
-              data.forEach((itemm,indexx,arrayy)=>{
-                if(itemm._id == item.secondClass){
-                  products[index].secondClass = itemm.label;
-                  ++i;
-                  if(i==proLength){
-                    resolve();
+        if(item.firstClass){
+          classification.find({"_id":item.firstClass},function(err,doc){
+            if(err){}else{
+              if(doc){
+                products[index].firstClass = doc[0].label;
+                var data = doc[0].children;
+                data.forEach((itemm,indexx,arrayy)=>{
+                  if(itemm._id == item.secondClass){
+                    products[index].secondClass = itemm.label;
+                    ++i;
+                    if(i==proLength){
+                      resolve();
+                    }
                   }
+                })
+              }else{
+                ++i;
+                if(i==proLength){
+                  resolve();
                 }
-              })
-            }else{
-              ++i;
-              if(i==proLength){
-                resolve();
-              }            }
+              }
+            }
+          })
+        }else{
+          ++i;
+          if(i==proLength){
+            resolve();
           }
-        })
+        }
       })
     })
   }
