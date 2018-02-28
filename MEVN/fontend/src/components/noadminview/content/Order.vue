@@ -16,7 +16,7 @@
       :data="tableData5"
       style="width: 1000px">
       <el-table-column type="expand">
-        <template slot-scope="props">
+        <template scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="订单总金额">
               <span>{{ props.row.all }}</span>
@@ -57,7 +57,7 @@
       <el-table-column
       label="操作"
       width="300px">
-        <template slot-scope="scope">
+        <template scope="scope">
           <el-button
           size="small"
           @click="handleEdit(scope.$index, scope.row)">付款</el-button>

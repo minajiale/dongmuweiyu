@@ -8,7 +8,7 @@
           :data="tableData5"
           style="width: 1000px">
           <el-table-column type="expand">
-            <template slot-scope="props">
+            <template scope="props">
               <el-row >
                <el-col :span="12"><div class="">
                 <img v-bind:src="props.row.img[0]" class="image">
@@ -52,7 +52,7 @@
             prop="spec">
           </el-table-column>
           <el-table-column label="操作"   width="300">
-            <template slot-scope="scope">
+            <template scope="scope">
               <el-button
               size="small"
               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
